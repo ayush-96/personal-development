@@ -1,6 +1,9 @@
 # Encapsulation
-# Bundling the data attributes, methods in a single class
-# hiding the details (abstraction) from outside world
+# Bundling the data attributes, methods in a single unit called class
+# hiding the details (abstraction) from outside world, focusing on high level to use effectively
+# methods dictate the rules on how the instance attributes are modified
+# mechanism is a way of enabling abstraction
+
 
 class BadBankAccount:
 

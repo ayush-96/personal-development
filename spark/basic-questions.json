@@ -23,5 +23,4 @@
     "correct": 3,
     "description": "DAG stands for Directed Acyclic Graph. It is the logical execution plan of a Spark job.\nHigh-level operations(i.e., transformations and actions) in the Spark application code is converted into a DAG of stages and tasks.\nJob is broken down into a sequence of stages, and each stage has a group of tasks that are executed independently across partitions.\nThe DAG allows Spark to perform various optimizations, such as pipelining, task reordering, and pruning unnecessary operations, to improve the efficiency of the job execution.\nDAG Scheduler is responsible for transforming a sequence of RDD operation into a DAG.\nFault tolerance for Spark is achieved using the DAG's lineage, which is the record of the transformations that were used to create an RDD."
   }
-  // Add more questions here (no comma after last one)
 ]

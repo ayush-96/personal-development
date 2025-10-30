@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "question": "In Spark, repartition function can :",
+    "choices": [
+      "only increase the number of partitions",
+      "only decrease the number of partitions",
+      "increase or decrease the number of partitions",
+      "automatically repartition the data"
+    ],
+    "correct": 2,
+    "description": "Spark provides two ways to control the number of partitions. One of them is repartition().\nRepartition can increase and decrease the number of partitions. It performs a full shuffle of data across partitions and equally distributes them resulting in roughly equal sized partitions.\nIt creates new partitions with data that's distributed evenly (data distribution is more even for larger data sets) and returns new RDD.\nIt is a very expensive operation as it shuffles data from all nodes in a cluster, so one must be careful when using it.\nWhen you call the repartition() function, Spark internally calls the coalesce function with shuffle parameter set to true.\nDefault Spark hash partitioning function will be used to repartition the dataframe."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following statements about the DAG is correct?",
+    "choices": [
+      "DAG stands for Distributed Acyclic Graph",
+      "Spark developers cannot see the DAG of Spark jobs because Spark wants hide internals for simplicity",
+      "A DAG represents the executor level mapping of tasks",
+      "A DAG represents the execution plan of a Spark job"
+    ],
+    "correct": 3,
+    "description": "DAG stands for Directed Acyclic Graph. It is the logical execution plan of a Spark job.\nHigh-level operations(i.e., transformations and actions) in the Spark application code is converted into a DAG of stages and tasks.\nJob is broken down into a sequence of stages, and each stage has a group of tasks that are executed independently across partitions.\nThe DAG allows Spark to perform various optimizations, such as pipelining, task reordering, and pruning unnecessary operations, to improve the efficiency of the job execution.\nDAG Scheduler is responsible for transforming a sequence of RDD operation into a DAG.\nFault tolerance for Spark is achieved using the DAG's lineage, which is the record of the transformations that were used to create an RDD."
+  }
+  // Add more questions here (no comma after last one)
+]

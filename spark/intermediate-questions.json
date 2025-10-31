@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Which transformation triggers a shuffle in Spark?",
+    "choices": [
+      "map()",
+      "filter()",
+      "groupByKey()",
+      "flatMap()"
+    ],
+    "correct": 2,
+    "description": "Shuffle occurs during **wide transformations** where data from multiple partitions must be redistributed.\ngroupByKey(), reduceByKey(), join(), distinct(), and repartition() are examples.\nmap(), filter(), flatMap() are **narrow** — no shuffle.\n**Best Practice**: Prefer reduceByKey() over groupByKey() to reduce shuffle size."
+  },
+  {
+    "id": 2,
+    "question": "What is the main cost of a shuffle operation?",
+    "choices": [
+      "CPU computation",
+      "Network I/O and disk spill",
+      "Memory allocation",
+      "Serialization only"
+    ],
+    "correct": 1,
+    "description": "Shuffle involves:\n1. **Serialization** of records\n2. **Network transfer** across nodes\n3. **Disk I/O** if data spills\n4. Deserialization on receiver\nThis is the most expensive phase in Spark jobs.\n**Best Practice**: Tune `spark.shuffle.file.buffer`, `spark.shuffle.io.maxRetries`, and use Kryo serialization."
+  },
+  {
+    "id": 3,
+    "question": "When should you use broadcast variables?",
+    "choices": [
+      "For large lookup tables",
+      "For small datasets (<10 MB) used in joins",
+      "For mutable state",
+      "For streaming data"
+    ],
+    "correct": 1,
+    "description": "Broadcast variables cache read-only data on **each executor** to avoid shipping with every task.\nIdeal for **small lookup tables** (e.g., country codes, config).\n**Best Practice**: Use `spark.sql.autoBroadcastJoinThreshold` (default 10MB) or manually broadcast with `broadcast(df)`."
+  },
+  {
+    "id": 4,
+    "question": "What happens if you broadcast a DataFrame larger than executor memory?",
+    "choices": [
+      "Spark automatically spills to disk",
+      "Job fails with OOM",
+      "It uses off-heap memory",
+      "Shuffle is triggered"
+    ],
+    "correct": 1,
+    "description": "Broadcast data is stored in **executor memory**. If too large → OOM.\n**Best Practice**: Monitor via Spark UI → 'Storage' tab. Set `spark.sql.autoBroadcastJoinThreshold = -1` to disable auto-broadcast."
+  },
+  {
+    "id": 5,
+    "question": "Which join type avoids shuffle on the small table?",
+    "choices": [
+      "Sort Merge Join",
+      "Shuffle Hash Join",
+      "Broadcast Hash Join",
+      "Cartesian Join"
+    ],
+    "correct": 2,
+    "description": "**Broadcast Hash Join**:\n- Small table broadcasted to all executors\n- No shuffle on small side\n- Large table scanned locally\n**Best Practice**: Enable with `spark.sql.autoBroadcastJoinThreshold` or `hint(\"broadcast\")`."
+  },
+  {
+    "id": 6,
+    "question": "What is the default join strategy when auto-broadcast is disabled?",
+    "choices": [
+      "Broadcast Hash Join",
+      "Sort Merge Join",
+      "Shuffle Hash Join",
+      "Cartesian Join"
+    ],
+    "correct": 1,
+    "description": "Default is **Sort Merge Join** (Spark 2.0+).\nSteps:\n1. Shuffle both tables by join key\n2. Sort partitions\n3. Merge sorted streams\nReliable but requires full shuffle.\n**Best Practice**: Use when both sides are large."
+  },
+  {
+    "id": 7,
+    "question": "What is an accumulator used for?",
+    "choices": [
+      "Sharing read-only data",
+      "Aggregating values across tasks (e.g., counters)",
+      "Caching RDDs",
+      "Broadcasting config"
+    ],
+    "correct": 1,
+    "description": "Accumulators are **write-only** variables from tasks, **read-only** from driver.\nUsed for counters, sums, custom metrics.\n**Best Practice**: Use for debugging (e.g., invalid records count) or monitoring. Not for data aggregation in output."
+  },
+  {
+    "id": 8,
+    "question": "Why is groupByKey() discouraged for aggregations?",
+    "choices": [
+      "It is slower than map()",
+      "It shuffles all data without local reduce",
+      "It mutates the RDD",
+      "It requires sorting"
+    ],
+    "correct": 1,
+    "description": "groupByKey() shuffles **all records** per key → high memory/network pressure.\nreduceByKey() does **local aggregation** first → less data shuffled.\n**Best Practice**: Always use `reduceByKey`, `aggregateByKey`, or `combineByKey` for aggregations."
+  },
+  {
+    "id": 9,
+    "question": "What does Catalyst optimizer do during Spark SQL execution?",
+    "choices": [
+      "Only parses SQL",
+      "Applies rule-based and cost-based optimizations",
+      "Handles shuffles only",
+      "Generates Java bytecode"
+    ],
+    "correct": 1,
+    "description": "Catalyst phases:\n1. **Analysis** → resolve columns\n2. **Logical Optimization** → predicate pushdown, constant folding\n3. **Physical Planning** → choose join type, broadcast\n4. **Code Generation** → whole-stage codegen\n**Best Practice**: Use DataFrame/Dataset API to benefit from Catalyst."
+  },
+  {
+    "id": 10,
+    "question": "What is predicate pushdown?",
+    "choices": [
+      "Pushing filters after join",
+      "Pushing filters to data source before scan",
+      "Pushing aggregations to driver",
+      "Pushing shuffles to disk"
+    ],
+    "correct": 1,
+    "description": "Predicate pushdown filters data **at the source** (Parquet, JDBC, etc.)\nReduces data read from disk → faster scans.\nSupported by columnar formats like Parquet.\n**Best Practice**: Filter early in query chain."
+  },
+  {
+    "id": 11,
+    "question": "What is column pruning?",
+    "choices": [
+      "Removing duplicate columns",
+      "Reading only required columns from storage",
+      "Pruning partitions",
+      "Dropping null columns"
+    ],
+    "correct": 1,
+    "description": "Column pruning reads **only needed columns** from files.\nHuge I/O savings in wide tables.\nWorks with Parquet/ORC.\n**Best Practice**: Select only required columns: `df.select(\"id\", \"name\")`."
+  },
+  {
+    "id": 12,
+    "question": "When does Spark spill to disk during shuffle?",
+    "choices": [
+      "When shuffle buffer is full",
+      "When executor memory is low",
+      "Only during sort",
+      "Never — always in memory"
+    ],
+    "correct": 0,
+    "description": "During shuffle write:\n- Data sorted in memory buffer\n- If buffer full → **spill to disk**\n- Multiple spill files merged later\n**Best Practice**: Tune `spark.shuffle.file.buffer` (default 32KB) and `spark.memory.fraction`."
+  },
+  {
+    "id": 13,
+    "question": "What is shuffle partition tuning?",
+    "choices": [
+      "Increasing executor cores",
+      "Setting spark.sql.shuffle.partitions",
+      "Changing serializer",
+      "Enabling off-heap"
+    ],
+    "correct": 1,
+    "description": "`spark.sql.shuffle.partitions` (default 200) controls post-shuffle partitions.\nToo low → large partitions, OOM\nToo high → task overhead\n**Best Practice**: Set to ~2–3x total cores or based on data size (e.g., 1 partition per 100–200 MB)."
+  },
+  {
+    "id": 14,
+    "question": "What is a skewed key in join/shuffle?",
+    "choices": [
+      "Key with null value",
+      "Key with very high frequency (e.g., 90% of data)",
+      "Key with long string",
+      "Encrypted key"
+    ],
+    "correct": 1,
+    "description": "Skewed keys cause **straggler tasks** — one partition processes most data.\nLeads to slow jobs.\n**Best Practice**: Use **key salting** — append random suffix to key, then aggregate."
+  },
+  {
+    "id": 15,
+    "question": "How to implement key salting for skew?",
+    "choices": [
+      "Use repartition()",
+      "Add random number to key and group later",
+      "Use broadcast join",
+      "Increase memory"
+    ],
+    "correct": 1,
+    "description": "Example:\n```scala\nval salted = df.withColumn(\"salt\", rand() * 10)\nval joined = salted.join(broadcast(lookup), \"key\")\njoined.groupBy(\"key\").agg(...) // remove salt\n```\nDistributes load evenly.\n**Best Practice**: Use with AQE (Spark 3+) for auto-skew handling."
+  },
+  {
+    "id": 16,
+    "question": "What is Adaptive Query Execution (AQE)?",
+    "choices": [
+      "Manual tuning",
+      "Runtime re-optimization based on stats",
+      "Static planning",
+      "Driver-side optimization"
+    ],
+    "correct": 1,
+    "description": "AQE (Spark 3+) dynamically adjusts plan:\n- Coalesce shuffle partitions\n- Handle join skew\n- Switch join types\nEnabled via `spark.sql.adaptive.enabled=true`\n**Best Practice**: Always enable in production."
+  },
+  {
+    "id": 17,
+    "question": "What is the benefit of whole-stage code generation?",
+    "choices": [
+      "Better memory usage",
+      "Fuses operators into single Java function",
+      "Reduces shuffle",
+      "Improves serialization"
+    ],
+    "correct": 1,
+    "description": "Whole-stage codegen compiles multiple operators (filter → project → aggregate) into **one function**.\nEliminates virtual function calls → 2–10x CPU speedup.\nPart of Tungsten.\n**Best Practice**: Use DataFrame API to enable."
+  },
+  {
+    "id": 18,
+    "question": "When to use mapPartitions() over map()?",
+    "choices": [
+      "For row-by-row processing",
+      "For per-partition initialization (e.g., DB connection)",
+      "For simple transformations",
+      "For actions"
+    ],
+    "correct": 1,
+    "description": "mapPartitions() gives iterator over entire partition.\nUse to:\n- Initialize expensive resources once per partition\n- Batch processing\n**Best Practice**: Avoid if logic is simple — map() is clearer."
+  },
+  {
+    "id": 19,
+    "question": "What is the risk of using collect() in production?",
+    "choices": [
+      "Triggers shuffle",
+      "Brings all data to driver → OOM",
+      "Slows down executors",
+      "Breaks lineage"
+    ],
+    "correct": 1,
+    "description": "collect() pulls **all data** to driver memory.\nRisk of **driver OOM crash** on large datasets.\n**Best Practice**: Use only for debugging or small results. Prefer `take(n)`, `show()`, or write to file."
+  },
+  {
+    "id": 20,
+    "question": "How to monitor shuffle in Spark UI?",
+    "choices": [
+      "SQL tab",
+      "Stages tab → Shuffle Read/Write",
+      "Executors tab",
+      "Environment tab"
+    ],
+    "correct": 1,
+    "description": "In **Stages tab**:\n- **Shuffle Write**: data written to disk/network\n- **Shuffle Read**: data read from remote\nHigh values → tuning needed.\n**Best Practice**: Look for stages with high shuffle read > 1GB."
+  }
+]

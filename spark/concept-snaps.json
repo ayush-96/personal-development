@@ -1,0 +1,23 @@
+[
+  {
+    "term": "Hadoop",
+    "question": "What is it?",
+    "answer": "Distributed storage (HDFS) + processing (MapReduce) for massive datasets on cheap hardware. Fault-tolerant with 3x replication.",
+    "frontColor": "#4CAF50",
+    "backColor": "#2196F3"
+  },
+  {
+    "term": "Spark",
+    "question": "What is it?",
+    "answer": "In-memory distributed processing engine. Faster than MapReduce with RDDs, DataFrames, and lazy evaluation.",
+    "frontColor": "#FF9800",
+    "backColor": "#F44336"
+  },
+  {
+    "term": "Kafka",
+    "question": "Core idea?",
+    "answer": "Distributed event streaming platform. Publish/subscribe with topics, partitions, and log-based durability.",
+    "frontColor": "#9C27B0",
+    "backColor": "#3F51B5"
+  }
+]

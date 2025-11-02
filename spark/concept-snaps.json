@@ -3,15 +3,15 @@
     "term": "Hadoop",
     "question": "What is it?",
     "answer": "Distributed storage (HDFS) + processing (MapReduce) for massive datasets.",
-    "frontColor": "#4CAF50",
-    "backColor": "#2196F3"
+    "frontColor": "#10B981",
+    "backColor": "#334155"
   },
   {
     "term": "Spark",
     "question": "Core idea?",
     "answer": "In-memory cluster computing with RDDs and DataFrames.",
-    "frontColor": "#FF9800",
-    "backColor": "#F44336"
+    "frontColor": "#00FF00",
+    "backColor": "#FFFF00"
   },
   {
     "term": "Kafka",

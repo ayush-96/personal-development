@@ -1,0 +1,665 @@
+[
+  {
+    "id": 1,
+    "question": "In Spark, repartition function can :",
+    "choices": [
+      "only increase the number of partitions",
+      "only decrease the number of partitions",
+      "increase or decrease the number of partitions",
+      "automatically repartition the data"
+    ],
+    "correct": 2,
+    "description": "Spark provides two ways to control the number of partitions. One of them is repartition().\nRepartition can increase and decrease the number of partitions. It performs a full shuffle of data across partitions and equally distributes them resulting in roughly equal sized partitions.\nIt is a very expensive operation as it shuffles data from all nodes in a cluster."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following statements about the DAG is correct?",
+    "choices": [
+      "DAG stands for Distributed Acyclic Graph",
+      "Spark developers cannot see the DAG of Spark jobs because Spark wants hide internals for simplicity",
+      "A DAG represents the executor level mapping of tasks",
+      "A DAG represents the execution plan of a Spark job"
+    ],
+    "correct": 3,
+    "description": "DAG stands for Directed Acyclic Graph. It is the logical execution plan of a Spark job."
+  },
+  {
+    "id": 3,
+    "question": "What is the main purpose of Apache Spark?",
+    "choices": [
+      "To store large datasets",
+      "To process data faster than Hadoop MapReduce",
+      "To replace databases",
+      "To run machine learning models only"
+    ],
+    "correct": 1,
+    "description": "Spark is much faster than Hadoop MapReduce due to in-memory computation."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following is NOT a component of Spark?",
+    "choices": [
+      "Spark Core",
+      "Spark SQL",
+      "Spark Streaming",
+      "Spark Database"
+    ],
+    "correct": 3,
+    "description": "There is no Spark component named Spark Database."
+  },
+  {
+    "id": 5,
+    "question": "What does RDD stand for?",
+    "choices": [
+      "Resilient Data Dataset",
+      "Resilient Distributed Dataset",
+      "Remote Data Distribution",
+      "Reusable Data Definition"
+    ],
+    "correct": 1,
+    "description": "RDDs are immutable distributed collections of objects."
+  },
+  {
+    "id": 6,
+    "question": "Which function is used to reduce the number of partitions without shuffling?",
+    "choices": [
+      "repartition()",
+      "coalesce()",
+      "shuffle()",
+      "reduceByKey()"
+    ],
+    "correct": 1,
+    "description": "coalesce() reduces partitions without full shuffle; efficient for downsizing partitions."
+  },
+  {
+    "id": 7,
+    "question": "What happens when you call collect() on an RDD?",
+    "choices": [
+      "It returns a new RDD",
+      "It brings all data to the driver node",
+      "It saves data to disk",
+      "It triggers lazy evaluation"
+    ],
+    "correct": 1,
+    "description": "collect() brings entire RDD to the driver — use with caution."
+  },
+  {
+    "id": 8,
+    "question": "Which of the following is a transformation?",
+    "choices": [
+      "count()",
+      "collect()",
+      "map()",
+      "take()"
+    ],
+    "correct": 2,
+    "description": "map() is a lazy transformation."
+  },
+  {
+    "id": 9,
+    "question": "What is the default partitioning strategy in Spark?",
+    "choices": [
+      "Range partitioning",
+      "Hash partitioning",
+      "Round-robin partitioning",
+      "Custom partitioning"
+    ],
+    "correct": 1,
+    "description": "Spark uses hash(key) % numPartitions by default."
+  },
+  {
+    "id": 10,
+    "question": "Which file format is columnar and supports predicate pushdown?",
+    "choices": [
+      "CSV",
+      "JSON",
+      "Parquet",
+      "Text"
+    ],
+    "correct": 2,
+    "description": "Parquet is optimized for analytics with column pruning and predicate pushdown."
+  },
+  {
+    "id": 11,
+    "question": "What is lazy evaluation in Spark?",
+    "choices": [
+      "Spark executes code slowly",
+      "Transformations are not computed until an action is called",
+      "Spark delays writing to disk",
+      "Actions are executed lazily"
+    ],
+    "correct": 1,
+    "description": "Transformations build the DAG and execute only when actions run."
+  },
+  {
+    "id": 12,
+    "question": "Which of the following is an action?",
+    "choices": [
+      "filter()",
+      "map()",
+      "reduceByKey()",
+      "first()"
+    ],
+    "correct": 3,
+    "description": "first() is an action returning the first element of an RDD."
+  },
+  {
+    "id": 13,
+    "question": "What is the role of the Spark Driver?",
+    "choices": [
+      "Executes tasks on worker nodes",
+      "Stores data in memory",
+      "Manages the application and coordinates tasks",
+      "Handles shuffle operations"
+    ],
+    "correct": 2,
+    "description": "Driver converts code into tasks & schedules execution."
+  },
+  {
+    "id": 14,
+    "question": "Which method is used to cache an RDD in memory?",
+    "choices": [
+      "save()",
+      "persist()",
+      "collect()",
+      "store()"
+    ],
+    "correct": 1,
+    "description": "persist() or cache() keep RDD for repeated operations."
+  },
+  {
+    "id": 15,
+    "question": "What is a Spark Stage?",
+    "choices": [
+      "A single task",
+      "A group of tasks that can be executed without shuffling",
+      "The entire job",
+      "A physical machine"
+    ],
+    "correct": 1,
+    "description": "Each stage contains tasks executed in parallel per partition."
+  },
+  {
+    "id": 16,
+    "question": "Which of the following is true about DataFrame?",
+    "choices": [
+      "It is untyped and schema-less",
+      "It is a collection of Rows with a schema",
+      "It cannot be created from RDD",
+      "It is slower than RDD"
+    ],
+    "correct": 1,
+    "description": "DataFrame is structured data with a defined schema."
+  },
+  {
+    "id": 17,
+    "question": "What is the default shuffle partition count in Spark?",
+    "choices": [
+      "1",
+      "100",
+      "200",
+      "1000"
+    ],
+    "correct": 2,
+    "description": "spark.sql.shuffle.partitions default = 200."
+  },
+
+  /* ---------- New Questions from here ---------- */
+
+  {
+    "id": 18,
+    "question": "RDDs are fault-tolerant mainly because of:",
+    "choices": [
+      "Replication",
+      "Checkpointing",
+      "Lineage information",
+      "Caching"
+    ],
+    "correct": 2,
+    "description": "RDDs can be recomputed using lineage graph if partitions fail."
+  },
+  {
+    "id": 19,
+    "question": "Which transformation can produce more elements than the input?",
+    "choices": [
+      "map()",
+      "flatMap()",
+      "filter()",
+      "distinct()"
+    ],
+    "correct": 1,
+    "description": "flatMap() can return 0, 1, or many elements per input element."
+  },
+  {
+    "id": 20,
+    "question": "Which transformation groups data based on key?",
+    "choices": [
+      "groupByKey()",
+      "map()",
+      "filter()",
+      "first()"
+    ],
+    "correct": 0,
+    "description": "groupByKey() creates a (key, iterable) RDD grouping all values."
+  },
+  {
+    "id": 21,
+    "question": "reduceByKey() is preferred over groupByKey() because:",
+    "choices": [
+      "groupByKey() is faster",
+      "reduceByKey() performs local aggregation before shuffle",
+      "reduceByKey() does not require a function",
+      "reduceByKey() always increases partitions"
+    ],
+    "correct": 1,
+    "description": "reduceByKey() reduces data during shuffle → less network IO."
+  },
+  {
+    "id": 22,
+    "question": "Which operation materializes the RDD lineage and stores intermediate state?",
+    "choices": [
+      "cache()",
+      "checkpoint()",
+      "collect()",
+      "union()"
+    ],
+    "correct": 1,
+    "description": "Checkpointing truncates lineage by writing RDD to HDFS."
+  },
+  {
+    "id": 23,
+    "question": "Which API provides the lowest-level control in Spark?",
+    "choices": [
+      "RDD API",
+      "DataFrame API",
+      "Dataset API",
+      "Spark SQL"
+    ],
+    "correct": 0,
+    "description": "RDD API gives full control but lacks optimizer features."
+  },
+  {
+    "id": 24,
+    "question": "Which is TRUE about transformations in Spark?",
+    "choices": [
+      "They immediately compute results",
+      "They modify existing RDDs",
+      "They always cause shuffling",
+      "They return a new RDD"
+    ],
+    "correct": 3,
+    "description": "RDDs are immutable → transformations create new RDDs."
+  },
+  {
+    "id": 25,
+    "question": "filter() transformation:",
+    "choices": [
+      "Removes elements based on a condition",
+      "Always causes a shuffle",
+      "Collects data to driver",
+      "Is an action"
+    ],
+    "correct": 0,
+    "description": "filter() keeps only elements where condition is true."
+  },
+  {
+    "id": 26,
+    "question": "Which of the following is TRUE for actions?",
+    "choices": [
+      "They do not trigger execution",
+      "They return data or write output",
+      "They always create a new RDD",
+      "They define lineage"
+    ],
+    "correct": 1,
+    "description": "Actions execute DAG and return value or save to storage."
+  },
+  {
+    "id": 27,
+    "question": "Which Spark component executes tasks on worker nodes?",
+    "choices": [
+      "Driver",
+      "Executor",
+      "Master",
+      "Ranger"
+    ],
+    "correct": 1,
+    "description": "Executors run tasks and store data for caching."
+  },
+  {
+    "id": 28,
+    "question": "Where is cached data stored by default?",
+    "choices": [
+      "Disk only",
+      "Driver memory",
+      "Executor memory",
+      "External storage"
+    ],
+    "correct": 2,
+    "description": "Cached RDD blocks are stored in executor memory."
+  },
+  {
+    "id": 29,
+    "question": "Which scenario requires repartition() instead of coalesce()?",
+    "choices": [
+      "Increasing partitions",
+      "Decreasing partitions",
+      "No shuffle required",
+      "Working with a very small dataset"
+    ],
+    "correct": 0,
+    "description": "repartition() fully shuffles data to increase partitions."
+  },
+  {
+    "id": 30,
+    "question": "Which API uses Tungsten and Catalyst optimizations?",
+    "choices": [
+      "RDD",
+      "DataFrame",
+      "Hadoop MapReduce",
+      "RDD + Accumulators"
+    ],
+    "correct": 1,
+    "description": "DataFrames benefit from Spark SQL optimizer and memory optimizations."
+  },
+  {
+    "id": 31,
+    "question": "Which method creates an RDD from a local Scala/Python collection?",
+    "choices": [
+      "parallelize()",
+      "textFile()",
+      "wholeTextFiles()",
+      "read.csv()"
+    ],
+    "correct": 0,
+    "description": "parallelize() distributes a local collection into an RDD."
+  },
+  {
+    "id": 32,
+    "question": "Which is a narrow transformation?",
+    "choices": [
+      "map()",
+      "reduceByKey()",
+      "sortByKey()",
+      "join()"
+    ],
+    "correct": 0,
+    "description": "map() does not require data movement across partitions."
+  },
+  {
+    "id": 33,
+    "question": "Which is a wide transformation?",
+    "choices": [
+      "map()",
+      "filter()",
+      "reduceByKey()",
+      "mapPartitions()"
+    ],
+    "correct": 2,
+    "description": "reduceByKey() causes shuffling (wide dependency)."
+  },
+  {
+    "id": 34,
+    "question": "What is a task in Spark?",
+    "choices": [
+      "A Spark job",
+      "A unit of work executed on a single partition",
+      "A group of stages",
+      "Driver program code"
+    ],
+    "correct": 1,
+    "description": "One task is executed per partition of a stage."
+  },
+  {
+    "id": 35,
+    "question": "Which action returns only part of the RDD?",
+    "choices": [
+      "collect()",
+      "take()",
+      "reduce()",
+      "count()"
+    ],
+    "correct": 1,
+    "description": "take(n) fetches first n elements to driver."
+  },
+  {
+    "id": 36,
+    "question": "Which RDD property ensures immutability?",
+    "choices": [
+      "RDDs cannot be cached",
+      "Transformations create a new RDD",
+      "RDDs get modified in-place",
+      "RDDs always persist to disk"
+    ],
+    "correct": 1,
+    "description": "RDDs are immutable; any change creates a new RDD."
+  },
+  {
+    "id": 37,
+    "question": "Which of the following is a Spark cluster manager?",
+    "choices": [
+      "Kubernetes",
+      "ZooKeeper",
+      "HDFS",
+      "Parquet"
+    ],
+    "correct": 0,
+    "description": "Spark works with Standalone, YARN, Mesos, and Kubernetes cluster managers."
+  },
+  {
+    "id": 38,
+    "question": "Which operation writes an RDD to external storage?",
+    "choices": [
+      "saveAsTextFile()",
+      "map()",
+      "cache()",
+      "filter()"
+    ],
+    "correct": 0,
+    "description": "saveAsTextFile() stores RDD to file systems like HDFS."
+  },
+  {
+    "id": 39,
+    "question": "What causes shuffle operations?",
+    "choices": [
+      "Working on a local collection",
+      "Operations requiring data to move across partitions",
+      "Cache eviction",
+      "Action execution"
+    ],
+    "correct": 1,
+    "description": "Shuffle redistributes data across nodes in the cluster."
+  },
+  {
+    "id": 40,
+    "question": "Which function combines two RDDs by eliminating duplicates?",
+    "choices": [
+      "union()",
+      "intersection()",
+      "cartesian()",
+      "zip()"
+    ],
+    "correct": 1,
+    "description": "intersection() returns common elements — duplicates removed."
+  },
+  {
+    "id": 41,
+    "question": "What type of variable in Spark can accumulate values across tasks?",
+    "choices": [
+      "Broadcast variables",
+      "Accumulators",
+      "Global variables",
+      "Loop counters"
+    ],
+    "correct": 1,
+    "description": "Accumulators aggregate values across tasks."
+  },
+  {
+    "id": 42,
+    "question": "Broadcast variables are used to:",
+    "choices": [
+      "Store lineage information",
+      "Copy large data to every executor efficiently",
+      "Remove shuffle from reduceByKey",
+      "Store RDD partitions"
+    ],
+    "correct": 1,
+    "description": "Broadcast variables avoid sending large data repeatedly to tasks."
+  },
+  {
+    "id": 43,
+    "question": "Which API guarantees type safety at compile time?",
+    "choices": [
+      "RDD",
+      "DataFrame",
+      "Dataset",
+      "Parquet"
+    ],
+    "correct": 2,
+    "description": "Dataset API provides typed records (in Scala & Java)."
+  },
+  {
+    "id": 44,
+    "question": "Which command reads each file as a single record?",
+    "choices": [
+      "textFile()",
+      "wholeTextFiles()",
+      "parallelize()",
+      "read.json()"
+    ],
+    "correct": 1,
+    "description": "wholeTextFiles() returns (fileName, content) RDD."
+  },
+  {
+    "id": 45,
+    "question": "Which Spark parameter defines executor-level parallelism?",
+    "choices": [
+      "Number of partitions",
+      "Number of executors",
+      "spark.sql.shuffle.partitions",
+      "Number of jobs"
+    ],
+    "correct": 0,
+    "description": "Tasks run per partition → more partitions = more parallelism."
+  },
+  {
+    "id": 46,
+    "question": "Checkpoint data is typically saved to:",
+    "choices": [
+      "Driver memory",
+      "Cluster manager",
+      "Reliable storage like HDFS",
+      "Local executor memory"
+    ],
+    "correct": 2,
+    "description": "Checkpointing writes to fault-tolerant storage like HDFS/S3."
+  },
+  {
+    "id": 47,
+    "question": "Which function applies a transformation on each partition?",
+    "choices": [
+      "map()",
+      "mapPartitions()",
+      "filter()",
+      "reduce()"
+    ],
+    "correct": 1,
+    "description": "mapPartitions() is more efficient for functions that reuse resources."
+  },
+  {
+    "id": 48,
+    "question": "If an executor fails, Spark recomputes missing partitions using:",
+    "choices": [
+      "Backup cluster",
+      "Lineage graph",
+      "Broadcast variables",
+      "Logs"
+    ],
+    "correct": 1,
+    "description": "Lineage enables recalculation of lost partitions."
+  },
+  {
+    "id": 49,
+    "question": "Which operation causes the DAG Scheduler to submit a new stage?",
+    "choices": [
+      "map()",
+      "filter()",
+      "join()",
+      "cache()"
+    ],
+    "correct": 2,
+    "description": "join() requires shuffle → new stage boundary."
+  },
+  {
+    "id": 50,
+    "question": "Which is TRUE about RDD persistence?",
+    "choices": [
+      "It is automatic",
+      "User controls storage level",
+      "Only one RDD can be persisted",
+      "It always stores data on disk"
+    ],
+    "correct": 1,
+    "description": "persist() can store in memory, disk, or both."
+  },
+  {
+    "id": 51,
+    "question": "Which action returns the number of elements in an RDD?",
+    "choices": [
+      "count()",
+      "length()",
+      "size()",
+      "total()"
+    ],
+    "correct": 0,
+    "description": "count() returns total number of elements."
+  },
+  {
+    "id": 52,
+    "question": "Which reads a directory of text files into an RDD?",
+    "choices": [
+      "read.text()",
+      "textFile()",
+      "map()",
+      "parallelize()"
+    ],
+    "correct": 1,
+    "description": "textFile() loads file(s) into RDD of lines."
+  },
+  {
+    "id": 53,
+    "question": "Which operation combines two RDDs by pairing elements with same index?",
+    "choices": [
+      "zip()",
+      "join()",
+      "union()",
+      "distinct()"
+    ],
+    "correct": 0,
+    "description": "zip() pairs element i of RDD A with element i of RDD B."
+  },
+  {
+    "id": 54,
+    "question": "Which RDD operation is useful for experimenting with partial data?",
+    "choices": [
+      "take()",
+      "reduce()",
+      "groupByKey()",
+      "union()"
+    ],
+    "correct": 0,
+    "description": "take(n) lets you preview sample records."
+  },
+  {
+    "id": 55,
+    "question": "What happens if a cached RDD does not fit in memory?",
+    "choices": [
+      "Execution stops with error",
+      "Least recently used partitions are dropped",
+      "Everything spills to disk automatically",
+      "Cache is disabled"
+    ],
+    "correct": 1,
+    "description": "Memory-only caching may evict older partitions to make space."
+  }
+]

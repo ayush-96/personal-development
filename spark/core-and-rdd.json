@@ -203,9 +203,6 @@
     "correct": 2,
     "description": "spark.sql.shuffle.partitions default = 200."
   },
-
-  /* ---------- New Questions from here ---------- */
-
   {
     "id": 18,
     "question": "RDDs are fault-tolerant mainly because of:",

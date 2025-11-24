@@ -42,7 +42,9 @@ I also need a quiz card for it that is html code. HTML element I have for each q
 Follow the same format and give me the card element code as well
 ---------------------------------------------------------------------------
 Introduction to Apache Spark - Basic - History, ecosystem, features - 34 questions
+	quiz-arena/apache-spark/introduction-to-spark
 Spark Core & RDD Fundamentals - Basic & Intermediate - RDD basics, transformations, actions - 55 
+	quiz-arena/apache-spark/spark-core-and-rdd
 Spark Architecture Basics - Basic - Driver, Executors, Cluster Manager, DAG, etc. - 40 questions
 Spark Application & Deployment - Basic & Intermediate - Job stages, submitting apps, cluster modes - 30 questions
 Spark Shell & API Basics (Scala/Python)	- Basic & Intermediate - REPL, Data API differences - 25 questions

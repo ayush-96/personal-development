@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "Which component inside an executor JVM is responsible for storing cached blocks and shuffle intermediate data?",
+    "choices": [
+      "TaskRunner",
+      "BlockManager",
+      "ShuffleManager",
+      "MemoryManager"
+    ],
+    "correct": 1,
+    "description": "BlockManager is the unified storage layer inside each executor (and driver). It manages memory, disk, and off-heap blocks for both cached RDDs/DataFrames and shuffle files."
+  },
+  {
+    "id": 2,
+    "question": "In Spark’s Unified Memory Manager (since 1.6), execution memory and storage memory:",
+    "choices": [
+      "Are strictly separated",
+      "Can borrow from each other dynamically",
+      "Are managed only on-heap",
+      "Require manual configuration of ratios"
+    ],
+    "correct": 1,
+    "description": "Unified Memory allows execution (shuffle, joins, aggregation) and storage (cache) to share the same region. Storage can evict to disk; execution can borrow from storage."
+  },
+  {
+    "id": 3,
+    "question": "What is the default value of spark.memory.fraction?",
+    "choices": [
+      "0.6",
+      "0.75",
+      "0.9",
+      "1.0"
+    ],
+    "correct": 1,
+    "description": "spark.memory.fraction = 0.75 means 75% of (executor heap – 300 MB reserved) is used for execution + storage. The remaining 25% is for user data structures and OS."
+  },
+  {
+    "id": 4,
+    "question": "Within the unified region, spark.memory.storageFraction (default 0.5) controls:",
+    "choices": [
+      "Initial allocation split between storage and execution",
+      "Hard boundary that cannot be crossed",
+      "Ratio of on-heap vs off-heap",
+      "Cache eviction threshold"
+    ],
+    "correct": 0,
+    "description": "It defines the initial guaranteed storage memory (50% of unified region). Storage can be forced below this if execution needs more, but not vice-versa."
+  },
+  {
+    "id": 5,
+    "question": "Which shuffle manager has been the default since Spark 2.0?",
+    "choices": [
+      "HashShuffleManager",
+      "UnsafeShuffleManager",
+      "SortShuffleManager (with Tungsten optimizations)",
+      "TungstenSortShuffleManager"
+    ],
+    "correct": 2,
+    "description": "SortShuffleManager with serialized sorting and unsafe memory operations is the default. It writes one file per reducer per map task (consolidated when possible)."
+  },
+  {
+    "id": 6,
+    "question": "When does Spark fall back from SortShuffleManager to the older serialized HashShuffleManager?",
+    "choices": [
+      "When shuffle partitions > 200",
+      "When the map-side combine is disabled",
+      "When the output key type is not supported by unsafe (e.g., Array)",
+      "Only in Spark 1.x"
+    ],
+    "correct": 2,
+    "description": "If the key ordering or row format is not Tungsten-compatible (e.g., non-primitive or mutable types), Spark falls back to safe serialized shuffle."
+  },
+  {
+    "id": 7,
+    "question": "What does the configuration spark.shuffle.sort.bypassMergeThreshold control?",
+    "choices": [
+      "Maximum number of shuffle partitions",
+      "Threshold (default 200) above which bypass merge sort is disabled",
+      "When to use hash shuffle instead of sort",
+      "Maximum file size for consolidated shuffle files"
+    ],
+    "correct": 1,
+    "description": "If shuffle partitions ≤ 200, Spark uses bypass mode (no external sorting, direct append), otherwise normal sort-based shuffle with merge."
+  },
+  {
+    "id": 8,
+    "question": "What is the purpose of the MapOutputTracker on the driver?",
+    "choices": [
+      "Tracks location and size of shuffle files after each stage",
+      "Schedules tasks",
+      "Manages executor heartbeats",
+      "Stores cached blocks"
+    ],
+    "correct": 0,
+    "description": "After a shuffle map stage finishes, executors register their shuffle outputs with MapOutputTrackerMaster on the driver. Reducers query it to locate shuffle blocks."
+  },
+  {
+    "id": 9,
+    "question": "Which class performs the actual shuffle fetch on the reducer side?",
+    "choices": [
+      "BlockStoreShuffleReader",
+      "ShuffleClient",
+      "ExternalShuffleClient",
+      "NettyBlockTransferService"
+    ],
+    "correct": 0,
+    "description": "BlockStoreShuffleReader (in shuffle package) fetches remote shuffle blocks via BlockTransferService (Netty) and local blocks directly from the same executor."
+  },
+  {
+    "id": 10,
+    "question": "What is shuffle push introduced in Spark 3.2?",
+    "choices": [
+      "Pushing shuffle blocks to remote executors during map stage",
+      "Pushing shuffle data to external shuffle service",
+      "A new compression codec",
+      "Dynamic allocation of shuffle partitions"
+    ],
+    "correct": 0,
+    "description": "Shuffle push proactively pushes completed shuffle map outputs to reducer executors (or external shuffle service) to overlap map and reduce phases and reduce disk I/O."
+  },
+  {
+    "id": 11,
+    "question": "Which memory region is used by Tungsten’s UnsafeRow and memory pages?",
+    "choices": [
+      "On-heap",
+      "Off-heap (direct memory)",
+      "Executor heap only",
+      "Disk"
+    ],
+    "correct": 1,
+    "description": "Tungsten manages its own off-heap memory pages via MemoryManager. UnsafeRow pointers refer to these pages, avoiding Java object overhead."
+  },
+  {
+    "id": 12,
+    "question": "What is the role of TaskMemoryManager inside an executor?",
+    "choices": [
+      "Tracks memory allocated by each task to enforce per-task limits",
+      "Manages shuffle spill",
+      "Allocates storage memory",
+      "Handles driver communication"
+    ],
+    "correct": 0,
+    "description": "Each task gets its own TaskMemoryManager that enforces spark.executor.memory + per-core overhead limits and forces spill if exceeded."
+  },
+  {
+    "id": 13,
+    "question": "When does shuffle spill to disk occur?",
+    "choices": [
+      "When in-memory hash map exceeds 100 MB",
+      "When memory acquired by TaskMemoryManager exceeds spark.memory.fraction",
+      "When aggregate buffer or sort buffer exceeds per-task memory limit",
+      "Only when executor is out of memory"
+    ],
+    "correct": 2,
+    "description": "During sort or hash aggregation, if the in-memory buffer grows beyond the task’s acquired memory (usually a few hundred MB), it spills sorted runs to disk."
+  },
+  {
+    "id": 14,
+    "question": "What is the purpose of ExternalShuffleService (ESS)?",
+    "choices": [
+      "To serve shuffle files even after executor dies",
+      "To perform shuffle compression",
+      "To replace MapOutputTracker",
+      "To manage dynamic allocation"
+    ],
+    "correct": 0,
+    "description": "When spark.shuffle.service.enabled=true, shuffle files are written to ESS (a daemon on each node), so reducers can fetch them even if the original executor is gone."
+  },
+  {
+    "id": 15,
+    "question": "Which configuration controls the maximum size of a single shuffle block?",
+    "choices": [
+      "spark.shuffle.file.buffer",
+      "spark.maxRemoteBlockSizeFetchToMem",
+      "spark.shuffle.maxChunksSize",
+      "spark.network.maxRemoteBlockSize"
+    ],
+    "correct": 1,
+    "description": "Default 2 GB. Larger blocks are split during fetch to avoid OOM on reducer."
+  },
+  {
+    "id": 16,
+    "question": "In sort-based shuffle, how many files does each map task write by default?",
+    "choices": [
+      "One file per reducer partition",
+      "One consolidated file",
+      "One file per core",
+      "Exactly one file"
+    ],
+    "correct": 0,
+    "description": "Each map task writes M files (M = number of reduce partitions), unless consolidation is used (spark.shuffle.consolidateFiles=true in some managers)."
+  },
+  {
+    "id": 17,
+    "question": "What is the consolidation mechanism in push-based shuffle (Spark 3.2+)?",
+    "choices": [
+      "Multiple map tasks on same executor share shuffle files",
+      "Reducers merge shuffle blocks",
+      "Driver consolidates files",
+      "Only one file per partition"
+    ],
+    "correct": 0,
+    "description": "Consecutive map tasks on the same executor reuse the same set of shuffle files (in-memory or disk), drastically reducing file count."
+  },
+  {
+    "id": 18,
+    "question": "Which component serializes tasks before sending them to executors?",
+    "choices": [
+      "TaskScheduler",
+      "DAGScheduler",
+      "Driver’s TaskSerializer",
+      "Executor’s CoarseGrainedExecutorBackend"
+    ],
+    "correct": 1,
+    "description": "DAGScheduler serializes Task objects (including closures) using the configured serializer (Java or Kryo)."
+  },
+  {
+    "id": 19,
+    "question": "What is the purpose of spark.executor.heartbeatInterval?",
+    "choices": [
+      "Controls how often executors report heartbeats and block statuses to driver",
+      "Controls task timeout",
+      "Controls shuffle fetch timeout",
+      "Controls garbage collection"
+    ],
+    "correct": 0,
+    "description": "Default 10s. Longer intervals reduce driver load but increase detection time for dead executors."
+  },
+  {
+    "id": 20,
+    "question": "Which memory is NOT managed by Spark’s MemoryManager?",
+    "choices": [
+      "Execution memory",
+      "Storage memory",
+      "User memory (300 MB reserved + remaining heap)",
+      "Off-heap Tungsten memory"
+    ],
+    "correct": 2,
+    "description": "The reserved 300 MB + (1 – spark.memory.fraction) portion is for Java objects, buffers, and OS; Spark does not manage it."
+  },
+  {
+    "id": 21,
+    "question": "What happens when an executor runs out of off-heap memory (Tungsten)?",
+    "choices": [
+      "Automatic spill to disk",
+      "Task fails with OOM",
+      "Executor crashes",
+      "Spark falls back to on-heap"
+    ],
+    "correct": 1,
+    "description": "Off-heap allocation failure throws OutOfMemoryError immediately; there is no automatic fallback or spill for Tungsten pages."
+  },
+  {
+    "id": 22,
+    "question": "Which shuffle write metric indicates many small files (bad consolidation)?",
+    "choices": [
+      "Shuffle bytes written",
+      "Shuffle write time",
+      "Shuffle files created",
+      "Records written"
+    ],
+    "correct": 2,
+    "description": "High number of shuffle files per map task indicates lack of consolidation and leads to many small files."
+  },
+  {
+    "id": 23,
+    "question": "What is the role of ShuffleDependency’s aggregator?",
+    "choices": [
+      "Combines values on the map side before shuffle",
+      "Merges intermediate results on reducer",
+      "Both map-side and reduce-side combine",
+      "Only used for groupByKey"
+    ],
+    "correct": 2,
+    "description": "For reduceByKey, combineByKey, etc., map-side combine (createCombiner + mergeValue) drastically reduces shuffle data volume."
+  },
+  {
+    "id": 24,
+    "question": "Which class is responsible for deserializing shuffle data into UnsafeRow objects?",
+    "choices": [
+      "UnsafeShuffleReader",
+      "SortShuffleWriter",
+      "TungstenAggregator",
+      "ExternalSorter"
+    ],
+    "correct": 0,
+    "description": "UnsafeShuffleReader reads serialized shuffle files and reconstructs UnsafeRows using Tungsten memory pages."
+  },
+  {
+    "id": 25,
+    "question": "What is the maximum number of concurrent tasks an executor can run?",
+    "choices": [
+      "spark.executor.cores",
+      "spark.task.cpus",
+      "Min(cores, available memory)",
+      "Unlimited"
+    ],
+    "correct": 0,
+    "description": "One core = one concurrent task slot. spark.task.cpus > 1 allows a task to use multiple cores (rare)."
+  },
+  {
+    "id": 26,
+    "question": "Which configuration enables the new AQE coalescing of shuffle partitions at runtime?",
+    "choices": [
+      "spark.sql.adaptive.enabled",
+      "spark.sql.adaptive.coalescePartitions.enabled",
+      "Both",
+      "spark.sql.shuffle.partitions"
+    ],
+    "correct": 2,
+    "description": "AQE (Spark 3.0+) can dynamically reduce shuffle partitions after map stage based on actual data size."
+  },
+  {
+    "id": 27,
+    "question": "What is the purpose of spark.shuffle.io.maxRetries?",
+    "choices": [
+      "Maximum retries when fetching a shuffle block fails",
+      "Maximum shuffle write retries",
+      "Maximum executor registration retries",
+      "Maximum task retries"
+    ],
+    "correct": 0,
+    "description": "Default 3. Controls fetch retries before marking task failed."
+  },
+  {
+    "id": 28,
+    "question": "Which storage level uses off-heap memory and serialization?",
+    "choices": [
+      "MEMORY_ONLY_SER",
+      "OFF_HEAP",
+      "MEMORY_AND_DISK_SER",
+      "DISK_ONLY"
+    ],
+    "correct": 1,
+    "description": "OFF_HEAP (experimental in 3.x, stable in 3.4+) stores Tungsten serialized data in off-heap memory managed by Spark."
+  },
+  {
+    "id": 29,
+    "question": "What does the executor metric 'Peak Memory' represent?",
+    "choices": [
+      "Current heap usage",
+      "Maximum heap usage seen during the executor lifetime",
+      "Off-heap memory",
+      "Total memory allocated"
+    ],
+    "correct": 1,
+    "description": "Peak JVM heap usage reported by the executor; useful to detect memory leaks or large objects."
+  },
+  {
+    "id": 30,
+    "question": "Which component decides whether to localize a task (NODE_LOCAL, PROCESS_LOCAL, etc.)?",
+    "choices": [
+      "DAGScheduler",
+      "TaskSchedulerImpl",
+      "BlockManager",
+      "Cluster Manager"
+    ],
+    "correct": 1,
+    "description": "TaskSchedulerImpl uses delay scheduling and preferredLocations from RDD/DataSource to assign tasks with best locality."
+  },
+  {
+    "id": 31,
+    "question": "What is the default size of spark.buffer.pageSize?",
+    "choices": [
+      "1 MB",
+      "8 MB",
+      "64 MB",
+      "256 MB"
+    ],
+    "correct": 1,
+    "description": "Tungsten memory pages are 8 MB by default; controls granularity of off-heap allocation."
+  },
+  {
+    "id": 32,
+    "question": "When does an executor remove shuffle files?",
+    "choices": [
+      "Immediately after task finishes",
+      "When BlockManager removes the block",
+      "Only when executor shuts down",
+      "Never, driver cleans them"
+    ],
+    "correct": 1,
+    "description": "Shuffle files are registered as shuffle blocks in BlockManager; they are deleted when the application ends or via ExternalShuffleService."
+  },
+  {
+    "id": 33,
+    "question": "Which metric indicates shuffle data was spilled to disk on the map side?",
+    "choices": [
+      "Shuffle spill (memory)",
+      "Shuffle spill (disk)",
+      "Shuffle write time",
+      "Disk bytes spilled"
+    ],
+    "correct": 1,
+    "description": "Shuffle spill (disk) > 0 means map-side combine or sort buffer exceeded memory and spilled."
+  },
+  {
+    "id": 34,
+    "question": "What is the purpose of spark.executor.pyspark.memory?",
+    "choices": [
+      "Memory allocated to Python process in PySpark",
+      "Memory for Python UDFs in JVM",
+      "Off-heap memory for Arrow",
+      "Driver memory for PySpark"
+    ],
+    "correct": 0,
+    "description": "In PySpark, each executor spawns a separate Python process; this config limits its heap (default 1g if Arrow is used)."
+  },
+  {
+    "id": 35,
+    "question": "Which shuffle fetch failure eventually leads to task re-execution?",
+    "choices": [
+      "Transient network error",
+      "Missing shuffle block (executor lost)",
+      "Timeout",
+      "All of the above"
+    ],
+    "correct": 1,
+    "description": "If a shuffle block is permanently lost (executor died without ESS), Spark re-executes the corresponding map tasks."
+  },
+  {
+    "id": 36,
+    "question": "What is the role of NettyBlockTransferService?",
+    "choices": [
+      "High-performance block transfer using Netty",
+      "HTTP-based transfer",
+      "Disk-based transfer",
+      "Only for shuffle push"
+    ],
+    "correct": 0,
+    "description": "Default block transfer service since Spark 1.0; uses Netty zero-copy for shuffle fetch, broadcast, and cached block replication."
+  },
+  {
+    "id": 37,
+    "question": "Which configuration enables zero-copy for shuffle push?",
+    "choices": [
+      "spark.shuffle.push.enabled",
+      "spark.shuffle.push.minChunkSize",
+      "spark.network.io.preferDirectBufs",
+      "All are required"
+    ],
+    "correct": 3,
+    "description": "Push-based shuffle uses direct buffers and zero-copy when possible to reduce serialization overhead."
+  },
+  {
+    "id": 38,
+    "question": "What is the maximum number of in-flight shuffle fetch requests per executor?",
+    "choices": [
+      "spark.reducer.maxReqsInFlight (default 5)",
+      "spark.shuffle.maxChunksBeingTransferred",
+      "spark.network.maxRemoteBlockSize",
+      "Unlimited"
+    ],
+    "correct": 0,
+    "description": "Limits concurrent fetch requests to prevent reducer OOM from too many open connections."
+  },
+  {
+    "id": 39,
+    "question": "Which executor backend is used in cluster mode?",
+    "choices": [
+      "LocalExecutor",
+      "CoarseGrainedExecutorBackend",
+      "StandaloneExecutor",
+      "YarnExecutor"
+    ],
+    "correct": 1,
+    "description": "CoarseGrainedExecutorBackend receives tasks from driver over Netty RPC and manages task threads."
+  },
+  {
+    "id": 40,
+    "question": "Which statement best describes Spark’s executor memory model in 2025?",
+    "choices": [
+      "Static split between execution and storage",
+      "Unified on-heap + optional off-heap, with dynamic borrowing and per-task limits",
+      "Fully off-heap only",
+      "Same as Hadoop MapReduce"
+    ],
+    "correct": 1,
+    "description": "Unified Memory Manager dynamically shares heap between execution and storage; Tungsten adds managed off-heap; TaskMemoryManager enforces per-task safety."
+  }
+]

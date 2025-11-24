@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "What is the type of a DataFrame in Spark?",
+    "choices": [
+      "Dataset[Row]",
+      "Dataset[Any]",
+      "RDD[Row]",
+      "DataFrame is a completely separate type"
+    ],
+    "correct": 0,
+    "description": "DataFrame is just a type alias for Dataset[Row]. Row is an untyped representation where columns are accessed by position or name."
+  },
+  {
+    "id": 2,
+    "question": "In which languages do we have a strongly-typed Dataset[T] API?",
+    "choices": [
+      "Python and Scala",
+      "Scala and Java only",
+      "All languages including Python and R",
+      "Only Java"
+    ],
+    "correct": 1,
+    "description": "Only Scala and Java support compile-time type-safe Dataset[T]. In Python and R, DataFrame = Dataset[Row] (untyped)."
+  },
+  {
+    "id": 3,
+    "question": "What is the role of an Encoder in the Dataset API?",
+    "choices": [
+      "To serialize data to disk",
+      "To convert between JVM objects and Spark’s internal Tungsten binary format",
+      "To encrypt data",
+      "To compress shuffle data"
+    ],
+    "correct": 1,
+    "description": "Encoders provide efficient serialization/deserialization between Scala/Java objects and Spark’s off-heap binary format used by Tungsten."
+  },
+  {
+    "id": 4,
+    "question": "Which statement about lazy evaluation in DataFrames is correct?",
+    "choices": [
+      "Every transformation is executed immediately",
+      "Transformations are lazy, actions trigger computation",
+      "Only select() is lazy",
+      "cache() forces immediate execution"
+    ],
+    "correct": 1,
+    "description": "All DataFrame transformations (select, filter, join, etc.) are lazy and only build the logical plan. Actions (count, show, write) trigger execution."
+  },
+  {
+    "id": 5,
+    "question": "How can you view the logical plan of a DataFrame without executing it?",
+    "choices": [
+      "df.show()",
+      "df.explain()",
+      "df.queryExecution()",
+      "df.printPlan()"
+    ],
+    "correct": 1,
+    "description": "df.explain() or df.explain(true) prints the full logical and physical plans. No computation is performed."
+  },
+  {
+    "id": 6,
+    "question": "Which component optimizes the logical plan in Spark SQL/DataFrame?",
+    "choices": [
+      "Tungsten",
+      "Catalyst",
+      "Project Tungsten",
+      "Spark Core"
+    ],
+    "correct": 1,
+    "description": "Catalyst is the query optimizer that applies rule-based and cost-based optimizations to the logical plan before generating the physical plan."
+  },
+  {
+    "id": 7,
+    "question": "What does df.printSchema() display?",
+    "choices": [
+      "First 20 rows",
+      "Tree representation of the schema with data types and nullability",
+      "Physical plan",
+      "Number of partitions"
+    ],
+    "correct": 1,
+    "description": "printSchema() prints a nicely formatted tree showing column names, data types, and whether fields are nullable."
+  },
+  {
+    "id": 8,
+    "question": "How do you access a column in a DataFrame in a type-safe way (Scala)?",
+    "choices": [
+      "df(\"name\")",
+      "df.col(\"name\")",
+      "$\"name\" or 'name (after import spark.implicits._)",
+      "df.get(\"name\")"
+    ],
+    "correct": 2,
+    "description": "After import spark.implicits._, you can use 'columnName or $\"columnName\" which returns a typed Column."
+  },
+  {
+    "id": 9,
+    "question": "What happens when you do df.select(\"nonExistentColumn\")?",
+    "choices": [
+      "Returns null column",
+      "AnalysisException at runtime",
+      "AnalysisException during planning (before execution)",
+      "Silent empty DataFrame"
+    ],
+    "correct": 2,
+    "description": "Spark performs analysis during planning. Unknown columns throw AnalysisException immediately when an action is called."
+  },
+  {
+    "id": 10,
+    "question": "Which method forces Spark to infer the schema when reading CSV/JSON?",
+    "choices": [
+      "spark.read.format(...).load()",
+      "spark.read.schema(...)",
+      "spark.read.option(\"inferSchema\", \"true\")",
+      "spark.read.json() with header"
+    ],
+    "correct": 2,
+    "description": "option(\"inferSchema\", \"true\") makes Spark sample the file to infer data types (expensive but convenient)."
+  },
+  {
+    "id": 11,
+    "question": "What is the recommended way to provide a schema when reading large files?",
+    "choices": [
+      "Always let Spark infer it",
+      "Define a StructType programmatically and pass it",
+      "Use DDL string only",
+      "Both b and c are fine"
+    ],
+    "correct": 3,
+    "description": "Providing an explicit StructType or DDL string avoids the costly sampling pass and prevents type mismatches."
+  },
+  {
+    "id": 12,
+    "question": "In Scala, to convert a case class RDD to a Dataset[MyClass], you need:",
+    "choices": [
+      "An implicit Encoder[MyClass]",
+      "toDS() method and import spark.implicits._",
+      "Both are required",
+      "Just rdd.toDF()"
+    ],
+    "correct": 2,
+    "description": "spark.implicits._ brings both the Encoder and the toDS() extension method for RDD/Seq."
+  },
+  {
+    "id": 13,
+    "question": "What happens if an Encoder is missing for a type in Dataset?",
+    "choices": [
+      "Fallback to Java serialization",
+      "Compilation error (Scala)",
+      "Runtime exception when action is called",
+      "Uses Kryo automatically"
+    ],
+    "correct": 2,
+    "description": "If no Encoder is in scope, Spark throws \"Unable to find encoder for type ...\" when an action is triggered."
+  },
+  {
+    "id": 14,
+    "question": "Which operation is NOT allowed on a Dataset[Row] (DataFrame)?",
+    "choices": [
+      "map() with lambda returning Row",
+      "flatMap()",
+      "filter() with typed column",
+      "All are allowed"
+    ],
+    "correct": 0,
+    "description": "DataFrame (Dataset[Row]) does not have map/flatMap over rows in a type-safe way. You must convert to typed Dataset first."
+  },
+  {
+    "id": 15,
+    "question": "How do you convert a DataFrame back to a typed Dataset[Person] in Scala?",
+    "choices": [
+      "df.as[Person]",
+      "df.to[Person]",
+      "df.map(_.as[Person])",
+      "df.convertTo[Person]"
+    ],
+    "correct": 0,
+    "description": "df.as[Person] (with implicit Encoder[Person] in scope) converts DataFrame to Dataset[Person]."
+  },
+  {
+    "id": 16,
+    "question": "What does df.cache() do on a DataFrame?",
+    "choices": [
+      "Uses MEMORY_ONLY by default",
+      "Uses MEMORY_AND_DISK",
+      "Same as df.persist() with default level",
+      "Both a and c"
+    ],
+    "correct": 3,
+    "description": "DataFrame.cache() is identical to RDD.cache() → persist(StorageLevel.MEMORY_ONLY)."
+  },
+  {
+    "id": 17,
+    "question": "Which of the following returns a new DataFrame with an added column?",
+    "choices": [
+      "df.withColumn(\"newCol\", lit(1))",
+      "df.addColumn(\"newCol\", 1)",
+      "df.select($*, lit(1).as(\"newCol\"))",
+      "Both a and c"
+    ],
+    "correct": 3,
+    "description": "withColumn() and select with existing columns plus new ones are common patterns."
+  },
+  {
+    "id": 18,
+    "question": "What is the default nullability of a column when you define a StructType manually?",
+    "choices": [
+      "Always nullable = true",
+      "Always nullable = false",
+      "Depends on the data type",
+      "You must specify it"
+    ],
+    "correct": 0,
+    "description": "By default, StructField(..., nullable = true). You must explicitly set nullable = false if needed."
+  },
+  {
+    "id": 19,
+    "question": "Which method shows both logical and physical plans?",
+    "choices": [
+      "df.explain()",
+      "df.explain(true)",
+      "df.explain(\"extended\")",
+      "df.queryExecution().explain()"
+    ],
+    "correct": 1,
+    "description": "df.explain(true) or df.explain(extended = true) prints analyzed logical, optimized logical, and physical plans."
+  },
+  {
+    "id": 20,
+    "question": "What is Whole-Stage Code Generation (Tungsten)?",
+    "choices": [
+      "A query optimizer",
+      "Generating one Java bytecode function for an entire physical stage",
+      "Off-heap memory management",
+      "Both b and c"
+    ],
+    "correct": 3,
+    "description": "Whole-stage codegen fuses multiple operators into a single Java function, eliminating virtual function calls and improving CPU efficiency."
+  },
+  {
+    "id": 21,
+    "question": "Which of these operations benefits the most from Catalyst optimizations?",
+    "choices": [
+      "Simple filter + select",
+      "Complex joins with predicate pushdown and column pruning",
+      "Reading Parquet files",
+      "All of the above"
+    ],
+    "correct": 1,
+    "description": "Catalyst shines on complex queries by pushing filters, pruning columns, reordering joins, etc."
+  },
+  {
+    "id": 22,
+    "question": "In Spark 3.x, Encoders for case classes are generated:",
+    "choices": [
+      "At runtime using reflection",
+      "Automatically at compile time (zero reflection)",
+      "Only when you add .encoders",
+      "Using Kryo"
+    ],
+    "correct": 1,
+    "description": "Spark 3+ uses compile-time code generation for case class encoders (via macros), eliminating runtime reflection overhead."
+  },
+  {
+    "id": 23,
+    "question": "What does df.describe() return bottom line?",
+    "choices": [
+      "A new DataFrame with summary statistics",
+      "Prints to console",
+      "A Scala Map",
+      "An RDD"
+    ],
+    "correct": 0,
+    "description": "describe() returns a DataFrame containing count, mean, stddev, min, max for numeric columns."
+  },
+  {
+    "id": 24,
+    "question": "Which method returns the number of partitions of a DataFrame?",
+    "choices": [
+      "df.rdd.partitions.size",
+      "df.partitions()",
+      "df.storageLevel",
+      "df.countPartitions()"
+    ],
+    "correct": 0,
+    "description": "DataFrames don’t expose it directly; use df.rdd.getNumPartitions or df.rdd.partitions.length."
+  },
+  {
+    "id": 25,
+    "question": "Which statement best describes the relationship between DataFrame, Dataset, and SQL?",
+    "choices": [
+      "They are completely separate APIs",
+      "All three share the same underlying execution engine and can be freely intermixed",
+      "Dataset is only for Scala",
+      "SQL is slower than DataFrame"
+    ],
+    "correct": 1,
+    "description": "DataFrame, Dataset[T], and spark.sql(\"SELECT ...\") all compile to the same optimized physical plan and can be converted between each other seamlessly."
+  },
+  {
+    "id": 26,
+    "question": "What is the purpose of spark.sessionState.conf.caseSensitiveAnalysis?",
+    "choices": [
+      "Controls whether column names are case-sensitive",
+      "Controls SQL keyword case",
+      "Enables ANSI mode",
+      "Controls encoder case sensitivity"
+    ],
+    "correct": 0,
+    "description": "By default false → column names are case-insensitive. Set to true for case-sensitive resolution."
+  },
+  {
+    "id": 27,
+    "question": "Which of the following creates a DataFrame with a single column monotonically increasing ID?",
+    "choices": [
+      "monotonically_increasing_id()",
+      "row_number().over(Window.orderBy(lit(1)))",
+      "spark.range(0, n)",
+      "All are valid"
+    ],
+    "correct": 3,
+    "description": "monotonically_increasing_id() is fast but not consecutive; row_number() is consecutive after shuffle; spark.range() is simplest."
+  },
+  {
+    "id": 28,
+    "question": "What is the default behavior when you join two DataFrames on columns with the same name?",
+    "choices": [
+      "Throws error",
+      "Automatic disambiguation with _1, _2",
+      "Uses natural join semantics (columns merged)",
+      "Keeps both columns"
+    ],
+    "correct": 2,
+    "description": "df1.join(df2) without condition or using same-named columns performs natural join (equi-join on common columns)."
+  },
+  {
+    "id": 29,
+    "question": "Which method drops duplicate rows?",
+    "choices": [
+      "df.distinct()",
+      "df.dropDuplicates()",
+      "Both are equivalent",
+      "df.unique()"
+    ],
+    "correct": 2,
+    "description": "distinct() drops full-row duplicates; dropDuplicates(colNames) drops duplicates based on specified columns."
+  },
+  {
+    "id": 30,
+    "question": "In Spark, lazy evaluation means:",
+    "choices": [
+      "Spark delays execution until an action is called",
+      "Spark executes slowly",
+      "Only caching is delayed",
+      "Only writes are delayed"
+    ],
+    "correct": 0,
+    "description": "All transformations are lazily recorded in the logical plan. Execution happens only when an action triggers the job."
+  }
+]

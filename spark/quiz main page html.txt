@@ -1,0 +1,365 @@
+<!-- Apache Spark Quiz Portal — Portal C (Clean Pro badges) -->
+<style>
+  /* Container */
+  .spark-portal { max-width:1100px; margin:40px auto; padding:24px; font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial; color:#0f172a; }
+  .spark-portal h1 { font-size:2.25rem; margin:0 0 8px; }
+  .spark-portal p.lead { color:#475569; margin:0 0 28px; }
+
+  /* Sections */
+  .spark-section { margin:36px 0; }
+  .section-title { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .section-title .icon { font-size:1.45rem; }
+  .section-title h2 { font-size:1.4rem; margin:0; color:#0f172a; }
+
+  /* Grid */
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+
+  /* Card */
+  .spark-card {
+    background:#ffffff; border-radius:14px; padding:18px; box-shadow:0 6px 20px rgba(2,6,23,0.06);
+    border-top:6px solid transparent; display:flex; flex-direction:column; gap:10px;
+  }
+  .spark-card .spark-icon {
+    width:56px; height:56px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-size:28px; background:linear-gradient(180deg, rgba(15,23,42,0.03), rgba(15,23,42,0.01));
+    box-shadow:0 6px 14px rgba(2,6,23,0.03);
+    margin-bottom:6px;
+  }
+  .spark-card h3.spark-title { margin:0; font-size:1.05rem; color:#0f172a; line-height:1.2; }
+  .spark-card p.spark-desc { margin:0; color:#475569; font-size:0.95rem; min-height:44px; }
+
+  /* Badges — Clean Pro */
+  .badges { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+  .badge {
+    display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:0.82rem;
+  }
+  .badge-questions { background:#eef2ff; color:#3730a3; }
+  .badge-level { background:#f0fdf4; color:#065f46; }
+
+  /* Button */
+  .btn-start {
+    margin-top:auto; display:inline-block; text-decoration:none; text-align:center;
+    background:#0f172a; color:#fff; padding:10px 14px; border-radius:10px; font-weight:700; font-size:0.95rem;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-start:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(15,23,42,0.08); }
+
+  /* Top featured */
+  .featured-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:18px; }
+
+  /* Section heading helper */
+  .hub-intro { color:#475569; margin-bottom:12px; font-size:0.95rem; }
+
+  /* Responsive tweak */
+  @media (max-width:420px) {
+    .spark-card .spark-icon { width:48px; height:48px; font-size:24px; }
+  }
+
+</style>
+
+<div class="spark-portal">
+  <header>
+    <h1>Apache Spark — Quiz Hub</h1>
+    <p class="lead">Curated quizzes covering Spark Core, RDDs, DataFrames, Streaming, Architecture, ML & more. Pick a learning path and start testing your knowledge.</p>
+  </header>
+
+  <!-- Featured Beginner Path -->
+  <section class="spark-section">
+    <div class="section-title">
+      <div class="icon">🌟</div>
+      <h2>Featured Beginner Path</h2>
+    </div>
+    <p class="hub-intro">A quick onboarding flow for new learners — start here.</p>
+
+    <div class="featured-grid">
+      <!-- Introduction -->
+      <div class="spark-card" style="border-top-color:#FFB74D;">
+        <div class="spark-icon">🔥</div>
+        <h3 class="spark-title">Introduction to Apache Spark</h3>
+        <p class="spark-desc">History, ecosystem, core features, and advantages over Hadoop MapReduce</p>
+        <div class="badges">
+          <span class="badge badge-questions">34 Questions</span>
+          <span class="badge badge-level">Beginner</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/introduction-to-apache-spark">Start Quiz →</a>
+      </div>
+
+      <!-- Core & RDD -->
+      <div class="spark-card" style="border-top-color:#FF6B6B;">
+        <div class="spark-icon">🧩</div>
+        <h3 class="spark-title">Spark Core & RDD Fundamentals</h3>
+        <p class="spark-desc">RDD basics, transformations, actions, partitions, persistence & resilience</p>
+        <div class="badges">
+          <span class="badge badge-questions">55 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-core-and-rdd">Start Quiz →</a>
+      </div>
+
+      <!-- DataFrames & Datasets -->
+      <div class="spark-card" style="border-top-color:#4DB6AC;">
+        <div class="spark-icon">🧮</div>
+        <h3 class="spark-title">DataFrames & Datasets</h3>
+        <p class="spark-desc">Schema, logical/physical plans, encoders, lazy evaluation</p>
+        <div class="badges">
+          <span class="badge badge-questions">45 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/dataframes-and-datasets">Start Quiz →</a>
+      </div>
+
+      <!-- Spark SQL Basics (added to featured) -->
+      <div class="spark-card" style="border-top-color:#FF9800;">
+        <div class="spark-icon">📊</div>
+        <h3 class="spark-title">Spark SQL Basics</h3>
+        <p class="spark-desc">Intro to Spark SQL, DataFrame queries, temp views & simple optimizations</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Beginner</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-sql-basics">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Topic Hubs -->
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🧩</div><h2>Core & RDD</h2></div>
+    <p class="hub-intro">Deep dive into RDD internals, partitioning, lineage, and advanced transformations.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#F06292;">
+        <div class="spark-icon">🧩</div>
+        <h3 class="spark-title">Spark RDD — Advanced Concepts</h3>
+        <p class="spark-desc">Custom partitioning, accumulators, broadcast variables, failure recovery</p>
+        <div class="badges">
+          <span class="badge badge-questions">45 Questions</span>
+          <span class="badge badge-level">Intermediate – Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/rdd-advanced">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🏗️</div><h2>Spark Architecture</h2></div>
+    <p class="hub-intro">Execution internals: driver, executors, DAG, shuffle, and Tungsten engine.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#4ECDC4;">
+        <div class="spark-icon">🏗️</div>
+        <h3 class="spark-title">Spark Architecture Basics</h3>
+        <p class="spark-desc">Driver, Executors, Cluster Manager, Application, Job, Stage, Task & DAG</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-architecture-basics">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#7E57C2;">
+        <div class="spark-icon">🏗️</div>
+        <h3 class="spark-title">Advanced Spark Architecture</h3>
+        <p class="spark-desc">Executor memory model, shuffle internals, Tungsten, task serialization</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/advanced-architecture">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🚀</div><h2>Deployment & Cluster</h2></div>
+    <p class="hub-intro">Deployment modes, cluster managers, spark-submit, and best practices.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#1A535C;">
+        <div class="spark-icon">🚀</div>
+        <h3 class="spark-title">Spark Application & Deployment</h3>
+        <p class="spark-desc">spark-submit, client vs cluster mode, job stages, YARN/K8s/Standalone</p>
+        <div class="badges">
+          <span class="badge badge-questions">30 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-deployment">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#29B6F6;">
+        <div class="spark-icon">☸️</div>
+        <h3 class="spark-title">Spark on Kubernetes</h3>
+        <p class="spark-desc">Native K8s mode, dynamic allocation, shuffle service, pod templates</p>
+        <div class="badges">
+          <span class="badge badge-questions">25 Questions</span>
+          <span class="badge badge-level">Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-on-kubernetes">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🧮</div><h2>DataFrames & Data APIs</h2></div>
+    <p class="hub-intro">Schema, encoders, DataFrame operations, and best practices for analytics.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#4DB6AC;">
+        <div class="spark-icon">🧮</div>
+        <h3 class="spark-title">DataFrames & Datasets</h3>
+        <p class="spark-desc">Schema, logical/physical plans, encoders, lazy evaluation</p>
+        <div class="badges">
+          <span class="badge badge-questions">45 Questions</span>
+          <span class="badge badge-level">Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/dataframes-and-datasets">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#26A69A;">
+        <div class="spark-icon">🧮</div>
+        <h3 class="spark-title">Advanced DataFrame Transformations</h3>
+        <p class="spark-desc">Window functions, complex aggregations, UDFs vs built-ins</p>
+        <div class="badges">
+          <span class="badge badge-questions">35 Questions</span>
+          <span class="badge badge-level">Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/advanced-dataframe-transformations">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">📊</div><h2>Spark SQL</h2></div>
+    <p class="hub-intro">SQL, Catalyst, query plans, predicate pushdown and join strategies.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#FF9800;">
+        <div class="spark-icon">📊</div>
+        <h3 class="spark-title">Spark SQL & Catalyst Optimizer</h3>
+        <p class="spark-desc">SQL functions, logical/physical plans, projection, predicate pushdown</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Intermediate – Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-sql-catalyst">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#FFB74D;">
+        <div class="spark-icon">📊</div>
+        <h3 class="spark-title">SQL Query Tuning & Join Strategies</h3>
+        <p class="spark-desc">Broadcast joins, shuffle joins, partition pruning & AQE basics</p>
+        <div class="badges">
+          <span class="badge badge-questions">35 Questions</span>
+          <span class="badge badge-level">Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/sql-query-tuning">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🌊</div><h2>Streaming</h2></div>
+    <p class="hub-intro">DStreams and Structured Streaming — real-time processing essentials.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#66BB6A;">
+        <div class="spark-icon">🌊</div>
+        <h3 class="spark-title">Spark Streaming (DStreams)</h3>
+        <p class="spark-desc">Batch intervals, window operations, checkpointing, receivers</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/dstreams">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#AB47BC;">
+        <div class="spark-icon">🌊</div>
+        <h3 class="spark-title">Structured Streaming</h3>
+        <p class="spark-desc">Event-time, watermarks, triggers, stateful processing, output modes</p>
+        <div class="badges">
+          <span class="badge badge-questions">30 Questions</span>
+          <span class="badge badge-level">Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/structured-streaming">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🕸️</div><h2>Graph Processing</h2></div>
+    <p class="hub-intro">GraphX fundamentals for graph algorithms and message passing.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#42A5F5;">
+        <div class="spark-icon">🕸️</div>
+        <h3 class="spark-title">GraphX Fundamentals</h3>
+        <p class="spark-desc">Pregel API, EdgeTriplet, aggregateMessages, connected components</p>
+        <div class="badges">
+          <span class="badge badge-questions">30 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/graphx">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">🤖</div><h2>Machine Learning (MLlib)</h2></div>
+    <p class="hub-intro">ML pipelines, transformers, model selection, and scalable algorithms.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#FFA726;">
+        <div class="spark-icon">🤖</div>
+        <h3 class="spark-title">MLlib – ML Pipelines</h3>
+        <p class="spark-desc">Transformers, Estimators, Pipeline, CrossValidator, Evaluators</p>
+        <div class="badges">
+          <span class="badge badge-questions">30 Questions</span>
+          <span class="badge badge-level">Beginner – Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/mllib-pipelines">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">💾</div><h2>Delta Lake & Lakehouse</h2></div>
+    <p class="hub-intro">ACID tables, MERGE, time travel, schema evolution and best practices.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#7B1FA2;">
+        <div class="spark-icon">💾</div>
+        <h3 class="spark-title">Delta Lake & Lakehouse</h3>
+        <p class="spark-desc">ACID transactions, MERGE, time travel, schema evolution, OPTIMIZE</p>
+        <div class="badges">
+          <span class="badge badge-questions">40 Questions</span>
+          <span class="badge badge-level">Intermediate – Advanced</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/delta-lake">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="spark-section">
+    <div class="section-title"><div class="icon">⚙️</div><h2>Optimization & Tuning</h2></div>
+    <p class="hub-intro">Partitions, caching, AQE, memory tuning, skew handling and shuffle strategies.</p>
+    <div class="cards-grid">
+      <div class="spark-card" style="border-top-color:#26A69A;">
+        <div class="spark-icon">⚙️</div>
+        <h3 class="spark-title">Spark Configs & Performance</h3>
+        <p class="spark-desc">Partition tuning, broadcast, caching, AQE, skew handling</p>
+        <div class="badges">
+          <span class="badge badge-questions">35 Questions</span>
+          <span class="badge badge-level">Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/spark-tuning-configs">Start Quiz →</a>
+      </div>
+
+      <div class="spark-card" style="border-top-color:#EF5350;">
+        <div class="spark-icon">⚙️</div>
+        <h3 class="spark-title">Spark Shuffle & Tungsten Engine</h3>
+        <p class="spark-desc">Hash vs Sort shuffle, whole-stage codegen, off-heap memory</p>
+        <div class="badges">
+          <span class="badge badge-questions">25 Questions</span>
+          <span class="badge badge-level">Intermediate</span>
+        </div>
+        <a class="btn-start" href="/quiz-arena/apache-spark/shuffle-tungsten">Start Quiz →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top:36px; color:#6b7280; font-size:0.95rem;">
+    <p>Want more quizzes or tailored practice sets (certification-style)? Reply and I’ll generate JSON files and quiz pages for any topic.</p>
+  </footer>
+</div>

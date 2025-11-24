@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "GraphX is built on top of which core Spark abstraction?",
+    "choices": [
+      "DataFrame",
+      "Dataset",
+      "RDD",
+      "Spark SQL"
+    ],
+    "correct": 2,
+    "description": "GraphX extends RDDs with two specialized collections: VertexRDD and EdgeRDD.\nBoth are distributed collections of vertices and edges with associated properties."
+  },
+  {
+    "id": 2,
+    "question": "A Graph in GraphX is composed of:",
+    "choices": [
+      "Only vertices",
+      "Only edges",
+      "VertexRDD[VD] and EdgeRDD[ED]",
+      "A single RDD of triplets"
+    ],
+    "correct": 2,
+    "description": "Graph[VD, ED] is a generic class parameterized by vertex property type (VD) and edge property type (ED)."
+  },
+  {
+    "id": 3,
+    "question": "What is an EdgeTriplet in GraphX?",
+    "choices": [
+      "A triplet containing only edge attributes",
+      "A view that joins a vertex, its edge, and the destination vertex (src + edge + dst)",
+      "Three vertices connected together",
+      "A physical copy of data"
+    ],
+    "correct": 1,
+    "description": "EdgeTriplet is a logical join — no data movement occurs until materialized."
+  },
+  {
+    "id": 4,
+    "question": "The Pregel API in GraphX is inspired by:",
+    "choices": [
+      "MapReduce",
+      "Google's Pregel (Bulk Synchronous Parallel model)",
+      "Apache Giraph",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "Pregel uses supersteps: vertices receive messages, compute, and send messages for next iteration."
+  },
+  {
+    "id": 5,
+    "question": "In GraphX Pregel, the three main user-defined functions are:",
+    "choices": [
+      "mapVertices, mapEdges, mapTriplets",
+      "vprog, sendMsg, mergeMsg",
+      "aggregateMessages, collectNeighbors, joinVertices",
+      "transform, filter, groupBy"
+    ],
+    "correct": 1,
+    "description": "vprog(vertex, message) → new vertex value\nsendMsg(triplet) → generates messages\nmergeMsg(msg1, msg2) → combines messages."
+  },
+  {
+    "id": 6,
+    "question": "Which method is the most common way to create a Graph in GraphX?",
+    "choices": [
+      "Graph.fromEdges()",
+      "Graph.fromVertices()",
+      "GraphLoader.edgeListFile()",
+      "All are valid"
+    ],
+    "correct": 3,
+    "description": "Graph(vertices, edges) is the fundamental constructor; the others are helpers."
+  },
+  {
+    "id": 7,
+    "question": "The triplets view in GraphX is accessed via:",
+    "choices": [
+      "graph.triplets",
+      "graph.edges.join(graph.vertices)",
+      "graph.mapTriplets()",
+      "graph.collectTriplets()"
+    ],
+    "correct": 0,
+    "description": "graph.triplets returns an EdgeRDD[EdgeTriplet[VD, ED]] — a lazy view."
+  },
+  {
+    "id": 8,
+    "question": "Which operation reverses all edge directions in a graph?",
+    "choices": [
+      "graph.reverse",
+      "graph.mapEdges(e => Edge(e.dstId, e.srcId, e.attr))",
+      "graph.subgraph()",
+      "Both A and B"
+    ],
+    "correct": 3,
+    "description": "graph.reverse is a built-in efficient operation."
+  },
+  {
+    "id": 9,
+    "question": "The aggregateMessages operator is used for:",
+    "choices": [
+      "Joining vertices with external RDDs",
+      "Message-passing style computation (like PageRank, shortest paths)",
+      "Grouping edges",
+      "Converting graph to DataFrame"
+    ],
+    "correct": 1,
+    "description": "Similar to Pregel sendMsg/mergeMsg but expressed as a single high-level operator."
+  },
+  {
+    "id": 10,
+    "question": "Which method returns the in-degrees of all vertices?",
+    "choices": [
+      "graph.inDegrees",
+      "graph.degrees",
+      "graph.collectNeighborIds(EdgeDirection.In)",
+      "graph.aggregateMessages"
+    ],
+    "correct": 0,
+    "description": "graph.inDegrees, outDegrees, and degrees are precomputed property graphs."
+  },
+  {
+    "id": 11,
+    "question": "The subgraph() method filters:",
+    "choices": [
+      "Only vertices",
+      "Only edges",
+      "Both vertices and edges based on predicates",
+      "Only triplets"
+    ],
+    "correct": 2,
+    "description": "subgraph(vpred, epred) returns a new graph with filtered vertices and edges."
+  },
+  {
+    "id": 12,
+    "question": "joinVertices() is used to:",
+    "choices": [
+      "Join graph vertices with an external RDD/DataFrame",
+      "Perform SQL-like joins",
+      "Merge two graphs",
+      "Add edges"
+    ],
+    "correct": 0,
+    "description": "Useful for enriching vertex properties with lookup data."
+  },
+  {
+    "id": 13,
+    "question": "Which of the following is a structural operator in GraphX?",
+    "choices": [
+      "mapVertices",
+      "mapEdges",
+      "mapTriplets",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "These create new graphs by transforming properties while preserving structure."
+  },
+  {
+    "id": 14,
+    "question": "The collectNeighborIds() method returns:",
+    "choices": [
+      "List of neighbor vertex IDs for each vertex",
+      "Full neighbor vertex attributes",
+      "Edge attributes",
+      "Only outgoing neighbors"
+    ],
+    "correct": 0,
+    "description": "Available for EdgeDirection.In, Out, Either, Both."
+  },
+  {
+    "id": 15,
+    "question": "GraphX is considered:",
+    "choices": [
+      "Actively developed with new features",
+      "In maintenance mode (no new features since Spark 2.x)",
+      "Deprecated and removed",
+      "Replaced by GraphFrames"
+    ],
+    "correct": 1,
+    "description": "GraphX is stable but no longer actively enhanced; GraphFrames (DataFrame-based) is recommended for new projects."
+  },
+  {
+    "id": 16,
+    "question": "The mask() operator returns:",
+    "choices": [
+      "Intersection of two graphs (common vertices and edges)",
+      "Union of two graphs",
+      "Difference",
+      "Outer join"
+    ],
+    "correct": 0,
+    "description": "graph1.mask(graph2) keeps only vertices/edges present in both graphs."
+  },
+  {
+    "id": 17,
+    "question": "Which Pregel parameter controls the maximum number of iterations?",
+    "choices": [
+      "maxIterations",
+      "iterLimit",
+      "numIter",
+      "maxIter"
+    ],
+    "correct": 0,
+    "description": "Pregel.graph(...)(..., maxIterations = 100)(vprog, sendMsg, mergeMsg)"
+  },
+  {
+    "id": 18,
+    "question": "In Pregel, messages are sent:",
+    "choices": [
+      "To all neighbors",
+      "Only along outgoing edges by default",
+      "Only along incoming edges",
+      "To the driver"
+    ],
+    "correct": 1,
+    "description": "sendMsg runs on EdgeTriplet and typically uses triplet.sendToSrc() or sendToDst()."
+  },
+  {
+    "id": 19,
+    "question": "The connected components algorithm in GraphX uses:",
+    "choices": [
+      "BFS",
+      "Pregel-style message passing",
+      "PageRank",
+      "Triangle counting"
+    ],
+    "correct": 1,
+    "description": "Implemented efficiently using label propagation via Pregel."
+  },
+  {
+    "id": 20,
+    "question": "PageRank in GraphX can be computed using:",
+    "choices": [
+      "Static PageRank method",
+      "Dynamic PageRank with Pregel",
+      "Both",
+      "Only GraphFrames"
+    ],
+    "correct": 2,
+    "description": "graph.pageRank(tol) or graph.staticPageRank(numIter)"
+  },
+  {
+    "id": 21,
+    "question": "Triangle counting in GraphX is performed using:",
+    "choices": [
+      "Brute force",
+      "Node-iterator algorithm on partitioned graph",
+      "Matrix multiplication",
+      "External library"
+    ],
+    "correct": 1,
+    "description": "Efficiently counts triangles per vertex using graph partitioning."
+  },
+  {
+    "id": 22,
+    "question": "Which method materializes a graph to disk?",
+    "choices": [
+      "graph.cache()",
+      "graph.persist()",
+      "graph.saveAsTextFile()",
+      "graph.partitionBy()"
+    ],
+    "correct": 1,
+    "description": "persist() or cache() keeps the graph in memory/disk for reuse."
+  },
+  {
+    "id": 23,
+    "question": "The partitionBy() method is used to:",
+    "choices": [
+      "Choose graph partitioning strategy (e.g., EdgePartition2D, RandomVertexCut)",
+      "Repartition vertices",
+      "Filter edges",
+      "Change vertex attributes"
+    ],
+    "correct": 0,
+    "description": "Critical for performance — EdgePartition2D is usually the best."
+  },
+  {
+    "id": 24,
+    "question": "Which of these is NOT a built-in GraphX algorithm?",
+    "choices": [
+      "PageRank",
+      "Connected Components",
+      "Shortest Paths",
+      "Louvain Community Detection"
+    ],
+    "correct": 3,
+    "description": "Louvain is available in GraphFrames, not native GraphX."
+  },
+  {
+    "id": 25,
+    "question": "To convert a GraphX graph to a DataFrame, you typically collect:",
+    "choices": [
+      "graph.vertices.toDF() and graph.edges.toDF()",
+      "graph.toDataFrame()",
+      "graph.triplets.toDF()",
+      "Not possible"
+    ],
+    "correct": 0,
+    "description": "Both vertices and edges RDDs have .toDF() methods."
+  },
+  {
+    "id": 26,
+    "question": "The mrTriplets operator is:",
+    "choices": [
+      "Deprecated name for aggregateMessages",
+      "Used for map-reduce on triplets",
+      "Used for multi-round computation",
+      "Used for triangle counting"
+    ],
+    "correct": 0,
+    "description": "mrTriplets was renamed to aggregateMessages in later versions."
+  },
+  {
+    "id": 27,
+    "question": "In Pregel, the initial message for a vertex is:",
+    "choices": [
+      "Null",
+      "Zero",
+      "MSG() object",
+      "User-defined via initialMsg parameter"
+    ],
+    "correct": 3,
+    "description": "You can provide an initial message that is sent to all vertices before first iteration."
+  },
+  {
+    "id": 28,
+    "question": "Which method returns the number of vertices and edges efficiently?",
+    "choices": [
+      "graph.vertices.count(), graph.edges.count()",
+      "graph.numVertices, graph.numEdges (cached properties)",
+      "graph.triplets.count()",
+      "graph.degrees.sum()"
+    ],
+    "correct": 1,
+    "description": "numVertices and numEdges are cached metadata."
+  },
+  {
+    "id": 29,
+    "question": "GraphX automatically co-partitions:",
+    "choices": [
+      "VertexRDD and EdgeRDD to minimize shuffling",
+      "Only during construction",
+      "Never",
+      "Only during Pregel"
+    ],
+    "correct": 0,
+    "description": "Vertices and edges are co-partitioned using the same PartitionStrategy."
+  },
+  {
+    "id": 30,
+    "question": "The most important performance tip for GraphX is:",
+    "choices": [
+      "Always use EdgePartition2D and call graph.partitionBy() early",
+      "Cache the triplets",
+      "Use collect() frequently",
+      "Run on a single machine"
+    ],
+    "correct": 0,
+    "description": "Correct partitioning drastically reduces communication in iterative algorithms."
+  }
+]

@@ -1,0 +1,169 @@
+I want to create Apache Spark — Full Quiz Catalog
+----------------------------------------------------------------------------------
+Generate JSON for '' —  questions of Basic & Intermediate difficulty with 2-3 lines explanations. Follow the json format as following:
+[
+  {
+    "id": 1,
+    "question": "In Spark, repartition function can :",
+    "choices": [
+      "only increase the number of partitions",
+      "only decrease the number of partitions",
+      "increase or decrease the number of partitions",
+      "automatically repartition the data"
+    ],
+    "correct": 2,
+    "description": "Spark provides two ways to control the number of partitions. One of them is repartition().\nRepartition can increase and decrease the number of partitions. It performs a full shuffle of data across partitions and equally distributes them resulting in roughly equal sized partitions.\nIt is a very expensive operation as it shuffles data from all nodes in a cluster."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following statements about the DAG is correct?",
+    "choices": [
+      "DAG stands for Distributed Acyclic Graph",
+      "Spark developers cannot see the DAG of Spark jobs because Spark wants hide internals for simplicity",
+      "A DAG represents the executor level mapping of tasks",
+      "A DAG represents the execution plan of a Spark job"
+    ],
+    "correct": 3,
+    "description": "DAG stands for Directed Acyclic Graph. It is the logical execution plan of a Spark job."
+  }
+]
+------------------------
+I also need a quiz card for it that is html code. HTML element I have for each quiz card is as follows:
+<!-- Spark Core & RDD Fundamentals (Already Added Example) -->
+<div class="spark-card" style="border-top: 4px solid #FF6B6B;">
+  <div class="spark-icon">⚡</div>
+  <h3 class="spark-title">Spark Core & RDD Fundamentals</h3>
+  <p class="spark-desc">Master transformations, actions, partitions, and RDD resilience</p>
+  <span class="badge" style="background:#fecaca; color:#991b1b;">50+ Questions</span>
+  <span class="badge" style="background:#bbf7d0; color:#166534;">Beginner – Intermediate</span>
+  <a href="/quiz-arena/apache-spark/spark-core-and-rdd" class="btn-start">Start Quiz →</a>
+</div>
+
+Follow the same format and give me the card element code as well
+---------------------------------------------------------------------------
+Introduction to Apache Spark - Basic - History, ecosystem, features - 34 questions
+Spark Core & RDD Fundamentals - Basic & Intermediate - RDD basics, transformations, actions - 55 
+Spark Architecture Basics - Basic - Driver, Executors, Cluster Manager, DAG, etc. - 40 questions
+Spark Application & Deployment - Basic & Intermediate - Job stages, submitting apps, cluster modes - 30 questions
+Spark Shell & API Basics (Scala/Python)	- Basic & Intermediate - REPL, Data API differences - 25 questions
+Spark RDD Advanced Concepts - Advanced - Partitioning, persistence, failure recovery - 45 questions
+DataFrames & Dataset API – Intermediate - Schema, encoders, lazy evaluation - 30 questions
+Spark SQL & Catalyst Optimizer - Advanced - SQL functions, query plan, projection filters - 35 questions
+Advanced Spark Architecture - Advanced — Detailed Internals	Executors, memory model, shuffle mechanics - 40 questions
+Spark Configs & Performance - Intermediate - Tuning partitions, broadcast, caching - 35 questions
+Spark Shuffle & Tungsten Engine - Intermediate - Whole-stage codegen, off-heap memory - 25 questions
+Spark Scheduler & Job Execution Internals - Basic & Intermediate - DAG scheduling & speculative execution - 30 questions
+Spark Streaming (DStreams) - Basic & Intermediate - Batch intervals, window ops, checkpointing - 40 questions
+Structured Streaming - advanced - Event-time, watermarks, triggers - 30 questions
+MLlib ML Pipelines - Basic & Intermediate - Transformers, evaluators, models - 25 questions
+GraphX Fundamentals - Basic & Intermediate - Pregel API, triplets - 30 questions
+Spark on Kubernetes - Basic & Intermediate - Deployment + auto-scaling concepts - 25 questions
+Cluster Resource Optimization - Intermediate - Executors, dynamic allocation, memory tuning - 30 questions
+Fault-Tolerance & Checkpointing Advanced - Intermediate - WAL, lineage, recovery - 20 questions
+Delta Lake & Lakehouse - Intermediate to Advanced - ACID transactions, MERGE, schema evolution - 40 questions
+
+---------------------------------------------------------------------------
+
+🔹 Databricks-Specific
+25️⃣ Databricks Platform Basics	25–35
+26️⃣ Unity Catalog + Security	25–35
+27️⃣ DBFS, DBR versions & Auto-loader	20–30
+28️⃣ Databricks ML & Feature Store	20–30
+29️⃣ Spark Associate Exam Practice Test	Databricks Certified Associate Dev	45–60
+30️⃣ Spark Professional Exam Practice Test	Databricks Data Engineer Pro	60–90
+--------------------------------------------------------------------------------------------
+
+<style>
+  .spark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 40px 20px;
+    background: #0f172a; /* Dark blue background */
+    border-radius: 16px;
+    margin: 40px 0;
+  }
+  .spark-card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #334155;
+  }
+  .spark-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .spark-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .spark-title {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 12px 0;
+  }
+  .spark-desc {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 8px 4px;
+  }
+  .btn-start {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 12px 24px;
+    background: #f59e0b;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .btn-start:hover {
+    background: #fbbf24;
+  }
+</style>
+
+<div class="spark-grid">
+
+  <!-- Spark Introduction -->
+<div class="spark-card" style="border-top: 4px solid #FFB74D;">
+  <div class="spark-icon">🔥</div>
+  <h3 class="spark-title">Introduction to Apache Spark</h3>
+  <p class="spark-desc">Spark ecosystem, cluster computing basics, and advantages over Hadoop</p>
+  <span class="badge" style="background:#fde68a; color:#92400e;">30+ Questions</span>
+  <span class="badge" style="background:#bbf7d0; color:#166534;">Beginner</span>
+  <a href="/quiz-arena/apache-spark/introduction-to-spark" class="btn-start">Start Quiz →</a>
+</div>
+
+  <!-- Spark Architecture -->
+  <div class="spark-card" style="border-top: 4px solid #4ECDC4;">
+    <div class="spark-icon">▦</div>
+    <h3 class="spark-title">Spark Architecture</h3>
+    <p class="spark-desc">Drivers, Executors, and Cluster Manager</p>
+    <span class="badge" style="background:#a7f3d0; color:#065f46;">90+ Questions</span>
+    <span class="badge" style="background:#ccfbf1; color:#0f766e;">Beginner → Intermediate</span>
+    <a href="/quiz-arena/spark/spark-arch-1" class="btn-start">Start Quiz →</a>
+  </div>
+
+<!-- Spark Core & RDD Fundamentals (Already Added Example) -->
+<div class="spark-card" style="border-top: 4px solid #FF6B6B;">
+  <div class="spark-icon">⚡</div>
+  <h3 class="spark-title">Spark Core & RDD Fundamentals</h3>
+  <p class="spark-desc">Master transformations, actions, partitions, and RDD resilience</p>
+  <span class="badge" style="background:#fecaca; color:#991b1b;">50+ Questions</span>
+  <span class="badge" style="background:#bbf7d0; color:#166534;">Beginner – Intermediate</span>
+  <a href="/quiz-arena/apache-spark/spark-core-and-rdd" class="btn-start">Start Quiz →</a>
+</div>
+
+</div>

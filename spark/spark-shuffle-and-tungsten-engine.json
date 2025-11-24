@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "question": "What is the main goal of Project Tungsten?",
+    "choices": [
+      "Improve SQL performance only",
+      "Reduce memory usage and increase speed by managing memory explicitly and using whole-stage code generation",
+      "Replace Catalyst optimizer",
+      "Add new file formats"
+    ],
+    "correct": 1,
+    "description": "Tungsten (Spark 2.0+) focuses on memory/CPU efficiency through off-heap memory, cache-friendly layouts, and whole-stage codegen."
+  },
+  {
+    "id": 2,
+    "question": "Whole-stage code generation means:",
+    "choices": [
+      "Generating Scala code at runtime",
+      "Fusing multiple physical operators into a single Java function (one stage = one function)",
+      "Generating bytecode only for UDFs",
+      "Running the entire query in one task"
+    ],
+    "correct": 1,
+    "description": "Instead of volcano-style iterator model, Spark generates one Java method containing dozens of operators → eliminates virtual function calls and improves CPU cache usage."
+  },
+  {
+    "id": 3,
+    "question": "In the physical plan, a node labeled '*(1) WholeStageCodegen' indicates:",
+    "choices": [
+      "Codegen is disabled for that stage",
+      "All operators inside this node will be compiled into a single function",
+      "Only the first operator uses codegen",
+      "The stage runs on the driver"
+    ],
+    "correct": 1,
+    "description": "You will see WholeStageCodegen wrappers with a number; everything inside is fused."
+  },
+  {
+    "id": 4,
+    "question": "Which configuration disables whole-stage code generation?",
+    "choices": [
+      "spark.sql.codegen.wholeStage=false",
+      "spark.sql.tungsten.enabled=false",
+      "spark.sql.codegen=false",
+      "spark.sql.adaptive.enabled=false"
+    ],
+    "correct": 0,
+    "description": "Setting spark.sql.codegen.wholeStage=false forces the old per-operator codegen (much slower)."
+  },
+  {
+    "id": 5,
+    "question": "Tungsten uses off-heap memory primarily for:",
+    "choices": [
+      "Shuffle data only",
+      "UnsafeRow objects and intermediate aggregation/shuffle buffers",
+      "Cached RDDs",
+      "Driver metadata"
+    ],
+    "correct": 1,
+    "description": "UnsafeRow and memory pages are allocated outside the Java heap to avoid GC and enable pointer-based access."
+  },
+  {
+    "id": 6,
+    "question": "What is an UnsafeRow?",
+    "choices": [
+      "A row that can throw exceptions",
+      "A compact binary row format stored off-heap with fixed + variable parts",
+      "A row stored on disk",
+      "A row from untrusted data sources"
+    ],
+    "correct": 1,
+    "description": "UnsafeRow uses 8-byte pointers and variable-length data at the end; enables zero-copy access in codegen."
+  },
+  {
+    "id": 7,
+    "question": "Which shuffle mode is required for Tungsten’s sort-based shuffle optimizations?",
+    "choices": [
+      "Hash shuffle",
+      "Sort shuffle (default since Spark 2.0)",
+      "Unsafe shuffle (deprecated name)",
+      "Both b and c"
+    ],
+    "correct": 3,
+    "description": "Sort-based shuffle with Tungsten writes serialized sorted data using unsafe memory operations."
+  },
+  {
+    "id": 8,
+    "question": "In Tungsten sort shuffle, data is written:",
+    "choices": [
+      "As Java objects",
+      "As serialized bytes using Unsafe memory access",
+      "One file per partition per executor",
+      "Only after the entire stage finishes"
+    ],
+    "correct": 1,
+    "description": "Data is sorted in off-heap memory pages and spilled using unsafe pointers → much faster than Java serialization."
+  },
+  {
+    "id": 9,
+    "question": "Which operation benefits the most from whole-stage codegen?",
+    "choices": [
+      "Reading a single Parquet file",
+      "Complex queries with many filters, projections, and aggregations",
+      "Writing to HDFS",
+      "collect()"
+    ],
+    "correct": 1,
+    "description": "The more operators can be fused, the bigger the speedup (often 3–10×)."
+  },
+  {
+    "id": 10,
+    "question": "Codegen falls back to interpreted mode when:",
+    "choices": [
+      "Query is too simple",
+      "Generated code exceeds 100 KB (default limit)",
+      "spark.sql.codegen.wholeStage=false",
+      "Both b and c"
+    ],
+    "correct": 3,
+    "description": "Very large stages hit spark.sql.codegen.maxFields or spark.sql.codegen.hugeMethodLimit and fall back."
+  },
+  {
+    "id": 11,
+    "question": "What does the metric 'code generation time' in Spark UI represent?",
+    "choices": [
+      "Time to compile generated Java source to bytecode",
+      "Time to run the generated code",
+      "Time to parse SQL",
+      "Driver time only"
+    ],
+    "correct": 0,
+    "description": "Compilation is done once per stage per executor; high values indicate complex queries."
+  },
+  {
+    "id": 12,
+    "question": "Tungsten’s memory pages are typically:",
+    "choices": [
+      "1 MB",
+      "8 MB (configurable)",
+      "64 MB",
+      "Same size as HDFS block"
+    ],
+    "correct": 1,
+    "description": "spark.buffer.pageSize = 8m by default; controls allocation granularity for off-heap memory."
+  },
+  {
+    "id": 13,
+    "question": "Which storage level uses Tungsten’s off-heap memory (experimental in 3.x, stable in 3.4+)?",
+    "choices": [
+      "MEMORY_ONLY_SER",
+      "OFF_HEAP",
+      "MEMORY_AND_DISK_SER",
+      "DISK_ONLY"
+    ],
+    "correct": 1,
+    "description": "OFF_HEAP stores serialized data in Tungsten-managed off-heap memory instead of JVM heap."
+  },
+  {
+    "id": 14,
+    "question": "During shuffle write with Tungsten sort, records are:",
+    "choices": [
+      "Serialized one-by-one using Java serializer",
+      "Packed into UnsafeRows and sorted using pointer comparison",
+      "Written unsorted",
+      "Written directly to disk"
+    ],
+    "correct": 1,
+    "description": "Sorting compares 8-byte row pointers → extremely fast and cache-friendly."
+  },
+  {
+    "id": 15,
+    "question": "Which of these disables most Tungsten optimizations?",
+    "choices": [
+      "Using complex Scala objects as keys",
+      "Using Array[String] as grouping key",
+      "Using non-primitive types that unsafe cannot handle",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Unsafe sort and codegen require primitive-friendly types; complex types force fallback to safe paths."
+  },
+  {
+    "id": 16,
+    "question": "In Spark UI, 'Shuffle spill (memory)' vs 'Shuffle spill (disk)' means:",
+    "choices": [
+      "Memory = spilled from cache, Disk = spilled from shuffle",
+      "Memory = bytes that were in memory before spill, Disk = bytes written to disk",
+      "Both are the same",
+      "Only disk spill matters"
+    ],
+    "correct": 1,
+    "description": "Memory shows how much data lived in memory before being spilled; Disk shows actual bytes written."
+  },
+  {
+    "id": 17,
+    "question": "Whole-stage codegen is only applied to:",
+    "choices": [
+      "DataFrame/SQL API",
+      "RDD API",
+      "Both DataFrame and RDD",
+      "Only when using Parquet"
+    ],
+    "correct": 0,
+    "description": "RDD API uses the old volcano iterator model; codegen is a DataFrame/SQL feature."
+  },
+  {
+    "id": 18,
+    "question": "Which operator typically breaks whole-stage codegen fusion?",
+    "choices": [
+      "Filter",
+      "Project",
+      "Exchange (shuffle)",
+      "Aggregate"
+    ],
+    "correct": 2,
+    "description": "Shuffle boundaries (Exchange) always end a codegen stage because data must be materialized."
+  },
+  {
+    "id": 19,
+    "question": "Tungsten introduced cache-friendly data layout using:",
+    "choices": [
+      "Row-major format",
+      "Columnar in-memory format with UnsafeRow",
+      "Parquet files in memory",
+      "Kryo compression"
+    ],
+    "correct": 1,
+    "description": "Data is stored in columnar chunks inside memory pages → better CPU cache utilization."
+  },
+  {
+    "id": 20,
+    "question": "Which config increases the maximum size of a code-generated function?",
+    "choices": [
+      "spark.sql.codegen.maxFields",
+      "spark.sql.codegen.hugeMethodLimit (default 64000 bytes)",
+      "spark.sql.codegen.wholeStage=true",
+      "spark.executor.memory"
+    ],
+    "correct": 1,
+    "description": "Increase this if you see 'Code size limit exceeded' warnings."
+  },
+  {
+    "id": 21,
+    "question": "The main reason Tungsten avoids Java objects is:",
+    "choices": [
+      "To reduce serialization time",
+      "To reduce GC overhead and improve CPU efficiency",
+      "To save disk space",
+      "To support more data types"
+    ],
+    "correct": 1,
+    "description": "Java objects have high per-object overhead and cause frequent GC; UnsafeRow has almost zero overhead."
+  },
+  {
+    "id": 22,
+    "question": "In sort-based shuffle, spilled data is:",
+    "choices": [
+      "Spilled unsorted",
+      "Spilled as sorted runs that can be merge.sorted later",
+      "Spilled to HDFS",
+      "Never spilled"
+    ],
+    "correct": 1,
+    "description": "Multiple sorted runs are merged during the final shuffle write → efficient external sort."
+  },
+  {
+    "id": 23,
+    "question": "Which of these is a benefit of whole-stage codegen?",
+    "choices": [
+      "Better predicate pushdown",
+      "Reduced virtual function calls and better branch prediction",
+      "Automatic broadcast detection",
+      "Smaller shuffle files"
+    ],
+    "correct": 1,
+    "description": "Instead of millions of next() calls, the CPU executes tight loops with predictable branches."
+  },
+  {
+    "id": 24,
+    "question": "Tungsten’s aggregation uses:",
+    "choices": [
+      "HashMap[Row, MutableRow]",
+      "Unsafe keyed aggregation with direct memory access",
+      "Java HashMap[UnsafeRow, Long]",
+      "External sort always"
+    ],
+    "correct": 1,
+    "description": "Hash table is stored off-heap; keys and values accessed via unsafe pointers."
+  },
+  {
+    "id": 25,
+    "question": "Which statement is true about Spark shuffle + Tungsten in 2025?",
+    "choices": [
+      "Hash shuffle is default",
+      "Sort-based shuffle with whole-stage codegen and unsafe memory is the standard and fastest path",
+      "Whole-stage codegen works on RDDs",
+      "Tungsten is optional"
+    ],
+    "correct": 1,
+    "description": "As long as data types are unsafe-friendly, Spark automatically uses the fastest Tungsten sort-shuffle + codegen path."
+  }
+]

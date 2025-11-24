@@ -1,0 +1,363 @@
+[
+  {
+    "id": 1,
+    "question": "What triggers the creation of a new Spark Job?",
+    "choices": [
+      "Any transformation",
+      "Any action",
+      "cache() or persist()",
+      "repartition()"
+    ],
+    "correct": 1,
+    "description": "A new Spark Job is created every time an action (e.g., count(), collect(), saveAsTextFile(), foreach()) is called on an RDD/DataFrame/Dataset."
+  },
+  {
+    "id": 2,
+    "question": "How many Spark Jobs are triggered by rdd.count() followed by rdd.saveAsTextFile()?",
+    "choices": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": 2,
+    "description": "Each action creates a separate job. count() → Job 1, saveAsTextFile() → Job 2. Total: 2 jobs."
+  },
+  {
+    "id": 3,
+    "question": "A Spark Stage boundary is created by:",
+    "choices": [
+      "Narrow transformations only",
+      "Wide (shuffle) transformations",
+      "cache() calls",
+      "Any transformation"
+    ],
+    "correct": 1,
+    "description": "Wide transformations like repartition(), groupByKey(), join(), reduceByKey() require data shuffling, which forces a new stage."
+  },
+  {
+    "id": 4,
+    "question": "In the Spark UI, the 'Jobs' tab shows:",
+    "choices": [
+      "All transformations in the code",
+      "Only the actions that have been executed",
+      "Every stage in the application",
+      "Individual tasks"
+    ],
+    "correct": 1,
+    "description": "Each entry in the Jobs tab corresponds to one action that was executed."
+  },
+  {
+    "id": 5,
+    "question": "Which command is used to submit a Spark application?",
+    "choices": [
+      "spark-run",
+      "spark-submit",
+      "spark-launch",
+      "spark-start"
+    ],
+    "correct": 1,
+    "description": "spark-submit is the universal script/tool to launch Spark applications on any supported cluster manager."
+  },
+  {
+    "id": 6,
+    "question": "In Spark Standalone client mode, where does the Driver run?",
+    "choices": [
+      "Inside the cluster on a worker node",
+      "On the machine from which you run spark-submit",
+      "On the Standalone Master",
+      "Inside an executor"
+    ],
+    "correct": 1,
+    "description": "In client mode, the Driver process runs on the client machine that executed spark-submit."
+  },
+  {
+    "id": 7,
+    "question": "In Spark Standalone cluster mode, where doesniak the Driver run?",
+    "choices": [
+      "On the client machine",
+      "On the Standalone Master node",
+      "On one of the worker nodes allocated by the Master",
+      "On a separate Driver node"
+    ],
+    "correct": 2,
+    "description": "In cluster mode, the Master launches the Driver on a worker node; the client machine can disconnect after submission."
+  },
+  {
+    "id": 8,
+    "question": "Which deploy mode is recommended for production environments?",
+    "choices": [
+      "Client mode",
+      "Cluster mode",
+      "Local mode",
+      "Both are equally good"
+    ],
+    "correct": 1,
+    "description": "Cluster mode is preferred in production because the client can exit after submission and the driver is protected inside the cluster."
+  },
+  {
+    "id": 9,
+    "question": "In YARN, the equivalent of Standalone 'client' mode is called:",
+    "choices": [
+      "yarn-cluster",
+      "yarn-client",
+      "yarn-standalone",
+      "yarn-local"
+    ],
+    "correct": 1,
+    "description": "yarn-client → Driver runs on the client machine; yarn-cluster → Driver runs inside the ApplicationMaster on the cluster."
+  },
+  {
+    "id": 10,
+    "question": "Which flag sets the deploy mode in spark-submit?",
+    "choices": [
+      "--mode",
+      "--deploy-mode",
+      "--cluster-mode",
+      "--run-mode"
+    ],
+    "correct": 1,
+    "description": "--deploy-mode cluster|client controls where the driver process executes."
+  },
+  {
+    "id": 11,
+    "question": "In client mode, if the client machine crashes or loses network, the Spark application:",
+    "choices": [
+      "Continues running normally",
+      "Fails immediately because the Driver is lost",
+      "Automatically restarts",
+      "Pauses until reconnection"
+    ],
+    "correct": 1,
+    "description": "In client mode, the Driver runs on the client. If the client dies, the entire application fails."
+  },
+  {
+    "id": 12,
+    "question": "How many stages are created by this code?\nrdd.repartition(10).map(...).reduceByKey(...).count()",
+    "choices": [
+      "1 stage",
+      "2 stages",
+      "3 stages",
+      "4 stages"
+    ],
+    "correct": 2,
+    "description": "Two shuffle operations: repartition() and reduceByKey() → 3 stages (initial → after repartition → after reduceByKey → action)."
+  },
+  {
+    "id": 13,
+    "question": "Which of the following does NOT create a new stage?",
+    "choices": [
+      "groupByKey()",
+      "join()",
+      "filter()",
+      "distinct()"
+    ],
+    "correct": 2,
+    "description": "filter() is a narrow transformation; it can be pipelined within the same stage."
+  },
+  {
+    "id": 14,
+    "question": "In the Spark Web UI, where can you see the DAG of stages for a job?",
+    "choices": [
+      "Jobs tab → click on a job → Stages tab",
+      "Executors tab",
+      "Storage tab",
+      "Environment tab"
+    ],
+    "correct": 0,
+    "description": "Jobs → select a job → 'DAG Visualization' or the Stages tab shows the directed acyclic graph of stages."
+  },
+  {
+    "id": 15,
+    "question": "Which option specifies the main application JAR/file in spark-submit?",
+    "choices": [
+      "--jar",
+      "--class",
+      "--master",
+      "The last argument (positional)"
+    ],
+    "correct": 3,
+    "description": "The application JAR or python file is usually provided as the last argument after all options."
+  },
+  {
+    "id": 16,
+    "question": "To run a Spark application on a YARN cluster, you set --master to:",
+    "choices": [
+      "yarn",
+      "yarn-cluster",
+      "yarn-client",
+      "Both yarn-cluster and yarn-client work the same"
+    ],
+    "correct": 0,
+    "description": "--master yarn tells Spark to use YARN; the actual client/cluster behavior is controlled by --deploy-mode."
+  },
+  {
+    "id": 17,
+    "question": "A single Spark Job can contain:",
+    "choices": [
+      "Only one stage",
+      "Multiple stages",
+      "Only one task",
+      "No stages until execution"
+.\""
+    ],
+    "correct": 1,
+    "description": "A job is divided into one or more stages separated by shuffle boundaries."
+  },
+  {
+    "id": 18,
+    "question": "Which command shows all available spark-submit options?",
+    "choices": [
+      "spark-submit --help",
+      "spark-submit -h",
+      "Both work",
+      "There is no help command"
+    ],
+    "correct": 2,
+    "description": "spark-submit --help or spark-submit -h displays the full list of supported options."
+  },
+  {
+    "id": 19,
+    "question": "In Kubernetes deploy mode, the driver pod is created:",
+    "choices": [
+      "Only in client mode",
+      "Automatically by the spark-submit script",
+      "Manually by the user",
+      "Never, only executors are pods"
+    ],
+    "correct": 1,
+    "description": "When --master k8s://... is used, spark-submit creates both driver and executor pods."
+  },
+  {
+    "id": 20,
+    "question": "If you call cache() followed by two actions, how many jobs will run?",
+    "choices": [
+      "1 job (cached result reused)",
+      "2 jobs (cache + first action)",
+      "2 jobs, but second job reuses cache",
+      "3 jobs"
+    ],
+    "correct": 2,
+    "description": "cache() is lazy. First action triggers computation + caching (Job 1). Second action reuses cached data (Job 2, much faster)."
+  },
+  {
+    "id": 21,
+    "question": "Which parameter controls the number of executor cores?",
+    "choices": [
+      "--executor-cores",
+      "--num-executors",
+      "--total-executor-cores",
+      "--cores-max"
+    ],
+    "correct": 0,
+    "description": "--executor-cores N sets how many CPU cores each executor gets."
+  },
+  {
+    "id": 22,
+    "question": "The total parallelism of a stage is primarily determined by:",
+    "choices": [
+      "Number of executor cores",
+      "Number of partitions in the RDD/DataFrame",
+      "Number of executors",
+      "spark.default.parallelism"
+    ],
+    "correct": 1,
+    "description": "Number of tasks = number of partitions. Available cores only limit how many tasks run concurrently."
+  },
+  {
+    "id": 23,
+    "question": "In cluster mode, the spark-submit process:",
+    "choices": [
+      "Becomes the driver",
+      "Stays alive and monitors the job",
+      "Exits immediately after launching the application",
+      "Blocks until the job finishes"
+    ],
+    "correct": 2,
+    "description": "In cluster mode, spark-submit returns immediately after the cluster manager accepts the application."
+  },
+  {
+    "id": 24,
+    "question": "Which of the following is a valid --master value for Standalone cluster?",
+    "choices": [
+      "spark://host:7077",
+      "standalone://host:7077",
+      "mesos://host:5050",
+      "local[*]"
+    ],
+    "correct": 0,
+    "description": "Standalone master URL format is spark://<master-host>:7077."
+  },
+  {
+    "id": 25,
+    "question": "A 'Skipped' stage in Spark UI means:",
+    "choices": [
+      "The stage failed",
+      "Results were taken from cache, so it didn’t need to run again",
+      "The stage was manually skipped",
+      "Shuffle data was missing"
+    ],
+    "correct": 1,
+    "description": "When cached data or previously computed shuffle files are reused, the stage is marked as skipped."
+  },
+  {
+    "id": 26,
+    "question": "To pass configuration properties via spark-submit, you use:",
+    "choices": [
+      "--conf key=value",
+      "--properties-file",
+      "Both are valid",
+      "Only defaults.properties"
+    ],
+    "correct": 2,
+    "description": "Both --conf spark.executor.memory=4g and --properties-file my.conf are supported."
+  },
+  {
+    "id": 27,
+    "question": "In client mode, the Spark Driver logs appear:",
+    "choices": [
+      "Only in the cluster manager",
+      "On the client machine console",
+      "Only in the Spark UI",
+      "Inside executor logs"
+    ],
+    "correct": 1,
+    "description": "Driver logs (including stdout/stderr) are printed directly to the terminal in client mode."
+  },
+  {
+    "id": 28,
+    "question": "Which mode allows you to see real-time driver logs easily during development?",
+    "choices": [
+      "Cluster mode",
+      "Client mode",
+      "Both the same",
+      "Neither"
+    ],
+    "correct": 1,
+    "description": "Client mode is preferred for development because driver logs stream directly to your terminal."
+  },
+  {
+    "id": 29,
+    "question": "The Spark UI is usually available at:",
+    "choices": [
+      "Port 7077",
+      "Port 8080 (driver) or 4040",
+      "Port 18080",
+      "Port 9000"
+    ],
+    "correct": 1,
+    "description": "By default, Spark UI runs on port 4040. If occupied, it tries 4041, 4042, etc. In cluster mode, it’s reachable via proxy."
+  },
+  {
+    "id": 30,
+    "question": "Which of the following statements about Job → Stage → Task hierarchy is correct?",
+    "choices": [
+      "1 Job contains 1 Stage contains many Tasks",
+      "1 Action → 1 Job → 1 or more Stages → many Tasks",
+      "1 Stage contains many Jobs",
+      "Tasks contain Stages"
+    ],
+    "correct": 1,
+    "description": "Action triggers Job → Job is split into Stages by shuffle boundaries → Each Stage consists of many parallel Tasks (one per partition)."
+  }
+]

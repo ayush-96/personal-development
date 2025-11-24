@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "Spark Streaming (DStreams) is built on top of which core Spark component?",
+    "choices": [
+      "Spark SQL",
+      "Spark Core RDD",
+      "GraphX",
+      "MLlib"
+    ],
+    "correct": 1,
+    "description": "DStreams are just a continuous series of RDDs. Every batch interval creates one or more RDDs that are processed like normal Spark jobs."
+  },
+  {
+    "id": 2,
+    "question": "The batch interval in Spark Streaming is defined when you create:",
+    "choices": [
+      "SparkContext",
+      "StreamingContext",
+      "SparkConf",
+      "DStream"
+    ],
+    "correct": 1,
+    "description": "val ssc = new StreamingContext(sparkConf, Seconds(5)) — the second parameter is the batch interval."
+  },
+  {
+    "id": 3,
+    "question": "What happens when you call ssc.start()?",
+    "choices": [
+      "Only one batch is processed",
+      "The streaming application starts receiving data and processing micro-batches continuously",
+      "It just creates the DStreams",
+      "It blocks forever"
+    ],
+    "correct": 1,
+    "description": "start() launches the receiver threads and begins the infinite loop of job generation."
+  },
+  {
+    "id": 4,
+    "question": "To stop a StreamingContext gracefully, you call:",
+    "choices": [
+      "ssc.stop()",
+      "ssc.awaitTermination()",
+      "ssc.stop(true, true)",
+      "System.exit(0)"
+    ],
+    "correct": 2,
+    "description": "ssc.stop(stopSparkContext = true, stopGracefully = true) waits for current batch to finish before shutting down."
+  },
+  {
+    "id": 5,
+    "question": "Which method must be called after ssc.start() to keep the application alive?",
+    "choices": [
+      "ssc.start() again",
+      "ssc.awaitTermination()",
+      "Thread.sleep()",
+      "ssc.checkpoint()"
+    ],
+    "correct": 1,
+    "description": "awaitTermination() blocks the main thread until the streaming app is stopped or errors out."
+  },
+  {
+    "id": 6,
+    "question": "A DStream transformation that produces one output RDD for each input RDD is called:",
+    "choices": [
+      "Stateless",
+      "Stateful",
+      "Window-based",
+      "Output operation"
+    ],
+    "correct": 0,
+    "description": "Examples: map(), filter(), repartition() — each batch is processed independently."
+  },
+  {
+    "id": 7,
+    "question": "window() operation in DStreams requires two parameters:",
+    "choices": [
+      "windowDuration only",
+      "windowDuration and slideDuration",
+      "batchInterval and slideDuration",
+      "Only slideDuration"
+    ],
+    "correct": 1,
+    "description": "dstream.window(Seconds(30), Seconds(10)) → windows of 30s that slide every 10s."
+  },
+  {
+    "id": 8,
+    "question": "The slide duration of a windowed DStream must be:",
+    "choices": [
+      "Equal to the batch interval",
+      "A multiple of the batch interval",
+      "Any value",
+      "Smaller than window duration"
+    ],
+    "correct": 1,
+    "description": "slideDuration must be a multiple of ssc.graph.batchDuration, otherwise Spark throws an exception."
+  },
+  {
+    "id": 9,
+    "question": "Which operation is used to maintain state across batches (e.g., word count)?",
+    "choices": [
+      "map()",
+      "updateStateByKey()",
+      "reduceByKey()",
+      "transform()"
+    ],
+    "correct": 1,
+    "description": "updateStateByKey() takes a function (oldState, newValues) => newState."
+  },
+  {
+    "id": 10,
+    "question": "What is the purpose of checkpointing in Spark Streaming?",
+    "choices": [
+      "Only for fault tolerance",
+      "Only for stateful operations",
+      "For fault tolerance, driver recovery, and stateful/windowed operations",
+      "To save output data"
+    ],
+    "correct": 2,
+    "description": "Checkpointing saves metadata + state to HDFS so the driver can restart after failure."
+  },
+  {
+    "id": 11,
+    "question": "How often should you checkpoint a DStream with stateful operations?",
+    "choices": [
+      "Every batch",
+      "Every 10 seconds or more (multiple of batch interval)",
+      "Only once at the beginning",
+      "Never"
+    ],
+    "correct": 1,
+    "description": "Typical value: ssc.checkpoint(Seconds(10)) or 5–10 × batch interval."
+  },
+  {
+    "id": 12,
+    "question": "Which receiver stores received data reliably (with replication)?",
+    "choices": [
+      "Socket receiver",
+      "File receiver",
+      "Kafka Direct receiver",
+      "Custom receiver with StorageLevel.MEMORY_AND_DISK_SER_2"
+    ],
+    "correct": 3,
+    "description": "StorageLevel with _2 means data is replicated on two nodes; required for exactly-once semantics on failure."
+  },
+  {
+    "id": 13,
+    "question": "Receiver runs on:",
+    "choices": [
+      "Driver",
+      "Executors (in a long-running task)",
+      "Separate nodes",
+      "Cluster manager"
+    ],
+    "correct": 1,
+    "description": "Receivers are long-running tasks allocated as regular tasks on executors."
+  },
+  {
+    "id": 14,
+    "question": "Which operation triggers a Spark job in DStreams?",
+    "choices": [
+      "map(), filter()",
+      "foreachRDD()",
+      "transform()",
+      "print()"
+    ],
+    "correct": 1,
+    "description": "foreachRDD() is an output operation → triggers job submission every batch."
+  },
+  {
+    "id": 15,
+    "question": "countByWindow() is equivalent to:",
+    "choices": [
+      "window().count()",
+      "reduceByWindow()",
+      "window().reduce()",
+      "None of the above"
+    ],
+    "correct": 0,
+    "description": "countByWindow(windowDuration, slideDuration) = dstream.window(...).count()"
+  },
+  {
+    "id": 16,
+    "question": "reduceByKeyAndWindow() with invFunc (incremental) is more efficient because:",
+    "choices": [
+      "It recomputes only the sliding parts (added and removed data)",
+      "It uses broadcast",
+      "It avoids shuffle",
+      "It runs on driver"
+    ],
+    "correct": 0,
+    "description": "Provide inverse reduce function to subtract data leaving the window."
+  },
+  {
+    "id": 17,
+    "question": "Which method allows you to access the underlying RDDs of a DStream?",
+    "choices": [
+      "dstream.rdds",
+      "dstream.foreachRDD(rdd => ...)",
+      "dstream.getRDD()",
+      "dstream.toRDD()"
+    ],
+    "correct": 1,
+    "description": "foreachRDD() gives you access to each batch RDD for custom actions."
+  },
+  {
+    "id": 18,
+    "question": "To get exactly-once processing with a file-based source, you should use:",
+    "choices": [
+      "ssc.textFileStream()",
+      "ssc.fileStream() with reliable storage level",
+      "Monitoring new files manually inside foreachRDD",
+      "There is no exactly-once guarantee"
+    ],
+    "correct": 2,
+    "description": "textFileStream() does not track processed files → use custom tracking with foreachRDD and idempotent writes."
+  },
+  {
+    "id": 19,
+    "question": "What happens if you forget to call ssc.checkpoint(directory) for updateStateByKey?",
+    "choices": [
+      "State grows forever → OOM",
+      "State is lost on driver restart",
+      "Both A and B",
+      "No effect"
+    ],
+    "correct": 2,
+    "description": "Without checkpointing, state is kept only in memory and grows unbounded."
+  },
+  {
+    "id": 20,
+    "question": "Which DStream operation is NOT allowed without checkpointing?",
+    "choices": [
+      "map()",
+      "updateStateByKey() on driver restart",
+      "window() with duration > 10 min",
+      "print()"
+    ],
+    "correct": 1,
+    "description": "Stateful and long window operations need checkpoint to recover after failure."
+  },
+  {
+    "id": 21,
+    "question": "The recommended way to restart a failed streaming app is:",
+    "choices": [
+      "Create new StreamingContext",
+      "Use StreamingContext.getOrCreate(checkpointDir, creatingFunc)",
+      "Restart the driver manually",
+      "Use ssc.start() again"
+    ],
+    "correct": 1,
+    "description": "getOrCreate restores metadata, DStream graph, and state from checkpoint."
+  },
+  {
+    "id": 22,
+    "question": "A 'block' in receiver-based streaming corresponds to data received in:",
+    "choices": [
+      "1 second",
+      "blockInterval (default 200ms)",
+      "batch interval",
+      "receiver configuration"
+    ],
+    "correct": 1,
+    "description": "Data is divided into blocks every blockInterval for better parallelism."
+  },
+  {
+    "id": 23,
+    "question": "Which parameter controls the number of partitions for a receiver input DStream?",
+    "choices": [
+      "spark.streaming.blockQueueSize",
+      "spark.streaming.receiver.maxRate",
+      "spark.streaming.blockInterval",
+      "inputStream.repartition()"
+    ],
+    "correct": 2,
+    "description": "Number of blocks per batch = batchInterval / blockInterval → more blocks = more tasks."
+  },
+  {
+    "id": 24,
+    "question": "transform() operation allows you to:",
+    "choices": [
+      "Apply arbitrary RDD-to-RDD functions (including joins with external RDDs)",
+      "Transform to Structured Streaming",
+      "Change batch interval",
+      "Only map operations"
+    ],
+    "correct": 0,
+    "description": "Very powerful for joining streaming data with static datasets."
+  },
+  {
+    "id": 25,
+    "question": "Which of these is NOT a built-in input source for DStreams?",
+    "choices": [
+      "Kafka",
+      "Flume",
+      "Twitter",
+      "JDBC (requires custom receiver)"
+    ],
+    "correct": 3,
+    "description": "Kafka, Flume, Kinesis, Twitter have official receivers; others need custom implementation."
+  },
+  {
+    "id": 26,
+    "question": "What does ssc.remember() do?",
+    "choices": [
+      "Keeps RDDs in memory longer",
+      "Sets checkpoint duration",
+      "Nothing (deprecated)",
+      "Enables stateful processing"
+    ],
+    "correct": 2,
+    "description": "remember() was used in old versions; now use checkpoint interval."
+  },
+  {
+    "id": 27,
+    "question": "To limit ingestion rate per receiver, you set:",
+    "choices": [
+      "spark.streaming.receiver.maxRate",
+      "spark.streaming.kafka.maxRatePerPartition",
+      "spark.streaming.backpressure.enabled",
+      "spark.streaming.blockInterval"
+    ],
+    "correct": 0,
+    "description": "maxRate limits records/second per receiver (static rate limiting)."
+  },
+  {
+    "id": 28,
+    "question": "Backpressure in DStreams (Spark 1.5+) is enabled by:",
+    "choices": [
+      "spark.streaming.backpressure.enabled=true",
+      "spark.streaming.receiver.maxRate",
+      "Automatically enabled",
+      "Not possible"
+    ],
+    "correct": 0,
+    "description": "When enabled, Spark dynamically adjusts rate based on processing speed."
+  },
+  {
+    "id": 29,
+    "question": "Which operation is stateful and window-based?",
+    "choices": [
+      "reduceByWindow()",
+      "reduceByKeyAndWindow() with invFunc",
+      "countByValueAndWindow()",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All maintain intermediate state across sliding windows."
+  },
+  {
+    "id": 30,
+    "question": "The output of dstream.print() appears in:",
+    "choices": [
+      "Driver stdout",
+      "Executor logs",
+      "Web UI",
+      "HDFS"
+    ],
+    "correct": 0,
+    "description": "print() shows first 10 records of each batch on the driver console."
+  },
+  {
+    "id": 31,
+    "question": "A common pattern to save output exactly-once is:",
+    "choices": [
+      "foreachRDD { rdd => rdd.saveAsTextFile(...) }",
+      "foreachRDD with idempotent writes or transactional output",
+      "dstream.saveAsTextFiles()",
+      "print()"
+    ],
+    "correct": 1,
+    "description": "Use foreachRDD + database transaction or idempotent file names."
+  },
+  {
+    "id": 32,
+    "question": "Which is true about DStreams vs Structured Streaming?",
+    "choices": [
+      "DStreams are deprecated",
+      "Structured Streaming is built on Dataset/DataFrame and is the recommended API since Spark 2.0",
+      "DStreams are faster",
+      "Both are identical"
+    ],
+    "correct": 1,
+    "description": "Structured Streaming offers better performance, exactly-once, and event-time processing."
+  },
+  {
+    "id": 33,
+    "question": "How many jobs are submitted per batch interval?",
+    "choices": [
+      "1",
+      "One per output operation (foreachRDD, print, etc.)",
+      "One per transformation",
+      "Zero"
+    ],
+    "correct": 1,
+    "description": "Each output operation triggers a separate Spark job per batch."
+  },
+  {
+    "id": 34,
+    "question": "The recommended storage level for receiver input DStreams when checkpointing is enabled:",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_AND_DISK_SER",
+      "MEMORY_AND_DISK_SER_2",
+      "DISK_ONLY"
+    ],
+    "correct": 2,
+    "description": "_2 replicates received blocks on two nodes for fault tolerance."
+  },
+  {
+    "id": 35,
+    "question": "What does dstream.cache() do?",
+    "choices": [
+      "Caches every batch RDD in memory",
+      "Has no effect (you must use persist()Engine)",
+      "Caches only state",
+      "Caches receiver blocks"
+    ],
+    "correct": 0,
+    "description": "Same as RDD.cache() — useful when the same DStream is used in multiple outputs."
+  },
+  {
+    "id": 36,
+    "question": "Which method returns a new DStream with union of two DStreams?",
+    "choices": [
+      "dstream.merge()",
+      "dstream.union(other)",
+      "dstream.join(other)",
+      "dstream.concat()"
+    ],
+    "correct": 1,
+    "description": "union() combines multiple input streams (e.g., multiple Kafka topics)."
+  },
+  {
+    "id": 37,
+    "question": "To process each partition of an RDD in foreachRDD, you use:",
+    "choices": [
+      "foreachPartition()",
+      "mapPartitions()",
+      "foreach()",
+      "glom()"
+    ],
+    "correct": 0,
+    "description": "Ideal for creating connections (DB, HDFS) once per partition."
+  },
+  {
+    "id": 38,
+    "question": "The Kafka Direct Stream approach (no receivers) was introduced to:",
+    "choices": [
+      "Improve performance",
+      "Provide exactly-once semantics without WAL",
+      "Simplify offset management",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Direct stream reads offsets from Kafka and manages them itself."
+  },
+  {
+    "id": 39,
+    "question": "Which statement is true about DStream checkpoint data?",
+    "choices": [
+      "Contains only output data",
+      "Contains metadata, DStream graph, and state (for stateful ops)",
+      "Is stored in memory",
+      "Is automatically cleaned"
+    ],
+    "correct": 1,
+    "description": "Allows full driver recovery after crash."
+  },
+  {
+    "id": 40,
+    "question": "The fundamental idea behind Spark Streaming is:",
+    "choices": [
+      "True real-time processing (microsecond latency)",
+      "Micro-batch processing using discretized streams (DStreams)",
+      "Event-by-event processing",
+      "Push-based streaming"
+    ],
+    "correct": 1,
+    "description": "Treat streaming as a series of small deterministic batches → leverages Spark Core reliability and performance."
+  }
+]

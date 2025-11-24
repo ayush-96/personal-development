@@ -1,0 +1,363 @@
+[
+  {
+    "id": 1,
+    "question": "In Structured Streaming, event-time is defined as:",
+    "choices": [
+      "The time when Spark processes the record",
+      "The time when the record was generated at the source (timestamp inside the data)",
+      "The time when the record arrived at the source connector",
+      "Driver clock time"
+    ],
+    "correct": 1,
+    "description": "Event-time is embedded in the payload (e.g., timestamp field). Structured Streaming can extract and use it for windowing via withEventTimeWatermark()."
+  },
+  {
+    "id": 2,
+    "question": "Watermark is required for which of the following?",
+    "choices": [
+      "Append mode only",
+      "Complete mode only",
+      "Any stateful aggregation on event-time (windowed or streaming deduplication)",
+      "Only when using Kafka"
+    ],
+    "correct": 2,
+    "description": "Watermark defines 'how late is too late'. Without it, state grows forever in event-time aggregations."
+  },
+  {
+    "id": 3,
+    "question": "A watermark of withWatermark(\"eventTime\", \"10 minutes\") means:",
+    "choices": [
+      "Drop all events older than 10 minutes from current processing time",
+      "State for windows older than max_event_time_seen – 10 min can be safely dropped",
+      "Allow 10 minutes of out-of-order data",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "Watermark = max observed event-time – delayThreshold. State older than watermark is evicted."
+  },
+  {
+    "id": 4,
+    "question": "Which output mode is NOT allowed when using event-time windowed aggregation with watermark?",
+    "choices": [
+      "Append",
+      "Complete",
+      "Update",
+      "All are allowed"
+    ],
+    "correct": 1,
+    "description": "Complete mode cannot drop old state → incompatible with watermarking. Append and Update are supported."
+  },
+  {
+    "id": 5,
+    "question": "What happens when a record arrives with event-time older than the current watermark?",
+    "choices": [
+      "It causes an exception",
+      "It is silently dropped (late data)",
+      "It updates the result table anyway",
+      "It forces watermark to move backward"
+    ],
+    "correct": 1,
+    "description": "Late data below watermark is dropped in Append/Update mode to guarantee correctness."
+  },
+  {
+    {
+    "id": 6,
+    "question": "Trigger.ProcessingTime(\"30 seconds\") means:",
+    "choices": [
+      "Emit results every 30 seconds of event-time",
+      "Emit results every 30 seconds of processing-time, regardless of data arrival",
+      "Wait 30 seconds after each micro-batch",
+      "Only run if 30 seconds of data accumulated"
+    ],
+    "correct": 1,
+    "description": "ProcessingTime trigger fires based on wall-clock time, not on data volume or event-time."
+  },
+  {
+    "id": 7,
+    "question": "Which trigger allows exactly-once micro-batch execution even with failures?",
+    "choices": [
+      "Trigger.Once()",
+      "Trigger.ProcessingTime(\"1 minute\")",
+      "Trigger.Continuous(1000)",
+      "No trigger"
+    ],
+    "correct": 0,
+    "description": "Trigger.Once() runs exactly one micro-batch and stops — perfect for batch jobs on streaming sources with exactly-once semantics."
+  },
+  {
+    "id": 8,
+    "question": "In Append mode, results are emitted only when:",
+    "choices": [
+      "A row is first inserted",
+      "The watermark passes the end of the window",
+      "Every micro-batch",
+      "Only at the end of the query"
+    ],
+    "correct": 1,
+    "description": "Append mode guarantees final results — rows are output only after watermark passes window end."
+  },
+  {
+    "id": 9,
+    "question": "Update mode vs Append mode difference:",
+    "choices": [
+      "Update emits every change (including intermediate window results)",
+      "Append emits only final results after watermark",
+      "Both A and B",
+      "No difference"
+    ],
+    "correct": 2,
+    "description": "Update shows evolving window aggregates; Append shows only finalized windows."
+  },
+  {
+    "id": 10,
+    "question": "Which of these operations requires state store watermarking to clean state?",
+    "choices": [
+      "flatMapGroupsWithState",
+      "mapGroupsWithState",
+      "stream-stream self join on event-time",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Any stateful operation using event-time needs withWatermark() + watermark-aware state cleanup."
+  },
+  {
+    "id": 11,
+    "question": "The state store version is incremented on:",
+    "choices": [
+      "Every commit",
+      "Only when state changes",
+      "Every checkpoint interval",
+      "When watermark advances"
+    ],
+    "correct": 0,
+    "description": "Each micro-batch commit creates a new version; used for state reconciliation on restart."
+  },
+  {
+    "id": 12,
+    "question": "What is the default state store provider?",
+    "choices": [
+      "RocksDBStateStore",
+      "HDFSStateStore",
+      "InMemoryStateStore",
+      "There is no default"
+    ],
+    "correct": 0,
+    "description": "RocksDBStateStore (off-heap) is default since Spark 2.4+; HDFS-backed in older versions."
+  },
+  {
+    "id": 13,
+    "question": "Which trigger is experimental and provides low-latency (millisecond) processing?",
+    "choices": [
+      "Trigger.Once()",
+      "Trigger.Continuous(1000)",
+      "Trigger.AvailableNow()",
+      "Trigger.ProcessingTime(\"0 seconds\")"
+    ],
+    "correct": 1,
+    "description": "Continuous trigger runs in checkpointed continuous processing mode (not micro-batch)."
+  },
+  {
+    "id": 14,
+    "question": "Trigger.AvailableNow() (Spark 3.3+) is used for:",
+    "choices": [
+      "Continuous streaming",
+      "Processing all available data and then stop (multi-batch Trigger.Once())",
+      "Processing only new files",
+      "Running query every hour"
+    ],
+    "correct": 1,
+    "description": "Like Trigger.Once() but processes backlog in multiple micro-batches efficiently."
+  },
+  {
+    "id": 15,
+    "question": "In a tumbling 10-minute event-time window with 15-minute watermark, when is the window [12:00–12:10) finally emitted in Append mode?",
+    "choices": [
+      "At 12:10",
+      "When watermark > 12:25",
+      "When watermark > 12:10",
+      "Immediately"
+    ],
+    "correct": 1,
+    "description": "Window end + watermark delay = 12:10 + 15 min = 12:25. Only after watermark passes 12:25 is the result final."
+  },
+  {
+    "id": 16,
+    "question": "Which operation is NOT supported in Append mode?",
+    "choices": [
+      "Windowed aggregation",
+      "Streaming deduplication",
+      "sort() / limit() on streaming DataFrame",
+      "mapGroupsWithState"
+    ],
+    "correct": 2,
+    "description": "Sort and limit on unbounded tables break Append semantics → only allowed in Complete mode or foreachBatch."
+  },
+  {
+    "id": 17,
+    "question": "To implement sessionization, you typically use:",
+    "choices": [
+      "groupBy(session_window(eventTime, \"30 minutes))",
+      "flatMapGroupsWithState with TimeoutType.EventTime",
+      "window() with sliding",
+      "reduceByKeyAndWindow()"
+    ],
+    "correct": 1,
+    "description": "flatMapGroupsWithState + EventTimeTimeout enables dynamic session windows with inactivity timeout."
+  },
+  {
+    "id": 18,
+    "question": "State timeout types in flatMapGroupsWithState are:",
+    "choices": [
+      "ProcessingTimeTimeout only",
+      "EventTimeTimeout only",
+      "Both ProcessingTimeTimeout and EventTimeTimeout",
+      "NoTimeout"
+    ],
+    "correct": 2,
+    "description": "EventTimeTimeout requires watermark; ProcessingTimeTimeout uses wall-clock time since last update."
+  },
+  {
+    "id": 19,
+    "question": "Which sink supports exactly-once semantics with idempotent writes?",
+    "choices": [
+      "Console sink",
+      "Memory sink",
+      "File sink (Parquet) with _spark_metadata",
+      "Kafka sink"
+    ],
+    "correct": 2,
+    "description": "File sink uses log-based commit protocol and renames → exactly-once even on restart."
+  },
+  {
+    "id": 20,
+    "question": "To get the current watermark value in a query, you use:",
+    "choices": [
+      "spark.readStream.format(\"rate\").load()",
+      "progress event in StreamingQueryListener",
+      "status() method on StreamingQuery",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "Both StreamingQuery.progress() and onQueryProgress callback expose input rows, processed rows, and current watermark."
+  },
+  {
+    "id": 21,
+    "question": "Multiple streaming aggregations (chained) are supported starting from:",
+    "choices": [
+      "Spark 2.4",
+      "Spark 3.0",
+      "Spark 3.2",
+      "Not supported"
+    ],
+    "correct": 1,
+    "description": "Spark 3.0+ supports arbitrary chaining of stateful streaming aggregations with correct state cleanup."
+  },
+  {
+    "id": 22,
+    "question": "Which of these is a valid way to define a sliding window of 12 hours every 6 hours?",
+    "choices": [
+      "window(col(\"eventTime\"), \"12 hours\", \"6 hours\")",
+      "window(col(\"eventTime\"), \"12 hours\")",
+      "slidingWindow(col(\"eventTime\"), \"12 hours\", \"6 hours\")",
+      "tumblingWindow(col(\"eventTime\"), \"6 hours\")"
+    ],
+    "correct": 0,
+    "description": "window(col, windowDuration, slideDuration) — slide can be smaller than window."
+  },
+  {
+    "id": 23,
+    "question": "The stateful operation that offers the most flexibility and control is:",
+    "choices": [
+      "groupByKey().mapGroupsWithState()",
+      "groupByKey().flatMapGroupsWithState()",
+      "groupBy().agg()",
+      "reduceGroups()"
+    ],
+    "correct": 1,
+    "description": "flatMapGroupsWithState allows arbitrary state schema, timeouts, and output multiple rows per key."
+  },
+  {
+    "id": 24,
+    "question": "When using Kafka as source, the watermark advances based on:",
+    "choices": [
+      "Kafka commit log",
+      "Max event-time seen across all partitions in the current batch",
+      "Driver clock",
+      "Processing time"
+    ],
+    "correct": 1,
+    "description": "Watermark = max(eventTime in current micro-batch) – delayThreshold."
+  },
+  {
+    "id": 25,
+    "question": "To drop duplicates on (userId, eventTime) with 1-hour tolerance:",
+    "choices": [
+      "dropDuplicates(\"userId\")",
+      "dropDuplicates(\"userId\", \"eventTime\") within watermark",
+      "Use flatMapGroupsWithState with custom logic",
+      "Not possible"
+    ],
+    "correct": 1,
+    "description": "dropDuplicates() on streaming DF respects watermark — keeps only first record per key within watermark."
+  },
+  {
+    "id": 26,
+    "question": "Which configuration controls RocksDB memory usage in state store?",
+    "choices": [
+      "spark.sql.streaming.stateStore.memory",
+      "spark.sql.streaming.stateStore.rocksdb.memorySize",
+      "spark.sql.streaming.stateStore.maxMemory",
+      "There is no direct config"
+    ],
+    "correct": 2,
+    "description": "spark.sql.streaming.stateStore.maxMemory (default 100MB per partition) limits RocksDB block cache + memtables."
+  },
+  {
+    "id": 27,
+    "question": "foreachBatch() allows you to:",
+    "choices": [
+      "Run arbitrary DataFrame operations (including unsupported ones like sort, limit)",
+      "Write to multiple sinks safely",
+      "Access batchId",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "foreachBatch gives full batch DataFrame API — perfect for complex logic not yet supported natively."
+  },
+  {
+    "id": 28,
+    "question": "In a stream-stream inner join, both sides must have:",
+    "choices": [
+      "Same watermark delay",
+      "Watermarks and event-time constraints (join condition with time bounds)",
+      "Same number of partitions",
+      "Broadcast enabled"
+    ],
+    "correct": 1,
+    "description": "Join condition must include time range (e.g., leftTime BETWEEN rightTime - INTERVAL 1 HOUR AND rightTime + INTERVAL 30 MINUTES)."
+  },
+  {
+    "id": 29,
+    "question": "Which statement about state cleanup is true?",
+    "choices": [
+      "State is cleaned immediately when watermark advances",
+      "State is cleaned lazily during next access or compaction",
+      "State is never cleaned automatically",
+      "Only in Complete mode"
+    ],
+    "correct": 1,
+    "description": "StateStore performs lazy deletion and periodic compaction to reclaim space."
+  },
+  {
+    "id": 30,
+    "question": "The most correct definition of Structured Streaming’s progress guarantee is:",
+    "choices": [
+      "At-least-once",
+      "At-most-once",
+      "Exactly-once using end-to-end idempotency and checkpointing",
+      "Best-effort"
+    ],
+    "correct": 2,
+    "description": "Combination of offset checkpointing, idempotent sinks, and WAL (for some sources), and state versioning provides exactly-once semantics."
+  }
+]

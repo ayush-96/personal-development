@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Spark’s primary fault-tolerance mechanism for RDDs is:",
+    "choices": [
+      "Checkpointing",
+      "Lineage (re-computation from source)",
+      "Write-Ahead Log (WAL)",
+      "Replication"
+    ],
+    "correct": 1,
+    "description": "Spark records the graph of transformations (lineage) and recomputes lost partitions on failure.\nThis is lightweight and works even for in-memory data."
+  },
+  {
+    "id": 2,
+    "question": "Checkpointing in Spark breaks the lineage and:",
+    "choices": [
+      "Speeds up recomputation",
+      "Materializes the RDD/DataFrame to reliable storage (HDFS/S3) and truncates lineage",
+      "Only saves metadata",
+      "Is automatic"
+    ],
+    "correct": 1,
+    "description": "After checkpoint(), Spark no longer needs to recompute from the beginning → faster recovery."
+  },
+  {
+    "id": 3,
+    "question": "Which method triggers eager checkpointing (immediately saves data)?",
+    "choices": [
+      "rdd.checkpoint()",
+      "rdd.localCheckpoint()",
+      "rdd.checkpoint() + sc.runJob to force materialization",
+      "sparkContext.checkpointDir"
+    ],
+    "correct": 2,
+    "description": "rdd.checkpoint() is lazy; you must trigger an action to force checkpointing."
+  },
+  {
+    "id": 4,
+    "question": "localCheckpoint() differs from checkpoint() because it:",
+    "choices": [
+      "Truncates lineage but does NOT save to reliable storage",
+      "Is faster and used for iterative algorithms",
+      "Both A and B",
+      "Is deprecated"
+    ],
+    "correct": 2,
+    "description": "localCheckpoint() cuts lineage early for performance but provides no fault tolerance across executors."
+  },
+  {
+    "id": 5,
+    "question": "In Structured Streaming, checkpointing is:",
+    "choices": [
+      "Optional",
+      "Mandatory for exactly-once and driver fault recovery",
+      "Only needed for stateful operations",
+      "Only for output"
+    ],
+    "correct": 1,
+    "description": "Checkpoint stores offsets, state versions, and metadata → enables exactly-once and driver restart."
+  },
+  {
+    "id": 6,
+    "question": "The Write-Ahead Log (WAL) in old DStreams receiver-based streaming:",
+    "choices": [
+      "Logs received data before processing",
+      "Logs output data",
+      "Logs state changes",
+      "Does not exist"
+    ],
+    "correct": 0,
+    "description": "WAL (pre-commit log) replicates received blocks to ensure zero data loss on receiver failure."
+  },
+  {
+    "id": 7,
+    "question": "When an executor crashes, Spark recovers lost partitions by:",
+    "choices": [
+      "Re-reading from checkpoint",
+      "Recomputing using lineage from the last cached/checkpointed RDD",
+      "Restarting the entire job",
+      "Asking other executors for copies"
+    ],
+    "correct": 1,
+    "description": "Only uncached, non-checkpointed partitions are recomputed using the DAG."
+  },
+  {
+    "id": 8,
+    "question": "Cache() + checkpoint() together is useful when:",
+    "choices": [
+      "You want fast iterative access AND fault tolerance",
+      "You want to reduce memory usage",
+      "You want to force disk spill",
+      "Never useful"
+    ],
+    "correct": 0,
+    "description": "Cache for speed, checkpoint for recovery across executor failures."
+  },
+  {
+    "id": 9,
+    "question": "In Structured Streaming, the checkpoint directory contains:",
+    "choices": [
+      "Only offsets",
+      "offsets, commits, state, sources, metadata",
+      "Only state",
+      "Output data"
+    ],
+    "correct": 1,
+    "description": "Full recovery requires all subdirectories (offsets/, commits/, state/, etc.)."
+  },
+  {
+    "id": 10,
+    "question": "If you delete or corrupt the checkpoint directory in Structured Streaming:",
+    "choices": [
+      "Query continues normally",
+      "Query fails on restart (cannot recover state/offsets)",
+      "Spark recreates it automatically",
+      "Only state is lost"
+    ],
+    "correct": 1,
+    "description": "Checkpoint is the single source of truth — never delete unless starting from scratch."
+  },
+  {
+    "id": 11,
+    "question": "Which operation forces lineage recomputation even if data is cached?",
+    "choices": [
+      "unpersist()",
+      "cache()",
+      "persist(MEMORY_ONLY)",
+      "collect()"
+    ],
+    "correct": 0,
+    "description": "unpersist() removes cached data → next action recomputes from lineage."
+  },
+  {
+    "id": 12,
+    "question": "In Spark Streaming (DStreams), driver recovery after crash requires:",
+    "choices": [
+      "Only WAL",
+      "Checkpointing enabled",
+      "Manual restart",
+      "Dynamic allocation"
+    ],
+    "correct": 1,
+    "description": "StreamingContext.getOrCreate() reads checkpoint to reconstruct graph and state."
+  },
+  {
+    "id": 13,
+    "question": "Speculative execution helps fault-tolerance by:",
+    "choices": [
+      "Duplicating slow tasks (not failed ones)",
+      "Recovering lost data",
+      "Reducing lineage length",
+      "Increasing replication"
+    ],
+    "correct": 0,
+    "description": "It mitigates stragglers but does not replace lineage-based recovery."
+  },
+  {
+    "id": 14,
+    "question": "Blacklisting in Spark occurs after how many consecutive task failures on the same executor?",
+    "choices": [
+      "1",
+      "3",
+      "4 (spark.task.maxFailures)",
+      "10"
+    ],
+    "correct": 1,
+    "description": "After 3 failures, executor/node is blacklisted for that stage/job."
+  },
+  {
+    "id": 15,
+    "question": "Which storage level provides replication across executors for fault tolerance?",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_AND_DISK_2",
+      "DISK_ONLY",
+      "OFF_HEAP"
+    ],
+    "correct": 1,
+    "description": "Levels ending with _2 replicate each partition on two nodes."
+  },
+  {
+    "id": 16,
+    "question": "In Structured Streaming, stateful operators (e.g., groupBy + agg) require:",
+    "choices": [
+      "Checkpointing + watermark for state cleanup",
+      "Only watermark",
+      "Only checkpointing",
+      "Neither"
+    ],
+    "correct": 0,
+    "description": "Checkpoint for recovery, watermark for bounded state size."
+  },
+  {
+    "id": 17,
+    "question": "The maximum lineage length Spark can handle is limited by:",
+    "choices": [
+      "Stack depth during recomputation (can cause StackOverflowError)",
+      "Memory",
+      "Disk space",
+      "No limit"
+    ],
+    "correct": 0,
+    "description": "Very long lineages (thousands of transformations) → periodic checkpointing is required."
+  },
+  {
+    "id": 18,
+    "question": "Which of these is NOT recovered automatically on driver restart in Structured Streaming?",
+    "choices": [
+      "In-flight micro-batch data",
+      "Committed offsets",
+      "State store contents",
+      "Query metadata"
+    ],
+    "correct": 0,
+    "description": "Data being processed in the failed micro-batch is reprocessed on restart (idempotent sinks needed)."
+  },
+  {
+    "id": 19,
+    "question": "To make a long-running RDD lineage safe, you should:",
+    "choices": [
+      "Never cache",
+      "Periodically checkpoint() the RDD",
+      "Use persist(DISK_ONLY)",
+      "Increase driver memory"
+    ],
+    "correct": 1,
+    "description": "Breaks lineage and prevents exponential recomputation time."
+  },
+  {
+    "id": 20,
+    "question": "The most accurate statement about Spark fault-tolerance is:",
+    "choices": [
+      "Spark achieves exactly-once using replication",
+      "Spark achieves exactly-once via lineage + idempotent writes + checkpointing (in streaming)",
+      "Spark is only eventually consistent",
+      "Spark cannot tolerate any failure"
+    ],
+    "correct": 1,
+    "description": "Lineage gives at-least-once; combined with idempotent sinks and checkpointing → exactly-once."
+  }
+]

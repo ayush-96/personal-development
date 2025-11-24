@@ -1,0 +1,410 @@
+[
+  {
+    "id": 1,
+    "question": "What is Apache Spark primarily used for?",
+    "options": [
+      "Large-scale data processing",
+      "Web application hosting",
+      "Mobile app development",
+      "Image compression"
+    ],
+    "answer": "Large-scale data processing",
+    "explanation": "Spark is a distributed computing framework designed to process large amounts of data quickly."
+  },
+  {
+    "id": 2,
+    "question": "Which organization originally developed Apache Spark?",
+    "options": [
+      "Google",
+      "Databricks",
+      "UC Berkeley AMPLab",
+      "Facebook"
+    ],
+    "answer": "UC Berkeley AMPLab",
+    "explanation": "Spark was started at UC Berkeley’s AMPLab before being donated to Apache."
+  },
+  {
+    "id": 3,
+    "question": "Spark stores data in memory for computation to provide:",
+    "options": [
+      "Lower storage costs",
+      "Higher performance than disk-based engines",
+      "Better integration with relational databases",
+      "Improved GUI support"
+    ],
+    "answer": "Higher performance than disk-based engines",
+    "explanation": "Spark uses in-memory computation which speeds up iterative workloads significantly."
+  },
+  {
+    "id": 4,
+    "question": "Spark is written in which programming language?",
+    "options": [
+      "Java",
+      "Scala",
+      "Python",
+      "C++"
+    ],
+    "answer": "Scala",
+    "explanation": "Spark is written in Scala but supports multiple high-level languages like Python, Java, and R."
+  },
+  {
+    "id": 5,
+    "question": "Which of the following is NOT a core Spark component?",
+    "options": [
+      "Spark SQL",
+      "Spark Streaming",
+      "Spark MLlib",
+      "Hadoop YARN"
+    ],
+    "answer": "Hadoop YARN",
+    "explanation": "YARN is a cluster manager, not part of Spark’s internal ecosystem."
+  },
+  {
+    "id": 6,
+    "question": "What type of framework is Spark?",
+    "options": [
+      "Distributed data processing engine",
+      "Single-threaded CPU engine",
+      "Relational database",
+      "Web application framework"
+    ],
+    "answer": "Distributed data processing engine",
+    "explanation": "Spark performs distributed computation over clusters for big data workloads."
+  },
+  {
+    "id": 7,
+    "question": "Which feature makes Spark ideal for machine learning?",
+    "options": [
+      "Streaming-only operations",
+      "In-memory computation",
+      "Built-in data visualization",
+      "File indexing capability"
+    ],
+    "answer": "In-memory computation",
+    "explanation": "ML requires iterative computations which benefit greatly from Spark's in-memory models."
+  },
+  {
+    "id": 8,
+    "question": "Which deployment mode allows Spark to run standalone without Hadoop?",
+    "options": [
+      "YARN mode",
+      "Standalone mode",
+      "Mesos mode",
+      "Docker mode"
+    ],
+    "answer": "Standalone mode",
+    "explanation": "Standalone mode includes Spark’s built-in cluster manager."
+  },
+  {
+    "id": 9,
+    "question": "Spark uses which data abstraction for distributed datasets?",
+    "options": [
+      "RDD",
+      "DataFrame only",
+      "SQL Tables only",
+      "JSON Documents"
+    ],
+    "answer": "RDD",
+    "explanation": "Resilient Distributed Datasets (RDDs) are the original core data abstraction in Spark."
+  },
+  {
+    "id": 10,
+    "question": "Which Spark component supports structured data and SQL queries?",
+    "options": [
+      "GraphX",
+      "Spark SQL",
+      "MLlib",
+      "Core RDD API"
+    ],
+    "answer": "Spark SQL",
+    "explanation": "Spark SQL enables structured queries using SQL and DataFrames."
+  },
+  {
+    "id": 11,
+    "question": "GraphX is a Spark library for:",
+    "options": [
+      "Graph processing",
+      "Image transformation",
+      "Unstructured text processing",
+      "Cloud deployment"
+    ],
+    "answer": "Graph processing",
+    "explanation": "GraphX lets you compute over graphs using vertices and edges."
+  },
+  {
+    "id": 12,
+    "question": "Spark Streaming processes data in:",
+    "options": [
+      "Micro-batches",
+      "Single record per second",
+      "Only static batches",
+      "Cloud-only environments"
+    ],
+    "answer": "Micro-batches",
+    "explanation": "Spark Streaming uses DStreams that operate on small time-based batches."
+  },
+  {
+    "id": 13,
+    "question": "Which cluster managers does Spark support?",
+    "options": [
+      "Only YARN",
+      "Only Kubernetes",
+      "Standalone, YARN, Mesos, Kubernetes",
+      "None — Spark has no cluster support"
+    ],
+    "answer": "Standalone, YARN, Mesos, Kubernetes",
+    "explanation": "Spark is highly flexible and integrates with multiple cluster managers."
+  },
+  {
+    "id": 14,
+    "question": "Spark applications are typically written in:",
+    "options": [
+      "Scala, Python, Java, R",
+      "Only C++",
+      "Only Assembly",
+      "JavaScript only"
+    ],
+    "answer": "Scala, Python, Java, R",
+    "explanation": "These are officially supported high-level APIs."
+  },
+  {
+    "id": 15,
+    "question": "MLlib is a library in Spark for:",
+    "options": [
+      "Machine learning",
+      "Data ingestion",
+      "Dashboard creation",
+      "Distributed security"
+    ],
+    "answer": "Machine learning",
+    "explanation": "It provides scalable ML algorithms including classification, clustering, etc."
+  },
+  {
+    "id": 16,
+    "question": "Spark can process:",
+    "options": [
+      "Batch data only",
+      "Streaming data only",
+      "Both batch and streaming data",
+      "Neither batch nor streaming data"
+    ],
+    "answer": "Both batch and streaming data",
+    "explanation": "Spark supports batch via RDD/DataFrames and streaming via Structured Streaming."
+  },
+  {
+      "id": 17,
+      "question": "What is a key advantage of Spark over MapReduce?",
+      "options": [
+        "Spark eliminates the need for clusters",
+        "Spark provides in-memory computation for faster performance",
+        "Spark can only process small datasets",
+        "Spark does not support distributed processing"
+      ],
+      "answer": "Spark provides in-memory computation for faster performance",
+      "explanation": "MapReduce writes intermediate results to disk; Spark keeps them in memory."
+  },
+  {
+    "id": 18,
+    "question": "Spark was donated to which foundation?",
+    "options": [
+      "Apache Software Foundation",
+      "Linux Foundation",
+      "Eclipse Foundation",
+      "Mozilla Foundation"
+    ],
+    "answer": "Apache Software Foundation",
+    "explanation": "Spark became an Apache top-level project in 2014."
+  },
+  {
+    "id": 19,
+    "question": "What does the Spark driver do?",
+    "options": [
+      "Executes tasks directly on all nodes",
+      "Schedules tasks and manages application lifecycle",
+      "Stores final results permanently",
+      "Provides graphical dashboards"
+    ],
+    "answer": "Schedules tasks and manages application lifecycle",
+    "explanation": "Driver is the central coordinator of a Spark application."
+  },
+  {
+    "id": 20,
+    "question": "Executors in Spark are responsible for:",
+    "options": [
+      "Sending UI updates",
+      "Running tasks and storing data",
+      "Managing cluster nodes",
+      "Installing libraries"
+    ],
+    "answer": "Running tasks and storing data",
+    "explanation": "Executors perform distributed computations on worker nodes."
+  },
+  {
+    "id": 21,
+    "question": "Which engines can Spark use for file storage?",
+    "options": [
+      "Only HDFS",
+      "Only local disk",
+      "Multiple storage systems like HDFS, S3, and local FS",
+      "Only relational databases"
+    ],
+    "answer": "Multiple storage systems like HDFS, S3, and local FS",
+    "explanation": "Spark supports a variety of storage layers through Hadoop-compatible connectors."
+  },
+  {
+    "id": 22,
+    "question": "Which programming environment provides an interactive way to work with Spark?",
+    "options": [
+      "Spark Shell",
+      "Adobe Photoshop",
+      "Oracle SQL Developer",
+      "Microsoft Visual Studio"
+    ],
+    "answer": "Spark Shell",
+    "explanation": "Spark provides Scala and Python shells for interactive analytics."
+  },
+  {
+    "id": 23,
+    "question": "Which type of workloads benefit most from Spark’s in-memory design?",
+    "options": [
+      "Single-pass batch processing",
+      "Iterative machine learning and graph computations",
+      "File indexing only",
+      "Small local CSV analytics"
+    ],
+    "answer": "Iterative machine learning and graph computations",
+    "explanation": "These require repeated access to the same dataset, making memory caching beneficial."
+  },
+  {
+    "id": 24,
+    "question": "Spark supports which data formats?",
+    "options": [
+      "Parquet, Avro, JSON, CSV",
+      "Only Parquet",
+      "Only proprietary formats",
+      "JPEG and MP3 only"
+    ],
+    "answer": "Parquet, Avro, JSON, CSV",
+    "explanation": "Spark works with multiple structured and semi-structured data formats."
+  },
+  {
+    "id": 25,
+    "question": "What does the Spark UI primarily help with?",
+    "options": [
+      "Creating dashboards",
+      "Monitoring jobs, stages, and tasks",
+      "Database administration",
+      "GPU programming"
+    ],
+    "answer": "Monitoring jobs, stages, and tasks",
+    "explanation": "Spark UI provides insight into performance and execution details."
+  },
+  {
+    "id": 26,
+    "question": "Spark is highly scalable because it uses:",
+    "options": [
+      "Single-node execution only",
+      "Distributed clusters of machines",
+      "Dedicated GPU cores only",
+      "Manual resource scheduling"
+    ],
+    "answer": "Distributed clusters of machines",
+    "explanation": "Spark scales horizontally by distributing computation across many worker nodes."
+  },
+  {
+    "id": 27,
+    "question": "Which execution engine does Spark replace from Hadoop?",
+    "options": [
+      "HDFS",
+      "MapReduce",
+      "HBase",
+      "Pig"
+    ],
+    "answer": "MapReduce",
+    "explanation": "Spark offers a faster alternative to MapReduce for data processing."
+  },
+  {
+    "id": 28,
+    "question": "Which type of API does Spark SQL introduce?",
+    "options": [
+      "Unstructured RDD-only API",
+      "Structured API with DataFrames",
+      "Low-level binary coding API",
+      "Mobile UI API"
+    ],
+    "answer": "Structured API with DataFrames",
+    "explanation": "DataFrames provide schema-based structured data operations."
+  },
+  {
+    "id": 29,
+    "question": "Spark’s fault-tolerance is supported by:",
+    "options": [
+      "Data replication only",
+      "RDD lineage and recomputation",
+      "UI alerts",
+      "Manual code rewrites"
+    ],
+    "answer": "RDD lineage and recomputation",
+    "explanation": "Lineage tracks transformations and recomputes lost data on failure."
+  },
+  {
+    "id": 30,
+    "question": "Spark is most suitable for:",
+    "options": [
+      "Distributed analytics workloads",
+      "Small Excel tasks",
+      "Video editing",
+      "Game development"
+    ],
+    "answer": "Distributed analytics workloads",
+    "explanation": "Spark is designed for large-scale data engineering and analytics."
+  },
+  {
+    "id": 31,
+    "question": "What does Apache Spark primarily optimize for?",
+    "options": [
+      "Memory and execution speed",
+      "Low power consumption",
+      "3D rendering performance",
+      "Mobile compatibility"
+    ],
+    "answer": "Memory and execution speed",
+    "explanation": "Spark aims to process data faster by using memory-centric execution."
+  },
+  {
+    "id": 32,
+    "question": "Structured Streaming in Spark is built on top of:",
+    "options": [
+      "DataFrames",
+      "RDD transformations only",
+      "Kafka APIs",
+      "GraphX"
+    ],
+    "answer": "DataFrames",
+    "explanation": "Structured Streaming uses the same engine as DataFrames and Spark SQL."
+  },
+  {
+    "id": 33,
+    "question": "Which of the following best describes Spark’s ecosystem?",
+    "options": [
+      "A relational database product",
+      "A unified analytics engine",
+      "A file compression standard",
+      "A single-threaded processing tool"
+    ],
+    "answer": "A unified analytics engine",
+    "explanation": "Spark unifies batch, streaming, SQL, ML & graphs under one platform."
+  },
+  {
+    "id": 34,
+    "question": "Which two operations form the core of Spark’s execution model?",
+    "options": [
+      "Transformations and Actions",
+      "Queries and Dashboards",
+      "Insert and Update",
+      "Encode and Decode"
+    ],
+    "answer": "Transformations and Actions",
+    "explanation": "Transformations define lineage; actions trigger execution in Spark."
+  }
+]

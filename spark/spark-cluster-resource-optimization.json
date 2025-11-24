@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "The widely accepted sweet spot for executor cores in most workloads is:",
+    "choices": [
+      "1–2 cores per executor",
+      "5 cores per executor",
+      "10–15 cores per executor",
+      "Use all available cores per executor"
+    ],
+    "correct": 1,
+    "description": "5 cores per executor gives optimal HDFS throughput and minimizes GC pressure.\nMore than 5–6 cores often hurts performance due to GC and reduced parallelism."
+  },
+  {
+    "id": 2,
+    "question": "When using dynamic allocation, spark.dynamicAllocation.minExecutors and maxExecutors control:",
+    "choices": [
+      "Hard limits that Spark never violates",
+      "The range Spark can scale between when backlog exists or executors are idle",
+      "Only the initial number of executors",
+      "Only relevant on YARN"
+    ],
+    "correct": 1,
+    "description": "Spark adds/removes executors within [min, max] based on pending tasks and idle time."
+  },
+  {
+    "id": 3,
+    "question": "Dynamic allocation requires an external shuffle service because:",
+    "choices": [
+      "Executors can be removed while shuffle files are still needed",
+      "Shuffle data is too large",
+      "YARN requires it",
+      "It improves performance"
+    ],
+    "correct": 0,
+    "description": "When an executor is de-allocated, its shuffle files must remain accessible → external shuffle service (or node-local shuffle tracking) is mandatory."
+  },
+  {
+    "id": 4,
+    "question": "spark.executor.memory should be set to approximately what percentage of the container size on YARN/K8s?",
+    "choices": [
+      "100%",
+      "75–90% (leave room for overhead)",
+      "50%",
+      "25%"
+    ],
+    "correct": 1,
+    "description": "Typical overhead is 10–25% (off-heap, Python process, etc.).\nCommon practice: container = executor memory × 1.1"
+  },
+  {
+    "id": 5,
+    "question": "The configuration that controls executor idle timeout before removal in dynamic allocation is:",
+    "choices": [
+      "spark.dynamicAllocation.executorIdleTimeout (default 60s)",
+      "spark.dynamicAllocation.cachedExecutorIdleTimeout (default 120s)",
+      "Both",
+      "spark.executor.idleTimeout"
+    ],
+    "correct": 2,
+    "description": "Non-cached executors removed after 60s idle; cached ones survive longer (120s by default)."
+  },
+  {
+    "id": 6,
+    "question": "To prevent too many small tasks, you should ensure each partition is at least:",
+    "choices": [
+      "1–10 MB",
+      "64–128 MB",
+      "512 MB–1 GB",
+      "No minimum"
+    ],
+    "correct": 1,
+    "description": "Target ~128 MB per partition → tasks run 100ms–few seconds (ideal for scheduling granularity)."
+  },
+  {
+    "id": 7,
+    "question": "When you see GC time > 10–20% of task time in Spark UI, you should:",
+    "choices": [
+      "Increase executor memory",
+      "Switch to G1GC or ZGC",
+      "Reduce executor memory to trigger GC more often",
+      "Both A and B"
+    ],
+    "correct": 3,
+    "description": "Larger heaps reduce GC frequency; modern collectors (G1/ZGC) handle large heaps better."
+  },
+  {
+    "id": 8,
+    "question": "spark.memory.fraction=0.6 means:",
+    "choices": [
+      "60% of heap for execution + storage",
+      "60% for storage only",
+      "60% for execution only",
+      "60% reserved for user code"
+    ],
+    "correct": 0,
+    "description": "0.6 (60%) of (heap – 300MB reserved) is managed by Unified Memory Manager for shuffle/cache."
+  },
+  {
+    "id": 9,
+    "question": "spark.memory.storageFraction (default 0.5) controls:",
+    "choices": [
+      "Hard split between execution and storage",
+      "Initial allocation within unified memory (storage can be evicted, execution can borrow)",
+      "Off-heap ratio",
+      "Disk spill threshold"
+    ],
+    "correct": 1,
+    "description": "Only initial guaranteed storage; execution can push storage below this value if needed."
+  },
+  {
+    "id": 10,
+    "question": "Which setting enables AQE to dynamically coalesce shuffle partitions?",
+    "choices": [
+      "spark.sql.adaptive.enabled=true (default in Spark 3+)",
+      "spark.sql.adaptive.coalescePartitions.enabled=true",
+      "Both",
+      "spark.dynamicAllocation.enabled"
+    ],
+    "correct": 2,
+    "description": "AQE coalesces small post-shuffle partitions at runtime → fewer tasks, less overhead."
+  },
+  {
+    "id": 11,
+    "question": "The recommended way to set executor memory on YARN is:",
+    "choices": [
+      "--executor-memory 19G with 64G containers",
+      "--executor-memory 58G with 64G containers (leave overhead)",
+      "--executor-memory 64G",
+      "Let YARN decide"
+    ],
+    "correct": 1,
+    "description": "Leave ~10% for overhead → 64G container ≈ 58–60G executor memory."
+  },
+  {
+    "id": 12,
+    "question": "When you see many tasks with 'Shuffle spill (disk)' > 0, you should consider:",
+    "choices": [
+      "Increasing spark.sql.shuffle.partitions",
+      "Increasing executor memory",
+      "Enabling map-side combine",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "More partitions + larger executors + map-side combine reduce memory pressure during shuffle."
+  },
+  {
+    "id": 13,
+    "question": "spark.speculation=true helps when:",
+    "choices": [
+      "Tasks are uneven due to data skew or bad nodes",
+      "All tasks are fast",
+      "You have too few executors",
+      "Network is slow"
+    ],
+    "correct": 0,
+    "description": "Launches duplicate tasks for stragglers; useful in heterogeneous or noisy clusters."
+  },
+  {
+    "id": 14,
+    "question": "To minimize task scheduling overhead, the ideal number of tasks should be:",
+    "choices": [
+      "1–2× total cores",
+      "Exactly equal to total cores",
+      "3–4× total cores",
+      "10× total cores"
+    ],
+    "correct": 2,
+    "description": "3–4× cores gives headroom for retries, speculation, and avoids starvation."
+  },
+  {
+    "id": 15,
+    "question": "spark.sql.files.maxPartitionBytes (default 128MB) controls:",
+    "choices": [
+      "Maximum size when reading files (prevents huge partitions)",
+      "Maximum shuffle partition size",
+      "Maximum broadcast size",
+      "Maximum cache size"
+    ],
+    "correct": 0,
+    "description": "When reading many small files or large uncompressed files, this prevents OOM from giant partitions."
+  },
+  {
+    "id": 16,
+    "question": "Which configuration enables off-heap memory for execution and storage (Tungsten)?",
+    "choices": [
+      "spark.memory.offHeap.enabled=true",
+      "spark.memory.useLegacyMode=false (default)",
+      "spark.executor.extraJavaOptions=-XX:+UseCompressedOops",
+      "No config needed – always on"
+    ],
+    "correct": 0,
+    "description": "Must also set spark.memory.offHeap.size (e.g., 10g) to allocate direct memory."
+  },
+  {
+    "id": 17,
+    "question": "In Spark 3+, the default garbage collector is:",
+    "choices": [
+      "Parallel GC",
+      "CMS",
+      "G1GC",
+      "ZGC"
+    ],
+    "correct": 2,
+    "description": "G1GC is default and works well with large heaps; ZGC is recommended for >32GB heaps."
+  },
+  {
+    "id": 18,
+    "question": "spark.executor.pyspark.memory is needed when:",
+    "choices": [
+      "Using PySpark with Arrow enabled",
+      "Running Python UDFs",
+      "Both",
+      "Never"
+    ],
+    "correct": 2,
+    "description": "Each executor spawns a Python process that needs its own heap (default 1GB with Arrow)."
+  },
+  {
+    "id": 19,
+    "question": "To reduce small file problem on write, you should:",
+    "choices": [
+      "repartition() to reasonable number before write",
+      "Use coalesce()",
+      "Increase spark.sql.shuffle.partitions",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Target 128MB–1GB per file → use repartition(targetFiles) before write."
+  },
+  {
+    "id": 20,
+    "question": "spark.network.timeout (default 120s) should be increased when:",
+    "choices": [
+      "Tasks take longer than 2 minutes",
+      "Network is slow",
+      "Large shuffles",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Controls heartbeat, task completion, shuffle fetch timeouts."
+  },
+  {
+    "id": 21,
+    "question": "The configuration spark.sql.adaptive.skewJoin.enabled helps with:",
+    "choices": [
+      "Broadcast joins",
+      "Automatically detecting and splitting skewed shuffle partitions",
+      "Increasing partitions",
+      "Reducing memory"
+    ],
+    "correct": 1,
+    "description": "AQE detects skewed partitions and splits them into smaller sub-tasks."
+  },
+  {
+    "id": 22,
+    "question": "When using Kryo serialization, you should:",
+    "choices": [
+      "Register your custom classes",
+      "Increase spark.kryoserializer.buffer.max (default 64m)",
+      "Both",
+      "Nothing"
+    ],
+    "correct": 2,
+    "description": "Registration avoids reflection overhead; larger buffer prevents 'buffer overflow' errors."
+  },
+  {
+    "id": 23,
+    "question": "spark.sql.adaptive.advisoryPartitionSizeInBytes (default 64MB in Spark 3.2+) is used by AQE to:",
+    "choices": [
+      "Set input file partition size",
+      "Target post-shuffle partition size for coalescing",
+      "Limit broadcast size",
+      "Set cache size"
+    ],
+    "correct": 1,
+    "description": "AQE tries to merge small partitions to reach this target."
+  },
+  {
+    "id": 24,
+    "question": "To avoid OOM during large broadcasts, you should:",
+    "choices": [
+      "Increase spark.sql.autoBroadcastJoinThreshold (default 10MB)",
+      "Decrease it or disable (-1)",
+      "Use salted joins",
+      "Cache the table"
+    ],
+    "correct": 1,
+    "description": "Large broadcasts can OOM executors → lower threshold or use shuffle join."
+  },
+  {
+    "id": 25,
+    "question": "spark.task.cpus > 1 is useful when:",
+    "choices": [
+      "Tasks are CPU-intensive (ML inference, UDFs)",
+      "You have very few tasks",
+      "You want to reduce parallelism",
+      "Never"
+    ],
+    "correct": 0,
+    "description": "Allows one task to use multiple cores (e.g., for XGBoost inference)."
+  },
+  {
+    "id": 26,
+    "question": "The best way to find optimal executor configuration is:",
+    "choices": [
+      "Use default values",
+      "Calculate: total_cores / 5 = executors, memory = container × 0.9",
+      "Use one executor per node",
+      "Trial and error only"
+    ],
+    "correct": 1,
+    "description": "Classic rule: 5 cores + ~75% of memory per executor → maximize resource utilization."
+  },
+  {
+    "id": 27,
+    "question": "spark.locality.wait (default 3s) controls:",
+    "choices": [
+      "How long to wait for data-local tasks before falling back",
+      "Task timeout",
+      "Shuffle timeout",
+      "Heartbeat interval"
+    ],
+    "correct": 0,
+    "description": "Longer wait → better locality → less network; too long → scheduler starvation."
+  },
+  {
+    "id": 28,
+    "question": "When you see 'Executor added'/'removed' frequently in logs, it means:",
+    "choices": [
+      "Dynamic allocation is working",
+      "Cluster is unstable",
+      "Too many small tasks",
+      "Network issues"
+    ],
+    "correct": 0,
+    "description": "Normal behavior with dynamic allocation; excessive churning may indicate wrong min/max."
+  },
+  {
+    "id": 29,
+    "question": "spark.storage.memoryFraction is:",
+    "choices": [
+      "Deprecated in favor of unified memory",
+      "Still used in Spark 3+",
+      "Only for RDD API",
+      "Default 0.6"
+    ],
+    "correct": 0,
+    "description": "Replaced by spark.memory.fraction and storageFraction in Unified Memory Manager (Spark 1.6+)."
+  },
+  {
+    "id": 30,
+    "question": "The most important resource tuning principle in Spark is:",
+    "choices": [
+      "Maximize executor memory",
+      "Balance CPU utilization, memory pressure, and task granularity",
+      "Use as few executors as possible",
+      "Always enable dynamic allocation"
+    ],
+    "correct": 1,
+    "description": "Optimal config depends on workload — aim for high CPU usage, low GC, tasks ~100ms–few seconds."
+  }
+]

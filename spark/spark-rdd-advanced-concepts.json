@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "question": "Which of the following is true about RDD partitions?",
+    "choices": [
+      "Partitions are logical divisions of data and are always physically co-located",
+      "Each partition is processed by exactly one task during execution",
+      "The number of partitions can change during a narrow transformation",
+      "Partitions are immutable only after caching"
+    ],
+    "correct": 1,
+    "description": "Each RDD partition is processed by exactly one task. One task = one partition = one thread on one executor core.\nPartitions are logical divisions and can be distributed across nodes."
+  },
+  {
+    "id": 2,
+    "question": "repartition(n) internally performs:",
+    "choices": [
+      "A narrow transformation",
+      "A full shuffle using HashPartitioner by default",
+      "A full shuffle using RangePartitioner",
+      "coalesce() with shuffle enabled"
+    ],
+    "correct": 1,
+    "description": "repartition(n) always shuffles all data across the cluster using HashPartitioner by default (unless a custom partitioner is provided).\nIt guarantees exactly n non-empty partitions."
+  },
+  {
+    "id": 3,
+    "question": "coalesce(n) without shuffle can only:",
+    "choices": [
+      "Increase the number of partitions",
+      "Decrease the number of partitions",
+      "Both increase and decrease",
+      "Neither"
+    ],
+    "correct": 1,
+    "description": "coalesce(numPartitions, shuffle = false) can only reduce partitions by merging them within the same executor.\nIt avoids full shuffle but may cause data skew."
+  },
+  {
+    "id": 4,
+    "question": "When does Spark use RangePartitioner instead of HashPartitioner?",
+    "choices": [
+      "For all shuffle operations",
+      "When the data is monotonically increasing and shuffle is required",
+      "Only for sortByKey() and shuffle-based operations that need sorted output",
+      "Never"
+    ],
+    "correct": 2,
+    "description": "Operations like sortByKey(), shuffle with ordering, or when Spark can sample keys use RangePartitioner to keep keys sorted within partitions."
+  },
+  {
+    "id": 5,
+    "question": "Which persistence level replicates each partition on two nodes?",
+    "choices": [
+      "MEMORY_ONLY_2",
+      "MEMORY_AND_DISK_2",
+      "DISK_ONLY_2",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Any storage level ending with _2 (or _N) replicates partitions on N nodes for fault tolerance.\nExample: MEMORY_AND_DISK_2 stores in memory/disk and replicates twice."
+  },
+  {
+    "id": 6,
+    "question": "What happens when an executor crashes and a partition cached as MEMORY_ONLY is lost?",
+    "choices": [
+      "The job fails permanently",
+      "Spark recomputes the lost partition using lineage",
+      "Spark promotes a replica if replication was used",
+      "Spark automatically checkpoints the RDD"
+    ],
+    "correct": 1,
+    "description": "If no replication (_2) was used, Spark uses the RDD lineage graph to recompute only the missing partitions from source data.\nThis is Spark’s primary fault-tolerance mechanism."
+  },
+  {
+    "id": 7,
+    "question": "Which storage level uses off-heap memory (Tungsten)?",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_ONLY_SER",
+      "OFF_HEAP",
+      "DISK_ONLY"
+    ],
+    "correct": 2,
+    "description": "OFF_HEAP (introduced in Spark 1.6+) stores serialized data in off-heap memory managed by Tungsten.\nAvoids Java GC overhead and enables multiple executors to share memory safely."
+  },
+  {
+    "id": 8,
+    "question": "cache() is equivalent to:",
+    "choices": [
+      "persist(MEMORY_AND_DISK)",
+      "persist(MEMORY_ONLY)",
+      "persist(MEMORY_ONLY_SER)",
+      "persist(DISK_ONLY)"
+    ],
+    "correct": 1,
+    "description": "rdd.cache() is a shorthand for rdd.persist(StorageLevel.MEMORY_ONLY).\nIt keeps data in memory if it fits, otherwise partitions are discarded (not spilled to disk)."
+  },
+  {
+    "id": 9,
+    "question": "When you call unpersist() on an RDD:",
+    "choices": [
+      "All partitions are immediately deleted from memory/disk",
+      "It only marks the RDD for removal; actual removal is lazy",
+      "It triggers recomputation of the RDD",
+      "It blocks until all blocks are removed"
+    ],
+    "correct": 1,
+    "description": "unpersist(blocking = false) by default is asynchronous.\nUse unpersist(true) to block until all blocks are removed."
+  },
+  {
+    "id": 10,
+    "question": "Which method forces immediate materialization of an RDD and all its dependencies?",
+    "choices": [
+      "rdd.cache()",
+      "rdd.persist()",
+      "rdd.count()",
+      "rdd.checkpoint()"
+    ],
+    "correct": 3,
+    "description": "checkpoint() eagerly computes the RDD and saves it to reliable storage (HDFS), breaking the lineage.\nIt is the only method that cuts off lineage completely."
+  },
+  {
+    "id": 11,
+    "question": "What is the main difference between cache() and checkpoint()?",
+    "choices": [
+      "cache() breaks lineage, checkpoint() does not",
+      "checkpoint() breaks lineage and writes to reliable storage",
+      "checkpoint() is faster",
+      "cache() replicates data, checkpoint() does not"
+    ],
+    "correct": 1,
+    "description": "checkpoint() truncates the lineage graph and persists data to fault-tolerant storage (e.g., HDFS).\nUseful for long lineage chains or iterative algorithms."
+  },
+  {
+    "id": 12,
+    "question": "You must set a checkpoint directory before calling checkpoint():",
+    "choices": [
+      "No, Spark uses a default",
+      "Only for local mode",
+      "Yes, using sc.setCheckpointDir()",
+      "Only when using HDFS"
+    ],
+    "correct": 2,
+    "description": "sc.setCheckpointDir(\"hdfs://path\") must be called before any checkpoint() operation.\nSpark will fail otherwise."
+  },
+  {
+    "id": 13,
+    "question": "Which of the following creates a custom Partitioner?",
+    "choices": [
+      "new HashPartitioner(100)",
+      "new RangePartitioner(100, rdd)",
+      "Both are valid",
+      "Only Spark internal partitioners are allowed"
+    ],
+    "correct": 2,
+    "description": "You can extend org.apache.spark.Partitioner to create fully custom partitioning logic.\nHashPartitioner and RangePartitioner are commonly used built-in ones."
+  },
+  {
+    "id": 14,
+    "question": "partitionBy() is available on:",
+    "choices": [
+      "RDD[(K,V)]",
+      "PairRDDFunctions only",
+      "DataFrame",
+      "Both RDD and DataFrame"
+    ],
+    "correct": 1,
+    "description": "partitionBy() is a method on PairRDDFunctions (RDD of key-value pairs).\nDataFrames use repartition(col) instead."
+  },
+  {
+    "id": 15,
+    "question": "What does rdd.mapPartitionsWithIndex() allow you to do?",
+    "choices": [
+      "Access the partition index inside the function",
+      "Change the number of partitions",
+      "Skip certain partitions",
+      "Both a and c"
+    ],
+    "correct": 3,
+    "description": "mapPartitionsWithIndex((index, iterator) => ...) gives you the partition index and iterator.\nCommonly used for debugging or applying logic per partition."
+  },
+  {
+    "id": 16,
+    "question": "Which RDD method returns the partitioner used?",
+    "choices": [
+      "rdd.partitioner",
+      "rdd.getPartitioner()",
+      "rdd.partitions",
+      "rdd.partitioner.isDefined"
+    ],
+    "correct": 0,
+    "description": "rdd.partitioner returns Option[Partitioner]. If None, the RDD is not partitioned by a known partitioner."
+  },
+  {
+    "id": 17,
+    "question": "glom() does what?",
+    "choices": [
+      "Groups values by key",
+      "Collects all elements of each partition into a single array",
+      "Flattens nested arrays",
+      "Merges partitions"
+    ],
+    "correct": 1,
+    "description": "glom() converts each partition into an Array, useful for seeing data distribution or debugging skew."
+  },
+  {
+    "id": 18,
+    "question": "When is data skew most dangerous in RDD operations?",
+    "choices": [
+      "During narrow transformations",
+      "During shuffle operations (reduceByKey, join, groupByKey)",
+      "During collect()",
+      "During cache()"
+    ],
+    "correct": 1,
+    "description": "Skewed keys during shuffle cause some tasks to process much more data, leading to stragglers and OOM."
+  },
+  {
+    "id": 19,
+    "question": "Which operation is most likely to cause OOM on executors?",
+    "choices": [
+      "groupByKey()",
+      "reduceByKey()",
+      "aggregateByKey()",
+      "They are all safe"
+    ],
+    "correct": 0,
+    "description": "groupByKey() brings all values for a key to one executor without any reduction, easily causing OOM.\nreduceByKey() and combineByKey() perform local reduction first."
+  },
+  {
+    "id": 20,
+    "question": "What does RDD.toLocalIterator do?",
+    "choices": [
+      "Forces all data to driver memory",
+      "Returns an iterator that pulls one partition at a time to the driver",
+      "Converts RDD to local collection",
+      "Same as collect()"
+    ],
+    "correct": 1,
+    "description": "toLocalIterator pulls data partition-by-partition to the driver, avoiding full collect() memory explosion on large datasets."
+  },
+  {
+    "id": 21,
+    "question": "Which method returns an array of Partition objects?",
+    "choices": [
+      "rdd.partitions",
+      "rdd.getPartitions",
+      "rdd.partitionInfo",
+      "rdd.splits"
+    ],
+    "correct": 1,
+    "description": "rdd.getPartitions returns Array[Partition], useful for advanced introspection."
+  },
+  {
+    "id": 22,
+    "question": "What is a shuffle partition?",
+    "choices": [
+      "Any partition after a narrow transformation",
+      "Partitions created during a shuffle write",
+      "Partitions read during shuffle fetch",
+      "Both b and c"
+    ],
+    "correct": 3,
+    "description": "Shuffle write creates intermediate files per reducer; shuffle fetch pulls those files into new partitions."
+  },
+  {
+    "id": 23,
+    "question": "How can you change the number of shuffle partitions globally?",
+    "choices": [
+      "spark.sql.shuffle.partitions",
+      "spark.default.parallelism",
+      "spark.shuffle.partitions",
+      "Both a and b"
+    ],
+    "correct": 0,
+    "description": "spark.sql.shuffle.partitions (default 200) controls shuffle partitions for both DataFrame and RDD shuffle operations."
+  },
+  {
+    "id": 24,
+    "question": "Which persistence level is best for iterative ML algorithms when memory is limited?",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_AND_DISK",
+      "DISK_ONLY",
+      "MEMORY_ONLY_SER"
+    ],
+    "correct": 3,
+    "description": "MEMORY_ONLY_SER stores serialized objects, using less memory than deserialized Java objects.\nCritical for large datasets in iterative algorithms."
+  },
+  {
+    "id": 25,
+    "question": "What happens when you call rdd.persist() multiple times with different levels?",
+    "choices": [
+      "Error",
+      "Last persist() wins",
+      "First persist() wins",
+      "Levels are merged"
+    ],
+    "correct": 1,
+    "description": "The last call to persist() overrides previous storage levels.\nOnly one storage level is active at a time."
+  },
+  {
+    "id": 26,
+    "question": "Which of the following is true about checkpointed RDDs?",
+    "choices": [
+      "They still retain lineage",
+      "Lineage is truncated",
+      "They are automatically replicated",
+      "They are stored in memory only"
+    ],
+    "correct": 1,
+    "description": "checkpoint() cuts off lineage completely. After checkpointing, the RDD’s dependencies become empty."
+  },
+  {
+    "id": 27,
+    "question": "What is a 'zipped' partition in Spark?",
+    "choices": [
+      "Compressed partition data",
+      "Partitions from ZipFilesRDD",
+      "Co-partitioned RDDs used in cogroup/join",
+      "Partitions after coalesce"
+    ],
+    "correct": 2,
+    "description": "When two RDDs are co-partitioned with the same partitioner and same number of partitions, Spark can perform map-side joins efficiently."
+  },
+  {
+    "id": 28,
+    "question": "Which method is preferred for salting keys to avoid skew?",
+    "choices": [
+      "Adding a random prefix to keys + secondary reduce",
+      "Using groupByKey()",
+      "Using collect() + local aggregation",
+      "Increasing shuffle partitions"
+    ],
+    "correct": 0,
+    "description": "Salting: append random number to hot keys → partial aggregation → remove salt and aggregate again.\nCommon pattern for skewed groupByKey/reduceByKey."
+  },
+  {
+    "id": 29,
+    "question": "What does rdd.pipe() allow?",
+    "choices": [
+      "Running external programs per partition",
+      "Chaining RDDs",
+      "Creating pipelines like Unix",
+      "Compressing data"
+    ],
+    "correct": 0,
+    "description": "pipe() sends each partition’s data to an external process (via stdin) and collects stdout as a new RDD.\nUseful for integrating legacy tools."
+  },
+  {
+    "id": 30,
+    "question": "Which RDD is immutable by design?",
+    "choices": [
+      "All RDDs",
+      "Only cached RDDs",
+      "Only checkpointed RDDs",
+      "Only PairRDDs"
+    ],
+    "correct": 0,
+    "description": "RDDs are fundamentally immutable distributed collections.\nTransformations always return new RDDs."
+  },
+  {
+    "id": 31,
+    "question": "What does rdd.collectAsMap() do?",
+    "choices": [
+      "Returns Map[K, V] on the driver",
+      "Only works on PairRDD",
+      "Throws error if duplicate keys exist",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "collectAsMap() brings key-value pairs to driver as a Map and fails on duplicate keys."
+  },
+  {
+    "id": 32,
+    "question": "Which method is the most memory-efficient for counting distinct keys?",
+    "choices": [
+      "rdd.keys().distinct().count()",
+      "rdd.map(_._1).distinct().count()",
+      "rdd.map(k => (k._1, 1L)).reduceByKey(_ + _).count()",
+      "All are equal"
+    ],
+    "correct": 2,
+    "description": "reduceByKey with dummy value uses combiners and far less memory than distinct() on large key space."
+  },
+  {
+    "id": 33,
+    "question": "What is the purpose of rdd.toDebugString?",
+    "choices": [
+      "Prints RDD content",
+      "Shows the full lineage of the RDD",
+      "Shows partition information",
+      "Shows executor logs"
+    ],
+    "correct": 1,
+    "description": "toDebugString returns a string representation of the entire dependency chain and indentation shows narrow vs wide dependencies."
+  },
+  {
+    "id": 34,
+    "question": "Which dependency type triggers a shuffle?",
+    "choices": [
+      "NarrowDependency",
+      "OneToOneDependency",
+      "ShuffleDependency",
+      "RangeDependency"
+    ],
+    "correct": 2,
+    "description": "ShuffleDependency is created by wide transformations and forces stage boundary."
+  },
+  {
+    "id": 35,
+    "question": "What does rdd.dependencies return?",
+    "choices": [
+      "List of parent RDDs",
+      "Seq[Dependency[_]]",
+      "List of partitions",
+      "Number of dependencies"
+    ],
+    "correct": 1,
+    "description": "dependencies returns the list of Dependency objects (Narrow or Shuffle)."
+  },
+  {
+    "id": 36,
+    "question": "Which method is used internally by Spark for fault recovery?",
+    "choices": [
+      "getDependencies + compute()",
+      "checkpoint()",
+      "repartition()",
+      "cache()"
+    ],
+    "correct": 0,
+    "description": "When a partition is lost, Spark walks backward through dependencies and calls compute() on the earliest RDD that can regenerate it."
+  },
+  {
+    "id": 37,
+    "question": "What is the risk of using MEMORY_ONLY on large datasets?",
+    "choices": [
+      "Data loss on eviction",
+      "Automatic spill to disk",
+      "Job failure if it doesn’t fit",
+      "Both a and c"
+    ],
+    "correct": 3,
+    "description": "MEMORY_ONLY drops partitions when memory is full (LRU). If later needed, they are recomputed — but if executor dies, recomputation may be needed anyway."
+  },
+  {
+    "id": 38,
+    "question": "Which storage level uses Java serialization?",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_ONLY_SER",
+      "OFF_HEAP",
+      "MEMORY_AND_DISK"
+    ],
+    "correct": 1,
+    "description": "Levels with _SER use Java serialization. OFF_HEAP uses Tungsten’s binary format."
+  },
+  {
+    "id": 39,
+    "question": "When should you prefer checkpoint() over cache()?",
+    "choices": [
+      "Very long lineage chains",
+      "Iterative algorithms > 10 iterations",
+      "When you need fault tolerance beyond executor lifetime",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "checkpoint() is expensive but necessary when lineage becomes too long or when you need data to survive driver restart (with reliable storage)."
+  },
+  {
+    "id": 40,
+    "question": "What does rdd.id return?",
+    "choices": [
+      "Number of partitions",
+      "Unique identifier for the RDD",
+      "Partitioner ID",
+      "Stage ID"
+    ],
+    "correct": 1,
+    "description": "Every RDD has a unique integer ID assigned sequentially by SparkContext."
+  },
+  {
+    "id": 41,
+    "question": "Which transformation can change the number of partitions without shuffle?",
+    "choices": [
+      "map()",
+      "filter()",
+      "flatMap()",
+      "None of the above"
+    ],
+    "correct": 3,
+    "description": "Only coalesce() (when reducing) and union() (in some cases) can change partition count without shuffle.\nAll other narrow transformations preserve partition count."
+  },
+  {
+    "id": 42,
+    "question": "What is a ShuffledRDD?",
+    "choices": [
+      "An RDD created after shuffle",
+      "Internal RDD implementation after shuffleDependency",
+      "Same as HashPartitionedRDD",
+      "A user-facing RDD"
+    ],
+    "correct": 1,
+    "description": "ShuffledRDD is an internal RDD created after shuffle materialization. It reads shuffle files produced by MapOutputTracker."
+  },
+  {
+    "id": 43,
+    "question": "Which method returns the preferred locations (data locality) for a partition?",
+    "choices": [
+      "rdd.preferredLocations(partition)",
+      "rdd.getPreferredLocations(partition)",
+      "rdd.locality(partition)",
+      "rdd.hosts(partition)"
+    ],
+    "correct": 1,
+    "description": "getPreferredLocations(part) returns Seq[String] of hostnames where the partition data resides (for HDFS, etc.)."
+  },
+  {
+    "id": 44,
+    "question": "What is the effect of calling rdd.count() on a cached RDD that doesn’t fit in memory?",
+    "choices": [
+      "Recomputes missing partitions",
+      "Fails with OOM",
+      "Triggers full recomputation",
+      "Blocks forever"
+    ],
+    "correct": 0,
+    "description": "Spark silently recomputes any evicted partitions using lineage when you access a cached RDD that was partially dropped."
+  },
+  {
+    "id": 45,
+    "question": "Which of the following best describes Spark’s fault tolerance model for RDDs?",
+    "choices": [
+      "Data replication like HDFS",
+      "Lineage-based recomputation + optional checkpointing",
+      "Executor-level mirroring",
+      "Automatic failover using ZooKeeper"
+    ],
+    "correct": 1,
+    "description": "Spark is resilient by recording how to rebuild data (lineage), not by replicating it.\nCheckpointing adds durability when needed."
+  }
+]

@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "question": "What is the default value of spark.sql.shuffle.partitions?",
+    "choices": [
+      "100",
+      "200",
+      "500",
+      "Equal to spark.default.parallelism"
+    ],
+    "correct": 1,
+    "description": "spark.sql.shuffle.partitions = 200 controls the default number of partitions after any shuffle operation in DataFrame/SQL API.\nChanging it affects groupBy, join, aggregations, window functions, etc."
+  },
+  {
+    "id": 2,
+    "question": "A good rule of thumb for initial partition count when reading files is:",
+    "choices": [
+      "1 partition per file",
+      "2–4 partitions per CPU core in the cluster",
+      "Exactly 1 partition per 128 MB of input",
+      "Always use the default 200"
+    ],
+    "correct": 1,
+    "description": "Aim for 2–4 partitions per core to keep tasks short (a few hundred ms to seconds) and maintain parallelism."
+  },
+  {
+    "id": 3,
+    "question": "Which method avoids a full shuffle when you only want to reduce the number of partitions?",
+    "choices": [
+      "repartition(n)",
+      "coalesce(n)",
+      "df.repartition(n, col)",
+      "df.rdd.coalesce(n)"
+    ],
+    "correct": 1,
+    "description": "coalesce() reduces partitions without a full shuffle by merging partitions locally on the same executor when possible."
+  },
+  {
+    "id": 4,
+    "question": "What is the default value of spark.sql.autoBroadcastJoinThreshold?",
+    "choices": [
+      "10 MB",
+      "100 MB",
+      "1 GB",
+      "-1 (disabled)"
+    ],
+    "correct": 0,
+    "description": "If a table is smaller than 10 MB (after Catalyst estimation), Spark automatically broadcasts it for a map-side join."
+  },
+  {
+    "id": 5,
+    "question": "To force a broadcast join on a large table, you should:",
+    "choices": [
+      "Use df.join(bigDf, \"key\")",
+      "Use broadcast(smallDf)",
+      "Set spark.sql.autoBroadcastJoinThreshold to a huge value",
+      "Use /*+ SHUFFLE */ hint"
+    ],
+    "correct": 1,
+    "description": "import org.apache.spark.sql.functions.broadcast or sql hint /*+ BROADCAST(t1) */ forces broadcast regardless of size."
+  },
+  {
+    "id": 6,
+    "question": "When should you cache/persist a DataFrame?",
+    "choices": [
+      "After every transformation",
+      "When it will be reused multiple times (branches in DAG, iterative algorithms)",
+      "Only when it fits completely in memory",
+      "Before every write"
+    ],
+    "correct": 1,
+    "description": "Caching is beneficial only when the same DataFrame is used in multiple actions or downstream branches."
+  },
+  {
+    "id": 7,
+    "question": "What is the default storage level of df.cache()?",
+    "choices": [
+      "MEMORY_AND_DISK",
+      "MEMORY_ONLY",
+      "MEMORY_ONLY_SER",
+      "DISK_ONLY"
+    ],
+    "correct": 1,
+    "description": "df.cache() is equivalent to df.persist(StorageLevel.MEMORY_ONLY)."
+  },
+  {
+    "id": 8,
+    "question": "Which storage level is usually best for iterative ML algorithms with limited memory?",
+    "choices": [
+      "MEMORY_ONLY",
+      "MEMORY_AND_DISK",
+      "MEMORY_ONLY_SER",
+      "OFF_HEAP"
+    ],
+    "correct": 2,
+    "description": "MEMORY_ONLY_SER stores serialized bytes, using ~3–5× less memory than deserialized Java objects."
+  },
+  {
+    "id": 9,
+    "question": "What happens when a cached DataFrame does not fit in memory with MEMORY_ONLY?",
+    "choices": [
+      "Spark spills to disk automatically",
+      "Least-recently-used partitions are evicted and recomputed later",
+      "Job fails with OOM",
+      "Caching is silently disabled"
+    ],
+    "correct": 1,
+    "description": "MEMORY_ONLY evicts LRU partitions; they are recomputed from source when needed again."
+  },
+  {
+    "id": 10,
+    "question": "Which config controls how much executor memory is reserved for Spark internal use?",
+    "choices": [
+      "spark.memory.fraction",
+      "spark.memory.storageFraction",
+      "spark.executor.memoryFraction",
+      "300 MB is always reserved"
+    ],
+    "correct": 3,
+    "description": "Spark reserves max(384 MB, 0.07 * executor heap) for internal metadata and buffers."
+  },
+  {
+    "id": 11,
+    "question": "To avoid shuffle skew on a heavily skewed key, the recommended pattern is:",
+    "choices": [
+      "Increase spark.sql.shuffle.partitions to 10000",
+      "Salt the key with random number + second aggregation",
+      "Use broadcast join",
+      "Use coalesce()"
+    ],
+    "correct": 1,
+    "description": "Salting spreads hot keys across many partitions; a second group-by removes the salt."
+  },
+  {
+    "id": 12,
+    "question": "Which config enables Adaptive Query Execution (AQE) in Spark 3+?",
+    "choices": [
+      "spark.sql.adaptive.enabled = true",
+      "spark.sql.adaptive.optimize.enabled = true",
+      "spark.sql.catalyst.enabled = true",
+      "It is enabled by default"
+    ],
+    "correct": 0,
+    "description": "AQE dynamically coalesces shuffle partitions, converts sort-merge to broadcast joins, and handles skew."
+  },
+  {
+    "id": 13,
+    "question": "What is the main benefit of spark.sql.adaptive.coalescePartitions.enabled?",
+    "choices": [
+      "Increases partitions automatically",
+      "Reduces too many small partitions after shuffle",
+      "Forces broadcast joins",
+      "Enables off-heap memory"
+    ],
+    "correct": 1,
+    "description": "After a shuffle, if many partitions are tiny, AQE merges them to reach a target size (default ~128 MB)."
+  },
+  {
+    "id": 14,
+    "question": "Which of these increases the likelihood of OOM during a join?",
+    "choices": [
+      "Using broadcast join",
+      "Large shuffle partitions + skewed keys",
+      "Caching small tables",
+      "Using MEMORY_AND_DISK"
+    ],
+    "correct": 1,
+    "description": "Skewed keys cause some tasks to receive huge amounts of data → OOM in execution memory."
+  },
+  {
+    "id": 15,
+    "question": "spark.serializer should usually be set to:",
+    "choices": [
+      "org.apache.spark.serializer.JavaSerializer",
+      "org.apache.spark.serializer.KryoSerializer",
+      "org.apache.spark.serializer.PickleSerializer",
+      "No need to change"
+    ],
+    "correct": 1,
+    "description": "Kryo is faster and produces smaller serialized objects than Java serialization (default)."
+  },
+  {
+    "id": 16,
+    "question": "When reading Parquet/ORC files, partition pruning happens automatically if:",
+    "choices": [
+      "Files are partitioned by the filter column",
+      "spark.sql.hive.convertMetastoreParquet=true",
+      "You use df.cache()",
+      "You use df.repartition()"
+    ],
+    "correct": 0,
+    "description": "Directory layout like /year=2024/month=03/ allows Spark to skip entire directories when filtering on year/month."
+  },
+  {
+    "id": 17,
+    "question": "Which join type can benefit from bucketed tables (bucket pruning)?",
+    "choices": [
+      "Broadcast join",
+      "Sort-merge join on bucketed columns",
+      "Cross join",
+      "Left anti join"
+    ],
+    "correct": 1,
+    "description": "When both tables are bucketed by join keys with the same number of buckets, Spark can prune buckets dramatically."
+  },
+  {
+    "id": 18,
+    "question": "What is the recommended executor memory for most workloads?",
+    "choices": [
+      "4 GB",
+      "8–64 GB (depends on cluster)",
+      "128 GB always",
+      "Less than 5 GB"
+    ],
+    "correct": 1,
+    "description": "Executors between 8–64 GB with 5 cores each give good HDFS throughput and GC behavior."
+  },
+  {
+    "id": 19,
+    "question": "spark.speculation = true can help when:",
+    "choices": [
+      "Some tasks are much slower than others (stragglers)",
+      "Data is skewed",
+      "Network is slow",
+      "All tasks are fast"
+    ],
+    "correct": 0,
+    "description": "Speculative execution launches duplicate tasks for slow ones and takes the first result."
+  },
+  {
+    "id": 20,
+    "question": "To see how much data was shuffled in a job, you look at:",
+    "choices": [
+      "Spark UI → Storage tab",
+      "Spark UI → Stages tab → Shuffle Read",
+      "Executors tab",
+      "SQL tab → Physical Plan"
+    ],
+    "correct": 1,
+    "description": "Shuffle Read/Write columns in the Stages tab show total bytes shuffled across the cluster."
+  },
+  {
+    "id": 21,
+    "question": "Which operation almost always triggers a shuffle?",
+    "choices": [
+      "select(), filter(), withColumn()",
+      "groupBy(), join(), distinct(), repartition()",
+      "cache()",
+      "limit()"
+    ],
+    "correct": 1,
+    "description": "Any operation that changes data distribution across the cluster requires a shuffle."
+  },
+  {
+    "id": 22,
+    "question": "spark.sql.files.maxPartitionBytes controls:",
+    "choices": [
+      "Maximum size of each partition when reading files",
+      "Maximum shuffle partition size",
+      "Maximum broadcast size",
+      "Maximum cache size"
+    ],
+    "correct": 0,
+    "description": "Default 128 MB. Prevents huge partitions when reading very large files."
+  },
+  {
+    "id": 23,
+    "question": "When should you increase spark.sql.shuffle.partitions?",
+    "choices": [
+      "When you have many cores and small tasks",
+      "When you see shuffle skew",
+      "When you want fewer files",
+      "Never"
+    ],
+    "correct": 0,
+    "description": "More partitions → smaller tasks → better parallelism and less risk of OOM per task."
+  },
+  {
+    "id": 24,
+    "question": "Which of these reduces GC pressure?",
+    "choices": [
+      "Using MEMORY_ONLY_SER",
+      "Using Kryo serializer",
+      "Using off-heap memory (experimental)",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All three techniques reduce the number and size of Java objects, leading to fewer GC pauses."
+  },
+  {
+    "id": 25,
+    "question": "spark.dynamicAllocation.enabled = true is useful when:",
+    "choices": [
+      "Workload varies a lot (many concurrent jobs)",
+      "You want fixed resources",
+      "Running on standalone cluster only",
+      "Running a single job"
+    ],
+    "correct": 0,
+    "description": "Dynamic allocation adds/removes executors based on workload (requires external shuffle service)."
+  },
+  {
+    "id": 26,
+    "question": "What does spark.sql.adaptive.skewJoin.enabled do?",
+    "choices": [
+      "Automatically salts skewed keys at runtime",
+      "Splits large partitions into sub-partitions",
+      "Disables joins",
+      "Converts to broadcast"
+    ],
+    "correct": 1,
+    "description": "When a shuffle partition is much larger than average, AQE splits it and processes with multiple tasks."
+  },
+  {
+    "id": 27,
+    "question": "To disable automatic broadcast joins, set:",
+    "choices": [
+      "spark.sql.autoBroadcastJoinThreshold = -1",
+      "spark.sql.broadcastTimeout = 0",
+      "spark.sql.join.preferBroadcast = false",
+      "spark.sql.adaptive.enabled = false"
+    ],
+    "correct": 0,
+    "description": "Setting to -1 completely disables automatic broadcast detection."
+  },
+  {
+    "id": 28,
+    "question": "Which is generally faster for small lookup tables?",
+    "choices": [
+      "Shuffle join",
+      "Broadcast join",
+      "Sort-merge join",
+      "Cartesian join"
+    ],
+    "correct": 1,
+    "description": "Broadcast join avoids shuffle entirely by sending the small table to all executors."
+  },
+  {
+    "id": 29,
+    "question": "spark.executor.memory should include overhead for:",
+    "choices": [
+      "Only JVM heap",
+      "Off-heap + Python process + OS buffers",
+      "Only cached data",
+      "Only shuffle data"
+    ],
+    "correct": 1,
+    "description": "In YARN/K8s, container size = executor memory × (1 + spark.executor.memoryOverheadFraction, default 0.1)."
+  },
+  {
+    "id": 30,
+    "question": "What is the safest way to free memory used by a cached DataFrame?",
+    "choices": [
+      "df.unpersist()",
+      "spark.catalog.clearCache()",
+      "System.gc()",
+      "Restart the application"
+    ],
+    "correct": 0,
+    "description": "df.unpersist() (or unpersist(true) to block) removes the DataFrame from cache and frees memory/disk."
+  },
+  {
+    "id": 31,
+    "question": "Which config controls the target size for AQE partition coalescing?",
+    "choices": [
+      "spark.sql.adaptive.coalescePartitions.initialPartitionNum",
+      "spark.sql.adaptive.advisoryPartitionSizeInBytes (default 128MB)",
+      "spark.sql.shuffle.partitions",
+      "spark.sql.files.maxPartitionBytes"
+    ],
+    "correct": 1,
+    "description": "AQE tries to create post-shuffle partitions close to this target size."
+  },
+  {
+    "id": 32,
+    "question": "spark.sql.execution.arrow.pyspark.enabled = true helps with:",
+    "choices": [
+      "Faster Parquet reading",
+      "Faster Python UDFs via Apache Arrow",
+      "Faster joins",
+      "Faster caching"
+    ],
+    "correct": 1,
+    "description": "Arrow enables zero-copy data transfer between JVM and Python for pandas UDFs and toPandas()."
+  },
+  {
+    "id": 33,
+    "question": "When you see many tasks with 'Shuffle spill (disk)' > 0, you should:",
+    "choices": [
+      "Increase executor memory",
+      "Increase number of partitions",
+      "Use broadcast join",
+      "Any of the above may help"
+    ],
+    "correct": 3,
+    "description": "Spill happens when shuffle/aggregation memory is exceeded — more partitions, more memory, or map-side combine help."
+  },
+  {
+    "id": 34,
+    "question": "Which of these is NOT a reason to increase executor cores?",
+    "choices": [
+      "To run more parallel tasks per executor",
+      "To improve HDFS throughput (fewer executors)",
+      "To reduce JVM overhead",
+      "More than 5 cores often hurts GC and cache locality"
+    ],
+    "correct": 3,
+    "description": "5 cores per executor is a sweet spot for most workloads; more cores increase GC pressure."
+  },
+  {
+    "id": 35,
+    "question": "The single most important performance tuning principle in Spark is:",
+    "choices": [
+      "Avoid shuffle whenever possible",
+      "Always cache everything",
+      "Use the maximum number of partitions",
+      "Use Python instead of Scala"
+    ],
+    "correct": 0,
+    "description": "Shuffle is the most expensive operation — use broadcast joins, caching, predicate pushdown, and partitioning to minimize it."
+  }
+]

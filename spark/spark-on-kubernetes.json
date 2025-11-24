@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "question": "The native Spark on Kubernetes mode was introduced in which Spark version?",
+    "choices": [
+      "Spark 2.3",
+      "Spark 2.4",
+      "Spark 3.0",
+      "Spark 3.1"
+    ],
+    "correct": 0,
+    "description": "Spark 2.3 (2018) added experimental Kubernetes support; it became GA in Spark 2.4."
+  },
+  {
+    "id": 2,
+    "question": "In Spark on Kubernetes, who acts as the cluster manager?",
+    "choices": [
+      "YARN",
+      "Spark Standalone",
+      "Kubernetes itself",
+      "None – Spark runs without cluster manager"
+    ],
+    "correct": 2,
+    "description": "Kubernetes replaces YARN/Standalone – driver and executors run as pods."
+  },
+  {
+    "id": 3,
+    "question": "To submit a Spark job to Kubernetes, you use:",
+    "choices": [
+      "spark-submit --master k8s://https://<api-server>",
+      "spark-submit --deploy-mode cluster",
+      "kubectl apply -f spark-job.yaml",
+      "spark-shell --kubernetes"
+    ],
+    "correct": 0,
+    "description": "The --master flag points to the Kubernetes API server URL (no port needed if using standard 443)."
+  },
+  {
+    "id": 4,
+    "question": "In cluster mode on Kubernetes, the driver runs:",
+    "choices": [
+      "On the client machine",
+      "Inside a pod created by spark-submit",
+      "On the Kubernetes master node",
+      "Inside an executor pod"
+    ],
+    "correct": 1,
+    "description": "spark-submit creates a driver pod; the client exits after submission."
+  },
+  {
+    "id": 5,
+    "question": "Which namespace does Spark use by default on Kubernetes?",
+    "choices": [
+      "default",
+      "spark",
+      "The namespace of the service account used",
+      "kube-system"
+    ],
+    "correct": 2,
+    "description": "It uses the namespace of the service account passed via --kubernetes-namespace or default SA."
+  },
+  {
+    "id": 6,
+    "question": "The mandatory Kubernetes service account for Spark needs which role?",
+    "choices": [
+      "cluster-admin",
+      "edit or a custom RBAC role that can create/list/delete pods",
+      "view only",
+      "No special permissions"
+    ],
+    "correct": 1,
+    "description": "Spark driver needs to create executor pods and watch their status."
+  },
+  {
+    "id": 7,
+    "question": "Dynamic allocation (executor auto-scaling) on Kubernetes is enabled by:",
+    "choices": [
+      "spark.dynamicAllocation.enabled=true + shuffle tracking",
+      "spark.kubernetes.allocation.pods.enabled=true",
+      "Both A and shuffle service",
+      "Only external shuffle service"
+    ],
+    "correct": 2,
+    "description": "Requires spark.dynamicAllocation.enabled=true, spark.shuffle.service.enabled=true, and an external shuffle service (or Kubernetes shuffle in Spark 3.3+)."
+  },
+  {
+    "id": 8,
+    "question": "The built-in Kubernetes external shuffle service was introduced in:",
+    "choices": [
+      "Spark 3.1",
+      "Spark 3.2",
+      "Spark 3.3",
+      "Spark 3.4"
+    ],
+    "correct": 2,
+    "description": "Spark 3.3+ can run its own shuffle service as DaemonSet (spark.kubernetes.shuffle.enabled=true)."
+  },
+  {
+    "id": 9,
+    "question": "Which config specifies the Docker image for Spark executors?",
+    "choices": [
+      "spark.executor.image",
+      "spark.kubernetes.container.image",
+      "spark.kubernetes.executor.docker.image",
+      "spark.docker.image"
+    ],
+    "correct": 1,
+    "description": "spark.kubernetes.container.image=your-registry/spark:3.5.0 is the standard config."
+  },
+  {
+    "id": 10,
+    "question": "In client mode on Kubernetes, the driver runs:",
+    "choices": [
+      "Inside a pod",
+      "On the local machine or inside a pod you deploy manually",
+      "Always on the client laptop",
+      "Never supported"
+    ],
+    "correct": 1,
+    "description": "Use --deploy-mode client and run spark-submit from inside the cluster (or port-forward)."
+  },
+  {
+    "id": 11,
+    "question": "To mount a secret as environment variables in driver/executors, you use:",
+    "choices": [
+      "spark.kubernetes.driverEnv.",
+      "spark.kubernetes.driver.secretKeyRef.",
+      "spark.kubernetes.driver.secrets.",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "spark.kubernetes.driver.secretKeyRef.MY_SECRET=secret-name:secret-key mounts it as env var."
+  },
+  {
+    "id": 12,
+    "question": "Executor pods are deleted automatically when:",
+    "choices": [
+      "Application finishes (success or failure)",
+      "Only on success",
+      "Only on failure",
+      "Never – manual cleanup required"
+    ],
+    "correct": 0,
+    "description": "Driver pod has ownerReference to the application; Kubernetes garbage-collects everything."
+  },
+  {
+    "id": 13,
+    "question": "Which flag sets the initial number of executors?",
+    "choices": [
+      "--num-executors",
+      "spark.executor.instances",
+      "spark.kubernetes.executor.request.cores",
+      "Both A and B"
+    ],
+    "correct": 3,
+    "description": "Both work; with dynamic allocation they become the minimum number."
+  },
+  {
+    "id": 14,
+    "question": "To enable executor auto-scaling between 5 and 50 executors, you set:",
+    "choices": [
+      "spark.dynamicAllocation.minExecutors=5\nspark.dynamicAllocation.maxExecutors=50",
+      "spark.kubernetes.executor.min=5\nspark.kubernetes.executor.max=50",
+      "Only Kubernetes HPA",
+      "Not possible"
+    ],
+    "correct": 0,
+    "description": "Spark’s own dynamic allocation controls the desired number; Kubernetes creates/deletes pods."
+  },
+  {
+    "id": 15,
+    "question": "Pod template support (custom executor pod YAML) is configured via:",
+    "choices": [
+      "spark.kubernetes.executor.podTemplateFile",
+      "spark.kubernetes.driver.podTemplateFile",
+      "Both",
+      "Not supported"
+    ],
+    "correct": 2,
+    "description": "Allows sidecars, init containers, volumes, node selectors, etc."
+  },
+  {
+    "id": 16,
+    "question": "Logs of executor pods can be viewed using:",
+    "choices": [
+      "Spark UI → Executors → stderr",
+      "kubectl logs <executor-pod-name>",
+      "Both",
+      "Only driver logs"
+    ],
+    "correct": 2,
+    "description": "Spark UI aggregates logs; kubectl gives direct access."
+  },
+  {
+    "id": 17,
+    "question": "Which resource is mandatory to request/limit for Spark pods?",
+    "choices": [
+      "memory only",
+      "cpu only",
+      "Both cpu and memory",
+      "None"
+    ],
+    "correct": 2,
+    "description": "Kubernetes requires explicit cpu and memory requests/limits; otherwise pods may be pending."
+  },
+  {
+    "id": 18,
+    "question": "The config spark.kubernetes.driver.pod.name is used for:",
+    "choices": [
+      "Client mode when driver runs in existing pod",
+      "Cluster mode (ignored)",
+      "Both",
+      "Naming executor pods"
+    ],
+    "correct": 0,
+    "description": "In client mode, tell Spark which pod is the driver (useful for Helm charts)."
+  },
+  {
+    "id": 19,
+    "question": "Hadoop configuration files can be mounted via:",
+    "choices": [
+      "spark.hadoop.* properties",
+      "spark.kubernetes.driver.volumes / spark.files",
+      "spark-submit --files core-site.xml",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "Common pattern: mount ConfigMap with core-site.xml, hdfs-site.xml."
+  },
+  {
+    "id": 20,
+    "question": "Spark on Kubernetes supports local directories for shuffle/spill via:",
+    "choices": [
+      "emptyDir volumes (default)",
+      "hostPath",
+      "PersistentVolumeClaim",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "emptyDir is fastest and default; PVC for persistence across restarts."
+  },
+  {
+    "id": 21,
+    "question": "To run Spark PI example on Kubernetes, the minimal command is:",
+    "choices": [
+      "spark-submit --master k8s://https://k8s-api --class org.apache.spark.examples.SparkPi local:///opt/spark/examples/jars/spark-examples*.jar",
+      "spark-submit --deploy-mode cluster",
+      "kubectl run spark-pi",
+      "spark-shell"
+    ],
+    "correct": 0,
+    "description": "Must specify k8s master URL, container image, and initial executors/memory."
+  },
+  {
+    "id": 22,
+    "question": "Which statement is true about Spark UI on Kubernetes cluster mode?",
+    "choices": [
+      "UI is not accessible",
+      "UI runs inside driver pod → use kubectl port-forward",
+      "UI is automatically exposed via LoadBalancer",
+      "Only in client mode"
+    ],
+    "correct": 1,
+    "description": "kubectl port-forward <driver-pod> 4040:4040 to access Spark UI."
+  },
+  {
+    "id": 23,
+    "question": "Node-local storage for Spark shuffle is enabled by:",
+    "choices": [
+      "spark.kubernetes.node.selector with node labels",
+      "emptyDir + local SSD",
+      "spark.local.dir=/mnt/local-ssd",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Best performance comes from emptyDir on local SSD + node affinity."
+  },
+  {
+    "id": 24,
+    "question": "Spark 3.4+ introduced native support for:",
+    "choices": [
+      "Kubernetes credentials from service account (no need for kubeconfig)",
+      "Pod disruption budgets",
+      "Both",
+      "Only A"
+    ],
+    "correct": 2,
+    "description": "When running inside cluster, Spark automatically uses in-pod service account token."
+  },
+  {
+    "id": 25,
+    "question": "The biggest operational advantage of Spark on Kubernetes is:",
+    "choices": [
+      "Better performance than YARN",
+      "Native integration with cloud-native tools, fine-grained RBAC, and no dependency on YARN/HDFS",
+      "Lower cost",
+      "Simpler installation"
+    ],
+    "correct": 1,
+    "description": "Kubernetes is the modern standard for container orchestration; Spark runs as just another workload."
+  }
+]

@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "question": "What is the main purpose of ML Pipelines in Spark MLlib?",
+    "choices": [
+      "To replace Spark SQL",
+      "To provide a high-level API for building ML workflows that are easy to tune and reproduce",
+      "To speed up individual algorithms",
+      "To run models on GPU"
+    ],
+    "correct": 1,
+    "description": "Pipelines unify data preprocessing, feature engineering, model training, and evaluation into a single consistent API.\nThey make experiments reproducible and easy to productionize."
+  },
+  {
+    "id": 2,
+    "question": "Which of these is NOT a stage in an ML Pipeline?",
+    "choices": [
+      "Transformer",
+      "Estimator",
+      "Evaluator",
+      "DataFrame"
+    ],
+    "correct": 3,
+    "description": "Only Transformer and Estimator are Pipeline stages. Evaluator is separate (used after fitting)."
+  },
+  {
+    "id": 3,
+    "question": "A Transformer in MLlib:",
+    "choices": [
+      "Trains a model",
+      "Takes a DataFrame and returns a transformed DataFrame",
+      "Tunes hyperparameters",
+      "Evaluates model performance"
+    ],
+    "correct": 1,
+    "description": "Examples: Tokenizer, StandardScaler, VectorAssembler — all implement .transform() method."
+  },
+  {
+    "id": 4,
+    "question": "An Estimator in MLlib:",
+    "choices": [
+      "Already contains a trained model",
+      "Implements .fit() that produces a Model (which is a Transformer)",
+      "Only works on RDDs",
+      "Is used only for evaluation"
+    ],
+    "correct": 1,
+    "description": "LogisticRegression, RandomForestClassifier, KMeans are Estimators → call .fit(df) → returns a trained model."
+  },
+  {
+    "id": 5,
+    "question": "After fitting a Pipeline with multiple stages, the result is:",
+    "choices": [
+      "A new Pipeline",
+      "A PipelineModel (which is a Transformer)",
+      "An Estimator",
+      "A DataFrame"
+    ],
+    "correct": 1,
+    "description": "Pipeline.fit() returns a PipelineModel containing all fitted transformers in order."
+  },
+  {
+    "id": 6,
+    "question": "Which class combines multiple feature columns into a single Vector column?",
+    "choices": [
+      "VectorIndexer",
+      "VectorAssembler",
+      "VectorSlicer",
+      "FeatureHasher"
+    ],
+    "correct": 1,
+    "description": "VectorAssembler is the most commonly used feature engineering transformer."
+  },
+  {
+    "id": 7,
+    "question": "StringIndexer is used to:",
+    "choices": [
+      "Convert categorical strings to numeric indices",
+      "Tokenize text",
+      "One-hot encode labels",
+      "Remove strings"
+    ],
+    "correct": 0,
+    "description": "It maps strings to 0-based indices based on frequency (most frequent = 0 by default)."
+  },
+  {
+    "id": 8,
+    "question": "OneHotEncoder in Spark ML maps a column of label indices to:",
+    "choices": [
+      "A dense vector",
+      "A binary sparse vector (one-hot representation)",
+      "Multiple columns",
+      "A string"
+    ],
+    "correct": 1,
+    "description": "Usually paired with StringIndexer → StringIndexer → OneHotEncoder pipeline."
+  },
+  {
+    "id": 9,
+    "question": "Which evaluator is used for binary classification?",
+    "choices": [
+      "MulticlassClassificationEvaluator",
+      "BinaryClassificationEvaluator",
+      "RegressionEvaluator",
+      "ClusteringEvaluator"
+    ],
+    "correct": 1,
+    "description": "It supports areaUnderROC and areaUnderPR metrics."
+  },
+  {
+    "id": 10,
+    "question": "To tune hyperparameters automatically, you use:",
+    "choices": [
+      "CrossValidator",
+      "TrainValidationSplit",
+      "ParamGridBuilder",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "ParamGridBuilder defines the grid, CrossValidator or TrainValidationSplit runs the search."
+  },
+  {
+    "id": 11,
+    "question": "CrossValidator splits the dataset into:",
+    "choices": [
+      "2 folds by default",
+      "3 folds by default",
+      "5 folds by default",
+      "User-defined number of folds"
+    ],
+    "correct": 3,
+    "description": "Default is 3, but you can set numFolds parameter."
+  },
+  {
+    "id": 12,
+    "question": "Which of these is a correct way to save a fitted PipelineModel?",
+    "choices": [
+      "model.write.overwrite().save(path)",
+      "model.save(path)",
+      "Pipeline.save(path)",
+      "model.toPMML()"
+    ],
+    "correct": 0,
+    "description": "Both Pipeline and PipelineModel have .save() and .load() methods."
+  },
+  {
+    "id": 13,
+    "question": "Bucketizer is used for:",
+    "choices": [
+      "Discretizing continuous features into buckets",
+      "Random sampling",
+      "Grouping categories",
+      "Hashing trick"
+    ],
+    "correct": 0,
+    "description": "You define split points → continuous value → bucket index."
+  },
+  {
+    "id": 14,
+    "question": "StandardScaler standardizes features to:",
+    "choices": [
+      "Unit norm",
+      "Zero mean and unit variance (by default)",
+      "Range 0–1",
+      "Z-score per partition"
+    ],
+    "correct": 1,
+    "description": "Set withMean=true and withStd=true (withMean requires input as Vector)."
+  },
+  {
+    "id": 15,
+    "question": "Which transformer handles high-cardinality categorical features efficiently?",
+    "choices": [
+      "OneHotEncoder",
+      "StringIndexer",
+      "FeatureHasher",
+      "IndexToString"
+    ],
+    "correct": 2,
+    "description": "FeatureHasher uses the hashing trick → fixed-size vector regardless of cardinality."
+  },
+  {
+    "id": 16,
+    "question": "IndexToString is typically used to:",
+    "choices": [
+      "Convert predicted indices back to original labels",
+      "Encode strings",
+      "Create new indices",
+      "Remove indices"
+    ],
+    "correct": 0,
+    "description": "Useful in the final stage to make predictions human-readable."
+  },
+  {
+    "id": 17,
+    "question": "The output column for most feature transformers is usually named:",
+    "choices": [
+      "outputCol",
+      "features",
+      "prediction",
+      "rawPrediction"
+    ],
+    "correct": 0,
+    "description": "Each transformer has .setInputCol() and .setOutputCol()."
+  },
+  {
+    "id": 18,
+    "question": "Which algorithm in MLlib returns probability as well as prediction?",
+    "choices": [
+      "DecisionTreeClassifier",
+      "LogisticRegression",
+      "RandomForestClassifier",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "They have probabilityCol and rawPredictionCol in addition to predictionCol."
+  },
+  {
+    "id": 19,
+    "question": "In a Pipeline, stages are executed in:",
+    "choices": [
+      "Random order",
+      "The order they appear in the stages array",
+      "Reverse order",
+      "Parallel"
+    ],
+    "correct": 1,
+    "description": "val pipeline = new Pipeline().setStages(Array(stage1, stage2, stage3))"
+  },
+  {
+    "id": 20,
+    "question": "Which of these is a clustering algorithm in MLlib Pipelines?",
+    "choices": [
+      "KMeans",
+      "GaussianMixture",
+      "BisectingKMeans",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All are Estimators that produce a clustering model with .predict()"
+  },
+  {
+    "id": 21,
+    "question": "To evaluate a regression model, you typically use:",
+    "choices": [
+      "RegressionEvaluator",
+      "MulticlassClassificationEvaluator",
+      "BinaryClassificationEvaluator",
+      "RankingEvaluator"
+    ],
+    "correct": 0,
+    "description": "Supports rmse, mse, r2, mae metrics."
+  },
+  {
+    "id": 22,
+    "question": "VectorIndexer automatically identifies categorical features in a Vector by:",
+    "choices": [
+      "Looking at data types",
+      "Counting distinct values (below maxCategories threshold)",
+      "User annotation",
+      "Hashing"
+    ],
+    "correct": 1,
+    "description": "Useful when you have mixed categorical + continuous features in one Vector."
+  },
+  {
+    "id": 23,
+    "question": "Which class helps you build a parameter grid for tuning?",
+    "choices": [
+      "ParamGridBuilder",
+      "CrossValidator",
+      "GridSearch",
+      "HyperParamTuner"
+    ],
+    "correct": 0,
+    "description": "val paramGrid = new ParamGridBuilder().addGrid(lr.regParam, Array(0.1, 0.01)).build()"
+  },
+  {
+    "id": 24,
+    "question": "A trained PipelineModel can be used directly on streaming DataFrames because:",
+    "choices": [
+      "It is a Transformer",
+      "It contains only Estimators",
+      "It requires refitting",
+      "Only if saved as PMML"
+    ],
+    "correct": 0,
+    "description": "Just do streamingDF.transform(pipelineModel) or .select(model.transform(col(\"*\")))"
+  },
+  {
+    "id": 25,
+    "question": "The recommended way to structure an ML project in Spark is:",
+    "choices": [
+      "Write everything in one script",
+      "Use ML Pipelines + CrossValidator/TrainValidationSplit + save the best PipelineModel",
+      "Use only RDD-based MLlib",
+      "Train on driver"
+    ],
+    "correct": 1,
+    "description": "Pipelines give reproducibility, easy hyperparameter tuning, and seamless transition to production."
+  }
+]

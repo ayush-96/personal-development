@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "question": "Which command starts the Spark Scala REPL?",
+    "choices": [
+      "spark-shell",
+      "spark-scala",
+      "scala-spark",
+      "spark-repl"
+    ],
+    "correct": 0,
+    "description": "spark-shell launches the interactive Scala-based Spark REPL with a pre-initialized SparkSession (named spark) and SparkContext (named sc)."
+  },
+  {
+    "id": 2,
+    "question": "Which command starts the Spark Python/PySpark REPL?",
+    "choices": [
+      "pyspark",
+      "spark-python",
+      "python-spark",
+      "spark-py"
+    ],
+    "correct": 0,
+    "description": "pyspark is the official command to start the interactive Python shell with SparkSession (spark) and SparkContext (sc) already available."
+  },
+  {
+    "id": 3,
+    "question": "In spark-shell (Scala), the default SparkSession variable is named:",
+    "choices": [
+      "sc",
+      "spark",
+      "session",
+      "ss"
+    ],
+    "correct": 1,
+    "description": "Since Spark 2.0, both spark-shell and pyspark automatically create a SparkSession instance named spark."
+  },
+  {
+    "id": 4,
+    "question": "In PySpark shell, what is the type of the spark variable?",
+    "choices": [
+      "SparkContext",
+      "pyspark.sql.SparkSession",
+      "SQLContext",
+      "HiveContext"
+    ],
+    "correct": 1,
+    "description": "spark is an instance of pyspark.sql.SparkSession, the unified entry point introduced in Spark 2.0."
+  },
+  {
+    "id": 5,
+    "question": "In spark-shell, sc refers to:",
+    "choices": [
+      "SparkSession",
+      "SparkContext",
+      "SQLContext",
+      "SparkConf"
+    ],
+    "correct": 1,
+    "description": "sc is the traditional SparkContext object, still available for low-level RDD operations in both Scala and Python shells."
+  },
+  {
+    "id": 6,
+    "question": "Which of the following creates an RDD in Scala spark-shell?",
+    "choices": [
+      "spark.range(1, 100)",
+      "sc.parallelize(1 to 100)",
+      "spark.createDataFrame(1 to 100)",
+      "spark.read.text(\"file\")"
+    ],
+    "correct": 1,
+    "description": "sc.parallelize() is the classic way to create an RDD from a local collection in the Scala REPL."
+  },
+  {
+    "id": 7,
+    "question": "In PySpark shell, the equivalent of Scala’s 1 to 100 is:",
+    "choices": [
+      "range(1, 100)",
+      "list(range(1, 100))",
+      "range(100)",
+      "sc.range(1, 100)"
+    ],
+    "correct": 1,
+    "description": "Python requires an explicit list or any iterable: sc.parallelize(list(range(1, 100))) or simply sc.parallelize(range(1, 100))."
+  },
+  {
+    "id": 8,
+    "question": "Which API is the recommended way to work with structured data in Spark 2.0+?",
+    "choices": [
+      "RDD API",
+      "DataFrame / Dataset API",
+      "Both are equal",
+      "SQL only"
+    ],
+    "correct": 1,
+    "description": "DataFrame and Dataset (Scala) APIs are higher-level, optimized by Catalyst and Tungsten, and are strongly recommended over raw RDDs."
+  },
+  {
+    "id": 9,
+    "question": "In Scala, Dataset[T] is:",
+    "choices": [
+      "Type-unsafe like DataFrame",
+      "Type-safe (strongly typed)",
+      "Exactly the same as DataFrame",
+      "Only available in Spark 1.x"
+    ],
+    "correct": 1,
+    "description": "Dataset[T] provides compile-time type safety in Scala and Java; in Python there is no Dataset, only DataFrame."
+  },
+  {
+    "id": 10,
+    "question": "In PySpark, DataFrame and Dataset are:",
+    "choices": [
+      "Two different classes",
+      "The same thing (DataFrame = Dataset[Row])",
+      "Dataset is more performant",
+      "Dataset does not exist"
+    ],
+    "correct": 1,
+    "description": "Python and other non-JVM languages have only DataFrame, which internally is Dataset[Row]."
+  },
+  {
+    "id": 11,
+    "question": "Which command starts spark-shell in client mode against a remote cluster?",
+    "choices": [
+      "spark-shell --master local[*]",
+      "spark-shell --master spark://master:7077",
+      "spark-shell --remote",
+      "spark-shell --cluster"
+    ],
+    "correct": 1,
+    "description": "--master spark://host:7077 connects the interactive shell to a remote Standalone cluster in client mode."
+  },
+  {
+    "id": 12,
+    "question": "To increase driver memory in spark-shell, you use:",
+    "choices": [
+      "--driver-memory 4g",
+      "--executor-memory 4g",
+      "spark.driver.memory=4g",
+      "Both --driver-memory and SPARK_DRIVER_MEMORY env var"
+    ],
+    "correct": 3,
+    "description": "You can use spark-shell --driver-memory 4g or export SPARK_DRIVER_MEMORY=4g before launching."
+  },
+  {
+    "id": 13,
+    "question": "In PySpark shell, how do you read a CSV file as a DataFrame with header?",
+    "choices": [
+      "spark.read.csv(\"file.csv\", header=True)",
+      "spark.read.format(\"csv\").option(\"header\", \"true\").load(\"file.csv\")",
+      "Both are correct",
+      "Only the first syntax works"
+    ],
+    "correct": 2,
+    "description": "Both shortcuts and the explicit format/option style are fully supported in PySpark."
+  },
+  {
+    "id": 14,
+    "question": "In Scala spark-shell, the equivalent of Python’s header=True is:",
+    "choices": [
+      ".option(\"header\", true)",
+      ".option(\"header\" -> \"true\")",
+      "Both work",
+      "Scala has no header option"
+    ],
+    "correct": 2,
+    "description": "Scala allows both Java-style .option(\"header\", \"true\") and Scala-style .option(\"header\" -> \"true\")."
+  },
+  {
+    "id": 15,
+    "question": "Which method displays the first 20 rows of a DataFrame in the REPL?",
+    "choices": [
+      "df.print()",
+      "df.show()",
+      "df.display()",
+      "df.head()"
+    ],
+    "correct": 1,
+    "description": "df.show() (or df.show(20)) is the standard way to pretty-print DataFrame rows in both Scala and Python shells."
+  },
+  {
+    "id": 16,
+    "question": "To exit the Spark shell gracefully, you type:",
+    "choices": [
+      ":q",
+      ":quit",
+      "exit()",
+      "Ctrl+D or :q in Scala, Ctrl+D or quit() in Python"
+    ],
+    "correct": 3,
+    "description": "Scala REPL uses :quit or Ctrl+D; PySpark accepts quit() or Ctrl+D."
+  },
+  {
+    "id": 17,
+    "question": "In spark-shell, how do you import DataFrame-specific functions for SQL-style operations?",
+    "choices": [
+      "import spark.sql.functions._",
+      "import org.apache.spark.sql.functions._",
+      "import spark.implicits._",
+      "Both b and c"
+    ],
+    "correct": 3,
+    "description": "spark.implicits._ brings $ notation and toDF; org.apache.spark.sql.functions._ brings col(), lit(), etc."
+  },
+  {
+    "id": 18,
+    "question": "In PySpark, to use SQL functions like col(), lit(), you need to:",
+    "choices": [
+      "from pyspark.sql import functions as F",
+      "import pyspark.sql.functions",
+      "No import needed",
+      "from spark.sql.functions import *"
+    ],
+    "correct": 0,
+    "description": "The idiomatic way is from pyspark.sql.functions import * or commonly as F."
+  },
+  {
+    "id": 19,
+    "question": "Which shell automatically enables Hive support when --master yarn or a Hive metastore is present?",
+    "choices": [
+      "Only spark-shell",
+      "Only pyspark",
+      "Both, if spark.sql.catalogImplementation=hive",
+      "Neither"
+    ],
+    "correct": 2,
+    "description": "Both shells create a SparkSession with Hive support enabled when the configuration and metastore are available."
+  },
+  {
+    "id": 20,
+    "question": "To run spark-shell with 10 executor cores total in local mode, you use:",
+    "choices": [
+      "spark-shell --master local[10]",
+      "spark-shell --master local[*]",
+      "spark-shell --total-executor-cores 10",
+      "All of the above work"
+    ],
+    "correct": 0,
+    "description": "local[n] means run Spark locally with n threads (ideal for testing parallelism)."
+  },
+  {
+    "id": 21,
+    "question": "In Scala spark-shell, you can convert an RDD to DataFrame using:",
+    "choices": [
+      "rdd.toDF() after importing spark.implicits._",
+      "spark.createDataFrame(rdd)",
+      "Both are valid",
+      "Only the second one"
+    ],
+    "correct": 2,
+    "description": "toDF() requires spark.implicits._ and case class or column names; createDataFrame works directly."
+  },
+  {
+    "id": 22,
+    "question": "Which of the following is NOT available in PySpark shell by default?",
+    "choices": [
+      "spark.read",
+      "spark.sql()",
+      "Dataset API with type safety",
+      "spark.createDataFrame()"
+    ],
+    "correct": 2,
+    "description": "Python has no compile-time type-safe Dataset; you only get DataFrame (Dataset[Row])."
+  },
+  {
+    "id": 23,
+    "question": "To execute SQL queries directly in either shell, you use:",
+    "choices": [
+      "spark.query(\"SELECT ...\")",
+      "spark.sql(\"SELECT ...\")",
+      "spark.execute(\"SELECT ...\")",
+      "sql(\"SELECT ...\")"
+    ],
+    "correct": 1,
+    "description": "spark.sql(\"SELECT ...\") returns a DataFrame and works identically in both Scala and Python shells."
+  },
+  {
+    "id": 24,
+    "question": "In PySpark REPL, df.printSchema() prints the schema in:",
+    "choices": [
+      "JSON format",
+      "Tree format (pretty-printed)",
+      "CSV format",
+      "Only column names"
+    ],
+    "correct": 1,
+    "description": "printSchema() displays a nice hierarchical tree view of the DataFrame schema."
+  },
+  {
+    "id": 25,
+    "question": "Which statement is true about the REPL experience in Spark?",
+    "choices": [
+      "Scala shell is slower because of compilation",
+      "Python shell supports Dataset[T] type safety",
+      "Both shells provide almost identical DataFrame/SQL functionality",
+      "Only Scala shell can connect to remote clusters"
+    ],
+    "correct": 2,
+    "description": "Since Spark 2.0, both Scala and Python interactive shells offer nearly identical high-level DataFrame/SQL capabilities, with the main difference being type-safe Datasets in Scala/Java only."
+  }
+]

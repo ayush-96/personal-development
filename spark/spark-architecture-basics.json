@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "question": "A DataFrame in Spark is built on top of which abstraction?",
+    "choices": [
+      "RDD",
+      "Dataset",
+      "Spark SQL",
+      "Accumulator"
+    ],
+    "correct": 0,
+    "description": "A DataFrame is internally built on top of **RDDs**, providing schema and optimization via Catalyst."
+  },
+  {
+    "id": 2,
+    "question": "Which optimizer is used by Spark SQL to optimize DataFrame queries?",
+    "choices": [
+      "DAG Optimizer",
+      "Catalyst Optimizer",
+      "Shuffle Optimizer",
+      "Task Scheduler"
+    ],
+    "correct": 1,
+    "description": "Spark uses the **Catalyst Optimizer** for logical and physical query optimization."
+  },
+  {
+    "id": 3,
+    "question": "Which storage format is most optimized for Spark SQL operations?",
+    "choices": [
+      "CSV",
+      "Text",
+      "Parquet",
+      "TSV"
+    ],
+    "correct": 2,
+    "description": "Parquet is **columnar**, providing excellent compression and predicate pushdown."
+  },
+  {
+    "id": 4,
+    "question": "What is Dataset API's key advantage over DataFrames?",
+    "choices": [
+      "Higher memory usage",
+      "Runtime type safety",
+      "Built only for Python",
+      "Only supports SQL"
+    ],
+    "correct": 1,
+    "description": "Datasets provide **type safety** and compile-time validation (mainly for Scala & Java)."
+  },
+  {
+    "id": 5,
+    "question": "What does show() do on a DataFrame?",
+    "choices": [
+      "Triggers lazy evaluation",
+      "Displays rows in tabular format",
+      "Saves output to disk",
+      "Creates a new DataFrame"
+    ],
+    "correct": 1,
+    "description": "**show()** is an action that prints the DataFrame in tabular form."
+  },
+  {
+    "id": 6,
+    "question": "Which method returns the schema of a DataFrame?",
+    "choices": [
+      "describe()",
+      "schema()",
+      "dtypes()",
+      "explain()"
+    ],
+    "correct": 1,
+    "description": "**schema()** returns the column metadata including types."
+  },
+  {
+    "id": 7,
+    "question": "Which function is used to add a new derived column?",
+    "choices": [
+      "select()",
+      "withColumn()",
+      "groupBy()",
+      "drop()"
+    ],
+    "correct": 1,
+    "description": "**withColumn()** creates a new column or replaces an existing one."
+  },
+  {
+    "id": 8,
+    "question": "What is the default number of shuffle partitions used by DataFrame operations?",
+    "choices": [
+      "1",
+      "100",
+      "200",
+      "500"
+    ],
+    "correct": 2,
+    "description": "Default config: **spark.sql.shuffle.partitions = 200**"
+  },
+  {
+    "id": 9,
+    "question": "Which DataFrame operation always triggers a shuffle?",
+    "choices": [
+      "filter()",
+      "select()",
+      "groupBy()",
+      "withColumn()"
+    ],
+    "correct": 2,
+    "description": "**groupBy** creates aggregation requiring shuffle across partitions."
+  },
+  {
+    "id": 10,
+    "question": "Which type of evaluation is used by DataFrames?",
+    "choices": [
+      "Immediate evaluation",
+      "Lazy evaluation",
+      "Hybrid execution",
+      "None"
+    ],
+    "correct": 1,
+    "description": "Transformations in DataFrames are **lazy** to allow optimization before execution."
+  },
+  {
+    "id": 11,
+    "question": "Which API supports compile-time type checking?",
+    "choices": [
+      "Python DataFrames",
+      "Scala DataFrames",
+      "Scala Datasets",
+      "SQL Interface"
+    ],
+    "correct": 2,
+    "description": "Datasets in **Scala** & **Java** ensure type safety."
+  },
+  {
+    "id": 12,
+    "question": "Which method writes a DataFrame to storage?",
+    "choices": [
+      "write()",
+      "show()",
+      "limit()",
+      "schema()"
+    ],
+    "correct": 0,
+    "description": "**write()** enables saving to parquet, CSV, JSON, etc."
+  },
+  {
+    "id": 13,
+    "question": "Which output format supports nested fields efficiently?",
+    "choices": [
+      "Text",
+      "CSV",
+      "Parquet",
+      "SQL table"
+    ],
+    "correct": 2,
+    "description": "Parquet stores nested structures and arrays efficiently."
+  },
+  {
+    "id": 14,
+    "question": "Which function is used for SQL queries on DataFrames?",
+    "choices": [
+      "query()",
+      "sql()",
+      "execute()",
+      "runQuery()"
+    ],
+    "correct": 1,
+    "description": "sql() is used with temporary views for SQL execution."
+  },
+  {
+    "id": 15,
+    "question": "Which method registers a DataFrame as a temporary table?",
+    "choices": [
+      "createOrReplaceTempView()",
+      "registerTable()",
+      "newView()",
+      "persistView()"
+    ],
+    "correct": 0,
+    "description": "Allows SQL access: SELECT * FROM viewName"
+  },
+  {
+    "id": 16,
+    "question": "Which is NOT a DataFrame transformation?",
+    "choices": [
+      "select()",
+      "filter()",
+      "collect()",
+      "withColumn()"
+    ],
+    "correct": 2,
+    "description": "**collect()** is an action that brings data to driver."
+  },
+  {
+    "id": 17,
+    "question": "Is DataFrame immutable?",
+    "choices": [
+      "Yes",
+      "No",
+      "Only in Python",
+      "Only when cached"
+    ],
+    "correct": 0,
+    "description": "DataFrames are **immutable** like RDDs — transformations create new DataFrames."
+  },
+  {
+    "id": 18,
+    "question": "Which method converts DataFrame to RDD?",
+    "choices": [
+      "toRDD()",
+      "rdd()",
+      "asRDD()",
+      "convertToRDD()"
+    ],
+    "correct": 1,
+    "description": "DataFrame can be converted using **df.rdd** returning an RDD of Rows."
+  },
+  {
+    "id": 19,
+    "question": "Dataset API is available in which languages?",
+    "choices": [
+      "Scala & Java",
+      "Python only",
+      "R & Python",
+      "All languages"
+    ],
+    "correct": 0,
+    "description": "Dataset API requires static typing → available in Scala & Java."
+  },
+  {
+    "id": 20,
+    "question": "What does cache() do?",
+    "choices": [
+      "Stores data only on disk",
+      "Caches DataFrame in memory",
+      "Removes shuffle",
+      "Creates new partitions"
+    ],
+    "correct": 1,
+    "description": "cache() = persist(StorageLevel.MEMORY_ONLY)"
+  },
+  {
+    "id": 21,
+    "question": "Which DataFrame function can be used to rename a column?",
+    "choices": [
+      "withColumnRenamed()",
+      "rename()",
+      "columnName()",
+      "change()"
+    ],
+    "correct": 0,
+    "description": "Renames columns while keeping schema intact."
+  },
+  {
+    "id": 22,
+    "question": "Which of the following is a wide transformation?",
+    "choices": [
+      "select()",
+      "filter()",
+      "groupBy()",
+      "limit()"
+    ],
+    "correct": 2,
+    "description": "groupBy causes **shuffle**, making it a wide transformation."
+  },
+  {
+    "id": 23,
+    "question": "To remove duplicate rows, we use:",
+    "choices": [
+      "clean()",
+      "dedupe()",
+      "dropDuplicates()",
+      "remove()"
+    ],
+    "correct": 2,
+    "description": "dropDuplicates() removes duplicate rows or per column subset."
+  },
+  {
+    "id": 24,
+    "question": "Which joins are supported by DataFrames?",
+    "choices": [
+      "Inner",
+      "Left",
+      "Right",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Spark supports full set of joins: inner, left, right, full, cross, etc."
+  },
+  {
+    "id": 25,
+    "question": "which clause filters aggregated data?",
+    "choices": [
+      "where",
+      "having",
+      "select",
+      "orderBy"
+    ],
+    "correct": 1,
+    "description": "HAVING filters results **after groupBy** operations."
+  },
+  {
+    "id": 26,
+    "question": "What is returned by df.count()?",
+    "choices": [
+      "New DataFrame",
+      "Number of rows",
+      "Schema",
+      "NULL"
+    ],
+    "correct": 1,
+    "description": "count() is an action that returns number of rows."
+  },
+  {
+    "id": 27,
+    "question": "Which method prints the execution plan for a DataFrame?",
+    "choices": [
+      "info()",
+      "plan()",
+      "explain()",
+      "logic()"
+    ],
+    "correct": 2,
+    "description": "explain() shows logical & physical plans."
+  },
+  {
+    "id": 28,
+    "question": "Which DataFrame function supports sampling rows?",
+    "choices": [
+      "take()",
+      "sample()",
+      "peek()",
+      "pick()"
+    ],
+    "correct": 1,
+    "description": "sample() allows fraction-based sampling with/without replacement."
+  },
+  {
+    "id": 29,
+    "question": "Which of the following is a column function?",
+    "choices": [
+      "col()",
+      "column()",
+      "c()",
+      "field()"
+    ],
+    "correct": 0,
+    "description": "col() is used for referencing columns in expressions."
+  },
+  {
+    "id": 30,
+    "question": "What does cast() do?",
+    "choices": [
+      "Combine two DataFrames",
+      "Convert column type",
+      "Apply filter",
+      "Persist DataFrame"
+    ],
+    "correct": 1,
+    "description": "cast() changes column data type: df.col.cast(\"Integer\")"
+  },
+  {
+    "id": 31,
+    "question": "Window functions are used for:",
+    "choices": [
+      "Filtering nulls",
+      "Sorting only",
+      "Row-wise operations with ordering/partitioning",
+      "Schema validation"
+    ],
+    "correct": 2,
+    "description": "Window functions enable adjacent row operations based on partitioning & ordering."
+  },
+  {
+    "id": 32,
+    "question": "What does drop() do?",
+    "choices": [
+      "Drops rows only",
+      "Drops columns",
+      "Drops DataFrame",
+      "Triggers shuffle"
+    ],
+    "correct": 1,
+    "description": "drop() is used to remove columns or rows with NULL using dropna()."
+  },
+  {
+    "id": 33,
+    "question": "Which of these is a NULL handling function?",
+    "choices": [
+      "fillna()",
+      "clean()",
+      "hideNull()",
+      "dropNull()"
+    ],
+    "correct": 0,
+    "description": "fillna() replaces NULL values with defaults."
+  },
+  {
+    "id": 34,
+    "question": "Why is CSV less efficient in Spark?",
+    "choices": [
+      "Columnar storage",
+      "Schema must be inferred every time",
+      "Supports predicate pushdown",
+      "Stored in binary format"
+    ],
+    "correct": 1,
+    "description": "CSV is **row-based** + schema inference required = slower & larger storage."
+  },
+  {
+    "id": 35,
+    "question": "What does union() require?",
+    "choices": [
+      "Any number of columns allowed",
+      "Same number of columns and schema",
+      "Only integer columns",
+      "Explicit join key"
+    ],
+    "correct": 1,
+    "description": "Both DataFrames must have **same column count & structure**."
+  },
+  {
+    "id": 36,
+    "question": "Which DataFrame function performs sorting?",
+    "choices": [
+      "orderBy()",
+      "groupBy()",
+      "filter()",
+      "rename()"
+    ],
+    "correct": 0,
+    "description": "orderBy() sorts across entire DataFrame (likely shuffle)."
+  },
+  {
+    "id": 37,
+    "question": "To convert DataFrame to JSON output:",
+    "choices": [
+      "convertJSON()",
+      "write.json()",
+      "store.json()",
+      "saveJson()"
+    ],
+    "correct": 1,
+    "description": "Example: df.write.json(\"/path/out\")"
+  },
+  {
+    "id": 38,
+    "question": "Which collects only top N rows efficiently?",
+    "choices": [
+      "count()",
+      "collect()",
+      "take()",
+      "cache()"
+    ],
+    "correct": 2,
+    "description": "take(n) returns first n elements without full DAG computation."
+  },
+  {
+    "id": 39,
+    "question": "Which converts DataFrame into Dataset type?",
+    "choices": [
+      "as[T]()",
+      "toDataset()",
+      "toDS()",
+      "Either as[T]() or toDS()"
+    ],
+    "correct": 3,
+    "description": "Both **as[T]** and **toDS()** convert to Dataset in Spark (Scala)."
+  },
+  {
+    "id": 40,
+    "question": "Which of these is TRUE for DataFrames?",
+    "choices": [
+      "They allow schema enforcement",
+      "Use RDD as their execution engine",
+      "Support Catalyst optimization",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All statements describe DataFrames accurately."
+  },
+  {
+    "id": 41,
+    "question": "What is the row-type of a DataFrame in Scala?",
+    "choices": [
+      "User-defined class",
+      "Row",
+      "Tuple",
+      "Struct"
+    ],
+    "correct": 1,
+    "description": "DataFrame = Dataset[Row] in Scala API."
+  },
+  {
+    "id": 42,
+    "question": "broadcast() function helps:",
+    "choices": [
+      "To persist data",
+      "To reduce shuffle during joins",
+      "To increase shuffle",
+      "To remove skew"
+    ],
+    "correct": 1,
+    "description": "Broadcast joins move small table to every executor, avoiding large shuffle."
+  },
+  {
+    "id": 43,
+    "question": "Which method can change DataFrame column names using regex?",
+    "choices": [
+      "toDF()",
+      "drop()",
+      "renameColumns()",
+      "Regex not supported in Spark"
+    ],
+    "correct": 0,
+    "description": "toDF() can be used to rename columns programmatically."
+  },
+  {
+    "id": 44,
+    "question": "Which format is best when reading data repeatedly?",
+    "choices": [
+      "CSV",
+      "Raw text",
+      "Parquet",
+      "TSV"
+    ],
+    "correct": 2,
+    "description": "Parquet is best for repeated analytical queries → optimized using metadata."
+  },
+  {
+    "id": 45,
+    "question": "Which is a benefit of Tungsten execution engine?",
+    "choices": [
+      "Runtime code generation",
+      "Better memory management",
+      "Faster execution",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Tungsten improves performance via code gen, cache locality, and binary processing."
+  }
+]

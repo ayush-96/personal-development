@@ -1,0 +1,362 @@
+[
+    {
+        "id": 1,
+        "question": "Which component in Spark is responsible for building the DAG of stages?",
+        "choices": [
+            "TaskScheduler",
+            "DAGScheduler",
+            "Cluster Manager",
+            "SparkContext"
+        ],
+        "correct": 1,
+        "description": "DAGScheduler computes the DAG of stages from the logical plan, determines stage boundaries at shuffles, and submits stages as TaskSets to the TaskScheduler."
+    },
+    {
+        "id": 2,
+        "question": "A Spark Job is created when you call:",
+        "choices": [
+            "Any transformation",
+            "Any action (count(), collect(), saveAsTextFile(), etc.)",
+            "cache() or persist()",
+            "repartition()"
+        ],
+        "correct": 1,
+        "description": "Every action triggers exactly one Job. Transformations only extend the logical plan."
+    },
+    {
+        "id": 3,
+        "question": "A Spark Stage is:",
+        "choices": [
+            "Contains exactly one task",
+            "Is a set of parallel tasks that can be run without shuffling",
+            "Always corresponds to one action",
+            "Runs only on the driver"
+        ],
+        "correct": 1,
+        "description": "Stages are separated by shuffle boundaries (wide transformations). All tasks in a stage have the same code."
+    },
+    {
+        "id": 4,
+        "question": "ResultStage vs ShuffleMapStage – which one is the final stage of a job?",
+        "choices": [
+            "ShuffleMapStage",
+            "ResultStage",
+            "Both can be final",
+            "There is no difference"
+        ],
+        "correct": 1,
+        "description": "ResultStage performs the final action (collect, count, save). ShuffleMapStage produces shuffle files for downstream stages."
+    },
+    {
+        "id": 5,
+        "question": "What is the role of the TaskScheduler?",
+        "choices": [
+            "Builds the DAG",
+            "Decides which executor runs each task and handles task locality",
+            "Writes shuffle files",
+            "Runs the tasks"
+        ],
+        "correct": 1,
+        "description": "TaskScheduler receives TaskSets from DAGScheduler and assigns individual tasks to executors respecting data locality."
+    },
+    {
+        "id": 6,
+        "question": "Spark supports how many levels of task locality by default?",
+        "choices": [
+            "2",
+            "3",
+            "5",
+            "7"
+        ],
+        "correct": 2,
+        "description": "PROCESS_LOCAL > NODE_LOCAL > NO_PREF > RACK_LOCAL > ANY. Spark waits progressively longer for better locality."
+    },
+    {
+        "id": 7,
+        "question": "Which configuration enables speculative execution?",
+        "choices": [
+            "spark.speculation=true",
+            "spark.scheduler.speculative=true",
+            "spark.task.speculation=true",
+            "spark.enableSpeculation=true"
+        ],
+        "correct": 0,
+        "description": "When true, Spark launches duplicate tasks for stragglers and takes the first result."
+    },
+    {
+        "id": 8,
+        "question": "Speculative tasks are launched when a task runs longer than:",
+        "choices": [
+            "Median task time",
+            "spark.speculation.multiplier × median stage time (default 1.5×)",
+            "1 minute",
+            "Only when a task fails"
+        ],
+        "correct": 1,
+        "description": "Default threshold is 1.5× the median task duration in the stage."
+    },
+    {
+        "id": 9,
+        "question": "What is a TaskSet?",
+        "choices": [
+            "A single task",
+            "A group of tasks belonging to the same stage",
+            "All tasks of a job",
+            "Tasks on one executor"
+        ],
+        "correct": 1,
+        "description": "DAGScheduler submits entire stages as TaskSets to the TaskScheduler."
+    },
+    {
+        "id": 10,
+        "question": "In which order does Spark submit stages?",
+        "choices": [
+            "Random order",
+            "From final stage backward (reverse topological order)",
+            "From first stage forward",
+            "All stages at once"
+        ],
+        "correct": 1,
+        "description": "Spark starts with the final ResultStage and recursively submits missing parent stages (bottom-up)."
+    },
+    {
+        "id": 11,
+        "question": "What is stage-level scheduling?",
+        "choices": [
+            "Scheduling individual tasks",
+            "Submitting an entire stage as a unit (TaskSet)",
+            "Scheduling on the driver only",
+            "FIFO scheduling"
+        ],
+        "correct": 1,
+        "description": "Spark uses stage-level scheduling – all tasks of a stage are submitted together."
+    },
+    {
+        "id": 12,
+        "question": "Which scheduler backend is used when running in local mode?",
+        "choices": [
+            "LocalSchedulerBackend",
+            "StandaloneSchedulerBackend",
+            "YarnSchedulerBackend",
+            "MesosSchedulerBackend"
+        ],
+        "correct": 0,
+        "description": "local[*] uses LocalSchedulerBackend that runs everything in threads on the driver."
+    },
+    {
+        "id": 13,
+        "question": "What happens when a task fails?",
+        "choices": [
+            "The whole job fails immediately",
+            "Spark retries it up to spark.task.maxFailures times (default 4)",
+            "Only the stage is retried",
+            "Executor is killed"
+        ],
+        "correct": 1,
+        "description": "Spark automatically retries failed tasks (non-fatal exceptions) up to 4 times by default."
+    },
+    {
+        "id": 14,
+        "question": "Blacklisting is triggered after how many consecutive failures on the same executor?",
+        "choices": [
+            "1",
+            "3",
+            "4",
+            "Never"
+        ],
+        "correct": 1,
+        "description": "After 3 consecutive failures, the executor/node is blacklisted for that stage/job."
+    },
+    {
+        "id": 15,
+        "question": "Which component tracks which shuffle outputs are available?",
+        "choices": [
+            "BlockManager",
+            "MapOutputTracker",
+            "ShuffleManager",
+            "DAGScheduler"
+        ],
+        "correct": 1,
+        "description": "MapOutputTracker (driver-side) keeps locations and sizes of shuffle map outputs."
+    },
+    {
+        "id": 16,
+        "question": "Delay scheduling is used to:",
+        "choices": [
+            "Delay task launch for better locality",
+            "Delay shuffle write",
+            "Delay driver startup",
+            "Delay garbage collection"
+        ],
+        "correct": 0,
+        "description": "Spark waits a short time (spark.locality.wait = 3s default) for PROCESS_LOCAL or NODE_LOCAL data."
+    },
+    {
+        "id": 17,
+        "question": "What is a barrier task?",
+        "choices": [
+            "A task that failed",
+            "A task used in barrier execution mode (for gang scheduling)",
+            "A task that blocks shuffle",
+            "A task with high memory"
+        ],
+        "correct": 1,
+        "description": "Introduced in Spark 2.4 for ML gang scheduling (all tasks in stage must start together)."
+    },
+    {
+        "id": 18,
+        "question": "Which event causes the DAGScheduler to mark a stage as failed?",
+        "choices": [
+            "One task fails",
+            "All retries of a task fail",
+            "Executor is lost",
+            "Both B and C"
+        ],
+        "correct": 3,
+        "description": "Stage fails only when a task’s retries are exhausted or an executor is lost."
+    },
+    {
+        "id": 19,
+        "question": "In the Spark UI Jobs tab, 'Active Jobs' means:",
+        "choices": [
+            "Jobs that are currently running",
+            "Jobs that have not been garbage collected",
+            "Jobs submitted in last 24h",
+            "All jobs ever submitted"
+        ],
+        "correct": 0,
+        "description": "Active = at least one stage is still running."
+    },
+    {
+        "id": 20,
+        "question": "When does Spark launch a new stage before the previous one finishes?",
+        "choices": [
+            "Never",
+            "When there is no dependency (multiple final actions)",
+            "When using cache()",
+            "Only in local mode"
+        ],
+        "correct": 1,
+        "description": "If two actions have no common stages, Spark pipelines them (runs stages concurrently)."
+    },
+    {
+        "id": 21,
+        "question": "Which configuration controls how long Spark waits for better locality before falling back?",
+        "choices": [
+            "spark.locality.wait = 3s",
+            "spark.scheduler.delay = 3s",
+            "spark.task.maxFailures",
+            "spark.speculation.interval"
+        ],
+        "correct": 0,
+        "description": "Default 3 seconds per locality wait for each level (process, node, rack)."
+    },
+    {
+        "id": 22,
+        "question": "What is a 'straggler task'?",
+        "choices": [
+            "A task that failed",
+            "A task that runs significantly slower than the median",
+            "A task that uses too much memory",
+            "A task on a slow executor"
+        ],
+        "correct": 1,
+        "description": "Speculation targets stragglers to avoid the job being delayed by a few slow tasks."
+    },
+    {
+        "id": 23,
+        "question": "Which scheduler mode runs jobs in FIFO order?",
+        "choices": [
+            "FAIR",
+            "FIFO (default)",
+            "Capacity",
+            "Round-robin"
+        ],
+        "correct": 1,
+        "description": "spark.scheduler.mode = FIFO is the default; FAIR enables fair sharing pools."
+    },
+    {
+        "id": 24,
+        "question": "When an executor is lost, Spark:",
+        "choices": [
+            "Fails the entire application",
+            "Recomputes only the lost partitions using lineage",
+            "Restarts the executor automatically",
+            "Waits for manual intervention"
+        ],
+        "correct": 1,
+        "description": "Thanks to lineage, Spark resubmits only the missing tasks/partitions."
+    },
+    {
+        "id": 25,
+        "question": "How many jobs does df.write.save() trigger?",
+        "choices": [
+            "0",
+            "1",
+            "2",
+            "Depends on format"
+        ],
+        "correct": 1,
+        "description": "Any write operation is an action → exactly one job (unless you do something like count() + write())."
+    },
+    {
+        "id": 26,
+        "question": "What is the purpose of the 'Event Timeline' in Spark UI Stages tab?",
+        "choices": [
+            "Shows GC time",
+            "Shows task start/end times and scheduler delay, locality, etc.",
+            "Shows shuffle read/write",
+            "Shows executor logs"
+        ],
+        "correct": 1,
+        "description": "The timeline visualizes scheduler delay, deserialization, run time, result serialization, and GC."
+    },
+    {
+        "id": 27,
+        "question": "Which component sends heartbeats from executors to driver?",
+        "choices": [
+            "BlockManager",
+            "CoarseGrainedExecutorBackend",
+            "TaskRunner",
+            "Netty RPC"
+        ],
+        "correct": 1,
+        "description": "CoarseGrainedExecutorBackend sends periodic heartbeats (default every 10s)."
+    },
+    {
+        "id": 28,
+        "question": "A stage is considered 'skipped' when:",
+        "choices": [
+            "It failed",
+            "Its output is already cached or shuffle files exist",
+            "It was manually cancelled",
+            "It has no tasks"
+        ],
+        "correct": 1,
+        "description": "Spark reuses cached data or existing shuffle files → stage is skipped."
+    },
+    {
+        "id": 29,
+        "question": "How many stages does rdd.map().filter().distinct().count() produce?",
+        "choices": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "correct": 1,
+        "description": "map() and filter() are pipelined (narrow); distinct() creates a shuffle → 2 stages total."
+    },
+    {
+        "id": 30,
+        "question": "The correct hierarchy in-memory execution flow is:",
+        "choices": [
+            "Action → Stage → Job → Task",
+            "Action → Job → Stage → Task",
+            "Job → Stage → Action → Task",
+            "Task → Stage → Job → Action"
+        ],
+        "correct": 1,
+        "description": "Action triggers Job → Job is split into Stages → Each Stage contains many parallel Tasks."
+    }
+]

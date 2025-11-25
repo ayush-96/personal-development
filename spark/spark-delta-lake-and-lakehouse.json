@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "question": "What is the underlying storage format that enables ACID transactions in Delta Lake?",
+    "choices": [
+      "JSON Lines",
+      "Apache Parquet + transaction log (_delta_log)",
+      "Avro with custom metadata",
+      "ORC with Z-ordering"
+    ],
+    "correct": 1,
+    "description": "Delta Lake achieves ACID using write-ahead style transaction log (JSON files in _delta_log) + immutable Parquet data files. The log records every transaction atomically."
+  },
+  {
+    "id": 2,
+    "question": "Which protocol version introduced schema enforcement and evolution in Delta Lake?",
+    "choices": [
+      "Protocol version 1",
+      "Protocol version 2",
+      "Protocol version 3",
+      "Protocol version 4"
+    ],
+    "correct": 1,
+    "description": "Protocol version 2 (introduced in Delta 0.6.0) added reader/writer protocol versioning and schema enforcement. Version 3 added column mapping."
+  },
+  {
+    "id": 3,
+    "question": "By default, what happens when you try to write data that violates the existing Delta table schema?",
+    "choices": [
+      "Silent column truncation",
+      "Write succeeds with schema evolution",
+      "Transaction fails with schema mismatch error",
+      "Nulls are inserted for missing columns"
+    ],
+    "correct": 2,
+    "description": "By default, schema enforcement is strict. You must explicitly enable auto-merge or use 'overwriteSchema' / 'mergeSchema' options."
+  },
+  {
+    "id": 4,
+    "question": "Which option allows automatic schema evolution on write (append)?",
+    "choices": [
+      ".option(\"mergeSchema\", \"true\")",
+      ".option(\"autoMerge\", \"true\")",
+      ".option(\"schemaEvolution\", \"true\")",
+      ".option(\"overwriteSchema\", \"true\")"
+    ],
+    "correct": 0,
+    "description": "mergeSchema=true enables automatic addition of new columns during appends. It does NOT allow type changes or column deletion."
+  },
+  {
+    "id": 5,
+    "question": "What is the correct way to change a column’s data type in a Delta table?",
+    "choices": [
+      "Use ALTER TABLE CHANGE COLUMN ... TYPE",
+      "Use MERGE with schema evolution",
+      "Use REPLACE TABLE with new schema",
+      "Direct type change is not allowed — must rewrite table"
+    ],
+    "correct": 3,
+    "description": "Delta Lake does not support direct type changes. You must rewrite the table using SELECT with CAST or use Delta 2.0+ column mapping + Delta-RS (future)."
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is true about Delta Lake time travel?",
+    "choices": [
+      "Only works with version numbers",
+      "Only works with timestamps",
+      "Supports both version and timestamp",
+      "Requires Z-ordering enabled"
+    ],
+    "correct": 2,
+    "description": "You can query using df = spark.read.format(\"delta\").option(\"versionAsOf\", 5).load(path) or .option(\"timestampAsOf\", \"2025-01-01\").load(path)"
+  },
+  {
+    "id": 7,
+    "question": "What does the DESCRIBE HISTORY command show?",
+    "choices": [
+      "Only schema changes",
+      "Only data changes",
+      "All operations (write, merge, optimize, etc.) with metadata",
+      "Only failed transactions"
+    ],
+    "correct": 2,
+    "description": "DESCRIBE HISTORY shows every commit including operation, user, timestamp, clusterId, readVersion, and operationParameters."
+  },
+  {
+    "id": 8,
+    "question": "Which operation creates AddFile and RemoveFile entries in the transaction log?",
+    "choices": [
+      "Simple append",
+      "MERGE with matched updates",
+      "OPTIMIZE",
+      "DELETE"
+    ],
+    "correct": 2,
+    "description": "OPTIMIZE physically rewrites files — removes old Parquet files (RemoveFile) and adds new compacted ones (AddFile)."
+  },
+  {
+    "id": 9,
+    "question": "What is the default isolation level for Delta Lake transactions?",
+    "choices": [
+      "Read Uncommitted",
+      "Serializable",
+      "Snapshot Isolation",
+      "Write Skew"
+    ],
+    "correct": 2,
+    "description": "Delta Lake uses Snapshot Isolation — readers see a consistent snapshot from the start of the query, never blocking writers."
+  },
+  {
+    "id": 10,
+    "question": "Which clause in MERGE is executed when there is no match in the target table?",
+    "choices": [
+      "WHEN MATCHED",
+      "WHEN NOT MATCHED",
+      "WHEN NOT MATCHED BY SOURCE",
+      "WHEN NOT MATCHED THEN INSERT"
+    ],
+    "correct": 3,
+    "description": "WHEN NOT MATCHED THEN INSERT (or WHEN NOT MATCHED BY TARGET in newer versions) inserts new rows."
+  },
+  {
+    "id": 11,
+    "question": "How many times can a WHEN NOT MATCHED clause appear in a single MERGE statement?",
+    "choices": [
+      "Only once",
+      "Up to two times (with different conditions)",
+      "Unlimited",
+      "Not allowed at all"
+    ],
+    "correct": 1,
+    "description": "Since Delta 0.8.0 you can have up to two WHEN NOT MATCHED clauses with different predicates (e.g., WHEN NOT MATCHED AND source.id > 100 THEN INSERT...)"
+  },
+  {
+    "id": 12,
+    "question": "What happens if two concurrent MERGE operations target the same Delta table?",
+    "choices": [
+      "Both succeed",
+      "One succeeds, the other fails with ConcurrentAppendException",
+      "They deadlock",
+      "Automatic conflict resolution"
+    ],
+    "correct": 1,
+    "description": "Delta uses optimistic concurrency control — the losing transaction is retried or fails with a clear exception."
+  },
+  {
+    "id": 13,
+    "question": "Which command physically deletes data files for rows removed via DELETE?",
+    "choices": [
+      "DELETE",
+      "VACUUM",
+      "OPTIMIZE",
+      "ZORDER"
+    ],
+    "correct": 1,
+    "description": "VACUUM removes data files no longer referenced by any version within the retention period (default 7 days)."
+  },
+  {
+    "id": 14,
+    "question": "What is the default retention period for VACUUM?",
+    "choices": [
+      "24 hours",
+      "3 days",
+      "7 days",
+      "30 days"
+    ],
+    "correct": 2,
+    "description": "Default is 7 days (168 hours). You can lower it with delta.deletedFileRetentionDuration but not below safety thresholds in managed tables."
+  },
+  {
+    "id": 15,
+    "question": "Which of the following is true about Z-Ordering?",
+    "choices": [
+      "It physically sorts entire table",
+      "It co-locates data within each file based on specified columns",
+      "It replaces partitioning",
+      "It works across different partitions automatically"
+    ],
+    "correct": 1,
+    "description": "Z-Ordering (ZORDER BY) clusters data within each data file — it is complementary to partitioning, not a replacement."
+  },
+  {
+    "id": 16,
+    "question": "What does OPTIMIZE ZORDER do internally?",
+    "choices": [
+      "Only compacts small files",
+      "Compacts and then applies Z-cube clustering",
+      "Re-partitions the table",
+      "Creates new partition layout"
+    ],
+    "correct": 1,
+    "description": "OPTIMIZE with ZORDER BY first bins data, then compacts small files, then rewrites files with data clustered by the Z-order curve."
+  },
+  {
+    "id": 17,
+    "question": "Which feature allows Delta to enforce column-level constraints like NOT NULL after write?",
+    "choices": [
+      "Schema enforcement",
+      "CHECK constraints (Delta 2.0+)",
+      "Domain constraints",
+      "Generated columns"
+    ],
+    "correct": 1,
+    "description": "ALTER TABLE ADD CONSTRAINT age_check CHECK (age >= 18) — enforced on all future writes (including MERGE)."
+  },
+  {
+    "id": 18,
+    "question": "What is the purpose of 'delta.logRetentionDuration'?",
+    "choices": [
+      "How long data files are kept after deletion",
+      "How long transaction log files are retained",
+      "How long checkpoints are kept",
+      "Maximum table history duration"
+    ],
+    "correct": 1,
+    "description": "Controls how long JSON log files in _delta_log are kept (default 30 days). Checkpoints are controlled separately."
+  },
+  {
+    "id": 19,
+    "question": "Which operation creates a checkpoint?",
+    "choices": [
+      "Every 10 commits by default",
+      "Every OPTIMIZE",
+      "Every MERGE",
+      "Only manual CREATE CHECKPOINT"
+    ],
+    "correct": 0,
+    "description": "Delta automatically creates a Parquet checkpoint every 10 commits to avoid reading hundreds of JSON log files."
+  },
+  {
+    "id": 20,
+    "question": "What does 'delta.deletedFileRetentionDuration' control?",
+    "choices": [
+      "How long deleted files are kept for time travel",
+      "How long tombstone records are kept",
+      "VACUUM safety threshold",
+      "Both A and C"
+    ],
+    "correct": 3,
+    "description": "This setting (default 7 days) determines how long removed files are retained — used by VACUUM and time travel safety."
+  },
+  {
+    "id": 21,
+    "question": "Which of the following is NOT supported in Delta Lake MERGE?",
+    "choices": [
+      "Multiple matched clauses",
+      "Insert-only merge",
+      "Delete using WHEN MATCHED THEN DELETE",
+      "Update using complex expressions"
+    ],
+    "correct": 1,
+    "description": "Insert-only merge (no WHEN MATCHED) is NOT supported — you must have at least one matched or not-matched clause."
+  },
+  {
+    "id": 22,
+    "question": "What is the recommended way to perform SCD Type 2 using Delta Lake?",
+    "choices": [
+      "MERGE with WHEN NOT MATCHED THEN INSERT and WHEN MATCHED THEN UPDATE",
+      "MERGE with start/end date tracking and active flag",
+      "Two separate writes",
+      "Use Delta Live Tables"
+    ],
+    "correct": 1,
+    "description": "Standard pattern: use MERGE to close old records (set end_date, is_active=false) and insert new version with new start_date."
+  },
+  {
+    "id": 23,
+    "question": "Which Delta feature enables liquid clustering (Delta 2.0+)?",
+    "choices": [
+      "Z-Ordering",
+      "Optimized writes",
+      "Clustering columns (preview in Databricks)",
+      "Partition evolution"
+    ],
+    "correct": 2,
+    "description": "Databricks introduced liquid clustering — dynamically re-clusters data without rewriting entire table."
+  },
+  {
+    "id": 24,
+    "question": "What happens when you set 'delta.enableChangeDataFeed = true'?",
+    "choices": [
+      "All changes are streamed in real-time",
+      "Change data is captured in _change_data directory",
+      "Table becomes a streaming source with CDF",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "Change Data Feed (CDF) captures row-level changes (insert/update/delete) for use in streaming or auditing."
+  },
+  {
+    "id": 25,
+    "question": "Which identity column feature was added in Delta Lake 2.3+?",
+    "choices": [
+      "GENERATED ALWAYS AS IDENTITY",
+      "AUTO_INCREMENT",
+      "ROW_NUMBER()",
+      "UUID columns"
+    ],
+    "correct": 0,
+    "description": "Delta now supports proper surrogate key generation: CREATE TABLE t (id BIGINT GENERATED ALWAYS AS IDENTITY, ...)"
+  },
+  {
+    "id": 26,
+    "question": "What is the main benefit of Delta Lake UniForm (Iceberg compatibility)?",
+    "choices": [
+      "Read Delta tables with Iceberg clients",
+      "Write with both engines simultaneously",
+      "Automatic format conversion",
+      "Zero-copy migration"
+    ],
+    "correct": 0,
+    "description": "UniForm adds Iceberg manifest files so tools that only understand Iceberg can read Delta tables."
+  },
+  {
+    "id": 27,
+    "question": "Which command restores a Delta table to a previous version?",
+    "choices": [
+      "RESTORE TABLE TO VERSION AS OF 10",
+      "ROLLBACK TABLE TO VERSION 10",
+      "REVERT TABLE TO TIMESTAMP",
+      "Both A and C"
+    ],
+    "correct": 3,
+    "description": "RESTORE TABLE supports both VERSION AS OF and TIMESTAMP AS OF."
+  },
+  {
+    "id": 28,
+    "question": "What is the purpose of 'delta.columnMapping.mode = name'?",
+    "choices": [
+      "Allows column renaming without data rewrite",
+      "Enables physical name vs logical name separation",
+      "Both A and B",
+      "Required for schema evolution"
+    ],
+    "correct": 2,
+    "description": "Name mapping mode (Delta 2.0+) decouples physical column names in Parquet from logical names — enables safe renaming/dropping."
+  },
+  {
+    "id": 29,
+    "question": "Which operation requires 'delta.columnMapping.mode = id' or 'name'?",
+    "choices": [
+      "Dropping a column",
+      "Renaming a column",
+      "Both A and B",
+      "Adding a column"
+    ],
+    "correct": 2,
+    "description": "Column drop and rename require column mapping mode enabled — otherwise they are not supported."
+  },
+  {
+    "id": 30,
+    "question": "What does 'delta.checkpointInterval = 50' do?",
+    "choices": [
+      "Creates checkpoint every 50 commits",
+      "Keeps last 50 versions",
+      "Retains logs for 50 days",
+      "Limits history to 50 entries"
+    ],
+    "correct": 0,
+    "description": "Controls how frequently full Parquet checkpoints are written (default is every 10 commits)."
+  },
+  {
+    "id": 31,
+    "question": "Which of the following is true about Delta Lake constraints?",
+    "choices": [
+      "Only NOT NULL is enforced",
+      "CHECK constraints are enforced on write",
+      "Primary keys are enforced",
+      "Foreign keys are supported"
+    ],
+    "correct": 1,
+    "description": "CHECK constraints are fully enforced on all write operations (including MERGE and streaming)."
+  },
+  {
+    "id": 32,
+    "question": "What is the recommended pattern for upserts with high-frequency small writes?",
+    "choices": [
+      "MERGE on every batch",
+      "Auto-optimize + optimized writes",
+      "Write to staging and batch MERGE",
+      "Use FOREACHBATCH with MERGE"
+    ],
+    "correct": 1,
+    "description": "Delta’s optimized writes + auto-optimize (in Databricks) automatically bin and compact small files."
+  },
+  {
+    "id": 33,
+    "question": "Which Delta table property enables deletion vectors (Delta 2.4+)?",
+    "choices": [
+      "delta.enableDeletionVectors = true",
+      "delta.deletionVectors.enabled = true",
+      "delta.enableRowTracking = true",
+      "delta.rowTracking.enabled = true"
+    ],
+    "correct": 0,
+    "description": "Deletion vectors allow DELETE/UPDATE without rewriting files — huge performance win for large tables."
+  },
+  {
+    "id": 34,
+    "question": "What is the main advantage of row tracking / deletion vectors?",
+    "choices": [
+      "Faster queries",
+      "No file rewrites on UPDATE/DELETE",
+      "Better compression",
+      "Automatic indexing"
+    ],
+    "correct": 1,
+    "description": "Instead of rewriting Parquet files, Delta records which rows are deleted — dramatically reduces write amplification."
+  },
+  {
+    "id": 35,
+    "question": "Which command shows the current table protocol versions?",
+    "choices": [
+      "DESCRIBE DETAIL",
+      "DESCRIBE HISTORY",
+      "SHOW TBLPROPERTIES",
+      "DESCRIBE EXTENDED"
+    ],
+    "correct": 0,
+    "description": "DESCRIBE DETAIL shows readerVersion, writerVersion, and supported features (columnMapping, deletionVectors, etc.)."
+  },
+  {
+    "id": 36,
+    "question": "Can you convert an existing Parquet table to Delta in-place?",
+    "choices": [
+      "Yes — using CONVERT TO DELTA",
+      "No — must rewrite data",
+      "Only in Databricks",
+      "Only with external tools"
+    ],
+    "correct": 0,
+    "description": "CONVERT TO DELTA parquet.`/path/` creates the _delta_log with existing files — zero data movement."
+  },
+  {
+    "id": 37,
+    "question": "What is the purpose of 'delta.autoCompact'?",
+    "choices": [
+      "Automatically runs OPTIMIZE in background",
+      "Compacts small files during writes",
+      "Enables bin-compaction",
+      "Replaces manual OPTIMIZE"
+    ],
+    "correct": 1,
+    "description": "When enabled, Delta automatically compacts small files written by streaming or small appends."
+  },
+  {
+    "id": 38,
+    "question": "Which of the following is NOT a valid Delta table property?",
+    "choices": [
+      "delta.appendOnly = true",
+      "delta.isolationLevel = 'WriteSerializable'",
+      "delta.enableChangeDataFeed = true",
+      "delta.autoOptimize.optimizeWrite = true"
+    ],
+    "correct": 1,
+    "description": "isolationLevel is fixed at Snapshot Isolation — cannot be changed to WriteSerializable."
+  },
+  {
+    "id": 39,
+    "question": "What happens when you run VACUUM with a retention period of 0 hours?",
+    "choices": [
+      "Deletes all data files",
+      "Fails with safety check",
+      "Dry-run mode",
+      "Removes log files only"
+    ],
+    "correct": 1,
+    "description": "Delta blocks dangerous VACUUM operations that could break time travel — you must use SET TBLPROPERTIES and bypass safety check."
+  },
+  {
+    "id": 40,
+    "question": "Which Delta Lake feature is considered the foundation of the Lakehouse architecture?",
+    "choices": [
+      "Reliable ACID transactions on cloud storage",
+      "Support for streaming and batch",
+      "Open table formats",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Delta Lake pioneered reliable ACID transactions on object storage — enabling the modern Lakehouse pattern of unified batch + streaming + BI."
+  }
+]

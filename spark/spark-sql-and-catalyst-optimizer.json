@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "question": "Which phase of the Catalyst optimizer is responsible for converting an unresolved logical plan into a resolved logical plan?",
+    "choices": [
+      "Analysis",
+      "Logical Optimization",
+      "Physical Planning",
+      "Code Generation"
+    ],
+    "correct": 0,
+    "description": "The **Analysis** phase resolves attributes and relations using the catalog. It turns UnresolvedAttribute/Relation into fully typed expressions. This happens before any optimization rules are applied."
+  },
+  {
+    "id": 2,
+    "question": "The rule 'ConstantFolding' belongs to which Catalyst optimization category?",
+    "choices": [
+      "Predicate Pushdown",
+      "Constant Propagation & Folding",
+      "Projection Pruning",
+      "Join Reordering"
+    ],
+    "correct": 1,
+    "description": "ConstantFolding evaluates expressions that contain only literals (e.g., 2 + 3 → 5) at compile time. It is part of the broader constant propagation and folding batch."
+  },
+  {
+    "id": 3,
+    "question": "Which rule pushes a Filter through a Project when possible?",
+    "choices": [
+      "PushDownPredicate",
+      "FilterPushdown",
+      "PredicatePushdown",
+      "PushPredicateThroughProject"
+    ],
+    "correct": 3,
+    "description": "The actual rule name in Catalyst is **PushPredicateThroughProject**. It enables filter pushdown past projections when the filter only references columns preserved in the project list."
+  },
+  {
+    "id": 4,
+    "question": "What does the 'ReplaceExceptWithAntiJoin' rule do?",
+    "choices": [
+      "Converts LEFT ANTI to EXCEPT",
+      "Converts EXCEPT to LEFT ANTI JOIN",
+      "Replaces EXCEPT ALL with MINUS",
+      "Converts EXCEPT DISTINCT to LEFT SEMI"
+    ],
+    "correct": 1,
+    "description": "Spark does not support EXCEPT ALL natively. Catalyst rewrites EXCEPT (and EXCEPT DISTINCT) into a LEFT ANTI JOIN followed by deduplication if needed."
+  },
+  {
+    "id": 5,
+    "question": "In which batch does the 'BooleanSimplification' rule run?",
+    "choices": [
+      "Analysis",
+      "Early Optimization",
+      "Regular Optimization",
+      "Late Physical Optimization"
+    ],
+    "correct": 2,
+    "description": "BooleanSimplification (e.g., (a AND TRUE) → a) runs in the standard logical optimization batches after predicate pushdown."
+  },
+  {
+    "id": 6,
+    "question": "Which of the following is NOT a physical planning strategy in Spark Catalyst?",
+    "choices": [
+      "SortMergeJoin",
+      "BroadcastHashJoin",
+      "ShuffledHashJoin",
+      "CartesianProduct"
+    ],
+    "correct": 2,
+    "description": "ShuffledHashJoin was deprecated in Spark 3.0+. Spark only supports BroadcastHashJoin and SortMergeJoin (and ShuffleHashJoin is kept only for backward compatibility in some cases)."
+  },
+  {
+    "id": 7,
+    "question": "The 'CollapseProject' rule is an example of:",
+    "choices": [
+      "Projection pruning",
+      "Project merging",
+      "Filter elimination",
+      "Join elimination"
+    ],
+    "correct": 1,
+    "description": "CollapseProject merges consecutive Project operators into a single one, reducing overhead and enabling better pruning later."
+  },
+  {
+    "id": 8,
+    "question": "Which function is monotonically increasing and can be used safely in bucket pruning with bucketed tables?",
+    "choices": [
+      "unix_timestamp()",
+      "date_trunc()",
+      "trunc()",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All three are monotonic for a given precision (day, hour, etc.), so Spark can prune buckets when filtering on them."
+  },
+  {
+    "id": 9,
+    "question": "What does the rule 'OptimizeIn' do?",
+    "choices": [
+      "Converts IN with many values to a broadcast join",
+      "Replaces IN with a semi-join when possible",
+      "Sorts the IN list for faster evaluation",
+      "Converts large IN lists to temporary hash sets at runtime"
+    ],
+    "correct": 1,
+    "description": "When the IN list is large or contains complex expressions, Catalyst rewrites IN to an optimized semi-join with a local hash set or broadcast collection."
+  },
+  {
+    "id": 10,
+    "question": "Which Catalyst phase generates whole-stage codegen Java bytecode?",
+    "choices": [
+      "Logical Optimization",
+      "Physical Planning",
+      "Code Generation (JanusGraph)",
+      "WholeStageCodegen"
+    ],
+    "correct": 3,
+    "description": "WholeStageCodegen is a physical plan node that collapses multiple operators into a single Java method using Janino compiler."
+  },
+  {
+    "id": 11,
+    "question": "When does Catalyst apply 'PushDownPredicates' to an Aggregate?",
+    "choices": [
+      "Never — filters cannot be pushed into aggregates",
+      "Only when the filter references grouping keys",
+      "Only for HAVING clauses",
+      "Always when possible"
+    ],
+    "correct": 1,
+    "description": "Filters on grouping columns can be pushed before aggregation to reduce input data (local aggregation pruning)."
+  },
+  {
+    "id": 12,
+    "question": "The 'CombineFilters' rule:",
+    "choices": [
+      "Merges consecutive Filter nodes",
+      "Converts OR into UNION when possible",
+      "Splits complex filters",
+      "Replaces filters with joins"
+    ],
+    "correct": 0,
+    "description": "Consecutive Filter operators are merged into one to reduce tree depth and improve codegen efficiency."
+  },
+  {
+    "id": 13,
+    "question": "Which of these functions breaks predicate pushdown into Parquet?",
+    "choices": [
+      "substr(col, 1, 3)",
+      "year(date_col)",
+      "date_add(col, 5)",
+      "upper(col)"
+    ],
+    "correct": 1,
+    "description": "Parquet cannot push down year(), month(), etc., because they require reading the full timestamp. Substring and upper are supported."
+  },
+  {
+    "id": 14,
+    "question": "What does the 'ReorderJoin' rule depend on to choose join order?",
+    "choices": [
+      "Statistics from ANALYZE TABLE",
+      "Join hints only",
+      "Random selection",
+      "Always left-deep"
+    ],
+    "correct": 0,
+    "description": "Catalyst uses table/column statistics (cardinality, NDV) collected by ANALYZE to estimate costs and reorder joins optimally."
+  },
+  {
+    "id": 15,
+    "question": "Which rule eliminates unnecessary columns from a scan before projection?",
+    "choices": [
+      "ColumnPruning",
+      "ProjectionPruning",
+      "PushProjectionThroughLimit",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All three are part of Catalyst’s aggressive projection pruning strategy."
+  },
+  {
+    "id": 16,
+    "question": "In Spark 3.5+, which new rule helps with dynamic partition pruning on broadcast joins?",
+    "choices": [
+      "DynamicPartitionPruning",
+      "BroadcastPruning",
+      "DynamicFilterPushdown",
+      "RebalancePartitions"
+    ],
+    "correct": 0,
+    "description": "DynamicPartitionPruning (DPP) reuses broadcast results to prune partitions on the large side of a join at runtime."
+  },
+  {
+    "id": 17,
+    "question": "What is the purpose of the 'NullPropagation' rule?",
+    "choices": [
+      "Replaces expressions that always return null",
+      "Removes nullable columns",
+      "Adds null checks",
+      "Converts NOT NULL constraints"
+    ],
+    "correct": 0,
+    "description": "If an expression contains a null literal in a position that forces the result to be null (e.g., literal_null + x), it is replaced with a single null literal."
+  },
+  {
+    "id": 18,
+    "question": "Which of these is a fixed-point rule batch (runs until no changes)?",
+    "choices": [
+      "ConstantFolding",
+      "BooleanSimplification",
+      "CombineLimits",
+      "PushDownPredicate"
+    ],
+    "correct": 2,
+    "description": "CombineLimits is applied as a fixed-point batch because merging limits can enable further merging in subsequent iterations."
+  },
+  {
+    "id": 19,
+    "question": "The 'LikeSimplification' rule can rewrite which pattern?",
+    "choices": [
+      "'abc%' → startsWith('abc')",
+      "'%abc' → endsWith('abc')",
+      "'%abc%' → contains('abc')",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Catalyst rewrites simple LIKE patterns into the more efficient startsWith/endsWith/contains functions when possible."
+  },
+  {
+    "id": 20,
+    "question": "Which plan node triggers whole-stage code generation?",
+    "choices": [
+      "Filter",
+      "Project",
+      "WholeStageCodegen",
+      "Expand"
+    ],
+    "correct": 2,
+    "description": "The physical plan wraps a subtree inside a WholeStageCodegen node that generates a single Java function."
+  },
+  {
+    "id": 21,
+    "question": "What does 'RewriteDistinctAggregations' do?",
+    "choices": [
+      "Replaces COUNT(DISTINCT) with two-phase aggregation",
+      "Turns SELECT DISTINCT into GROUP BY",
+      "Eliminates DISTINCT when unnecessary",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "It rewrites SELECT DISTINCT into a single aggregation and removes redundant DISTINCTs when all selected columns are already grouped."
+  },
+  {
+    "id": 22,
+    "question": "Which function is NOT foldable (cannot be evaluated at compile time)?",
+    "choices": [
+      "current_date()",
+      "pi()",
+      "rand()",
+      "concat('a', 'b')"
+    ],
+    "correct": 2,
+    "description": "rand(), spark_partition_id(), monotonic functions like current_timestamp() are not foldable because their value changes per row or execution."
+  },
+  {
+    "id": 23,
+    "question": "The rule 'RemoveLiteralFromGroupExpressions' removes literals from GROUP BY keys because:",
+    "choices": [
+      "They are redundant",
+      "They prevent map-side aggregation",
+      "They cause skew",
+      "They increase shuffle size"
+    ],
+    "correct": 0,
+    "description": "GROUP BY (col, 'literal') is equivalent to GROUP BY col — the literal is removed to simplify planning."
+  },
+  {
+    "id": 24,
+    "question": "Which join hint forces a broadcast even when statistics suggest it’s too big?",
+    "choices": [
+      "/*+ BROADCAST(t) */",
+      "/*+ SHUFFLE_HASH(t) */",
+      "/*+ MERGE(t) */",
+      "/*+ FORCE_BROADCAST(t) */"
+    ],
+    "correct": 0,
+    "description": "BROADCAST (or BROADCASTJOIN) hint forces Spark to broadcast the table regardless of size or AQE settings."
+  },
+  {
+    "id": 25,
+    "question": "What is the role of the Analyzer’s 'ResolveRelations' rule?",
+    "choices": [
+      "Resolves table names to logical plans",
+      "Applies schema-on-read",
+      "Both A and B",
+      "Performs type coercion"
+    ],
+    "correct": 2,
+    "description": "ResolveRelations looks up catalog entries and replaces unresolved relations with actual logical plans (e.g., reading file format, applying schema)."
+  },
+  {
+    "id": 26,
+    "question": "Which of these operators disables whole-stage codegen?",
+    "choices": [
+      "Sort (without limit)",
+      "ObjectHashAggregate",
+      "Expand",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Operations that produce Java objects (instead of primitive columns) or require sorting large data break whole-stage codegen."
+  },
+  {
+    "id": 27,
+    "question": "The 'RewriteCorrelatedScalarSubquery' rule converts correlated scalar subqueries into:",
+    "choices": [
+      "LEFT OUTER JOIN + aggregation",
+      "LEFT SEMI JOIN",
+      "Broadcast nested loop",
+      "EXISTS predicate"
+    ],
+    "correct": 0,
+    "description": "Correlated scalar subqueries are rewritten to a left outer join followed by an assertion that exactly one row is returned."
+  },
+  {
+    "id": 28,
+    "question": "Which rule is responsible for converting IN subqueries into EXISTS when appropriate?",
+    "choices": [
+      "RewriteInToExists",
+      "RewriteExistsSubquery",
+      "PullupCorrelatedPredicate",
+      "RewriteSubquery"
+    ],
+    "correct": 2,
+    "description": "PullupCorrelatedPredicate pulls up predicates from correlated subqueries and can convert IN to EXISTS for better performance."
+  },
+  {
+    "id": 29,
+    "question": "What does the 'LimitPushDown' rule do when there is a LIMIT inside a UNION ALL?",
+    "choices": [
+      "Applies limit to each branch",
+      "Keeps limit only on the final output",
+      "Removes the limit",
+      "Converts to UNION DISTINCT"
+    ],
+    "correct": 0,
+    "description": "To reduce data movement, Spark pushes the limit into each UNION ALL branch when possible."
+  },
+  {
+    "id": 30,
+    "question": "Which of these is a cost-based optimization (CBO) feature requiring statistics?",
+    "choices": [
+      "Join reordering",
+      "Broadcast decision in AQE",
+      "Dynamic partition pruning",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "All modern join selection and pruning features in Spark 3+ rely on column statistics collected via ANALYZE TABLE."
+  },
+  {
+    "id": 31,
+    "question": "The 'OptimizeMetadataOnlyQuery' rule can completely eliminate reading data files when:",
+    "choices": [
+      "Query only selects partition columns",
+      "Query uses COUNT(*) on a partitioned table",
+      "Both A and B",
+      "Only with Delta Lake"
+    ],
+    "correct": 2,
+    "description": "Metadata-only queries (e.g., SELECT partition_col, COUNT(*) GROUP BY partition_col) can be answered directly from partition metadata."
+  },
+  {
+    "id": 32,
+    "question": "Which function is rewritten to a more efficient expression by 'RewriteDateTimestampFunctions'?",
+    "choices": [
+      "to_date(timestamp_col)",
+      "to_unix_timestamp(string_col)",
+      "date_format(col, 'yyyy')",
+      "trunc(col, 'year')"
+    ],
+    "correct": 0,
+    "description": "to_date(ts) is rewritten to a direct cast when possible, avoiding string formatting overhead."
+  },
+  {
+    "id": 33,
+    "question": "The rule 'EliminateOuterJoin' can convert:",
+    "choices": [
+      "LEFT OUTER to INNER when the right side key is NOT NULL",
+      "RIGHT OUTER to LEFT OUTER",
+      "FULL OUTER to UNION",
+      "All of the above"
+    ],
+    "correct": 0,
+    "description": "If the join key on the nullable side is constrained to be NOT NULL, Catalyst safely converts outer to inner join."
+  },
+  {
+    "id": 34,
+    "question": "Which physical plan strategy is chosen when AQE is enabled and a join exceeds broadcast threshold at runtime?",
+    "choices": [
+      "Fails with error",
+      "Falls back to SortMergeJoin automatically",
+      "Keeps trying to broadcast",
+      "Uses ShuffledHashJoin"
+    ],
+    "correct": 1,
+    "description": "Adaptive Query Execution (AQE) dynamically demotes broadcast joins to shuffle sort-merge when the broadcast side grows too large."
+  },
+  {
+    "id": 35,
+    "question": "Which command populates the statistics required for cost-based optimization?",
+    "choices": [
+      "REFRESH TABLE",
+      "ANALYZE TABLE ... COMPUTE STATISTICS",
+      "FSCK REPAIR TABLE",
+      "CACHE TABLE"
+    ],
+    "correct": 1,
+    "description": "ANALYZE TABLE … COMPUTE STATISTICS (or FOR COLUMNS on specific columns) gathers NDV, null count, min/max, etc., used by CBO."
+  }
+]

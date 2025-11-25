@@ -199,7 +199,6 @@
       "Multiple stages",
       "Only one task",
       "No stages until execution"
-.\""
     ],
     "correct": 1,
     "description": "A job is divided into one or more stages separated by shuffle boundaries."

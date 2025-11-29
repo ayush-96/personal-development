@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "question": "What is the primary benefit of the Medallion Architecture in Databricks Lakehouse?",
+    "choices": [
+      "It eliminates the need for ETL",
+      "It enforces incremental data quality layers (Bronze → Silver → Gold)",
+      "It automatically partitions all tables",
+      "It replaces Unity Catalog"
+    ],
+    "correct": 1,
+    "description": "Medallion architecture structures data into Bronze (raw ingestion), Silver (cleaned/validated), and Gold (aggregated/business-level) layers.\nThis enables progressive data quality, governance, and performance optimization."
+  },
+  {
+    "id": 2,
+    "question": "In Databricks Lakehouse, which component replaces traditional data warehouse staging areas?",
+    "choices": [
+      "Delta Lake Bronze tables",
+      "Unity Catalog external tables",
+      "DBFS",
+      "Spark temporary views"
+    ],
+    "correct": 0,
+    "description": "Bronze tables serve as the landing zone for raw data with schema-on-read and full history via Delta time travel.\nThey replace traditional staging schemas while providing ACID and auditability."
+  },
+  {
+    "id": 3,
+    "question": "Which statement is true about Photon in the Databricks Lakehouse?",
+    "choices": [
+      "Photon is a storage format",
+      "Photon is a C++ vectorized query engine written from scratch for Delta Lake",
+      "Photon only accelerates ML workloads",
+      "Photon requires GPU clusters"
+    ],
+    "correct": 1,
+    "description": "Photon is Databricks’ high-performance query engine built in C++ that natively reads Delta Lake and dramatically speeds up SQL and DataFrame workloads."
+  },
+  {
+    "id": 4,
+    "question": "Databricks Lakehouse Federation allows querying external data sources without ingestion. Which governance model applies?",
+    "choices": [
+      "No Unity Catalog governance",
+      "Unity Catalog governance is applied at query time using the external connection’s privileges",
+      "Only the external system’s privileges are used",
+      "Requires Passthrough authentication only"
+    ],
+    "correct": 1,
+    "description": "Unity Catalog enforces table/column-level privileges even on federated sources.\nRow/column masking and row filters are pushed down when supported."
+  },
+  {
+    "id": 5,
+    "question": "What is the key difference between Databricks Lakehouse and traditional data lake?",
+    "choices": [
+      "Lakehouse removes the need for object storage",
+      "Lakehouse adds transactional ACID, governance, and BI support directly on data lake storage via Delta Lake",
+      "Lakehouse only supports batch",
+      "Lakehouse does not support streaming"
+    ],
+    "correct": 1,
+    "description": "Delta Lake + Unity Catalog + Photon turn cheap object storage into a reliable lakehouse platform supporting ETL, BI, ML, and streaming with governance."
+  },
+  {
+    "id": 6,
+    "question": "Liquid Clustering in Databricks replaces which traditional techniques?",
+    "choices": [
+      "Z-Ordering only",
+      "Partitioning and Z-Ordering",
+      "Only Hive bucketing",
+      "None — it complements them"
+    ],
+    "correct": 1,
+    "description": "Liquid Clustering fully replaces static partitioning and Z-Ordering with dynamic, incremental clustering keys that evolve automatically."
+  },
+  {
+    "id": 7,
+    "question": "Predictive Optimization automatically performs which operations on managed tables?",
+    "choices": [
+      "Only VACUUM",
+      "OPTIMIZE, VACUUM, ANALYZE, and liquid clustering maintenance",
+      "Only OPTIMIZE",
+      "Only data skipping index creation"
+    ],
+    "correct": 1,
+    "description": "Predictive Optimization runs autonomously on eligible clusters/warehouses and keeps tables optimized without manual intervention."
+  },
+  {
+    "id": 8,
+    "question": "Which feature allows secure cross-organization live data sharing without copying?",
+    "choices": [
+      "Delta Live Tables",
+      "Delta Sharing",
+      "Unity Catalog Sharing",
+      "Databricks Repos"
+    ],
+    "correct": 1,
+    "description": "Delta Sharing is an open protocol for secure, live sharing of Delta tables and volumes with external recipients (even non-Databricks users)."
+  },
+  {
+    "id": 9,
+    "question": "Serverless SQL Warehouses in Databricks provide which key benefit?",
+    "choices": [
+      "Lower cost only",
+      "Instant start, auto-scale, built-in Photon, Predictive Optimization, and no cluster management",
+      "Only Photon",
+      "Only for dashboards"
+    ],
+    "correct": 1,
+    "description": "Serverless compute removes infrastructure management while delivering top performance and maintenance-free operations."
+  },
+  {
+    "id": 10,
+    "question": "The Lakehouse Monitoring feature can track quality metrics on:",
+    "choices": [
+      "Only Gold tables",
+      "Bronze, Silver, and Gold tables including time-series snapshots and drift detection",
+      "Only streaming tables",
+      "Only ML features"
+    ],
+    "correct": 1,
+    "description": "Lakehouse Monitoring creates system tables with statistical profiles and alerts on data quality degradation over time."
+  },
+  {
+    "id": 11,
+    "question": "What is the purpose of Volume in Unity Catalog?",
+    "choices": [
+      "Structured data only",
+      "Managed non-tabular storage (files, images, models) inside the lakehouse with governance",
+      "Temporary storage",
+      "Only for ML artifacts"
+    ],
+    "correct": 1,
+    "description": "Volumes provide governed access to unstructured or semi-structured files in cloud storage with same privilege model as tables."
+  },
+  {
+    "id": 12,
+    "question": "Which statement is true about Databricks Asset Bundles?",
+    "choices": [
+      "Only for notebooks",
+      "IaC (Infrastructure-as-Code) deployment of jobs, pipelines, models, and dashboards",
+      "Only for Delta Live Tables",
+      "Deprecated"
+    ],
+    "correct": 1,
+    "description": "Asset Bundles enable GitOps-style deployment and promotion across environments using YAML + databricks CLI."
+  },
+  {
+    "id": 13,
+    "question": "Unity Catalog supports which data lineage granularity?",
+    "choices": [
+      "Table-level only",
+      "Column-level lineage across notebooks, jobs, dashboards, and DLT pipelines",
+      "Only job-level",
+      "None"
+    ],
+    "correct": 1,
+    "description": "Full column-level upstream/downstream lineage is captured automatically and visible in Catalog Explorer."
+  },
+  {
+    "id": 14,
+    "question": "What happens when you query a Delta table with '@v10' syntax?",
+    "choices": [
+      "Reads latest version",
+      "Reads version 10 of the table (time travel)",
+      "Fails",
+      "Reads version 10 metadata only"
+    ],
+    "correct": 1,
+    "description": "Delta Lake supports version-based and timestamp-based time travel queries for audit, rollback, and reproducibility."
+  },
+  {
+    "id": 15,
+    "question": "Databricks Workflows supports which advanced scheduling features?",
+    "choices": [
+      "Cron only",
+      "Cron, file arrival triggers, multi-task dependencies, repair runs, and conditional execution",
+      "Only file arrival",
+      "Only daily schedules"
+    ],
+    "correct": 1,
+    "description": "Workflows provide full orchestration with task dependencies, alerts, retries, and event-driven triggers."
+  },
+  {
+    "id": 16,
+    "question": "Which engine powers Databricks SQL dashboards and alerts?",
+    "choices": [
+      "Spark SQL",
+      "Photon",
+      "Legacy Hive",
+      "Presto"
+    ],
+    "correct": 1,
+    "description": "All DBSQL queries and dashboards run on Photon for maximum performance and cost efficiency."
+  },
+  {
+    "id": 17,
+    "question": "What is the main advantage of using Delta Live Tables (DLT) over traditional Spark jobs?",
+    "choices": [
+      "Faster runtime",
+      "Declarative pipeline definition, automatic lineage, expectation quality checks, and auto-scaling",
+      "Only streaming",
+      "Cheaper"
+    ],
+    "correct": 1,
+    "description": "DLT lets you define pipelines in SQL or Python with built-in data quality (@expect), lineage, and operational monitoring."
+  },
+  {
+    "id": 18,
+    "question": "Which authentication method is required for Unity Catalog-enabled workspaces?",
+    "choices": [
+      "PAT only",
+      "Table Access Control (TAC) only",
+      "Unity Catalog requires Azure AD / Okta / Google SSO + SCIM provisioning",
+      "No auth needed"
+    ],
+    "correct": 2,
+    "description": "Unity Catalog mandates identity federation via AAD/Entra ID (Azure), Okta, or Google Workspace."
+  },
+  {
+    "id": 19,
+    "question": "What does 'Managed Table' mean in Unity Catalog?",
+    "choices": [
+      "Table stored in DBFS",
+      "Table whose lifecycle and storage are fully managed by Unity Catalog (data in catalog's managed location)",
+      "External table",
+      "View"
+    ],
+    "correct": 1,
+    "description": "Dropping a managed table deletes both metadata and underlying data files; ideal for full governance."
+  },
+  {
+    "id": 20,
+    "question": "Which feature allows Databricks notebooks to be scheduled as production jobs?",
+    "choices": [
+      "dbutils.notebook.run()",
+      "Databricks Workflows task type 'Notebook'",
+      "Only Python scripts",
+      "Repos only"
+    ],
+    "correct": 1,
+    "description": "Workflows support notebook tasks with parameter passing, retries, alerts, and dependency graphs."
+  },
+  {
+    "id": 21,
+    "question": "Databricks Model Serving supports which deployment types?",
+    "choices": [
+      "Only batch",
+      "Real-time endpoints, serverless, foundation model APIs, and external models",
+      "Only foundation models",
+      "Only MLflow models"
+    ],
+    "correct": 1,
+    "description": "Model Serving provides low-latency inference with auto-scaling, authentication, and monitoring."
+  },
+  {
+    "id": 22,
+    "question": "What is the purpose of System Tables in Databricks?",
+    "choices": [
+      "User data",
+      "Billing, audit logs, lineage, monitoring, and performance metrics accessible via SQL",
+      "Temporary tables",
+      "Only audit logs"
+    ],
+    "correct": 1,
+    "description": "System schema provides operational intelligence across billing, queries, jobs, and lineage."
+  },
+  {
+    "id": 23,
+    "question": "Which storage layer does Unity Catalog use for managed tables by default?",
+    "choices": [
+      "DBFS root",
+      "Workspace-specific storage",
+      "Catalog-defined managed storage location (root bucket/container)",
+      "User home directory"
+    ],
+    "correct": 2,
+    "description": "Each catalog has its own managed storage root; tables are created under that location automatically."
+  },
+  {
+    "id": 24,
+    "question": "What is 'Lakeflow' in Databricks?",
+    "choices": [
+      "New storage format",
+      "Unified product name for batch + streaming declarative pipelines (formerly DLT + Workflows)",
+      "Only streaming",
+      "SQL-only"
+    ],
+    "correct": 1,
+    "description": "Lakeflow unifies declarative pipeline development with built-in testing, observability, and deployment."
+  },
+  {
+    "id": 25,
+    "question": "Which capability makes Databricks Lakehouse 'open' compared to traditional warehouses?",
+    "choices": [
+      "Only cost",
+      "Open storage formats (Delta, Parquet), open table format (Delta), open sharing (Delta Sharing), no vendor lock-in",
+      "Only open source",
+      "Free tier"
+    ],
+    "correct": 1,
+    "description": "Everything is built on open standards allowing data and models to move freely across platforms."
+  }
+]

@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "question": "In AWS S3, what is the maximum size of a single object when using a single PUT operation?",
+    "choices": [
+      "5 GB",
+      "10 GB",
+      "100 GB",
+      "5 TB"
+    ],
+    "correct": 0,
+    "description": "A single PUT request supports up to 5 GB per object.\nFor larger objects you need to use multipart upload."
+  },
+  {
+    "id": 2,
+    "question": "Which feature must be enabled to keep multiple versions of an object in an S3 bucket?",
+    "choices": [
+      "Bucket Logging",
+      "Object Lock",
+      "Versioning",
+      "Replication"
+    ],
+    "correct": 2,
+    "description": "Enabling Versioning allows S3 to retain multiple versions of an object when it is overwritten or deleted.\nUseful for recovery or audit."
+  },
+  {
+    "id": 3,
+    "question": "What happens if you PUT an object with the same key into a versioned bucket?",
+    "choices": [
+      "Overwrites existing object and discard old version",
+      "Returns an error",
+      "Creates a new version and retains the old one",
+      "Automatically deletes old version"
+    ],
+    "correct": 2,
+    "description": "S3 versioning keeps previous versions by creating a new version with a different versionId.\nOld versions remain accessible unless explicitly deleted."
+  },
+  {
+    "id": 4,
+    "question": "Which storage class is the most cost-effective for infrequently accessed objects with rapid retrieval needs?",
+    "choices": [
+      "STANDARD",
+      "INTELLIGENT_TIERING",
+      "GLACIER_INSTANT_RETRIEVAL",
+      "GLACIER_DEEP_ARCHIVE"
+    ],
+    "correct": 2,
+    "description": "GLACIER_INSTANT_RETRIEVAL offers very low storage cost with millisecond retrieval — ideal for rarely accessed data needing occasional fast access."
+  },
+  {
+    "id": 5,
+    "question": "Which storage class should you use for archiving data with retrieval latency of several hours acceptable?",
+    "choices": [
+      "STANDARD_IA",
+      "GLACIER",
+      "ONEZONE_IA",
+      "STANDARD"
+    ],
+    "correct": 1,
+    "description": "GLACIER (standard archive) offers cheaper long-term storage with retrieval time in minutes to hours — suitable for archival data."
+  },
+  {
+    "id": 6,
+    "question": "What is the purpose of S3 Lifecycle policies?",
+    "choices": [
+      "Manage bucket access permissions",
+      "Define object transitions between storage classes or auto-delete",
+      "Monitor data retrieval frequency",
+      "Control data encryption"
+    ],
+    "correct": 1,
+    "description": "Lifecycle policies allow automated transition of objects to different storage classes and scheduled deletion — helpful for cost management."
+  },
+  {
+    "id": 7,
+    "question": "Which header enables server-side encryption with Amazon-managed keys (SSE-S3) for an object?",
+    "choices": [
+      "x-amz-server-side-encryption: AES256",
+      "x-amz-encryption: S3",
+      "x-amz-security: S3-managed",
+      "x-amz-sse: S3"
+    ],
+    "correct": 0,
+    "description": "Setting \"x-amz-server-side-encryption: AES256\" instructs S3 to encrypt the object using Amazon-managed keys upon storage."
+  },
+  {
+    "id": 8,
+    "question": "Which storage class allows automatic cost optimization without manual intervention based on access patterns?",
+    "choices": [
+      "STANDARD_IA",
+      "INTELLIGENT_TIERING",
+      "ONEZONE_IA",
+      "REDUCED_REDUNDANCY"
+    ],
+    "correct": 1,
+    "description": "INTELLIGENT_TIERING monitors access patterns and automatically moves objects between frequent and infrequent tiers to optimize cost."
+  },
+  {
+    "id": 9,
+    "question": "What does 'Multipart Upload' in S3 help you to do?",
+    "choices": [
+      "Encrypt large files before upload",
+      "Split upload of large objects into parts to improve reliability and resumability",
+      "Compress objects during upload",
+      "Automatically version objects"
+    ],
+    "correct": 1,
+    "description": "Multipart Upload splits large objects into smaller parts allowing resume on failure and uploading in parallel for faster performance."
+  },
+  {
+    "id": 10,
+    "question": "Which S3 feature helps to serve content globally with low latency by caching objects at edge locations?",
+    "choices": [
+      "S3 Global Tables",
+      "S3 Transfer Acceleration",
+      "S3 Cross-Region Replication",
+      "S3 Static Website Hosting"
+    ],
+    "correct": 1,
+    "description": "Transfer Acceleration speeds up upload/downloads over long distances by leveraging Amazon’s CloudFront edge network."
+  },
+  {
+    "id": 11,
+    "question": "Cross-Region Replication (CRR) requires which bucket property to be enabled?",
+    "choices": [
+      "Logging",
+      "Versioning",
+      "Encryption",
+      "Public Access"
+    ],
+    "correct": 1,
+    "description": "CRR only works when versioning is enabled on both source and destination buckets, to replicate every object version."
+  },
+  {
+    "id": 12,
+    "question": "Which ACL permission allows a user to read objects in a bucket but not modify them?",
+    "choices": [
+      "WRITE",
+      "READ",
+      "FULL_CONTROL",
+      "WRITE_ACP"
+    ],
+    "correct": 1,
+    "description": "READ permission grants the ability to list or read objects — but does not allow writing or altering permissions."
+  },
+  {
+    "id": 13,
+    "question": "What does enabling 'Block Public Access' on a bucket do by default?",
+    "choices": [
+      "Prevents all public reads and writes unless explicitly allowed",
+      "Blocks all IAM user access",
+      "Disables encryption",
+      "Auto-deletes public objects"
+    ],
+    "correct": 0,
+    "description": "Block Public Access restricts any public ACL or policy from granting public permission — good for secure buckets."
+  },
+  {
+    "id": 14,
+    "question": "Which header is used to store custom metadata alongside an S3 object?",
+    "choices": [
+      "x-amz-meta-*",
+      "x-amz-custom",
+      "x-amz-data-info",
+      "x-amz-tag"
+    ],
+    "correct": 0,
+    "description": "Custom metadata is stored via headers prefixed with \"x-amz-meta-\" and retrieved with the object.\nUseful for application data."
+  },
+  {
+    "id": 15,
+    "question": "What does S3 VersionId identify?",
+    "choices": [
+      "Unique object version in a versioned bucket",
+      "User uploading the object",
+      "Creation date only",
+      "Encryption key used"
+    ],
+    "correct": 0,
+    "description": "Each version of an object gets a unique VersionId, enabling retrieval or restore of old versions."
+  },
+  {
+    "id": 16,
+    "question": "Which operation permanently removes all object versions and deletes markers in a versioned bucket?",
+    "choices": [
+      "Empty bucket",
+      "Lifecycle Delete action with abort incomplete multipart",
+      "S3 delete bucket",
+      "Restore bucket"
+    ],
+    "correct": 1,
+    "description": "A lifecycle rule can be configured to delete all versions and clean up delete markers, fully emptying a versioned bucket."
+  },
+  {
+    "id": 17,
+    "question": "When using S3 encryption with KMS-managed keys (SSE-KMS), what additional cost is incurred?",
+    "choices": [
+      "No extra cost",
+      "Cost for KMS usage per request",
+      "Double storage cost",
+      "Bandwidth cost"
+    ],
+    "correct": 1,
+    "description": "SSE-KMS uses AWS KMS for encryption keys — each request incurs a small KMS API charge besides standard storage cost."
+  },
+  {
+    "id": 18,
+    "question": "Which request can be used to retrieve only object metadata without the object data itself?",
+    "choices": [
+      "GET Object",
+      "HEAD Object",
+      "LIST Objects",
+      "METADATA Object"
+    ],
+    "correct": 1,
+    "description": "HEAD Object returns headers and metadata but not the object body — useful for checking existence or properties."
+  },
+  {
+    "id": 19,
+    "question": "If you enable default encryption on an S3 bucket, what happens to newly uploaded objects?",
+    "choices": [
+      "They are encrypted automatically",
+      "They remain unencrypted unless specified",
+      "They are rejected",
+      "They are stored in a different bucket"
+    ],
+    "correct": 0,
+    "description": "Default bucket encryption ensures all new objects are encrypted server-side without requiring explicit headers."
+  },
+  {
+    "id": 20,
+    "question": "Which API is recommended for efficient listing of large buckets (millions of objects)?",
+    "choices": [
+      "ListObjects (single call)",
+      "ListObjectsV2 with pagination",
+      "HEAD Bucket",
+      "GetBucketLocation"
+    ],
+    "correct": 1,
+    "description": "ListObjectsV2 with pagination handles large buckets gracefully by returning batches of object metadata."
+  },
+  {
+    "id": 21,
+    "question": "S3 Transfer Acceleration works using:",
+    "choices": [
+      "AWS internal network + CloudFront edge locations",
+      "VPN connection",
+      "Direct connect only",
+      "S3 Edge Cache servers"
+    ],
+    "correct": 0,
+    "description": "Transfer Acceleration uses CloudFront’s global edge network to speed up uploads/downloads across large distances."
+  },
+  {
+    "id": 22,
+    "question": "Which event notification can S3 trigger when a new object is created?",
+    "choices": [
+      "S3:ObjectCreated:*",
+      "S3:ObjectRemoved:Delete",
+      "S3:BucketAclChanged",
+      "S3:ReplicationCompleted"
+    ],
+    "correct": 0,
+    "description": "S3 can generate ObjectCreated notifications (PUT, POST, COPY) to trigger Lambda, SNS, or SQS workflows."
+  },
+  {
+    "id": 23,
+    "question": "What does enabling MFA Delete in a versioned bucket protect against?",
+    "choices": [
+      "Unauthorized reads",
+      "Accidental or malicious permanent deletion of object versions",
+      "Public access",
+      "Bucket recreation"
+    ],
+    "correct": 1,
+    "description": "MFA Delete forces multi-factor authentication for delete operations — adding extra protection for versioned data."
+  },
+  {
+    "id": 24,
+    "question": "Which of the following reduces the number of S3 GET requests when using many small objects?",
+    "choices": [
+      "Multipart Upload",
+      "Object Consolidation (combining many small files into one)",
+      "Enable Transfer Acceleration",
+      "Use Standard Storage class"
+    ],
+    "correct": 1,
+    "description": "Consolidating small files into a larger archive or bulk object reduces overhead and request count."
+  },
+  {
+    "id": 25,
+    "question": "What is a Delete Marker in a versioned S3 bucket?",
+    "choices": [
+      "A placeholder marking object as deleted without removing versions",
+      "Permanent deletion of object",
+      "A log entry of deletion",
+      "An error record"
+    ],
+    "correct": 0,
+    "description": "Deleting an object in a versioned bucket creates a delete marker — old versions remain retrievable unless explicitly removed."
+  },
+  {
+    "id": 26,
+    "question": "Which method ensures data durability and availability across multiple AZs?",
+    "choices": [
+      "REDUCED_REDUNDANCY",
+      "STANDARD storage class",
+      "ONEZONE_IA",
+      "STANDARD_IA"
+    ],
+    "correct": 1,
+    "description": "STANDARD provides high durability and replicates data across multiple Availability Zones by default."
+  },
+  {
+    "id": 27,
+    "question": "What is required to host a static website on S3?",
+    "choices": [
+      "Bucket must be public accessible and static website hosting enabled",
+      "Bucket must be versioned",
+      "Objects must be encrypted",
+      "Bucket must be in us-east-1"
+    ],
+    "correct": 0,
+    "description": "Static website hosting requires the bucket to allow public access (or CloudFront) and have website hosting enabled in bucket settings."
+  },
+  {
+    "id": 28,
+    "question": "Which header prevents S3 from returning a cached response when object is fetched via HTTP?",
+    "choices": [
+      "Cache-Control: no-cache",
+      "x-amz-cache: disable",
+      "Pragma: no-cache",
+      "Expires: 0"
+    ],
+    "correct": 0,
+    "description": "Cache-Control headers help manage CDN or browser caching behavior when serving S3 objects."
+  },
+  {
+    "id": 29,
+    "question": "Which storage class stores data in a single AZ and costs less than STANDARD?",
+    "choices": [
+      "ONEZONE_IA",
+      "STANDARD_IA",
+      "INTELLIGENT_TIERING",
+      "GLACIER"
+    ],
+    "correct": 0,
+    "description": "ONEZONE_IA stores data in one AZ only — cheaper but less redundancy than STANDARD or IA options."
+  },
+  {
+    "id": 30,
+    "question": "Which S3 feature should you use to track object-level access events for auditing?",
+    "choices": [
+      "Server access logging",
+      "Bucket versioning",
+      "Lifecycle rules",
+      "Object lock"
+    ],
+    "correct": 0,
+    "description": "Server access logging records detailed logs of every request to S3 objects — useful for auditing or security compliance."
+  },
+  {
+    "id": 31,
+    "question": "If you want to enforce encryption of uploaded objects from clients, you should:",
+    "choices": [
+      "Use default bucket encryption or bucket policy requiring SSE",
+      "Trust clients to encrypt",
+      "Use public buckets only",
+      "Require multipart upload"
+    ],
+    "correct": 0,
+    "description": "Default bucket encryption or policy ensures that all objects are encrypted regardless of the client’s request headers."
+  },
+  {
+    "id": 32,
+    "question": "Which S3 operation retrieves a list of object versions in a versioned bucket?",
+    "choices": [
+      "ListObjectsV2",
+      "ListBuckets",
+      "ListObjectVersions",
+      "GetObjectVersion"
+    ],
+    "correct": 2,
+    "description": "ListObjectVersions returns metadata for all versions and delete markers — useful for cleanup or audit."
+  },
+  {
+    "id": 33,
+    "question": "Which S3 request method is least expensive for billing when aborting a failed multipart upload?",
+    "choices": [
+      "AbortMultipartUpload",
+      "DeleteObject",
+      "CompleteMultipartUpload",
+      "PUT"
+    ],
+    "correct": 0,
+    "description": "AbortMultipartUpload cleans up partial uploads and prevents incurring storage cost for incomplete parts."
+  },
+  {
+    "id": 34,
+    "question": "What does S3 Intelligent-Tiering do when an object becomes unused for more than 30 consecutive days?",
+    "choices": [
+      "Deletes object",
+      "Moves object to low-cost infrequent tier automatically",
+      "Compresses the object",
+      "Locks the object version"
+    ],
+    "correct": 1,
+    "description": "Intelligent-Tiering transitions infrequently accessed objects to a cheaper tier, optimizing storage costs."
+  },
+  {
+    "id": 35,
+    "question": "Which of these is NOT a valid reason for a slow S3 GET performance?",
+    "choices": [
+      "Large object size",
+      "High latency region access",
+      "Improper encryption headers",
+      "No internet connectivity"
+    ],
+    "correct": 2,
+    "description": "Encryption headers do not inherently slow performance; network latency or object size are more common causes."
+  },
+  {
+    "id": 36,
+    "question": "Which bucket-level setting restricts every public ACL or policy to prevent public exposure?",
+    "choices": [
+      "Block Public Access",
+      "Disable Bucket Versioning",
+      "Enable MFA Delete",
+      "Enable Logging"
+    ],
+    "correct": 0,
+    "description": "Block Public Access ensures no accidental public permissions via ACLs or policies — improving bucket security."
+  },
+  {
+    "id": 37,
+    "question": "If you need cross-account access to a bucket, you should use:",
+    "choices": [
+      "Bucket ACLs only",
+      "Bucket policy that allows the other account’s IAM role/user",
+      "Public access",
+      "Generate pre-signed URLs once and share"
+    ],
+    "correct": 1,
+    "description": "Bucket policies are the recommended mechanism for granting cross-account permissions securely without making the bucket public."
+  },
+  {
+    "id": 38,
+    "question": "A pre-signed URL allows:",
+    "choices": [
+      "Unlimited access to a bucket",
+      "Temporary access to a specific object without credentials",
+      "Permanent public access",
+      "Change of object metadata"
+    ],
+    "correct": 1,
+    "description": "Pre-signed URLs grant time-limited access to a specific object — useful for controlled sharing."
+  },
+  {
+    "id": 39,
+    "question": "Which is a consequence of not configuring lifecycle policies on large buckets with many versions?",
+    "choices": [
+      "Infinite version growth → higher storage costs",
+      "Automatic deletion by AWS",
+      "Bucket becomes read-only",
+      "Encryption disabled"
+    ],
+    "correct": 0,
+    "description": "Without lifecycle cleanup, every version or delete marker remains forever, increasing storage usage and cost."
+  },
+  {
+    "id": 40,
+    "question": "Which storage class is designed for one-time archive and minimal retrieval requests?",
+    "choices": [
+      "STANDARD",
+      "STANDARD_IA",
+      "GLACIER_DEEP_ARCHIVE",
+      "ONEZONE_IA"
+    ],
+    "correct": 2,
+    "description": "GLACIER_DEEP_ARCHIVE offers lowest storage cost, suited for infrequently accessed archived data with retrieval over hours."
+  },
+  {
+    "id": 41,
+    "question": "Objects encrypted with SSE-C require what from the client on each request?",
+    "choices": [
+      "Nothing special",
+      "Encryption key in request header",
+      "Bucket policy change",
+      "Multipart upload"
+    ],
+    "correct": 1,
+    "description": "SSE-C requires the client to supply encryption key on each upload/download — AWS does not store the key."
+  },
+  {
+    "id": 42,
+    "question": "Which S3 feature helps mitigate accidental deletion of objects?",
+    "choices": [
+      "Server logging",
+      "Bucket versioning + MFA Delete",
+      "Transfer Acceleration",
+      "Cross-Region Replication"
+    ],
+    "correct": 1,
+    "description": "Combining versioning with MFA Delete makes accidental or unauthorized deletion much harder to perform."
+  },
+  {
+    "id": 43,
+    "question": "What happens when you copy an object to the same key in a versioned bucket without specifying version?",
+    "choices": [
+      "Overwrites existing object without new version",
+      "Creates a new version and retains old one",
+      "Deletes old version automatically",
+      "Fails with error"
+    ],
+    "correct": 1,
+    "description": "Copying to same key in versioned bucket adds a new version — previous versions stay intact."
+  },
+  {
+    "id": 44,
+    "question": "Which of these best practices helps lower S3 request costs for frequent access patterns?",
+    "choices": [
+      "Use many small objects",
+      "Use fewer large objects or bundle small files",
+      "Disable encryption",
+      "Public buckets"
+    ],
+    "correct": 1,
+    "description": "Bundling small files reduces number of requests and improves performance — lowering request cost."
+  },
+  {
+    "id": 45,
+    "question": "Which storage class is automatically selected if you upload without specifying storage class in a standard bucket?",
+    "choices": [
+      "STANDARD_IA",
+      "ONEZONE_IA",
+      "STANDARD",
+      "REDUCED_REDUNDANCY"
+    ],
+    "correct": 2,
+    "description": "If no storage class is specified, S3 defaults to STANDARD — offering high durability and availability."
+  }
+]

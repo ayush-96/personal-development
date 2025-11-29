@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "question": "Amazon Redshift is primarily designed for:",
+    "choices": [
+      "Transactional workloads (OLTP)",
+      "Data warehousing and analytics workloads (OLAP)",
+      "In-memory caching",
+      "Real-time messaging"
+    ],
+    "correct": 1,
+    "description": "Redshift is an OLAP database optimized for analytical queries over large datasets."
+  },
+  {
+    "id": 2,
+    "question": "Redshift’s underlying architecture is based on:",
+    "choices": [
+      "Distributed key-value storage",
+      "Massively Parallel Processing (MPP)",
+      "Single-node compute with autoscaling",
+      "Graph processing"
+    ],
+    "correct": 1,
+    "description": "MPP allows Redshift to split queries into tasks executed in parallel across nodes."
+  },
+  {
+    "id": 3,
+    "question": "Which Redshift component stores and processes data?",
+    "choices": [
+      "Leader node",
+      "Compute nodes",
+      "Query editor",
+      "Spectrum nodes"
+    ],
+    "correct": 1,
+    "description": "Leader node schedules queries, while compute nodes handle storage and execution."
+  },
+  {
+    "id": 4,
+    "question": "Which node type executes queries in a Redshift cluster?",
+    "choices": [
+      "Leader node only",
+      "Compute nodes",
+      "Both leader and compute nodes",
+      "S3 buckets linked to Redshift"
+    ],
+    "correct": 1,
+    "description": "Leader node does planning but all execution happens on compute nodes."
+  },
+  {
+    "id": 5,
+    "question": "Columnar storage in Redshift improves performance by:",
+    "choices": [
+      "Faster row inserts",
+      "Scanning only necessary columns",
+      "Full-table scans",
+      "More replication overhead"
+    ],
+    "correct": 1,
+    "description": "Columnar format reduces I/O by reading only relevant columns for a query."
+  },
+  {
+    "id": 6,
+    "question": "Which distribution style spreads rows evenly across compute nodes?",
+    "choices": [
+      "KEY distribution",
+      "EVEN distribution",
+      "ALL distribution",
+      "SORT distribution"
+    ],
+    "correct": 1,
+    "description": "EVEN distribution randomly spreads rows, useful when no clear join key exists."
+  },
+  {
+    "id": 7,
+    "question": "Which distribution style keeps the same key values on the same node for optimized joins?",
+    "choices": [
+      "EVEN",
+      "KEY",
+      "ALL",
+      "AUTO"
+    ],
+    "correct": 1,
+    "description": "KEY distribution minimizes data shuffling during joins on that distribution key."
+  },
+  {
+    "id": 8,
+    "question": "Which distribution style replicates the entire table to every node?",
+    "choices": [
+      "EVEN",
+      "KEY",
+      "ALL",
+      "AUTO"
+    ],
+    "correct": 2,
+    "description": "ALL is best for small dimension tables used in frequent joins."
+  },
+  {
+    "id": 9,
+    "question": "Redshift Sort Keys improve performance by:",
+    "choices": [
+      "Compressing data at storage",
+      "Reducing lock contention",
+      "Reducing the amount of scanned data",
+      "Encrypting snapshots"
+    ],
+    "correct": 2,
+    "description": "Sort keys allow range-based filtering so only relevant blocks are scanned."
+  },
+  {
+    "id": 10,
+    "question": "Which Redshift feature enables querying Amazon S3 data directly?",
+    "choices": [
+      "Redshift Direct Query",
+      "Redshift Federated Query",
+      "Redshift Spectrum",
+      "Redshift Lambda Connector"
+    ],
+    "correct": 2,
+    "description": "Spectrum extends Redshift to read external tables stored in S3."
+  },
+  {
+    "id": 11,
+    "question": "What is Redshift RA3 node family’s unique capability?",
+    "choices": [
+      "Local-only SSD storage",
+      "Decoupled compute and storage using Redshift Managed Storage",
+      "Single-node cluster limitation",
+      "Built-in business intelligence tool"
+    ],
+    "correct": 1,
+    "description": "RA3 allows independent scaling of compute from storage."
+  },
+  {
+    "id": 12,
+    "question": "What does VACUUM operation in Redshift do?",
+    "choices": [
+      "Encrypt data",
+      "Reclaims deleted rows and sorts data",
+      "Backs up the cluster",
+      "Runs ANALYZE by default"
+    ],
+    "correct": 1,
+    "description": "VACUUM compacts deleted rows and reorders data according to sort keys."
+  },
+  {
+    "id": 13,
+    "question": "What is ANALYZE used for?",
+    "choices": [
+      "Reclaiming disk space",
+      "Updating table statistics",
+      "Encrypting columns",
+      "Deleting historical snapshots"
+    ],
+    "correct": 1,
+    "description": "ANALYZE updates metadata statistics used for query optimization."
+  },
+  {
+    "id": 14,
+    "question": "What ensures high compression and performance in Redshift storage?",
+    "choices": [
+      "Row encoding",
+      "Columnar encoding",
+      "GPU acceleration",
+      "No encoding"
+    ],
+    "correct": 1,
+    "description": "Column encoding stores similar data together enabling effective compression."
+  },
+  {
+    "id": 15,
+    "question": "Redshift Concurrency Scaling helps by:",
+    "choices": [
+      "Adding more leader nodes",
+      "Automatically adding transient compute clusters",
+      "Restricting simultaneous queries",
+      "Caching results permanently"
+    ],
+    "correct": 1,
+    "description": "Concurrency Scaling adds temporary compute clusters to handle workload spikes."
+  },
+  {
+    "id": 16,
+    "question": "Which security feature supports network isolation for Redshift?",
+    "choices": [
+      "IAM roles only",
+      "VPC placement",
+      "Lambda integration",
+      "QuickSight authentication"
+    ],
+    "correct": 1,
+    "description": "Redshift can run inside a VPC providing private networking and security."
+  },
+  {
+    "id": 17,
+    "question": "Which security feature enables access to S3 for Spectrum queries?",
+    "choices": [
+      "Bucket policy only",
+      "IAM Role attached to the Redshift cluster",
+      "Database user privileges",
+      "Public S3 access"
+    ],
+    "correct": 1,
+    "description": "Redshift assumes an IAM role to access external data securely."
+  },
+  {
+    "id": 18,
+    "question": "Backups in Redshift are created using:",
+    "choices": [
+      "Automated snapshots and manual snapshots",
+      "RDS snapshot engine",
+      "File system checkpoints",
+      "S3 local caching"
+    ],
+    "correct": 0,
+    "description": "All snapshots are stored in S3 and can be restored to new clusters."
+  },
+  {
+    "id": 19,
+    "question": "What does Workload Management (WLM) do?",
+    "choices": [
+      "Controls how compute nodes shut down",
+      "Manages query priorities and concurrency",
+      "Encrypts snapshots",
+      "Schedules VACUUM jobs"
+    ],
+    "correct": 1,
+    "description": "WLM prevents long-running queries from blocking important workloads."
+  },
+  {
+    "id": 20,
+    "question": "What is the purpose of SORTKEY AUTO?",
+    "choices": [
+      "No sort key ever",
+      "Automatically chooses optimal sort keys based on workload",
+      "Sort only when VACUUM runs",
+      "Sort by primary key"
+    ],
+    "correct": 1,
+    "description": "Redshift analyzes queries and sets sort keys to maximize performance."
+  },
+  {
+    "id": 21,
+    "question": "Which compression type does Redshift recommend for new columns?",
+    "choices": [
+      "LZO",
+      "RAW (no compression)",
+      "AUTO ENCODE",
+      "Delta encoding only"
+    ],
+    "correct": 2,
+    "description": "AUTO ENCODE evaluates data to pick the most efficient compression format."
+  },
+  {
+    "id": 22,
+    "question": "Which statement is true about Redshift Spectrum pricing?",
+    "choices": [
+      "It is free",
+      "You pay per TB of data scanned",
+      "You pay per external table",
+      "Charged based on number of leader nodes"
+    ],
+    "correct": 1,
+    "description": "Spectrum charges per amount of data scanned from S3."
+  },
+  {
+    "id": 23,
+    "question": "How does Redshift handle data durability?",
+    "choices": [
+      "No backups available",
+      "Replicates data across nodes & stores snapshots in S3",
+      "Relies on EBS backups only",
+      "Snapshots stored locally only"
+    ],
+    "correct": 1,
+    "description": "Snapshots can be restored to new clusters in case of node failures."
+  },
+  {
+    "id": 24,
+    "question": "Which Redshift feature enables SQL queries across multiple data stores?",
+    "choices": [
+      "Cross-region replication",
+      "Redshift Federated Query",
+      "IAM Federation",
+      "Dynamo SQL Adapter"
+    ],
+    "correct": 1,
+    "description": "Federated Query allows Redshift to query operational databases via Aurora/RDS PostgreSQL."
+  },
+  {
+    "id": 25,
+    "question": "To improve join performance, you should generally:",
+    "choices": [
+      "Avoid using keys",
+      "Align distribution keys across joined tables",
+      "Use EVIL distribution",
+      "Store tables in JSON format"
+    ],
+    "correct": 1,
+    "description": "Matching DISTKEYs reduces network data redistribution."
+  },
+  {
+    "id": 26,
+    "question": "What happens if distribution keys are poorly chosen?",
+    "choices": [
+      "Faster writes",
+      "Data skew leading to slower queries",
+      "Improved SORTKEY usage",
+      "Better snapshot compression"
+    ],
+    "correct": 1,
+    "description": "Skew causes uneven workload across compute nodes."
+  },
+  {
+    "id": 27,
+    "question": "Redshift Spectrum requires which metadata service?",
+    "choices": [
+      "IAM",
+      "AWS Glue Data Catalog",
+      "SQS",
+      "Route 53"
+    ],
+    "correct": 1,
+    "description": "Glue Catalog stores table metadata for external S3-based datasets."
+  },
+  {
+    "id": 28,
+    "question": "Which query format is ideal for Redshift?",
+    "choices": [
+      "Many small OLTP transactions",
+      "Large analytical scans and aggregations",
+      "Graph traversals",
+      "Key-value operations"
+    ],
+    "correct": 1,
+    "description": "Redshift is optimized for large dataset scanning and computation-heavy analytics."
+  },
+  {
+    "id": 29,
+    "question": "Result caching in Redshift:",
+    "choices": [
+      "Stores identical query results for re-use",
+      "Caches entire tables",
+      "Disables VACUUM automatically",
+      "Only applies to external tables"
+    ],
+    "correct": 0,
+    "description": "Identical queries can reuse cached results speeding response time."
+  },
+  {
+    "id": 30,
+    "question": "UNLOAD in Redshift is used to:",
+    "choices": [
+      "Export table results to S3",
+      "Load data from DynamoDB",
+      "Only replicate snapshots",
+      "Encrypt local storage"
+    ],
+    "correct": 0,
+    "description": "UNLOAD writes query results in parallel into S3 for fast export."
+  },
+  {
+    "id": 31,
+    "question": "COPY command loads data into Redshift from:",
+    "choices": [
+      "Only on-prem servers",
+      "S3, DynamoDB, or remote hosts via SSH",
+      "RDS directly only",
+      "Local CSV only"
+    ],
+    "correct": 1,
+    "description": "COPY is the preferred high-throughput loading mechanism for Redshift."
+  },
+  {
+    "id": 32,
+    "question": "What does the STL schema store?",
+    "choices": [
+      "Billing reports",
+      "System logs and query information",
+      "Backup metadata",
+      "User profiles"
+    ],
+    "correct": 1,
+    "description": "STL tables are useful for performance tuning and auditing."
+  },
+  {
+    "id": 33,
+    "question": "A Manifest file in Redshift data load:",
+    "choices": [
+      "Encrypts files",
+      "Specifies multiple S3 objects to load with COPY",
+      "Repairs corrupted blocks",
+      "Is required for UNLOAD"
+    ],
+    "correct": 1,
+    "description": "Manifest ensures all listed files are loaded exactly once."
+  },
+  {
+    "id": 34,
+    "question": "Automatic Table Optimization (ATO):",
+    "choices": [
+      "Chooses optimal sort & distribution keys over time",
+      "Disables VACUUM",
+      "Deletes unused tables automatically",
+      "Works only for Spectrum"
+    ],
+    "correct": 0,
+    "description": "ATO continuously monitors workload and adjusts keys to improve performance."
+  },
+  {
+    "id": 35,
+    "question": "Materialized views in Redshift:",
+    "choices": [
+      "Refresh automatically only",
+      "Store query results physically and accelerate complex joins",
+      "Are slower than normal views",
+      "Must use only external tables"
+    ],
+    "correct": 1,
+    "description": "They precompute results reducing repeated expensive computations."
+  }
+]

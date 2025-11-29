@@ -221,7 +221,6 @@
     "question": "Which command shows all current table properties including protocol versions?",
     "choices": [
       "DESCRIBE DETAIL",
-      ",
       "DESCRIBE EXTENDED",
       "SHOW TBLPROPERTIES",
       "DESCRIBE HISTORY"

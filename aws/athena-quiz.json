@@ -1,0 +1,338 @@
+[
+  {
+    "id": 1,
+    "question": "Amazon Athena is primarily used for:",
+    "choices": [
+      "Running NoSQL queries",
+      "SQL queries on S3 data without provisioning servers",
+      "Managing S3 bucket security",
+      "Streaming data ingestion"
+    ],
+    "correct": 1,
+    "description": "Athena is a serverless interactive SQL query service over data stored in Amazon S3. You only pay for the amount of data scanned."
+  },
+  {
+    "id": 2,
+    "question": "Which query engine does Athena use underneath?",
+    "choices": [
+      "Apache Hive",
+      "Presto / Trino",
+      "Spark SQL",
+      "AWS Glue ETL engine"
+    ],
+    "correct": 1,
+    "description": "Athena uses the Presto (now Trino) distributed SQL engine for fast, ANSI-SQL compliant queries."
+  },
+  {
+    "id": 3,
+    "question": "Which AWS service is used for metadata/catalog of tables queried in Athena?",
+    "choices": [
+      "CloudTrail",
+      "AWS Glue Data Catalog",
+      "DynamoDB",
+      "Redshift Metadata Store"
+    ],
+    "correct": 1,
+    "description": "Athena uses the Glue Data Catalog to store table definitions, schemas, and partition metadata."
+  },
+  {
+    "id": 4,
+    "question": "How is Athena priced?",
+    "choices": [
+      "Per vCPU-hour",
+      "Flat monthly fee",
+      "Based on the amount of data scanned per query",
+      "Per table queried"
+    ],
+    "correct": 2,
+    "description": "Pricing is based on the amount of data scanned. Compressing and partitioning reduces cost significantly."
+  },
+  {
+    "id": 5,
+    "question": "Which file format usually provides the BEST query performance in Athena?",
+    "choices": [
+      "CSV",
+      "JSON",
+      "Parquet / ORC",
+      "XML"
+    ],
+    "correct": 2,
+    "description": "Columnar formats like Parquet/ORC allow selective column reads, reducing data scanned and improving performance."
+  },
+  {
+    "id": 6,
+    "question": "Partitioning S3 data for Athena:",
+    "choices": [
+      "Increases scan costs",
+      "Improves performance by pruning unused data",
+      "Is required for all tables",
+      "Does not affect query results"
+    ],
+    "correct": 1,
+    "description": "Partitioning makes queries scan only relevant folders/paths, reducing cost and speeding up query execution."
+  },
+  {
+    "id": 7,
+    "question": "Which SQL standard does Athena support?",
+    "choices": [
+      "No SQL support",
+      "Partial MySQL syntax only",
+      "ANSI SQL",
+      "Athena custom query language"
+    ],
+    "correct": 2,
+    "description": "Athena supports ANSI SQL with extended functions from Presto."
+  },
+  {
+    "id": 8,
+    "question": "Which data lake feature helps Athena automatically recognize new partitions?",
+    "choices": [
+      "Partition projection",
+      "S3 lifecycle policies",
+      "S3 Select",
+      "Athena Accelerator"
+    ],
+    "correct": 0,
+    "description": "Partition projection avoids expensive Glue catalog updates and reads partition structure dynamically."
+  },
+  {
+    "id": 9,
+    "question": "Athena stores temporary query results in:",
+    "choices": [
+      "DynamoDB",
+      "Local disk",
+      "An S3 query result location",
+      "RDS"
+    ],
+    "correct": 2,
+    "description": "Every Athena query writes temporary output to a configured S3 bucket for logging and persistence."
+  },
+  {
+    "id": 10,
+    "question": "Compression improves Athena performance mainly because:",
+    "choices": [
+      "It uses more CPU",
+      "It reduces amount of data scanned",
+      "It increases fault tolerance",
+      "It changes file format"
+    ],
+    "correct": 1,
+    "description": "Lower data scanned → lower cost & faster queries. Columnar + compression = optimal."
+  },
+  {
+    "id": 11,
+    "question": "CTAS (Create Table As Select) queries in Athena can:",
+    "choices": [
+      "Only change schema",
+      "Reformat and optimize data into Parquet",
+      "Backup Redshift clusters",
+      "Grant IAM permissions"
+    ],
+    "correct": 1,
+    "description": "CTAS lets you convert raw formats like CSV into optimized formats like Parquet directly in S3."
+  },
+  {
+    "id": 12,
+    "question": "Athena supports ACID transactions:",
+    "choices": [
+      "Fully supported",
+      "Not supported — Athena is read-oriented",
+      "Only for Glue tables",
+      "Only for JSON"
+    ],
+    "correct": 1,
+    "description": "Athena is query-only for S3 data; no native ACID transaction support exists."
+  },
+  {
+    "id": 13,
+    "question": "If a query scans too much data, the BEST optimization is:",
+    "choices": [
+      "Store files uncompressed",
+      "Use CSV format",
+      "Use Parquet + Partitioning",
+      "Duplicate data"
+    ],
+    "correct": 2,
+    "description": "Columnar + partitioned data drastically reduces scan size → lower cost & faster results."
+  },
+  {
+    "id": 14,
+    "question": "Athena can query data from federated sources such as:",
+    "choices": [
+      "Only S3",
+      "Redshift, DynamoDB, RDS via connectors",
+      "EC2 instance logs only",
+      "S3 Glacier"
+    ],
+    "correct": 1,
+    "description": "Using Athena Federated Query, it can query multiple data sources beyond S3 using connectors."
+  },
+  {
+    "id": 15,
+    "question": "Which security feature encrypts query results stored in S3?",
+    "choices": [
+      "IAM roles",
+      "Glue Crawlers",
+      "KMS encryption",
+      "EC2 Security Groups"
+    ],
+    "correct": 2,
+    "description": "Athena supports server-side encryption with AWS KMS for securing results and data in S3."
+  },
+  {
+    "id": 16,
+    "question": "Glue Crawlers help Athena by:",
+    "choices": [
+      "Executing SQL queries faster",
+      "Automatically detecting schemas and updating partitions",
+      "Encrypting data",
+      "Managing IAM users"
+    ],
+    "correct": 1,
+    "description": "Crawlers discover schema/partitions and maintain Glue catalog metadata for Athena."
+  },
+  {
+    "id": 17,
+    "question": "Which is TRUE about Athena Join performance?",
+    "choices": [
+      "Joins are fast on very large unpartitioned tables",
+      "It’s better to join large tables using Redshift",
+      "Joins are not supported",
+      "Athena caches join results"
+    ],
+    "correct": 1,
+    "description": "Athena is suited for large analytical scans, but massive joins may perform better in Redshift."
+  },
+  {
+    "id": 18,
+    "question": "Athena’s concurrency scaling:",
+    "choices": [
+      "Automatically scales queries without admin overhead",
+      "Requires manual cluster upgrade",
+      "Is not supported",
+      "Only available for enterprise accounts"
+    ],
+    "correct": 0,
+    "description": "Presto engine is serverless and automatically scales to run multiple queries concurrently."
+  },
+  {
+    "id": 19,
+    "question": "When querying JSON files, performance is best improved by:",
+    "choices": [
+      "Using JSON as-is",
+      "Flattening & converting to Parquet",
+      "Adding more IAM users",
+      "Using UPSERT operations"
+    ],
+    "correct": 1,
+    "description": "Nested JSON causes heavy scans; flatten and convert to columnar formats for speed."
+  },
+  {
+    "id": 20,
+    "question": "What happens if you query a non-existent partition?",
+    "choices": [
+      "Full table scan occurs",
+      "AWS automatically creates it",
+      "Query fails immediately",
+      "Results show cached data"
+    ],
+    "correct": 0,
+    "description": "Athena scans full dataset if partition metadata is missing, causing high cost & slow queries."
+  },
+  {
+    "id": 21,
+    "question": "To control access at cell/row level in Athena, use:",
+    "choices": [
+      "S3 bucket versioning",
+      "IAM policies only",
+      "Lake Formation Permissions",
+      "EC2 Instance Profiles"
+    ],
+    "correct": 2,
+    "description": "Lake Formation provides fine-grained access control at table, column, and row levels."
+  },
+  {
+    "id": 22,
+    "question": "Athena result caching:",
+    "choices": [
+      "Reuses previous results to avoid re-scanning data",
+      "Re-queries the entire dataset each time",
+      "Only works for Parquet",
+      "Requires Glue workflows"
+    ],
+    "correct": 0,
+    "description": "Results of previous identical queries may be returned instantly, saving time and cost."
+  },
+  {
+    "id": 23,
+    "question": "Which statement is TRUE about Athena query timeouts?",
+    "choices": [
+      "Unlimited execution time",
+      "Default timeout exists for long-running queries",
+      "Timeout is based on vCPU usage",
+      "Only applies to CSV queries"
+    ],
+    "correct": 1,
+    "description": "Athena queries have built-in execution limits to protect resources from runaway scans."
+  },
+  {
+    "id": 24,
+    "question": "Athena federated queries require:",
+    "choices": [
+      "Glue crawler always",
+      "Lambda-based connectors",
+      "Only S3 access",
+      "DMS replication"
+    ],
+    "correct": 1,
+    "description": "Federated queries depend on Lambda connectors that translate remote data into queryable form."
+  },
+  {
+    "id": 25,
+    "question": "Athena Workgroups are mainly used to:",
+    "choices": [
+      "Run ETL jobs",
+      "Isolate workloads, enforce query limits, and track costs",
+      "Store query results",
+      "Manage IAM roles"
+    ],
+    "correct": 1,
+    "description": "Workgroups allow cost governance, performance monitoring, and resource control for different teams."
+  },
+  {
+    "id": 26,
+    "question": "Athena can read data encrypted in S3 using:",
+    "choices": [
+      "Only SSE-S3",
+      "Only SSE-KMS",
+      "Both SSE-S3 and SSE-KMS",
+      "Encryption not supported"
+    ],
+    "correct": 2,
+    "description": "Athena supports AWS S3 native encryption (AES-256) and KMS-managed keys."
+  },
+  {
+    "id": 27,
+    "question": "What is a BEST practice for S3 file sizes in Athena?",
+    "choices": [
+      "1 KB chunks",
+      "Split into many tiny files",
+      "Optimized large files (~128 MB - 1 GB)",
+      "Single multi-TB file"
+    ],
+    "correct": 2,
+    "description": "Presto performs best with fewer larger files to reduce file-open overhead and improve scan efficiency."
+  },
+  {
+    "id": 28,
+    "question": "Which is the best choice for streaming data analytics with low-latency queries?",
+    "choices": [
+      "Athena alone",
+      "Athena + S3 object notifications",
+      "Kinesis Data Analytics / Managed streaming engine",
+      "AWS Backup"
+    ],
+    "correct": 2,
+    "description": "Athena is not real-time. Kinesis Data Analytics is designed for low-latency streaming SQL processing."
+  }
+]

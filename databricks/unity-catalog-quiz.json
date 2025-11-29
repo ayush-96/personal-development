@@ -1,363 +1,362 @@
 [
-  {
-    "id": 1,
-    "question": "What is the correct three-level namespace order in Unity Catalog?",
-    "choices": [
-      "Schema → Catalog → Table",
-      "Catalog → Schema → Table/Volume/Function/Model",
-      "Workspace → Schema → Table",
-      "Metastore → Database → Table"
-    ],
-    "correct": 1,
-    "description": "Unity Catalog uses catalog.schema.object syntax.\nThe catalog is the top-level isolation and governance boundary."
-  },
-  {
-    "id": 2,
-    "question": "Which privilege is NOT required to create a managed table in a schema you do not own?",
-    "choices": [
-      "USE CATALOG",
-      "USE SCHEMA",
-      "CREATE TABLE",
-      "OWNERSHIP of the catalog"
-    ],
-    "correct": 3,
-    "description": "USE CATALOG + USE SCHEMA + CREATE TABLE is sufficient.\nOwnership is only needed for admin actions like granting privileges."
-  },
-  {
-    "id": 3,
-    "question": "Who automatically inherits full privileges on a new object?",
-    "choices": [
-      "The workspace admin",
-      "The object owner (creator) and the catalog owner",
-      "Account admins only",
-      "No one"
-    ],
-    "correct": 1,
-    "description": "The creator becomes the owner and receives ALL privileges.\nThe parent catalog owner also inherits ownership (and therefore all privileges)."
-  },
-  {
-    "id": 4,
-    "question": "Dynamic views in Unity Catalog can use which of these functions for row filtering and column masking?",
-    "choices": [
-      "current_user() only",
-      "current_user(), is_account_group_member(), is_member()",
-      "fn.is_admin()",
-      "session_user()"
-    ],
-    "correct": 1,
-    "description": "is_member('group_name') and is_account_group_member('account_group') are both supported for fine-grained access control."
-  },
-  {
-    "id": 5,
-    "question": "What happens when you GRANT SELECT ON TABLE prod.db.sales TO `finance-team` and the table has column masking?",
-    "choices": [
-      "Masking is ignored",
-      "Masking is applied if the user lacks the UNMASK privilege",
-      "Only the owner can see unmasked data",
-      "Masking only works in DBSQL"
-    ],
-    "correct": 1,
-    "description": "Column masking and row filters are enforced for all users unless they have been explicitly granted UNMASK or bypass privileges."
-  },
-  {
-    "id": 6,
-    "question": "Which object types can be registered as FUNCTIONS in Unity Catalog?",
-    "choices": [
-      "Only SQL UDFs",
-      "SQL scalar functions, SQL table functions, and Python/Scala/Java functions created via CREATE FUNCTION",
-      "Only Python functions",
-      "Only built-in functions"
-    ],
-    "correct": 1,
-    "description": "Unity Catalog supports permanent registration of SQL and code-based functions across languages with full governance."
-  },
-  {
-    "id": 7,
-    "question": "A managed volume differs from an external volume because:",
-    ",
-    "choices": [
-      "It is stored in DBFS",
-      "Dropping it deletes the underlying files in the catalog’s managed storage",
-      "It supports structured data",
-      "It is slower"
-    ],
-    "correct": 1,
-    "description": "Managed volumes are fully control lifecycle: DROP VOLUME deletes both metadata and all files in the volume path."
-  },
-  {
-    "id": 8,
-    "question": "What is required to enable Unity Catalog on a workspace?",
-    "choices": [
-      "Just enable it in workspace settings",
-      "Assign a metastore at the account level + enable UC access mode + assign storage root",
-      "Only create a catalog",
-      "Upgrade to Enterprise"
-    ],
-    "correct": 1,
-    "description": "Unity Catalog is account-level; workspaces must be attached to an account metastore and granted access."
-  },
-  {
-    "id": 9,
-    "question": "Which statement is true about external locations?",
-    "choices": [
-      "They can only be created by account admins",
-      "They require a storage credential + a root S3/ADLS/GCS path",
-      "They automatically grant access to all subpaths",
-      "Both B and C"
-    ],
-    "correct": 3,
-    "description": "External locations link a storage credential to a path prefix; grants on the location flow to all objects under it."
-  },
-  {
-    "id": 10,
-    "question": "Column-level lineage in Unity Catalog is captured from:",
-    "choices": [
-      "Notebooks only",
-      "Notebooks, Jobs, Delta Live Tables, DBSQL queries, and Model Serving",
-      "Only DLT pipelines",
-      "Only SQL warehouses"
-    ],
-    "correct": 1,
-    "description": "Lineage is automatically collected at column granularity across nearly all compute types."
-  },
-  {
-    "id": 11,
-    "question": "You can delegate catalog ownership to a group. What privilege do you need?",
-    "choices": [
-      "SET OWNER on the catalog",
-      "OWNERSHIP of the catalog (current) owner",
-      "Both",
-      "Account admin only"
-    ],
-    "correct": 2,
-    "description": "Only the current owner (or account admin) can execute ALTER CATALOG ... SET OWNER TO ..."
-  },
-  {
-    "id": 12,
-    "question": "What does SECURED view/policy mean in Unity Catalog?",
-    "choices": [
-      "View with row filtering only",
-      "A view or table that hides its underlying definition and prevents access to base tables",
-      "Encrypted data",
-      "Only for PII"
-    ],
-    "correct": 1,
-    "description": "SECURED views/tables prevent users from querying base tables directly, enforcing access only through the secured object."
-  },
-  {
-    "id": 13,
-    "question": "Which privilege allows a user to run SYNC commands to register Hive metastore tables into Unity Catalog?",
-    "choices": [
-      "CREATE TABLE",
-      "SYNC",
-      "CREATE EXTERNAL TABLE",
-      "Account admin"
-    ],
-    "correct": 1,
-    "description": "SYNC privilege on the source Hive schema is required to migrate legacy tables."
-  },
-  {
-    "id": 14,
-    "question": "Tags in Unity Catalog can be applied to:",
-    "choices": [
-      "Tables only",
-      "Catalogs, schemas, tables, columns, volumes, models, functions",
-      "Only columns",
-      "Only PII tags"
-    ],
-    "correct": 1,
-    "description": "Object and column tagging enables classification (PII, PHI, sensitivity) and integration with data governance tools."
-  },
-  {
-    "id": 15,
-    "question": "What is the effect of REVOKE USE CATALOG ON CATALOG prod FROM `data-engineers`?",
-    "choices": [
-      "They lose access to all schemas and objects inside",
-      "They only lose CREATE privileges",
-      "No effect on existing grants",
-      "Only affects new objects"
-    ],
-    "correct": 0,
-    "description": "USE CATALOG is required to resolve any object inside the catalog; revoking it blocks all access."
-  },
-  {
-    "id": 16,
-    "question": "Which command shows who has which privileges on an object?",
-    "choices": [
-      "DESCRIBE TABLE",
-      "SHOW GRANTS ON table_name",
-      "SHOW PRIVILEGES",
-      "DESCRIBE EXTENDED"
-    ],
-    "correct": 1,
-    "description": "SHOW GRANTS ON <object> returns the complete ACL for that object."
-  },
-  {
-    "id": 17,
-    "question": "Unity Catalog supports storage credentials using:",
-    "choices": [
-      "Only IAM roles",
-      "Managed identities, service principals, IAM roles, and instance profiles (AWS)",
-      "Only access keys",
-      "Only SAS tokens"
-    ],
-    "correct": 1,
-    "description": "Storage credentials abstract cloud identities; multiple external locations can reuse the same credential."
-  },
-  {
-    "id": 18,
-    "question": "What is required to query a federated table (e.g., MySQL, Postgres) through Unity Catalog?",
-    "choices": [
-      "Direct network access",
-      "A foreign catalog connection + a foreign schema + USE privileges",
-      "Only Lakehouse Federation enabled workspace",
-      "Passthrough auth only"
-    ],
-    "correct": 1,
-    "description": "Foreign catalogs expose external DBMS objects as UC tables with full UC governance applied on top."
-  },
-  {
-    "id": 19,
-    "question": "Can you create a view in catalog A that references a table in catalog B?",
-    "choices": [
-      "No",
-      "Yes, if the view owner has SELECT on the table in catalog B",
-      "Only if both catalogs share the same managed storage",
-      "Only in DBSQL"
-    ],
-    "correct": 1,
-    "description": "Cross-catalog references are fully supported as long as the appropriate USE and SELECT privileges exist."
-  },
-  {
-    "id": 20,
-    "question": "What happens when you drop a catalog with CASCADE?",
-    "choices": [
-      "Only metadata is dropped",
-      "All schemas, tables, volumes, functions, and managed data are permanently deleted",
-      "Fails if objects exist",
-      "Only drops the catalog container"
-    ],
-    "correct": 1,
-    "description": "DROP CATALOG ... CASCADE is irreversible and deletes everything including managed storage data."
-  },
-  {
-    "id": 21,
-    "question": "Which system table contains historical privilege changes?",
-    "choices": [
-      "system.access.audit",
-      "system.information_schema.privileges",
-      "system.access.grants_history",
-      "system.billing.usage"
-    ],
-    "correct": 0,
-    "description": "system.access.audit logs all GRANT, REVOKE, DENY, and ownership changes across the account."
-  },
-  {
-    "id": 22,
-    "question": "A user has SELECT on a table but the query fails with 'Table not found'. Most likely cause?",
-    "choices": [
-      "They lack USE SCHEMA",
-      "They lack USE CATALOG",
-      "Both A and B",
-      "Table is external"
-    ],
-    "correct": 2,
-    "description": "USE CATALOG and USE SCHEMA are hierarchical prerequisites before any object-level privilege is evaluated."
-  },
-  {
-    "id": 23,
-    "question": "What is the purpose of a 'Recipient' in Delta Sharing?",
-    "choices": [
-      "Internal user",
-      "External entity (person or organization) that receives shared data",
-      "Only Databricks workspace",
-      "Share owner"
-    ],
-    "correct": 1,
-    "description": "Recipients are activated via activation link and can access shares using open-source Delta Sharing clients or Databricks."
-  },
-  {
-    "id": 24,
-    "question": "Unity Catalog governance applies to which compute types?",
-    "choices": [
-      "All-purpose clusters only",
-      "All-purpose, jobs, SQL warehouses, DLT, DBSQL, Model Serving, and serverless compute",
-      "Only SQL warehouses",
-      "Only DLT"
-    ],
-    "correct": 1,
-    "description": "Unity Catalog is the single governance layer across all Databricks compute."
-  },
-  {
-    "id": 25,
-    "question": "Can you grant privileges on system tables?",
-    "choices": [
-      "Yes, freely",
-      "Only account admins have access; no grants possible",
-      "Yes, but only SELECT",
-      "Only on system.access"
-    ],
-    "correct": 1,
-    "description": "System tables are protected; access is restricted to account admins and specific roles."
-  },
-  {
-    "id": 26,
-    "question": "What is required to register an MLflow model in Unity Catalog?",
-    "choices": [
-      "CREATE MODEL privilege on the schema",
-      "USE CATALOG + USE SCHEMA + CREATE MODEL",
-      "Model must be logged with signature",
-      "All of the above"
-    ],
-    "correct": 3,
-    "description": "Models are first-class UC objects with lineage, versioning, and access control."
-  },
-  {
-    "id": 27,
-    "question": "Which privilege allows a user to run CREATE CATALOG?",
-    "choices": [
-      "CREATE CATALOG at account level",
-      "Account admin only",
-      "Metastore owner",
-      "Both A and C"
-    ],
-    "correct": 3,
-    "description": "CREATE CATALOG is an account-level privilege granted to metastore owners or account admins."
-  },
-  {
-    "id": 28,
-    "question": "How do you deny a privilege in Unity Catalog?",
-    "choices": [
-      "REVOKE",
-      "DENY SELECT ON ...",
-      "There is no DENY statement",
-      "Only via UI"
-    ],
-    "correct": 2,
-    "description": "Unity Catalog does not support explicit DENY; access is purely additive."
-  },
-  {
-    "id": 29,
-    "question": "What happens when a user with OWNERSHIP of a schema creates a table?",
-    "choices": [
-      "They become table owner",
-      "The catalog owner becomes table owner",
-      "The workspace becomes owner",
-      "No owner"
-    ],
-    "correct": 0,
-    "description": "Creator always becomes the initial owner of the object, even if they are not the parent owner."
-  },
-  {
-    "id": 30,
-    "question": "Which feature allows you to audit who accessed which column of which table?",
-    "choices": [
-      "System.access.column_access",
-      "System.access.audit with column-level granularity",
-      "Lakehouse Monitoring",
-      "Only via CloudTrail"
-    ],
-    "correct": 1,
-    "description": "system.access.audit logs include column names when queries touch specific columns (where supported)."
-  }
+    {
+        "id": 1,
+        "question": "What is the correct three-level namespace order in Unity Catalog?",
+        "choices": [
+            "Schema → Catalog → Table",
+            "Catalog → Schema → Table/Volume/Function/Model",
+            "Workspace → Schema → Table",
+            "Metastore → Database → Table"
+        ],
+        "correct": 1,
+        "description": "Unity Catalog uses catalog.schema.object syntax.\nThe catalog is the top-level isolation and governance boundary."
+    },
+    {
+        "id": 2,
+        "question": "Which privilege is NOT required to create a managed table in a schema you do not own?",
+        "choices": [
+            "USE CATALOG",
+            "USE SCHEMA",
+            "CREATE TABLE",
+            "OWNERSHIP of the catalog"
+        ],
+        "correct": 3,
+        "description": "USE CATALOG + USE SCHEMA + CREATE TABLE is sufficient.\nOwnership is only needed for admin actions like granting privileges."
+    },
+    {
+        "id": 3,
+        "question": "Who automatically inherits full privileges on a new object?",
+        "choices": [
+            "The workspace admin",
+            "The object owner (creator) and the catalog owner",
+            "Account admins only",
+            "No one"
+        ],
+        "correct": 1,
+        "description": "The creator becomes the owner and receives ALL privileges.\nThe parent catalog owner also inherits ownership (and therefore all privileges)."
+    },
+    {
+        "id": 4,
+        "question": "Dynamic views in Unity Catalog can use which of these functions for row filtering and column masking?",
+        "choices": [
+            "current_user() only",
+            "current_user(), is_account_group_member(), is_member()",
+            "fn.is_admin()",
+            "session_user()"
+        ],
+        "correct": 1,
+        "description": "is_member('group_name') and is_account_group_member('account_group') are both supported for fine-grained access control."
+    },
+    {
+        "id": 5,
+        "question": "What happens when you GRANT SELECT ON TABLE prod.db.sales TO `finance-team` and the table has column masking?",
+        "choices": [
+            "Masking is ignored",
+            "Masking is applied if the user lacks the UNMASK privilege",
+            "Only the owner can see unmasked data",
+            "Masking only works in DBSQL"
+        ],
+        "correct": 1,
+        "description": "Column masking and row filters are enforced for all users unless they have been explicitly granted UNMASK or bypass privileges."
+    },
+    {
+        "id": 6,
+        "question": "Which object types can be registered as FUNCTIONS in Unity Catalog?",
+        "choices": [
+            "Only SQL UDFs",
+            "SQL scalar functions, SQL table functions, and Python/Scala/Java functions created via CREATE FUNCTION",
+            "Only Python functions",
+            "Only built-in functions"
+        ],
+        "correct": 1,
+        "description": "Unity Catalog supports permanent registration of SQL and code-based functions across languages with full governance."
+    },
+    {
+        "id": 7,
+        "question": "A managed volume differs from an external volume because:",
+        "choices": [
+            "It is stored in DBFS",
+            "Dropping it deletes the underlying files in the catalog’s managed storage",
+            "It supports structured data",
+            "It is slower"
+        ],
+        "correct": 1,
+        "description": "Managed volumes are fully control lifecycle: DROP VOLUME deletes both metadata and all files in the volume path."
+    },
+    {
+        "id": 8,
+        "question": "What is required to enable Unity Catalog on a workspace?",
+        "choices": [
+            "Just enable it in workspace settings",
+            "Assign a metastore at the account level + enable UC access mode + assign storage root",
+            "Only create a catalog",
+            "Upgrade to Enterprise"
+        ],
+        "correct": 1,
+        "description": "Unity Catalog is account-level; workspaces must be attached to an account metastore and granted access."
+    },
+    {
+        "id": 9,
+        "question": "Which statement is true about external locations?",
+        "choices": [
+            "They can only be created by account admins",
+            "They require a storage credential + a root S3/ADLS/GCS path",
+            "They automatically grant access to all subpaths",
+            "Both B and C"
+        ],
+        "correct": 3,
+        "description": "External locations link a storage credential to a path prefix; grants on the location flow to all objects under it."
+    },
+    {
+        "id": 10,
+        "question": "Column-level lineage in Unity Catalog is captured from:",
+        "choices": [
+            "Notebooks only",
+            "Notebooks, Jobs, Delta Live Tables, DBSQL queries, and Model Serving",
+            "Only DLT pipelines",
+            "Only SQL warehouses"
+        ],
+        "correct": 1,
+        "description": "Lineage is automatically collected at column granularity across nearly all compute types."
+    },
+    {
+        "id": 11,
+        "question": "You can delegate catalog ownership to a group. What privilege do you need?",
+        "choices": [
+            "SET OWNER on the catalog",
+            "OWNERSHIP of the catalog (current) owner",
+            "Both",
+            "Account admin only"
+        ],
+        "correct": 2,
+        "description": "Only the current owner (or account admin) can execute ALTER CATALOG ... SET OWNER TO ..."
+    },
+    {
+        "id": 12,
+        "question": "What does SECURED view/policy mean in Unity Catalog?",
+        "choices": [
+            "View with row filtering only",
+            "A view or table that hides its underlying definition and prevents access to base tables",
+            "Encrypted data",
+            "Only for PII"
+        ],
+        "correct": 1,
+        "description": "SECURED views/tables prevent users from querying base tables directly, enforcing access only through the secured object."
+    },
+    {
+        "id": 13,
+        "question": "Which privilege allows a user to run SYNC commands to register Hive metastore tables into Unity Catalog?",
+        "choices": [
+            "CREATE TABLE",
+            "SYNC",
+            "CREATE EXTERNAL TABLE",
+            "Account admin"
+        ],
+        "correct": 1,
+        "description": "SYNC privilege on the source Hive schema is required to migrate legacy tables."
+    },
+    {
+        "id": 14,
+        "question": "Tags in Unity Catalog can be applied to:",
+        "choices": [
+            "Tables only",
+            "Catalogs, schemas, tables, columns, volumes, models, functions",
+            "Only columns",
+            "Only PII tags"
+        ],
+        "correct": 1,
+        "description": "Object and column tagging enables classification (PII, PHI, sensitivity) and integration with data governance tools."
+    },
+    {
+        "id": 15,
+        "question": "What is the effect of REVOKE USE CATALOG ON CATALOG prod FROM `data-engineers`?",
+        "choices": [
+            "They lose access to all schemas and objects inside",
+            "They only lose CREATE privileges",
+            "No effect on existing grants",
+            "Only affects new objects"
+        ],
+        "correct": 0,
+        "description": "USE CATALOG is required to resolve any object inside the catalog; revoking it blocks all access."
+    },
+    {
+        "id": 16,
+        "question": "Which command shows who has which privileges on an object?",
+        "choices": [
+            "DESCRIBE TABLE",
+            "SHOW GRANTS ON table_name",
+            "SHOW PRIVILEGES",
+            "DESCRIBE EXTENDED"
+        ],
+        "correct": 1,
+        "description": "SHOW GRANTS ON <object> returns the complete ACL for that object."
+    },
+    {
+        "id": 17,
+        "question": "Unity Catalog supports storage credentials using:",
+        "choices": [
+            "Only IAM roles",
+            "Managed identities, service principals, IAM roles, and instance profiles (AWS)",
+            "Only access keys",
+            "Only SAS tokens"
+        ],
+        "correct": 1,
+        "description": "Storage credentials abstract cloud identities; multiple external locations can reuse the same credential."
+    },
+    {
+        "id": 18,
+        "question": "What is required to query a federated table (e.g., MySQL, Postgres) through Unity Catalog?",
+        "choices": [
+            "Direct network access",
+            "A foreign catalog connection + a foreign schema + USE privileges",
+            "Only Lakehouse Federation enabled workspace",
+            "Passthrough auth only"
+        ],
+        "correct": 1,
+        "description": "Foreign catalogs expose external DBMS objects as UC tables with full UC governance applied on top."
+    },
+    {
+        "id": 19,
+        "question": "Can you create a view in catalog A that references a table in catalog B?",
+        "choices": [
+            "No",
+            "Yes, if the view owner has SELECT on the table in catalog B",
+            "Only if both catalogs share the same managed storage",
+            "Only in DBSQL"
+        ],
+        "correct": 1,
+        "description": "Cross-catalog references are fully supported as long as the appropriate USE and SELECT privileges exist."
+    },
+    {
+        "id": 20,
+        "question": "What happens when you drop a catalog with CASCADE?",
+        "choices": [
+            "Only metadata is dropped",
+            "All schemas, tables, volumes, functions, and managed data are permanently deleted",
+            "Fails if objects exist",
+            "Only drops the catalog container"
+        ],
+        "correct": 1,
+        "description": "DROP CATALOG ... CASCADE is irreversible and deletes everything including managed storage data."
+    },
+    {
+        "id": 21,
+        "question": "Which system table contains historical privilege changes?",
+        "choices": [
+            "system.access.audit",
+            "system.information_schema.privileges",
+            "system.access.grants_history",
+            "system.billing.usage"
+        ],
+        "correct": 0,
+        "description": "system.access.audit logs all GRANT, REVOKE, DENY, and ownership changes across the account."
+    },
+    {
+        "id": 22,
+        "question": "A user has SELECT on a table but the query fails with 'Table not found'. Most likely cause?",
+        "choices": [
+            "They lack USE SCHEMA",
+            "They lack USE CATALOG",
+            "Both A and B",
+            "Table is external"
+        ],
+        "correct": 2,
+        "description": "USE CATALOG and USE SCHEMA are hierarchical prerequisites before any object-level privilege is evaluated."
+    },
+    {
+        "id": 23,
+        "question": "What is the purpose of a 'Recipient' in Delta Sharing?",
+        "choices": [
+            "Internal user",
+            "External entity (person or organization) that receives shared data",
+            "Only Databricks workspace",
+            "Share owner"
+        ],
+        "correct": 1,
+        "description": "Recipients are activated via activation link and can access shares using open-source Delta Sharing clients or Databricks."
+    },
+    {
+        "id": 24,
+        "question": "Unity Catalog governance applies to which compute types?",
+        "choices": [
+            "All-purpose clusters only",
+            "All-purpose, jobs, SQL warehouses, DLT, DBSQL, Model Serving, and serverless compute",
+            "Only SQL warehouses",
+            "Only DLT"
+        ],
+        "correct": 1,
+        "description": "Unity Catalog is the single governance layer across all Databricks compute."
+    },
+    {
+        "id": 25,
+        "question": "Can you grant privileges on system tables?",
+        "choices": [
+            "Yes, freely",
+            "Only account admins have access; no grants possible",
+            "Yes, but only SELECT",
+            "Only on system.access"
+        ],
+        "correct": 1,
+        "description": "System tables are protected; access is restricted to account admins and specific roles."
+    },
+    {
+        "id": 26,
+        "question": "What is required to register an MLflow model in Unity Catalog?",
+        "choices": [
+            "CREATE MODEL privilege on the schema",
+            "USE CATALOG + USE SCHEMA + CREATE MODEL",
+            "Model must be logged with signature",
+            "All of the above"
+        ],
+        "correct": 3,
+        "description": "Models are first-class UC objects with lineage, versioning, and access control."
+    },
+    {
+        "id": 27,
+        "question": "Which privilege allows a user to run CREATE CATALOG?",
+        "choices": [
+            "CREATE CATALOG at account level",
+            "Account admin only",
+            "Metastore owner",
+            "Both A and C"
+        ],
+        "correct": 3,
+        "description": "CREATE CATALOG is an account-level privilege granted to metastore owners or account admins."
+    },
+    {
+        "id": 28,
+        "question": "How do you deny a privilege in Unity Catalog?",
+        "choices": [
+            "REVOKE",
+            "DENY SELECT ON ...",
+            "There is no DENY statement",
+            "Only via UI"
+        ],
+        "correct": 2,
+        "description": "Unity Catalog does not support explicit DENY; access is purely additive."
+    },
+    {
+        "id": 29,
+        "question": "What happens when a user with OWNERSHIP of a schema creates a table?",
+        "choices": [
+            "They become table owner",
+            "The catalog owner becomes table owner",
+            "The workspace becomes owner",
+            "No owner"
+        ],
+        "correct": 0,
+        "description": "Creator always becomes the initial owner of the object, even if they are not the parent owner."
+    },
+    {
+        "id": 30,
+        "question": "Which feature allows you to audit who accessed which column of which table?",
+        "choices": [
+            "System.access.column_access",
+            "System.access.audit with column-level granularity",
+            "Lakehouse Monitoring",
+            "Only via CloudTrail"
+        ],
+        "correct": 1,
+        "description": "system.access.audit logs include column names when queries touch specific columns (where supported)."
+    }
 ]

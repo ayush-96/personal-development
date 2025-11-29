@@ -346,7 +346,7 @@
       "Configurable via delta.targetFileSize"
     ],
     "correct": 2,
-    "description": "description": "Default target is 1 GiB per compacted file; can be tuned via delta.targetFileSize table property."
+    "description": "Default target is 1 GiB per compacted file; can be tuned via delta.targetFileSize table property."
   },
   {
     "id": 30,

@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "question": "Which JOIN returns only rows with matching keys in both tables?",
+    "choices": [
+      "LEFT JOIN",
+      "RIGHT JOIN",
+      "INNER JOIN",
+      "FULL OUTER JOIN"
+    ],
+    "correct": 2,
+    "description": "INNER JOIN returns only the matched rows from both sides. If there is no match, the row is excluded."
+  },
+  {
+    "id": 2,
+    "question": "A LEFT JOIN returns:",
+    "choices": [
+      "Only matching rows",
+      "All rows from the right table",
+      "All rows from the left table, matched rows from right",
+      "All non-matching rows only"
+    ],
+    "correct": 2,
+    "description": "LEFT JOIN keeps all rows from the left table and includes matching rows from the right or NULL if no match exists."
+  },
+  {
+    "id": 3,
+    "question": "Which JOIN is best to find unmatched records in the right table?",
+    "choices": [
+      "RIGHT JOIN + WHERE left.id IS NULL",
+      "INNER JOIN",
+      "FULL JOIN",
+      "CROSS JOIN"
+    ],
+    "correct": 0,
+    "description": "Use a RIGHT JOIN and filter NULLs on the left table key → finds right-side rows with no match."
+  },
+  {
+    "id": 4,
+    "question": "A FULL OUTER JOIN returns:",
+    "choices": [
+      "Matching rows only",
+      "All rows, matching or not",
+      "Only unmatched rows",
+      "One table completely"
+    ],
+    "correct": 1,
+    "description": "FULL OUTER JOIN includes all rows from both tables — matched and unmatched — filling NULLs where needed."
+  },
+  {
+    "id": 5,
+    "question": "What does a CROSS JOIN do?",
+    "choices": [
+      "Matches rows based on a key",
+      "Returns only NULL rows",
+      "Creates a Cartesian product between tables",
+      "Same as INNER JOIN"
+    ],
+    "correct": 2,
+    "description": "CROSS JOIN generates every possible combination of rows (Cartesian Product)."
+  },
+  {
+    "id": 6,
+    "question": "Which SQL clause is used to define join conditions?",
+    "choices": [
+      "USING",
+      "WHERE",
+      "ON",
+      "HAVING"
+    ],
+    "correct": 2,
+    "description": "JOIN conditions are typically defined using ON. USING works only when both tables share the same column name."
+  },
+  {
+    "id": 7,
+    "question": "Which JOIN can cause duplicate rows if referential integrity is not maintained?",
+    "choices": [
+      "INNER JOIN",
+      "LEFT JOIN",
+      "CROSS JOIN",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Any join may produce duplicates if the relationship isn’t 1:1. Checking keys and constraints is important."
+  },
+  {
+    "id": 8,
+    "question": "To combine employees with departments even if some employees have no department, you use:",
+    "choices": [
+      "FULL JOIN",
+      "LEFT JOIN",
+      "RIGHT JOIN",
+      "SELF JOIN"
+    ],
+    "correct": 1,
+    "description": "Employees are usually the primary set → LEFT JOIN ensures every employee appears even without a department."
+  },
+  {
+    "id": 9,
+    "question": "Which JOIN can be used to detect orphan records on the left table?",
+    "choices": [
+      "LEFT OUTER JOIN + WHERE right.id IS NULL",
+      "FULL OUTER JOIN",
+      "INNER JOIN",
+      "CROSS JOIN"
+    ],
+    "correct": 0,
+    "description": "Filter unmatched rows after a LEFT JOIN to find orphans from the left table."
+  },
+  {
+    "id": 10,
+    "question": "A SELF JOIN is used when:",
+    "choices": [
+      "You join one table with itself",
+      "Two identical tables are joined",
+      "You need a Cartesian product",
+      "Database normalization"
+    ],
+    "correct": 0,
+    "description": "A table joins to itself to relate hierarchical or comparative data like employee-manager relationships."
+  },
+  {
+    "id": 11,
+    "question": "Using USING(column) instead of ON t1.col = t2.col:",
+    "choices": [
+      "Combines duplicate column names automatically",
+      "Requires explicit aliases",
+      "Does not allow equality join",
+      "Only works in SQLite"
+    ],
+    "correct": 0,
+    "description": "USING eliminates duplicate columns when both tables share the same column name."
+  },
+  {
+    "id": 12,
+    "question": "Which JOIN guarantees no NULLs appear in result?",
+    "choices": [
+      "LEFT JOIN",
+      "INNER JOIN",
+      "FULL JOIN",
+      "RIGHT JOIN"
+    ],
+    "correct": 1,
+    "description": "INNER JOIN only includes matches → no missing relation fields appear as NULL."
+  },
+  {
+    "id": 13,
+    "question": "Which JOIN works best for slowly changing dimensions (SCD Type 2) history lookup?",
+    "choices": [
+      "SELF JOIN",
+      "CROSS JOIN",
+      "INNER JOIN with BETWEEN",
+      "FULL JOIN"
+    ],
+    "correct": 2,
+    "description": "Time-range conditions via INNER JOIN help select the correct historical dimension row."
+  },
+  {
+    "id": 14,
+    "question": "What should be indexed to improve join performance?",
+    "choices": [
+      "Join keys",
+      "All text columns",
+      "Only primary keys",
+      "No columns"
+    ],
+    "correct": 0,
+    "description": "Indexing join keys reduces scan cost, speeding up equality and join lookups."
+  },
+  {
+    "id": 15,
+    "question": "Which JOIN type is most expensive in large data warehouse workloads?",
+    "choices": [
+      "INNER JOIN",
+      "CROSS JOIN",
+      "LEFT JOIN",
+      "RIGHT JOIN"
+    ],
+    "correct": 1,
+    "description": "CROSS JOIN produces a Cartesian explosion → often avoided unless necessary."
+  },
+  {
+    "id": 16,
+    "question": "If a foreign key is NOT enforced but data depends on it logically:",
+    "choices": [
+      "INNER JOIN always returns correct data",
+      "JOINs can return mismatches or NULLs",
+      "Referential integrity isn't needed",
+      "NULL values get removed automatically"
+    ],
+    "correct": 1,
+    "description": "Without enforced FK constraints, orphan or inconsistent data may appear in joins."
+  },
+  {
+    "id": 17,
+    "question": "Which join is most suitable for many-to-many relationships?",
+    "choices": [
+      "Using a bridge table",
+      "SELF JOIN",
+      "FULL OUTER JOIN",
+      "RIGHT JOIN"
+    ],
+    "correct": 0,
+    "description": "Bridge tables connect two fact domains to resolve many-to-many joins cleanly."
+  },
+  {
+    "id": 18,
+    "question": "In join order optimization, databases often:",
+    "choices": [
+      "Evaluate joins in written order",
+      "Always join smallest tables first",
+      "Use cost-based optimization to reorder",
+      "Disable parallel execution"
+    ],
+    "correct": 2,
+    "description": "Query planners reorder joins using table stats and cost metrics for faster execution."
+  },
+  {
+    "id": 19,
+    "question": "Which join condition may produce a huge increase in results?",
+    "choices": [
+      "Equality join on primary keys",
+      "Joining on non-unique columns",
+      "Filtering before joining",
+      "USING identical keys"
+    ],
+    "correct": 1,
+    "description": "Non-unique keys can multiply row combinations → may inflate result sizes unexpectedly."
+  },
+  {
+    "id": 20,
+    "question": "A NATURAL JOIN:",
+    "choices": [
+      "Uses all columns with same name to join",
+      "Requires a USING clause",
+      "Always performs left join",
+      "Never produces NULLs"
+    ],
+    "correct": 0,
+    "description": "Natural join auto-detects and joins shared column names. It can cause accidental matches if not careful."
+  },
+  {
+    "id": 21,
+    "question": "When joining large fact table with small dimension tables:",
+    "choices": [
+      "Broadcast smaller table if supported",
+      "Always full scan both tables",
+      "Use CROSS JOIN",
+      "Replicate fact table"
+    ],
+    "correct": 0,
+    "description": "Broadcasting avoids shuffles on big data systems like Spark or Snowflake."
+  },
+  {
+    "id": 22,
+    "question": "Which is MOST likely to cause duplicate business rows?",
+    "choices": [
+      "Joining fact to dimension using non-key column",
+      "Filtering NULL keys",
+      "Limiting result set",
+      "Using INNER JOIN"
+    ],
+    "correct": 0,
+    "description": "Joining on non-unique fields creates many-to-many accidentally → duplication risk."
+  },
+  {
+    "id": 23,
+    "question": "To find customers who never placed an order:",
+    "choices": [
+      "INNER JOIN Orders",
+      "LEFT JOIN Orders + WHERE Orders.id IS NULL",
+      "RIGHT JOIN Orders",
+      "NATURAL JOIN Orders"
+    ],
+    "correct": 1,
+    "description": "LEFT JOIN + NULL filter returns rows from customer table lacking any match in orders."
+  },
+  {
+    "id": 24,
+    "question": "Which JOIN works best for comparing values between rows in same table?",
+    "choices": [
+      "FULL JOIN",
+      "SELF JOIN",
+      "RIGHT JOIN",
+      "CROSS JOIN"
+    ],
+    "correct": 1,
+    "description": "SELF JOIN links different rows of the same table to compare values like employee salary differences."
+  },
+  {
+    "id": 25,
+    "question": "In a one-to-many relationship, the primary key:",
+    "choices": [
+      "Exists only in the 'many' side",
+      "Exists only in the 'one' side",
+      "Exists in both tables",
+      "Must be NULL"
+    ],
+    "correct": 1,
+    "description": "The primary key uniquely identifies the 'one' table. The 'many' table references it via a foreign key."
+  },
+  {
+    "id": 26,
+    "question": "RIGHT JOIN is most useful when:",
+    "choices": [
+      "The right table contains the primary dataset",
+      "The left table has strict referential integrity",
+      "NULL values must be removed",
+      "Dimensions are bigger than facts"
+    ],
+    "correct": 0,
+    "description": "Right-side rows are fully preserved → used when that table is the main relationship driver."
+  },
+  {
+    "id": 27,
+    "question": "What happens if JOIN condition is missing?",
+    "choices": [
+      "SQL throws syntax error",
+      "A CROSS JOIN (Cartesian product) occurs implicitly",
+      "Only NULL rows are returned",
+      "Query is canceled"
+    ],
+    "correct": 1,
+    "description": "Without a join condition, SQL combines all rows → massive Cartesian result set."
+  },
+  {
+    "id": 28,
+    "question": "A FOREIGN KEY field:",
+    "choices": [
+      "Must be UNIQUE",
+      "Links to a primary key in another table",
+      "Can only reference nullable data",
+      "Is always indexed automatically"
+    ],
+    "correct": 1,
+    "description": "Foreign keys establish the relationship by referencing a primary or unique key in another table."
+  },
+  {
+    "id": 29,
+    "question": "Joins involving text comparison instead of numeric keys:",
+    "choices": [
+      "Are typically faster",
+      "May degrade performance due to larger indexes",
+      "Automatically compress the data",
+      "Prevent NULL propagation"
+    ],
+    "correct": 1,
+    "description": "Text indexes cost more storage and comparison operations → slower join performance."
+  },
+  {
+    "id": 30,
+    "question": "Which join is needed to pull only orders that have at least one product?",
+    "choices": [
+      "LEFT JOIN",
+      "INNER JOIN",
+      "RIGHT JOIN",
+      "FULL JOIN"
+    ],
+    "correct": 1,
+    "description": "INNER JOIN filters out orders with no product match, ensuring valid linked data only."
+  },
+  {
+    "id": 31,
+    "question": "When joining >2 tables, join order is:",
+    "choices": [
+      "Always left to right in query",
+      "Optimized by query planner",
+      "Completely random",
+      "Always alphabetically sorted"
+    ],
+    "correct": 1,
+    "description": "Query engines reorder joins internally to minimize cost, regardless of SQL writing order."
+  },
+  {
+    "id": 32,
+    "question": "Which operation prevents duplicates on join key fields?",
+    "choices": [
+      "DISTINCT",
+      "INNER JOIN",
+      "USING",
+      "CROSS JOIN"
+    ],
+    "correct": 0,
+    "description": "DISTINCT removes duplicate rows, useful when joins produce unintended repeats."
+  },
+  {
+    "id": 33,
+    "question": "Which clause controls join execution order in SQL?",
+    "choices": [
+      "GROUP BY",
+      "ORDER BY",
+      "ON",
+      "No explicit clause; engine decides"
+    ],
+    "correct": 3,
+    "description": "SQL engines determine the join order automatically using query optimization and statistics."
+  },
+  {
+    "id": 34,
+    "question": "To find products without any matching category record:",
+    "choices": [
+      "INNER JOIN Categories",
+      "LEFT JOIN Categories + WHERE Categories.id IS NULL",
+      "CROSS JOIN + WHERE NULL",
+      "USING(category_id)"
+    ],
+    "correct": 1,
+    "description": "LEFT JOIN + filtering NULL identifies rows lacking relationships on the right side."
+  },
+  {
+    "id": 35,
+    "question": "Joining 3+ tables using multiple foreign keys is common in:",
+    "choices": [
+      "OLTP normalized schemas",
+      "Flat denormalized tables",
+      "CSV data models",
+      "Graph databases"
+    ],
+    "correct": 0,
+    "description": "Normalized relational databases split data across many tables → multiple joins become essential."
+  }
+]

@@ -1,0 +1,360 @@
+[
+  {
+    "id": 1,
+    "question": "Which clause is required to define the ordering of a Window Function?",
+    "choices": [
+      "ORDERING BY",
+      "ORDER BY within OVER()",
+      "GROUP BY",
+      "PARTITION BY"
+    ],
+    "correct": 1,
+    "description": "Window functions need ORDER BY inside the OVER() clause to create a logical sequence for calculations like ROW_NUMBER or LAG."
+  },
+  {
+    "id": 2,
+    "question": "The PARTITION BY clause in a window function is used to:",
+    "choices": [
+      "Group rows like GROUP BY but without collapsing results",
+      "Sort rows",
+      "Filter rows before computation",
+      "Remove duplicate rows"
+    ],
+    "correct": 0,
+    "description": "PARTITION BY divides rows into independent windows while still retaining row-level outputs unlike GROUP BY."
+  },
+  {
+    "id": 3,
+    "question": "Which window function assigns a unique rank without gaps?",
+    "choices": [
+      "RANK()",
+      "DENSE_RANK()",
+      "ROWNUMBER()",
+      "COUNT()"
+    ],
+    "correct": 1,
+    "description": "DENSE_RANK() assigns ranks sequentially without skipping values when ties occur, unlike RANK()."
+  },
+  {
+    "id": 4,
+    "question": "ROW_NUMBER() differs from RANK() because:",
+    "choices": [
+      "ROW_NUMBER() ignores ordering",
+      "ROW_NUMBER() assigns unique values even for ties",
+      "RANK() does not require OVER() clause",
+      "RANK() always starts from 0"
+    ],
+    "correct": 1,
+    "description": "ROW_NUMBER() always increments uniquely but RANK() produces gaps in numbers when duplicates exist."
+  },
+  {
+    "id": 5,
+    "question": "Which function is best for accessing values from previous rows?",
+    "choices": [
+      "LAG()",
+      "LEAD()",
+      "FIRST_VALUE()",
+      "NTILE()"
+    ],
+    "correct": 0,
+    "description": "LAG() allows you to look at the prior row’s value within the same window without a self join."
+  },
+  {
+    "id": 6,
+    "question": "LEAD() is typically used to:",
+    "choices": [
+      "Calculate running totals",
+      "Access the next row’s value",
+      "Group rows",
+      "Assign rank"
+    ],
+    "correct": 1,
+    "description": "LEAD() fetches data from a subsequent row which is useful for comparisons or interval calculations."
+  },
+  {
+    "id": 7,
+    "question": "Which window function divides rows equally into buckets?",
+    "choices": [
+      "NTILE(n)",
+      "RANK()",
+      "SUM()",
+      "LAG()"
+    ],
+    "correct": 0,
+    "description": "NTILE(n) distributes rows into specified number of groups — useful for quartiles or percentiles."
+  },
+  {
+    "id": 8,
+    "question": "Window functions are written using:",
+    "choices": [
+      "OVER clause",
+      "WHERE clause",
+      "HAVING clause",
+      "LIMIT clause"
+    ],
+    "correct": 0,
+    "description": "The OVER() clause defines a window context so functions are computed over a defined row set."
+  },
+  {
+    "id": 9,
+    "question": "What does the RANGE keyword specify in window frames?",
+    "choices": [
+      "Physical offset rows",
+      "Value-based boundaries",
+      "The strongest sorting method",
+      "It groups nulls separately"
+    ],
+    "correct": 1,
+    "description": "RANGE defines a frame on underlying values versus ROWS which uses row counts."
+  },
+  {
+    "id": 10,
+    "question": "Running totals are generally implemented using:",
+    "choices": [
+      "LAG() with filter",
+      "SUM() OVER ORDER BY",
+      "MAX() OVER PARTITION",
+      "RANK() OVER"
+    ],
+    "correct": 1,
+    "description": "Running totals use a cumulative SUM() with an ORDER BY inside the window."
+  },
+  {
+    "id": 11,
+    "question": "Which function returns the first row value of the defined window?",
+    "choices": [
+      "FIRST_ROW()",
+      "INITIAL_VALUE()",
+      "FIRST_VALUE()",
+      "TOP(1)"
+    ],
+    "correct": 2,
+    "description": "FIRST_VALUE() picks the value of the first ordered row within the window frame."
+  },
+  {
+    "id": 12,
+    "question": "COALESCE is often used with LAG/LEAD to:",
+    "choices": [
+      "Replace nulls",
+      "Remove duplicates",
+      "Improve sorting",
+      "Convert strings"
+    ],
+    "correct": 0,
+    "description": "LAG/LEAD return NULL when no prior/next row exists, so COALESCE helps fill a default value."
+  },
+  {
+    "id": 13,
+    "question": "Window functions run after:",
+    "choices": [
+      "WHERE and GROUP BY",
+      "SELECT and ORDER BY",
+      "FROM but before SELECT",
+      "LIMIT clause"
+    ],
+    "correct": 0,
+    "description": "They operate on the final row set after WHERE and GROUP BY have filtered data but before SELECT renders output."
+  },
+  {
+    "id": 14,
+    "question": "To rank rows only within each department, you would use:",
+    "choices": [
+      "RANK() OVER()",
+      "RANK() OVER (PARTITION BY department_id ORDER BY salary DESC)",
+      "RANK(ORDER BY salary)",
+      "DENSE_RANK() GROUP BY department"
+    ],
+    "correct": 1,
+    "description": "Partitioning ensures each department has its own rank ordering independent of others."
+  },
+  {
+    "id": 15,
+    "question": "ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW refers to:",
+    "choices": [
+      "A 1-row frame",
+      "Entire partition from start until the current row",
+      "Only rows with nulls",
+      "Rows from the last row to first"
+    ],
+    "correct": 1,
+    "description": "This frame type accumulates from first row in the partition up to the current one — common in running sums."
+  },
+  {
+    "id": 16,
+    "question": "Percentile-based distributions generally use:",
+    "choices": [
+      "PERCENT_RANK()",
+      "LEAD()",
+      "ROW_NUMBER()",
+      "COUNT()"
+    ],
+    "correct": 0,
+    "description": "PERCENT_RANK() and CUME_DIST() offer percentile positioning within an ordered window."
+  },
+  {
+    "id": 17,
+    "question": "Which function measures the cumulative probability up to current row?",
+    "choices": [
+      "CUME_DIST()",
+      "NTILE()",
+      "LAG()",
+      "RANK()"
+    ],
+    "correct": 0,
+    "description": "CUME_DIST gives a cumulative percentage for ordered rows — useful in analytics."
+  },
+  {
+    "id": 18,
+    "question": "Window functions can be used in the WHERE clause.",
+    "choices": [
+      "True",
+      "False"
+    ],
+    "correct": 1,
+    "description": "They cannot be filtered directly in WHERE since they are evaluated after SELECT. Use a subquery or CTE instead."
+  },
+  {
+    "id": 19,
+    "question": "Which would retrieve the previous sales value by month?",
+    "choices": [
+      "SUM(sales) OVER ORDER BY month",
+      "RANK() OVER PARTITION month",
+      "LAG(sales) OVER (ORDER BY month)",
+      "NTILE(4) OVER month"
+    ],
+    "correct": 2,
+    "description": "LAG() gives access to values from a previous row following the ORDER BY month logic."
+  },
+  {
+    "id": 20,
+    "question": "Frame clause is optional because:",
+    "choices": [
+      "SQL automatically defines a default frame",
+      "Functions ignore frames",
+      "Only PARTITION is required",
+      "Only ORDER BY is needed"
+    ],
+    "correct": 0,
+    "description": "SQL assigns default ROWS frames when not explicitly defined depending on the function."
+  },
+  {
+    "id": 21,
+    "question": "What is the default frame when using RANK()?",
+    "choices": [
+      "UNBOUNDED PRECEDING to 1 FOLLOWING",
+      "UNBOUNDED PRECEDING to CURRENT ROW",
+      "CURRENT ROW only",
+      "Last row of partition only"
+    ],
+    "correct": 1,
+    "description": "Ranking functions default to a full-range partition frame since they need all rows."
+  },
+  {
+    "id": 22,
+    "question": "Which function returns relative change between rows?",
+    "choices": [
+      "LEAD()",
+      "LAG()",
+      "DIFFERENCE()",
+      "LAG/LEAD combined with arithmetic"
+    ],
+    "correct": 3,
+    "description": "Calculating deltas requires subtracting LAG result from current row or similar arithmetic."
+  },
+  {
+    "id": 23,
+    "question": "Which clause limits ranking functions to each group?",
+    "choices": [
+      "ORDER BY",
+      "LIMIT",
+      "PARTITION BY",
+      "DISTINCT"
+    ],
+    "correct": 2,
+    "description": "PARTITION BY creates independent ranking segments — e.g. rank by team inside tournament."
+  },
+  {
+    "id": 24,
+    "question": "Window functions do not reduce the number of rows because:",
+    "choices": [
+      "They only annotate each row with extra computed values",
+      "They must always keep nulls",
+      "They remove duplicates",
+      "They filter out values"
+    ],
+    "correct": 0,
+    "description": "Unlike GROUP BY, window functions keep the original row context intact while adding insights."
+  },
+  {
+    "id": 25,
+    "question": "To get the highest salary in each department without collapsing rows:",
+    "choices": [
+      "MAX(salary) GROUP BY dept",
+      "MAX(salary) OVER (PARTITION BY dept)",
+      "MAX(salary) OVER ORDER BY salary",
+      "MAX() rownum"
+    ],
+    "correct": 1,
+    "description": "Aggregation in a window returns department values without losing row granularity."
+  },
+  {
+    "id": 26,
+    "question": "RANGE frame requires:",
+    "choices": [
+      "ORDER BY numeric values",
+      "GROUP BY clause",
+      "Equality based partition",
+      "Null sorting disabled"
+    ],
+    "correct": 0,
+    "description": "RANGE uses numeric or time-value boundaries — ROWS works better for physical grouping."
+  },
+  {
+    "id": 27,
+    "question": "CUME_DIST() produces values in:",
+    "choices": [
+      "0 to 100",
+      "0 to 1",
+      "1 to 10",
+      "Only integers"
+    ],
+    "correct": 1,
+    "description": "CUME_DIST returns fractional rank positions normalized between 0 and 1."
+  },
+  {
+    "id": 28,
+    "question": "Window functions compute results based on:",
+    "choices": [
+      "Only rows that match WHERE",
+      "Rows in a defined limit or partition",
+      "Only rows with highest values",
+      "Only aggregated rows"
+    ],
+    "correct": 1,
+    "description": "Windows define analytic context — either entire dataset or partitioned subsets."
+  },
+  {
+    "id": 29,
+    "question": "Which of the following needs OVER() or it is invalid?",
+    "choices": [
+      "SUM()",
+      "COUNT()",
+      "RANK()",
+      "ROW_NUMBER()"
+    ],
+    "correct": 3,
+    "description": "Ranking functions like ROW_NUMBER must be used with an OVER() clause to define window behavior."
+  },
+  {
+    "id": 30,
+    "question": "Window functions are most suitable for:",
+    "choices": [
+      "Row-level analytic computations",
+      "Permanent aggregated table creation",
+      "Table restructuring",
+      "Character manipulation only"
+    ],
+    "correct": 0,
+    "description": "They are great for insights like trends, running totals, and positional comparisons while keeping row granularity."
+  }
+]

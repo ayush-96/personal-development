@@ -1,0 +1,338 @@
+[
+  {
+    "id": 1,
+    "question": "What is a subquery in SQL?",
+    "choices": [
+      "A secondary server that stores data",
+      "A query nested inside another query",
+      "A query executed after the main query finishes",
+      "A debugging statement"
+    ],
+    "correct": 1,
+    "description": "A subquery is an inner SELECT statement used inside another query's WHERE, FROM, or SELECT clause."
+  },
+  {
+    "id": 2,
+    "question": "Which clause often uses subqueries to filter results?",
+    "choices": [
+      "ORDER BY",
+      "WHERE",
+      "GROUP BY",
+      "LIMIT"
+    ],
+    "correct": 1,
+    "description": "Subqueries are commonly used inside WHERE to filter based on results of another query."
+  },
+  {
+    "id": 3,
+    "question": "A subquery that returns more than one row is valid when used with:",
+    "choices": [
+      "=",
+      "IN",
+      "BETWEEN",
+      "LIKE"
+    ],
+    "correct": 1,
+    "description": "IN, ANY, and ALL can work with multi-row subqueries, whereas = expects a single value."
+  },
+  {
+    "id": 4,
+    "question": "Which operator checks if a value matches ANY row from a subquery?",
+    "choices": [
+      "IN",
+      "EXISTS",
+      "ANY",
+      "ALL"
+    ],
+    "correct": 2,
+    "description": "ANY compares a value against each row returned by the subquery and succeeds if any condition matches."
+  },
+  {
+    "id": 5,
+    "question": "What does ALL do in a subquery comparison?",
+    "choices": [
+      "Returns all rows from the subquery",
+      "Requires the comparison to be true for every returned row",
+      "Randomly samples rows",
+      "Ignores NULL values"
+    ],
+    "correct": 1,
+    "description": "ALL requires the condition to be true for every row — often used with > ALL, < ALL comparisons."
+  },
+  {
+    "id": 6,
+    "question": "What type of subquery returns exactly one value?",
+    "choices": [
+      "Scalar subquery",
+      "Correlated subquery",
+      "Table subquery",
+      "Recursive subquery"
+    ],
+    "correct": 0,
+    "description": "Scalar subqueries return one column and one row — useful in SELECT and WHERE clauses."
+  },
+  {
+    "id": 7,
+    "question": "Where can a subquery that returns multiple columns be used?",
+    "choices": [
+      "SELECT list only",
+      "FROM clause only",
+      "ORDER BY clause only",
+      "HAVING clause only"
+    ],
+    "correct": 1,
+    "description": "Only FROM can accept multi-column subqueries, as they must form a virtual table."
+  },
+  {
+    "id": 8,
+    "question": "What is a correlated subquery?",
+    "choices": [
+      "A subquery that runs just once",
+      "A subquery that references columns from the outer query",
+      "A query without a parent",
+      "A recursive CTE"
+    ],
+    "correct": 1,
+    "description": "Correlated subqueries depend on each row of the parent query — executed repeatedly per row."
+  },
+  {
+    "id": 9,
+    "question": "Which type of subquery executes once per row of the outer query?",
+    "choices": [
+      "Scalar subquery",
+      "Correlated subquery",
+      "Inline view",
+      "Recursive CTE"
+    ],
+    "correct": 1,
+    "description": "Correlated subqueries act like nested loops, evaluating for each row that outer query returns."
+  },
+  {
+    "id": 10,
+    "question": "What does EXISTS return?",
+    "choices": [
+      "Count of rows",
+      "True/False",
+      "First matching row",
+      "All rows"
+    ],
+    "correct": 1,
+    "description": "EXISTS returns TRUE if the subquery returns at least one row — efficient when combined with correlated subqueries."
+  },
+  {
+    "id": 11,
+    "question": "EXISTS performs best when:",
+    "choices": [
+      "The subquery returns millions of rows",
+      "The subquery returns one or few rows",
+      "The query has no WHERE condition",
+      "Indexes are missing"
+    ],
+    "correct": 1,
+    "description": "EXISTS stops scanning after it finds the first qualifying row — very performant."
+  },
+  {
+    "id": 12,
+    "question": "Which clause must be present for a correlated subquery?",
+    "choices": [
+      "JOIN",
+      "REFERENCES",
+      "WHERE",
+      "OVER()"
+    ],
+    "correct": 2,
+    "description": "The WHERE clause allows referencing outer query columns — a key condition for correlated behavior."
+  },
+  {
+    "id": 13,
+    "question": "Which comparison operator cannot be used with a subquery returning multiple rows?",
+    "choices": [
+      ">",
+      "IN",
+      "ANY",
+      "ALL"
+    ],
+    "correct": 0,
+    "description": ">, <, or = expect single results unless combined with ANY/ALL — multi-row values cause errors."
+  },
+  {
+    "id": 14,
+    "question": "What must the SELECT list of a subquery inside WHERE using IN include?",
+    "choices": [
+      "Only numeric values",
+      "Only a single column",
+      "Exactly two columns",
+      "All columns"
+    ],
+    "correct": 1,
+    "description": "IN subqueries must return exactly one column because the comparison is against a single column."
+  },
+  {
+    "id": 15,
+    "question": "Which subquery placement allows it to act like a virtual table?",
+    "choices": [
+      "SELECT",
+      "WHERE",
+      "FROM",
+      "HAVING"
+    ],
+    "correct": 2,
+    "description": "Subqueries in the FROM clause are called inline views — they behave like a temporary table."
+  },
+  {
+    "id": 16,
+    "question": "Subqueries in the SELECT clause are evaluated:",
+    "choices": [
+      "Once per query",
+      "Once per row in the result",
+      "Only if sorted",
+      "Only when aggregated"
+    ],
+    "correct": 1,
+    "description": "Scalar subqueries in SELECT execute per row of output."
+  },
+  {
+    "id": 17,
+    "question": "What error occurs if a scalar subquery returns more than one row?",
+    "choices": [
+      "Duplicate key violation",
+      "Subquery returns more than one row",
+      "Syntax error",
+      "Aggregate missing"
+    ],
+    "correct": 1,
+    "description": "Scalar subqueries must produce exactly one row — otherwise execution fails."
+  },
+  {
+    "id": 18,
+    "question": "What does NOT IN return when the subquery includes NULL?",
+    "choices": [
+      "TRUE",
+      "FALSE",
+      "EMPTY",
+      "UNKNOWN / no rows returned"
+    ],
+    "correct": 3,
+    "description": "NULL in NOT IN creates UNKNOWN comparisons → can cause query to unexpectedly return 0 rows."
+  },
+  {
+    "id": 19,
+    "question": "Which is the most efficient for checking existence?",
+    "choices": [
+      "COUNT(*) > 0",
+      "IN",
+      "EXISTS",
+      "= ANY"
+    ],
+    "correct": 2,
+    "description": "EXISTS short-circuits as soon as a match is found — COUNT scans all rows."
+  },
+  {
+    "id": 20,
+    "question": "What is a nested subquery?",
+    "choices": [
+      "Two or more subqueries inside each other",
+      "A recursive operation",
+      "A CTE replacement",
+      "A duplicate query copy"
+    ],
+    "correct": 0,
+    "description": "Nested subqueries stack multiple levels of SELECT statements — used in complex filtering or transformation logic."
+  },
+  {
+    "id": 21,
+    "question": "Which condition allows subqueries in the SELECT list?",
+    "choices": [
+      "Subquery returns 1 column & 1 row",
+      "Subquery uses GROUP BY",
+      "Subquery has ORDER BY",
+      "Main query uses DISTINCT"
+    ],
+    "correct": 0,
+    "description": "Scalar conditions — exactly one column and one row output — must be satisfied."
+  },
+  {
+    "id": 22,
+    "question": "What is the benefit of using a subquery instead of a JOIN?",
+    "choices": [
+      "Easier readability in some filtering cases",
+      "Faster performance always",
+      "Guaranteed distinct results",
+      "Avoids NULLs"
+    ],
+    "correct": 0,
+    "description": "Subqueries can simplify logical structure when filtering conditions rely on derived sets."
+  },
+  {
+    "id": 23,
+    "question": "Which clause can be replaced by a subquery?",
+    "choices": [
+      "JOIN",
+      "GROUP BY",
+      "ORDER BY",
+      "SELECT DISTINCT"
+    ],
+    "correct": 0,
+    "description": "JOINs and subqueries can produce equivalent results — JOINs often perform better."
+  },
+  {
+    "id": 24,
+    "question": "In which clause can correlated subqueries appear?",
+    "choices": [
+      "SELECT",
+      "WHERE",
+      "FROM",
+      "All of the above"
+    ],
+    "correct": 3,
+    "description": "Correlated subqueries may be used in any clause while referencing the outer query."
+  },
+  {
+    "id": 25,
+    "question": "Which SQL feature is often faster than correlated subqueries?",
+    "choices": [
+      "Window functions",
+      "Aggregations",
+      "CTEs",
+      "ORDER BY"
+    ],
+    "correct": 0,
+    "description": "Window functions avoid repeated subquery execution by evaluating results in partitions."
+  },
+  {
+    "id": 26,
+    "question": "Why are correlated subqueries slower?",
+    "choices": [
+      "They remove indexes",
+      "They execute the subquery repeatedly for each row",
+      "They require sorting",
+      "They only run on temporary tables"
+    ],
+    "correct": 1,
+    "description": "For each outer row, the inner query re-runs — creating nested-loop-like processing."
+  },
+  {
+    "id": 27,
+    "question": "What must be true for a comparison using = with a subquery?",
+    "choices": [
+      "Subquery returns exactly one column and one row",
+      "Subquery is ordered",
+      "NULL values must exist",
+      "All rows must be distinct"
+    ],
+    "correct": 0,
+    "description": "Equality operators require scalar behavior — one column and one returned value only."
+  },
+  {
+    "id": 28,
+    "question": "A multi-level nested subquery inside WHERE is evaluated:",
+    "choices": [
+      "From the innermost to the outermost",
+      "From the outermost to the innermost",
+      "Randomly by optimizer",
+      "Only after ORDER BY executes"
+    ],
+    "correct": 0,
+    "description": "SQL evaluates nested subqueries starting from the deepest level upward."
+  }
+]

@@ -1,0 +1,317 @@
+[
+  {
+    "id": 1,
+    "question": "Which engine executes all queries in Databricks SQL (DBSQL) as of 2025?",
+    "choices": [
+      "Spark SQL",
+      "Photon exclusively (100 % of workloads)",
+      "Photon + fallback to Spark for rare features",
+      "Presto"
+    ],
+    "correct": 1,
+    "description": "Since 2024, every single query on every DBSQL warehouse (Pro & Serverless) runs on Photon natively.\nNo fallback path exists anymore."
+  },
+  {
+    {
+    "id": 2,
+    "question": "Serverless SQL warehouses differ from Pro SQL warehouses in that they:",
+    "choices": [
+      "Are slower",
+      "Start instantly, auto-scale to zero, run Predictive Optimization automatically, no cluster config needed",
+      "Only support dashboards",
+      "Cost more per DBU"
+    ],
+    "correct": 1,
+    "description": "Serverless warehouses eliminate all infrastructure management and include Predictive Optimization + Liquid Clustering maintenance for free."
+  },
+  {
+    "id": 3,
+    "question": "What is the maximum query result size that can be downloaded from DBSQL UI?",
+    "choices": [
+      "1 GB",
+      "10 GB",
+      "100 GB",
+      "Unlimited (streaming download)"
+    ],
+    "correct": 3,
+    "description": "Downloads stream directly from cloud storage → no practical limit beyond browser/network constraints."
+  },
+  {
+    "id": 4,
+    "question": "Which feature allows a dashboard to refresh automatically without re-running the underlying queries?",
+    "choices": [
+      "Live results",
+      "Result cache sharing",
+      "Query federation cache",
+      "Photon cache"
+    ],
+    "correct": 1,
+    "description": "If another user (or scheduled refresh) ran the same query recently, subsequent dashboard loads reuse cached results for seconds-to-minutes."
+  },
+  {
+    "id": 5,
+    "question": "Databricks SQL Alerts can be based on:",
+    "choices": [
+      "Only numeric values",
+      "Numeric, percentage, or custom SQL condition returning a single row",
+      "Only row count",
+      "Only text"
+    ],
+    "correct": 1,
+    "description": "Alert condition is any SQL query; alert fires when the query returns ≥1 row."
+  },
+ 6,
+  {
+    "id": 6,
+    "question": "What is the default and maximum refresh schedule frequency for a DBSQL dashboard?",
+    "choices": [
+      "Every 1 minute / max 5 minutes",
+      "Every 1 minute / max 1 minute (serverless) or Photon-accelerated)",
+      "Every 5 minutes / max 1 hour",
+      "Every 10 seconds"
+    ],
+    "correct": 1,
+    "description": "Serverless + Photon enable true 1-minute (or faster via API) scheduled refreshes."
+  },
+  {
+    "id": 7,
+    "question": "Which governance controls are enforced inside Databricks SQL queries?",
+    "choices": [
+      "Only table ACLs",
+      "Unity Catalog table/column ACLs, row filters, column masking, and data sharing restrictions",
+      "Only schema-level",
+      "None"
+    ],
+    "correct": 1,
+    "description": "DBSQL respects the exact same Unity Catalog privileges, masking, and row-level security as Spark."
+  },
+  {
+    "id": 8,
+    "question": "Query Insights (Statement Execution Plan) shows which of these in the UI?",
+    "choices": [
+      "Only logical plan",
+      "Physical plan, runtime stats, spilled data, skew warnings, Photon vs Spark fallback",
+      "Only duration",
+      "Only cost"
+    ],
+    "correct": 1,
+    "description": "Full explain plan + skew/spill warnings + duration breakdown by stage."
+  },
+  {
+    "id": 9,
+    "question": "What happens when you share a dashboard with 'Can Run' permission?",
+    "choices": [
+      "Recipient sees static data",
+      "Recipient can refresh the dashboard and re-run all queries live",
+      "Only view",
+      "Can edit"
+    ],
+    "correct": 1,
+    "description": "'Can Run' = live refresh capability; 'Can View' = latest cached results only."
+  },
+  {
+    "id": 10,
+    "question": "Which SQL command is supported in DBSQL but NOT in Databricks Spark SQL notebooks?",
+    "choices": [
+      "CREATE TABLE",
+      "DESCRIBE HISTORY",
+      "PIVOT / UNPIVOT",
+      "SHOW TBLPROPERTIES"
+    ],
+    "correct": 2,
+    "description": "PIVOT and UNPIVOT are fully supported in DBSQL and serverless SQL but still missing in Spark SQL (as of DBR 15.x)."
+  },
+  {
+    "id": 11,
+    "question": "Lakehouse Monitoring quality reports can be visualized directly inside:",
+    "choices": [
+      "Notebooks only",
+      "DBSQL dashboards using system.monitoring tables",
+      "Only Monitoring UI",
+      "Delta Live Tables"
+    ],
+    "correct": 1,
+    "description": "All monitoring metrics are exposed under system.monitoring schema for custom SQL dashboards."
+  },
+  {
+    "id": 12,
+    "question": "What is the isolation level for queries running on Serverless SQL warehouses?",
+    "choices": [
+      "Read uncommitted",
+      "Snapshot isolation (same as Delta Lake default)",
+      "Serializable",
+      "Read committed"
+    ],
+    "correct": 1,
+    "description": "All Delta reads in DBSQL are snapshot isolated as of a specific table version → no dirty reads, always consistent."
+  },
+  {
+    "id": 13,
+    "question": "Which of these objects can you create directly from DBSQL UI?",
+    "choices": [
+      "Clusters",
+      "Dashboards, alerts, queries, data visualizations, Lakehouse Monitoring profiles",
+      "Jobs",
+      "ML models"
+    ],
+    "correct": 1,
+    "description": "Full self-service BI experience inside the same platform."
+  },
+  {
+    "id": 14,
+    "question": "A user has only SELECT on a view with row filtering. They run SELECT * FROM view. What do they see?",
+    "choices": [
+      "All rows (filter ignored)",
+      "Only rows they are allowed to see according to the filter",
+      "Query fails",
+      "Only column-masked data"
+    ],
+    "correct": 1,
+    "description": "Row-level security defined in the view is strictly enforced in DBSQL."
+  },
+  {
+    "id": 15,
+    "question": "What is the maximum number of parameters a SQL query in DBSQL can have?",
+    "choices": [
+      "10",
+      "50",
+      "No limit",
+      "100"
+    ],
+    "correct": 2,
+    "description": "Unlimited named or positional parameters supported."
+  },
+  {
+    "id": 16,
+    "question": "Query History in DBSQL retains data for how long?",
+    "choices": [
+      "30 days",
+      "90 days",
+      "1 year",
+      "Forever (in system.access.audit)"
+    ],
+    "correct": 1,
+    "description": "Query text, user, duration, status retained 90 days in UI and system tables."
+  },
+  {
+    "id": 17,
+    "question": "Which warehouse type supports 'Auto Stop' = 0 minutes?",
+    "choices": [
+      "Pro SQL only",
+      "Serverless SQL only",
+      "Both",
+      "Neither"
+    ],
+    "correct": 1,
+    "description": "Serverless never stops and is always ready; Pro warehouses minimum auto-stop is 5 minutes."
+  },
+  {
+    "id": 18,
+    "question": "Databricks SQL supports which visualization types natively?",
+    "choices": [
+      "Bar, line, pie, scatter, table",
+      "All of the above + sankey, sunburst, counter, pivot table, map, box plot",
+      "Only bar/line",
+      "Only Tableau-style"
+    ],
+    "correct": 1,
+    "description": "Very rich built-in visualization library, no need for third-party tools."
+  },
+  {
+    {
+    "id": 19,
+    "question": "You can schedule a query to run and deliver results via:",
+    "choices": [
+      "Email only",
+      "Email, Slack, Microsoft Teams, webhook",
+      "Only dashboard",
+      "Only alert"
+    ],
+    "correct": 1,
+    "description": "Scheduled query results can be delivered to multiple channels with custom text + CSV/JSON attachment."
+  },
+  {
+    "id": 20,
+    "question": "What does 'Query Federation' allow you to do directly from a SQL editor?",
+    "choices": [
+      "Join Delta with Snowflake",
+      "Query MySQL, Postgres, SQL Server, Snowflake, Redshift, BigQuery as if they were native tables",
+      "Only read from S3",
+      "Only write"
+    ],
+    "correct": 1,
+    "description": "Foreign catalog tables appear alongside Delta tables with full UC governance."
+  },
+  {
+    "id": 21,
+    "question": "Which statement is true about cost allocation in DBSQL?",
+    "choices": [
+      "All charged to workspace",
+      "Serverless and Pro warehouses can be tagged and billed to different cost centers",
+      "Only DBU consumption",
+      "Free"
+    ],
+    "correct": 1,
+    "description": "Warehouse-level tags propagate to billing records for chargeback/showback."
+  },
+  {
+    "id": 22,
+    "question": "AI/BI Genie is:",
+    "choices": [
+      "A separate product",
+      "Natural-language → SQL → visualization inside DBSQL (formerly BI Genie)",
+      "Only for dashboards",
+      "Preview only"
+    ],
+    "correct": 1,
+    "description": "Ask questions in plain English → Genie generates SQL + chart instantly."
+  },
+  {
+    "id": 23,
+    "question": "Which SQL extension allows incremental materialization without writing Spark code?",
+    "choices": [
+      "CREATE INCREMENTAL TABLE",
+      "CREATE OR REFRESH STREAMING TABLE",
+      "CREATE LIVE TABLE",
+      "APPLY CHANGES INTO"
+    ],
+    "correct": 1,
+    "description": "CREATE OR REFRESH STREAMING TABLE is the SQL-native version of streaming DLT tables."
+  },
+  {
+    "id": 24,
+    "question": "DBSQL supports publishing dashboards to external sites via:",
+    "choices": [
+      "Public link (no auth)",
+      "Secure embed with SSO + row-level security preserved",
+      "Only internal",
+      "Only Power BI"
+    ],
+    "correct": 1,
+    "description": "Secure embed keeps Unity Catalog RLS intact even for external viewers."
+  },
+  {
+    "id": 25,
+    "question": "The Query Profile tab can show:",
+    "choices": [
+      "Only duration",
+      "Execution timeline, stage durations, input/output sizes, skew heatmap, spill, operator tree",
+      "Only cost",
+      "Only SQL text"
+    ],
+    "correct": 1,
+    "description": "description": "Very detailed performance diagnostics comparable to Spark UI but optimized for SQL."
+  },
+  {
+    "id": 26,
+    "question": "As of Nov 2025, which of these is NOT available in Databricks SQL?",
+    "choices": [
+      "PIVOT/UNPIVOT",
+      "Window functions",
+      "Recursive CTEs",
+      "INSERT OVERWRITE"
+    ],
+    "correct": 3,
+    "description": "INSERT OVERWRITE is still Spark-only; use CREATE OR REPLACE TABLE AS or MERGE in DBSQL."
+  }
+]

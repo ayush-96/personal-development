@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    "question": "What does the GROUP BY clause do in SQL?",
+    "choices": [
+      "Groups rows that have the same values into summary rows",
+      "Sorts the result set",
+      "Filters rows before aggregation",
+      "Counts distinct values only"
+    ],
+    "correct": 0,
+    "description": "GROUP BY groups rows based on common column values and allows aggregate functions to be applied per group."
+  },
+  {
+    "id": 2,
+    "question": "Which aggregate function is used to count non-NULL values?",
+    "choices": [
+      "COUNT(*)",
+      "COUNT(column_name)",
+      "SUM(column_name)",
+      "COUNT(DISTINCT column_name)"
+    ],
+    "correct": 1,
+    "description": "COUNT(column_name) ignores NULL values, while COUNT(*) counts all rows including those with NULLs."
+  },
+  {
+    "id": 3,
+    "question": "Which function returns the total number of rows including NULLs?",
+    "choices": [
+      "COUNT(*)",
+      "COUNT(column_name)",
+      "COUNT(DISTINCT column_name)",
+      "ROWCOUNT()"
+    ],
+    "correct": 0,
+    "description": "COUNT(*) counts every row in the result set, regardless of column NULL values."
+  },
+  {
+    "id": 4,
+    "question": "Which clause filters aggregated results after GROUP BY is applied?",
+    "choices": [
+      "WHERE",
+      "ORDER BY",
+      "HAVING",
+      "LIMIT"
+    ],
+    "correct": 2,
+    "description": "HAVING filters groups after aggregation, whereas WHERE filters rows before aggregation."
+  },
+  {
+    "id": 5,
+    "question": "Which aggregate returns the smallest value in a numeric column?",
+    "choices": [
+      "LEAST()",
+      "MIN()",
+      "SMALL()",
+      "LOWEST()"
+    ],
+    "correct": 1,
+    "description": "MIN() returns the lowest value in a column, commonly used with GROUP BY."
+  },
+  {
+    "id": 6,
+    "question": "What does COUNT(DISTINCT column) do?",
+    "choices": [
+      "Counts all rows",
+      "Counts only rows where column = DISTINCT",
+      "Counts rows after sorting",
+      "Counts unique non-NULL values"
+    ],
+    "correct": 3,
+    "description": "DISTINCT removes duplicates before counting. NULL values are still ignored."
+  },
+  {
+    "id": 7,
+    "question": "When you use GROUP BY without an aggregate function, SQL will:",
+    "choices": [
+      "Return syntax error",
+      "Return one row per group",
+      "Return duplicate rows",
+      "Return full table unchanged"
+    ],
+    "correct": 1,
+    "description": "GROUP BY forces rows to collapse into groups, even without aggregates."
+  },
+  {
+    "id": 8,
+    "question": "Which valid query counts customers per region?",
+    "choices": [
+      "SELECT region, COUNT(*) FROM customers GROUP BY region;",
+      "SELECT COUNT(region) GROUP BY region FROM customers;",
+      "GROUP BY region SELECT region, COUNT(*) FROM customers;",
+      "SELECT region, GROUP COUNT(*) customers;"
+    ],
+    "correct": 0,
+    "description": "Syntax: SELECT group_column, aggregates FROM table GROUP BY group_column."
+  },
+  {
+    "id": 9,
+    "question": "What happens when a non-grouped column is included in SELECT along with GROUP BY?",
+    "choices": [
+      "SQL chooses a random value",
+      "It generates an aggregation",
+      "It results in an error",
+      "It sorts automatically"
+    ],
+    "correct": 2,
+    "description": "SQL requires all selected columns to be aggregated or included in GROUP BY for deterministic results."
+  },
+  {
+    "id": 10,
+    "question": "Which statement is true?",
+    "choices": [
+      "WHERE filters groups",
+      "HAVING filters groups",
+      "WHERE works after HAVING",
+      "HAVING cannot use aggregate functions"
+    ],
+    "correct": 1,
+    "description": "HAVING is applied after aggregates are computed; WHERE applies before aggregation."
+  },
+  {
+    "id": 11,
+    "question": "Which aggregate calculates the average numeric value?",
+    "choices": [
+      "SUM()",
+      "AVG()",
+      "MEAN()",
+      "MEDIAN()"
+    ],
+    "correct": 1,
+    "description": "AVG() computes the arithmetic mean. MEDIAN() isn’t supported in standard SQL."
+  },
+  {
+    "id": 12,
+    "question": "Which SQL clause is always executed before GROUP BY?",
+    "choices": [
+      "HAVING",
+      "SELECT",
+      "WHERE",
+      "ORDER BY"
+    ],
+    "correct": 2,
+    "description": "WHERE filters rows prior to grouping. HAVING applies after grouping."
+  },
+  {
+    "id": 13,
+    "question": "To find the highest salary per department, which function is used?",
+    "choices": [
+      "TOP()",
+      "MAX()",
+      "HIGHEST()",
+      "GREATEST()"
+    ],
+    "correct": 1,
+    "description": "MAX() returns the top value per group when used with GROUP BY."
+  },
+  {
+    "id": 14,
+    "question": "What does SUM() return for non-matching groups?",
+    "choices": [
+      "0",
+      "NULL",
+      "Error",
+      "Negative value"
+    ],
+    "correct": 0,
+    "description": "SUM() returns 0 for empty matched rows, unlike MIN/MAX which usually return NULL."
+  },
+  {
+    "id": 15,
+    "question": "Can HAVING be used without GROUP BY?",
+    "choices": [
+      "No, it always requires GROUP BY",
+      "Yes, but typically used with aggregates",
+      "Only in PostgreSQL",
+      "Only when DISTINCT is used"
+    ],
+    "correct": 1,
+    "description": "HAVING filters aggregate results — GROUP BY makes sense but is not mandatory."
+  },
+  {
+    "id": 16,
+    "question": "Which clause determines the grouping granularity?",
+    "choices": [
+      "WHERE",
+      "GROUP BY",
+      "ORDER BY",
+      "ROLLUP"
+    ],
+    "correct": 1,
+    "description": "The columns specified in GROUP BY define how rows are divided into groups."
+  },
+  {
+    "id": 17,
+    "question": "What does ROLLUP add to GROUP BY queries?",
+    "choices": [
+      "Filtering by rank",
+      "Group totals and overall totals",
+      "Sorting by aggregated values",
+      "Removing NULLs"
+    ],
+    "correct": 1,
+    "description": "ROLLUP creates hierarchical subtotals and a grand total — useful for reporting."
+  },
+  {
+    "id": 18,
+    "question": "Which keyword adds grouping sets including individual and combined groups?",
+    "choices": [
+      "GROUP ALL",
+      "CUBE",
+      "UNION GROUP",
+      "EXTEND GROUP"
+    ],
+    "correct": 1,
+    "description": "GROUP BY CUBE creates all possible grouping combinations of dimension columns."
+  },
+  {
+    "id": 19,
+    "question": "What is GROUPING SETS used for?",
+    "choices": [
+      "Filtering distinct groups",
+      "Custom group combinations for reports",
+      "Sorting aggregated results",
+      "Eliminating NULLs from groups"
+    ],
+    "correct": 1,
+    "description": "GROUPING SETS allow defining specific group levels instead of computing every combination."
+  },
+  {
+    "id": 20,
+    "question": "What is the role of DISTINCT inside SUM(DISTINCT column)?",
+    "choices": [
+      "Sums only non-NULL values",
+      "Sums only unique values",
+      "Removes 0s before summation",
+      "Changes sort order before sum"
+    ],
+    "correct": 1,
+    "description": "SUM(DISTINCT) eliminates duplicates before aggregation to avoid inflated totals."
+  },
+  {
+    "id": 21,
+    "question": "What will COUNT(*) return for a table with zero rows?",
+    "choices": [
+      "NULL",
+      "0",
+      "Error",
+      "Negative number"
+    ],
+    "correct": 1,
+    "description": "COUNT(*) always returns a numeric count; for empty sets, the count is 0."
+  },
+  {
+    "id": 22,
+    "question": "Which operator allows applying aggregates without grouping columns?",
+    "choices": [
+      "No operator needed",
+      "WINDOW",
+      "OVER()",
+      "BY()"
+    ],
+    "correct": 2,
+    "description": "OVER() defines window frames for analytic versions of aggregates e.g. SUM(col) OVER()."
+  },
+  {
+    "id": 23,
+    "question": "To filter groups with total orders > 10, which is correct?",
+    "choices": [
+      "WHERE SUM(orders) > 10",
+      "HAVING SUM(orders) > 10",
+      "GROUP WHERE orders > 10",
+      "LIMIT SUM(orders) > 10"
+    ],
+    "correct": 1,
+    "description": "Aggregates are evaluated in HAVING, since WHERE cannot reference aggregated values."
+  },
+  {
+    "id": 24,
+    "question": "Which statement is true about AVG()?",
+    "choices": [
+      "It includes NULLs and counts them as 0",
+      "It ignores NULL values",
+      "It converts NULLs to median",
+      "It errors when NULLs are present"
+    ],
+    "correct": 1,
+    "description": "AVG() ignores NULL rows to avoid affecting the denominator incorrectly."
+  },
+  {
+    "id": 25,
+    "question": "Which query shows revenue per region sorted from highest to lowest?",
+    "choices": [
+      "SELECT region, SUM(revenue) FROM sales ORDER BY 2 DESC;",
+      "SELECT region, SUM(revenue) FROM sales GROUP BY region ORDER BY SUM(revenue) DESC;",
+      "SELECT region FROM sales GROUP BY region DESC;",
+      "SELECT SUM(revenue), region FROM sales DESC;"
+    ],
+    "correct": 1,
+    "description": "The ORDER BY uses the aggregate value to sort results after grouping."
+  },
+  {
+    "id": 26,
+    "question": "Which ensures groups are arranged alphabetically?",
+    "choices": [
+      "GROUP BY region ASC",
+      "ORDER BY region",
+      "HAVING region ASC",
+      "WHERE region ORDER"
+    ],
+    "correct": 1,
+    "description": "ORDER BY defines the final sorted output — GROUP BY only organizes grouping logic."
+  },
+  {
+    "id": 27,
+    "question": "What happens with SUM(column) when all values are NULL?",
+    "choices": [
+      "Returns 0",
+      "Returns NULL",
+      "Returns error",
+      "Ignores NULLs but returns garbage"
+    ],
+    "correct": 1,
+    "description": "SUM() returns NULL when no numeric values exist — unlike COUNT which returns 0."
+  },
+  {
+    "id": 28,
+    "question": "Which returns the number of unique departments in a table?",
+    "choices": [
+      "SELECT DISTINCT department FROM employees;",
+      "SELECT COUNT(department) FROM employees;",
+      "SELECT COUNT(DISTINCT department) FROM employees;",
+      "SELECT UNIQUE(department) FROM employees;"
+    ],
+    "correct": 2,
+    "description": "COUNT(DISTINCT column) counts unique values efficiently in an aggregated result."
+  },
+  {
+    "id": 29,
+    "question": "Which keyword generates subtotals along grouping dimensions?",
+    "choices": [
+      "ROLLUP",
+      "SUBTOTAL",
+      "SEQUENCE",
+      "WINDOW"
+    ],
+    "correct": 0,
+    "description": "ROLLUP adds parent-level totals and one final grand total row."
+  },
+  {
+    "id": 30,
+    "question": "What does HAVING AVG(price) > 100 mean?",
+    "choices": [
+      "Filter rows where price > 100",
+      "Filter groups where avg price > 100",
+      "Sort by price > 100",
+      "Sets price = 100"
+    ],
+    "correct": 1,
+    "description": "HAVING filters based on aggregated expressions per group, not per row."
+  },
+  {
+    "id": 31,
+    "question": "Which correctly finds customers with more than 5 orders?",
+    "choices": [
+      "SELECT customer_id FROM orders WHERE COUNT(*) > 5;",
+      "SELECT customer_id FROM orders GROUP BY customer_id HAVING COUNT(*) > 5;",
+      "SELECT customer_id HAVING COUNT(*) > 5 GROUP BY customer_id;",
+      "SELECT customer_id, COUNT(*) FILTER 5;"
+    ],
+    "correct": 1,
+    "description": "Group by customer_id, then filter those groups using HAVING."
+  },
+  {
+    "id": 32,
+    "question": "Which shows the correct order of SQL execution involving GROUP BY?",
+    "choices": [
+      "SELECT → WHERE → GROUP BY → HAVING → ORDER BY",
+      "WHERE → HAVING → SELECT → GROUP BY → ORDER BY",
+      "GROUP BY → WHERE → HAVING → ORDER BY → SELECT",
+      "ORDER BY → SELECT → GROUP BY → HAVING → WHERE"
+    ],
+    "correct": 0,
+    "description": "Logical processing flows: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY."
+  }
+]

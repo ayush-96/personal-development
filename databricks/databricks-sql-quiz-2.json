@@ -59,7 +59,6 @@
         "correct": 1,
         "description": "Alert condition is any SQL query; alert fires when the query returns ≥1 row."
     },
-    6,
     {
         "id": 6,
         "question": "What is the default and maximum refresh schedule frequency for a DBSQL dashboard?",

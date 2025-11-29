@@ -1,0 +1,360 @@
+[
+  {
+    "id": 1,
+    "question": "Which SQL statement is used to retrieve data from a database?",
+    "choices": [
+      "GET",
+      "SELECT",
+      "FETCH",
+      "EXTRACT"
+    ],
+    "correct": 1,
+    "description": "SELECT is the core SQL command used to query data from tables in a database."
+  },
+  {
+    "id": 2,
+    "question": "Which clause specifies the table to retrieve data from?",
+    "choices": [
+      "FROM",
+      "WHERE",
+      "TABLE",
+      "INTO"
+    ],
+    "correct": 0,
+    "description": "The FROM clause defines the source table for the query."
+  },
+  {
+    "id": 3,
+    "question": "Which SQL keyword removes duplicate rows in the result?",
+    "choices": [
+      "ALL",
+      "DISTINCT",
+      "UNIQUE",
+      "REMOVE DUPES"
+    ],
+    "correct": 1,
+    "description": "DISTINCT filters out duplicate values and returns only unique results."
+  },
+  {
+    "id": 4,
+    "question": "What does the WHERE clause do?",
+    "choices": [
+      "Sorts results",
+      "Filters rows",
+      "Groups rows",
+      "Defines aliases"
+    ],
+    "correct": 1,
+    "description": "WHERE filters rows before grouping or sorting takes place."
+  },
+  {
+    "id": 5,
+    "question": "Which operator checks for a value within a list?",
+    "choices": [
+      "BETWEEN",
+      "IN",
+      "LIKE",
+      "HAS"
+    ],
+    "correct": 1,
+    "description": "IN checks membership in a list and simplifies multiple OR conditions."
+  },
+  {
+    "id": 6,
+    "question": "The LIKE operator is used for:",
+    "choices": [
+      "Exact matches",
+      "Date comparison",
+      "Pattern matching",
+      "Foreign key lookup"
+    ],
+    "correct": 2,
+    "description": "LIKE uses % and _ symbols to match text patterns in queries."
+  },
+  {
+    "id": 7,
+    "question": "Which wildcard in LIKE matches any number of characters?",
+    "choices": [
+      "?",
+      "%",
+      "*",
+      "_"
+    ],
+    "correct": 1,
+    "description": "% represents zero or more characters in string matching."
+  },
+  {
+    "id": 8,
+    "question": "What does ORDER BY do?",
+    "choices": [
+      "Filters rows",
+      "Sorts result rows",
+      "Removes duplicates",
+      "Updates rows"
+    ],
+    "correct": 1,
+    "description": "ORDER BY sorts the result set in ascending or descending order."
+  },
+  {
+    "id": 9,
+    "question": "Which keyword sorts results in descending order?",
+    "choices": [
+      "DESC",
+      "ASC",
+      "DOWN",
+      "REVERSE"
+    ],
+    "correct": 0,
+    "description": "DESC explicitly sorts in descending order, while ASC is default ascending."
+  },
+  {
+    "id": 10,
+    "question": "What does the LIMIT clause do?",
+    "choices": [
+      "Restricts number of rows returned",
+      "Restricts table size",
+      "Restricts column count",
+      "Blocks NULL values"
+    ],
+    "correct": 0,
+    "description": "LIMIT is used for pagination and performance tuning by restricting output size."
+  },
+  {
+    "id": 11,
+    "question": "Which function counts rows?",
+    "choices": [
+      "SUM()",
+      "COUNT()",
+      "ROWS()",
+      "LEN()"
+    ],
+    "correct": 1,
+    "description": "COUNT() returns number of rows or non-NULL values depending on usage."
+  },
+  {
+    "id": 12,
+    "question": "Which clause groups rows for aggregate functions?",
+    "choices": [
+      "GROUP BY",
+      "ORDER BY",
+      "FORMAT",
+      "CLUSTER BY"
+    ],
+    "correct": 0,
+    "description": "GROUP BY clusters rows into groups before applying aggregates like SUM or AVG."
+  },
+  {
+    "id": 13,
+    "question": "Which clause filters aggregated results?",
+    "choices": [
+      "WHERE",
+      "HAVING",
+      "ON",
+      "LIMIT"
+    ],
+    "correct": 1,
+    "description": "HAVING filters groups formed after GROUP BY — WHERE filters before grouping."
+  },
+  {
+    "id": 14,
+    "question": "What does SELECT * return?",
+    "choices": [
+      "All columns",
+      "All tables",
+      "All schemas",
+      "All databases"
+    ],
+    "correct": 0,
+    "description": "SELECT * retrieves all defined columns of the queried table(s)."
+  },
+  {
+    "id": 15,
+    "question": "Which operator checks for NULL values?",
+    "choices": [
+      "= NULL",
+      "== NULL",
+      "IS NULL",
+      "ISNULL"
+    ],
+    "correct": 2,
+    "description": "NULL is not a value — proper comparison is IS NULL or IS NOT NULL."
+  },
+  {
+    "id": 16,
+    "question": "Which clause renames a column or table in output?",
+    "choices": [
+      "RENAME",
+      "ALIAS",
+      "AS",
+      "CHANGE"
+    ],
+    "correct": 2,
+    "description": "AS allows alias definition for columns or tables to improve readability."
+  },
+  {
+    "id": 17,
+    "question": "Which keyword fetches unique combinations of multiple columns?",
+    "choices": [
+      "KEY",
+      "DISTINCT",
+      "UNION",
+      "UNIQUE"
+    ],
+    "correct": 1,
+    "description": "DISTINCT applies to entire row tuples, not just a single column."
+  },
+  {
+    "id": 18,
+    "question": "UNION removes duplicate rows by default.",
+    "choices": [
+      "True",
+      "False"
+    ],
+    "correct": 0,
+    "description": "UNION DISTINCT is default. Use UNION ALL to include duplicates."
+  },
+  {
+    "id": 19,
+    "question": "Which clause combines rows based on matching column values?",
+    "choices": [
+      "CONNECT",
+      "JOIN",
+      "MATCH",
+      "MERGE"
+    ],
+    "correct": 1,
+    "description": "JOIN logically relates rows across multiple tables using key columns."
+  },
+  {
+    "id": 20,
+    "question": "Which join returns unmatched rows from the left table?",
+    "choices": [
+      "INNER JOIN",
+      "LEFT JOIN",
+      "RIGHT JOIN",
+      "FULL JOIN"
+    ],
+    "correct": 1,
+    "description": "LEFT JOIN includes all left rows and NULL-fills missing matches on the right."
+  },
+  {
+    "id": 21,
+    "question": "What does BETWEEN do?",
+    "choices": [
+      "Matches values in a specific set",
+      "Matches value within a range (inclusive)",
+      "Finds NULLs",
+      "Reverses ordering"
+    ],
+    "correct": 1,
+    "description": "BETWEEN is inclusive of lower and upper bounds — useful for ranges like dates or numbers."
+  },
+  {
+    "id": 22,
+    "question": "Which function returns the smallest value?",
+    "choices": [
+      "MIN()",
+      "SMALL()",
+      "LOW()",
+      "FIRST()"
+    ],
+    "correct": 0,
+    "description": "MIN() returns the minimum value in a numeric or text column."
+  },
+  {
+    "id": 23,
+    "question": "What does SELECT COUNT(*) return?",
+    "choices": [
+      "Non-null values only",
+      "Only unique rows",
+      "All rows including NULLs",
+      "Invalid syntax"
+    ],
+    "correct": 2,
+    "description": "COUNT(*) includes NULL values in its total row count."
+  },
+  {
+    "id": 24,
+    "question": "What happens if ORDER BY column is not selected in SELECT?",
+    "choices": [
+      "Query fails",
+      "Sorting still works",
+      "Rows are grouped",
+      "Duplicates are removed"
+    ],
+    "correct": 1,
+    "description": "ORDER BY can sort using columns not present in the output — valid SQL."
+  },
+  {
+    "id": 25,
+    "question": "Which function concatenates strings in ANSI SQL?",
+    "choices": [
+      "CONCAT()",
+      "APPEND()",
+      "JOIN()",
+      "MERGE()"
+    ],
+    "correct": 0,
+    "description": "CONCAT() joins multiple strings; some engines also support || operator."
+  },
+  {
+    "id": 26,
+    "question": "Which statement returns the number of different values?",
+    "choices": [
+      "COUNT(*)",
+      "COUNT(DISTINCT col)",
+      "SUM(col)",
+      "MIN(col)"
+    ],
+    "correct": 1,
+    "description": "COUNT(DISTINCT) eliminates duplicates before counting."
+  },
+  {
+    "id": 27,
+    "question": "What does the ALIAS help with in SQL?",
+    "choices": [
+      "Enhancing readability of column/table names",
+      "Improving performance",
+      "Removing duplicates",
+      "Encrypting data"
+    ],
+    "correct": 0,
+    "description": "Aliases are mainly for cleaner, user-friendly output."
+  },
+  {
+    "id": 28,
+    "question": "Which keyword combines results from two SELECT queries including duplicates?",
+    "choices": [
+      "UNION ALL",
+      "FULL JOIN",
+      "MERGE",
+      "ADD ROWS"
+    ],
+    "correct": 0,
+    "description": "UNION ALL returns all rows without eliminating duplicates — faster than UNION."
+  },
+  {
+    "id": 29,
+    "question": "What does FETCH / OFFSET enable in queries?",
+    "choices": [
+      "Filtering empty rows",
+      "Incremental pagination",
+      "Only returning distinct values",
+      "Table creation"
+    ],
+    "correct": 1,
+    "description": "FETCH / OFFSET paginate results for UI or data browsing use cases."
+  },
+  {
+    "id": 30,
+    "question": "Which statement selects only unique row combinations from two columns?",
+    "choices": [
+      "SELECT col1, col2 FROM t",
+      "SELECT ALL col1, col2 FROM t",
+      "SELECT DISTINCT col1, col2 FROM t",
+      "SELECT UNIQUE col1, col2 FROM t"
+    ],
+    "correct": 2,
+    "description": "DISTINCT applies to the entire selected tuple, not per column individually."
+  }
+]

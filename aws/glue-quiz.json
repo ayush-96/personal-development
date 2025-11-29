@@ -1,0 +1,398 @@
+[
+  {
+    "id": 1,
+    "question": "AWS Glue is primarily used for:",
+    "choices": [
+      "Image processing",
+      "Fully managed ETL and Data Cataloging",
+      "Creating EC2 instances",
+      "Monitoring S3 bucket costs"
+    ],
+    "correct": 1,
+    "description": "AWS Glue is a serverless data integration service that performs ETL and metadata cataloging for analytics and data lakes."
+  },
+  {
+    "id": 2,
+    "question": "Glue Data Catalog stores:",
+    "choices": [
+      "Only raw files",
+      "Schemas, table metadata and partitions",
+      "IAM Roles",
+      "EC2 configuration"
+    ],
+    "correct": 1,
+    "description": "Glue Data Catalog acts as a centralized metadata repository for Athena, Redshift Spectrum, and EMR."
+  },
+  {
+    "id": 3,
+    "question": "Glue ETL jobs typically run using which engine?",
+    "choices": [
+      "MapReduce",
+      "Apache Spark",
+      "Apache Flink",
+      "Hadoop Streaming"
+    ],
+    "correct": 1,
+    "description": "Glue runs distributed ETL workloads using a managed Apache Spark environment."
+  },
+  {
+    "id": 4,
+    "question": "Glue Crawlers are used to:",
+    "choices": [
+      "Create VPCs",
+      "Discover schema and populate Data Catalog",
+      "Schedule Athena queries",
+      "Encrypt data automatically"
+    ],
+    "correct": 1,
+    "description": "Crawlers scan various data stores, infer schema, and update partition information automatically."
+  },
+  {
+    "id": 5,
+    "question": "Glue supports job development using:",
+    "choices": [
+      "Python and Scala",
+      "Only Java",
+      "C++",
+      "SQL only"
+    ],
+    "correct": 0,
+    "description": "Glue uses PySpark or Scala-based Spark ETL code with dynamic frames."
+  },
+  {
+    "id": 6,
+    "question": "A Glue Job Bookmark helps by:",
+    "choices": [
+      "Encrypting job logs",
+      "Preventing reprocessing of already processed data",
+      "Increasing cluster size automatically",
+      "Caching Spark join results"
+    ],
+    "correct": 1,
+    "description": "Bookmarks track previously processed data sources — crucial for incremental ETL pipelines."
+  },
+  {
+    "id": 7,
+    "question": "Glue DynamicFrames provide:",
+    "choices": [
+      "Better image compression",
+      "Schema flexibility for semi-structured data",
+      "Only CSV support",
+      "Logging configuration"
+    ],
+    "correct": 1,
+    "description": "DynamicFrames allow schema-on-read transformations, ideal for JSON and evolving schemas."
+  },
+  {
+    "id": 8,
+    "question": "Glue Workflows help:",
+    "choices": [
+      "Manage IAM users",
+      "Orchestrate ETL pipelines with dependencies",
+      "Generate EC2 Spot Instances",
+      "Compress S3 objects"
+    ],
+    "correct": 1,
+    "description": "Workflows chain crawlers, jobs, triggers, and conditions into end-to-end data workflows."
+  },
+  {
+    "id": 9,
+    "question": "Glue Studio is primarily used for:",
+    "choices": [
+      "Interactive SQL analytics",
+      "Visual ETL job authoring and monitoring",
+      "AI model training",
+      "Server creation"
+    ],
+    "correct": 1,
+    "description": "Glue Studio gives a visual drag-and-drop interface to build and monitor Spark ETL pipelines."
+  },
+  {
+    "id": 10,
+    "question": "Glue DPU stands for:",
+    "choices": [
+      "Data Processing Unit",
+      "Distributed Power Unit",
+      "Data Performance Upgrade",
+      "Database Provisioning Unit"
+    ],
+    "correct": 0,
+    "description": "DPU is the billing unit for compute resources in Glue: CPU + memory + networking."
+  },
+  {
+    "id": 11,
+    "question": "Glue Job execution model is best described as:",
+    "choices": [
+      "Server-based cluster you manage",
+      "Fully managed serverless Spark environment",
+      "Manual EC2 configuration",
+      "VPC-only execution"
+    ],
+    "correct": 1,
+    "description": "Glue handles provisioning and scaling of the ETL infrastructure — no cluster management needed."
+  },
+  {
+    "id": 12,
+    "question": "Which Glue feature improves performance by letting Spark read S3 partitions efficiently?",
+    "choices": [
+      "Partition Pruning",
+      "Versioning",
+      "S3 Transfer Acceleration",
+      "Bucket Version Triggers"
+    ],
+    "correct": 0,
+    "description": "Glue integrates Spark partition pruning to scan only relevant subsets of data."
+  },
+  {
+    "id": 13,
+    "question": "Glue supports job retries using:",
+    "choices": [
+      "Job bookmarks",
+      "Triggers and workflows",
+      "SageMaker integration",
+      "Route 53"
+    ],
+    "correct": 1,
+    "description": "Triggers/workflows manage job failure rules, retries and sequencing for resilience."
+  },
+  {
+    "id": 14,
+    "question": "Glue Developer Endpoints are used for:",
+    "choices": [
+      "Deploying ML models",
+      "Interactive ETL code development",
+      "Hosting static websites",
+      "Scaling S3 buckets"
+    ],
+    "correct": 1,
+    "description": "Developer endpoints allow custom code debugging using Jupyter notebooks/IDE."
+  },
+  {
+    "id": 15,
+    "question": "Which data formats are best for Glue ETL performance?",
+    "choices": [
+      "CSV & TXT",
+      "Parquet / ORC",
+      "XML",
+      "PNG"
+    ],
+    "correct": 1,
+    "description": "Columnar formats reduce scanned data and are optimized for analytical workloads."
+  },
+  {
+    "id": 16,
+    "question": "Glue can integrate with streaming sources like:",
+    "choices": [
+      "Kinesis and Kafka",
+      "Athena only",
+      "DynamoDB backfills only",
+      "Glacier archives"
+    ],
+    "correct": 0,
+    "description": "Glue Streaming Jobs process near real-time ingestion from Kinesis Data Streams and Kafka."
+  },
+  {
+    "id": 17,
+    "question": "Glue supports ACID transactions using:",
+    "choices": [
+      "DynamoDB locking",
+      "Apache Hudi on S3",
+      "Athena SQL",
+      "No ACID support at all"
+    ],
+    "correct": 1,
+    "description": "Glue integrates Apache Hudi/Iceberg for ACID-compliant incremental tables in data lakes."
+  },
+  {
+    "id": 18,
+    "question": "Glue Security is primarily built on:",
+    "choices": [
+      "IAM + KMS + VPC networking",
+      "Public access only",
+      "CloudFront keys",
+      "Port forwarding"
+    ],
+    "correct": 0,
+    "description": "Secure by design — IAM policies, encryption, and VPC isolation ensure compliance."
+  },
+  {
+    "id": 19,
+    "question": "Glue DataBrew is mainly used for:",
+    "choices": [
+      "Data wrangling with a visual UI",
+      "Low-latency streaming analytics",
+      "ML feature engineering",
+      "S3 bucket administration"
+    ],
+    "correct": 0,
+    "description": "DataBrew provides no-code data cleaning and transformation for analysts."
+  },
+  {
+    "id": 20,
+    "question": "Glue Schema Registry is designed for:",
+    "choices": [
+      "ETL job orchestration",
+      "Schema version control for streaming pipelines",
+      "Athena query optimization",
+      "Managing S3 storage classes"
+    ],
+    "correct": 1,
+    "description": "Schema Registry enables schema enforcement for Kafka/Kinesis event streams."
+  },
+  {
+    "id": 21,
+    "question": "Which Glue job type supports Python shell jobs?",
+    "choices": [
+      "Spark ETL Jobs",
+      "Python Shell Jobs",
+      "DataBrew Recipes",
+      "Crawler Tasks"
+    ],
+    "correct": 1,
+    "description": "Python shell jobs are lightweight execution for simple tasks without full Spark overhead."
+  },
+  {
+    "id": 22,
+    "question": "Glue Jobs store logs in:",
+    "choices": [
+      "Athena",
+      "CloudWatch Logs & S3",
+      "CodeCommit",
+      "Route 53"
+    ],
+    "correct": 1,
+    "description": "Job execution details are logged to CloudWatch and can optionally be archived in S3."
+  },
+  {
+    "id": 23,
+    "question": "Which connector type allows Glue to read RDS and Redshift sources?",
+    "choices": [
+      "JDBC connections",
+      "Direct Athena queries",
+      "SSH tunneling",
+      "Glue notebooks only"
+    ],
+    "correct": 0,
+    "description": "JDBC connections allow Glue to ingest from SQL databases while maintaining credentials securely."
+  },
+  {
+    "id": 24,
+    "question": "Glue supports data lake format evolution using:",
+    "choices": [
+      "Static schema",
+      "Hudi / Iceberg / Delta Lake",
+      "Glue encrypted logs only",
+      "Only CSV"
+    ],
+    "correct": 1,
+    "description": "Glue supports advanced lakehouse formats enabling incremental upserts & time-travel queries."
+  },
+  {
+    "id": 25,
+    "question": "Glue scaling model:",
+    "choices": [
+      "Manual cluster size selection",
+      "Serverless auto-scaling of DPUs",
+      "Only 1 node always",
+      "Determined by S3 bucket policy"
+    ],
+    "correct": 1,
+    "description": "Glue automatically adjusts compute resources based on workload and parallelism."
+  },
+  {
+    "id": 26,
+    "question": "Glue ETL script customization can be done in:",
+    "choices": [
+      "Glue Studio and script editor",
+      "Only Linux terminals",
+      "Only via AWS CLI",
+      "Only through third party apps"
+    ],
+    "correct": 0,
+    "description": "Scripts can be written and edited inside Glue Studio or imported from external repositories."
+  },
+  {
+    "id": 27,
+    "question": "Glue Blueprints are used to:",
+    "choices": [
+      "Automate DataBrew recipes",
+      "Generate reusable workflow templates",
+      "Encrypt crawlers",
+      "Upload S3 files"
+    ],
+    "correct": 1,
+    "description": "Blueprints provide reusable templates for common ETL/data ingestion patterns."
+  },
+  {
+    "id": 28,
+    "question": "Which is true about Glue and Lake Formation?",
+    "choices": [
+      "Glue cannot read tables secured by Lake Formation",
+      "Glue respects LF permissions for fine-grained access control",
+      "Glue bypasses all access rules",
+      "They are not integrated"
+    ],
+    "correct": 1,
+    "description": "Glue enforces Lake Formation security policies at table, column, and row levels for secure analytics."
+  },
+  {
+    "id": 29,
+    "question": "Glue’s recommended S3 file size for performance:",
+    "choices": [
+      "1 KB",
+      "128 MB to 1 GB",
+      "10 TB each",
+      "No recommendation"
+    ],
+    "correct": 1,
+    "description": "Larger but optimized files reduce metadata overhead and speed scans in Spark ETL pipelines."
+  },
+  {
+    "id": 30,
+    "question": "Glue can write directly to Redshift using:",
+    "choices": [
+      "COPY command under the hood",
+      "Glue Crawler only",
+      "Route 53",
+      "Only DataBrew"
+    ],
+    "correct": 0,
+    "description": "Glue ETL writes to Redshift using JDBC or COPY via S3 staging for optimal throughput."
+  },
+  {
+    "id": 31,
+    "question": "Glue job restart behavior for streaming jobs:",
+    "choices": [
+      "Starts from scratch always",
+      "Can resume using checkpointing/bookmarks",
+      "Restarts only once per day",
+      "Not supported"
+    ],
+    "correct": 1,
+    "description": "Streaming jobs maintain checkpoints/bookmarks to restart from last processed batch."
+  },
+  {
+    "id": 32,
+    "question": "Glue supports which deployment model?",
+    "choices": [
+      "Single-Tenant only",
+      "Serverless multi-tenant architecture",
+      "On-prem only",
+      "Edge computing only"
+    ],
+    "correct": 1,
+    "description": "Glue is serverless and multi-tenant but integrates with private VPCs for secure data access."
+  },
+  {
+    "id": 33,
+    "question": "When should you choose Glue Python Shell over Spark Jobs?",
+    "choices": [
+      "For heavy distributed transformations",
+      "For lightweight tasks not requiring Spark",
+      "For DataBrew pipelines",
+      "For schema cataloging"
+    ],
+    "correct": 1,
+    "description": "Python Shell jobs are cheaper and faster for small non-distributed ETL tasks like API pulls and metadata ops."
+  }
+]

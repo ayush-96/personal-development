@@ -1,267 +1,266 @@
 [
-  {
-    "id": 1,
-    "question": "What is the maximum number of concurrent tasks allowed in a single Databricks Workflow (Job)?",
-    "choices": [
-      "100",
-      "200",
-      "1000",
-      "No hard limit – depends on account concurrency quota"
-    ],
-    "correct": 3,
-    "description": "Databricks imposes account-level concurrent run limits (typically 1000+), not a fixed job-level cap.\nMulti-task jobs can fan out massively with proper cluster policies."
-  },
-  {
-    "id": 2,
-    "question": "Which trigger type allows a job to start automatically when new files arrive in a cloud storage path?",
-    "choices": [
-      "Cron trigger",
-      "File arrival trigger",
-      "Event trigger",
-      "Manual only"
-    ],
-    "correct": 1,
-    "description": "File arrival triggers watch one or more storage paths (including wildcards) and start the job as soon as matching files appear."
-  },
-  {
-    "id": 3,
-    "question": "In a multi-task job, Task-A fails. Task-B has dependency 'Task-A succeeded'. What happens to Task-B?",
-    "choices": [
-      "Runs anyway",
-      "Skipped automatically",
-      "Retried 3 times",
-      "Job fails immediately"
-    ],
-    "correct": 1,
-    "description": "Default dependency behavior is 'success'. Failed upstream tasks cause downstream tasks to be skipped unless set to 'all_done' or custom logic."
-  },
-  {
-    "id": 4,
-    "question": "Which parameter passing method is considered best practice for production workflows?",
-    "choices": [
-      "Hard-coded widgets",
-      "Job parameters + {{job.parameters.param_name}} in tasks",
-      "dbutils.widgets.text() only",
-      "Global init scripts"
-    ],
-    "correct": 1,
-    "description": "Job-level parameters are version-controlled, visible in UI, and can be overridden per run or via API."
-  },
-  {
-    "id": 5,
-    "question": "Repair Run on a multi-task job allows you to:",
-    "choices": [
-      "Only rerun failed tasks while preserving outputs of successful tasks",
-      "Always rerun the entire job",
-      "Only rerun from a specific task onward",
-      "Both A and C"
-    ],
-    "correct": 3,
-    "description": "Repair Run reuses cached results of successful tasks and only re-executes failed or downstream tasks – huge time & cost saver."
-  },
-  {
-    "id": 6,
-    "question": "What is the purpose of a Task Value in Databricks Workflows?",
-    "choices": [
-      "Store large files",
-      "Pass small data (strings, JSON) from one task to downstream tasks",
-      "Replace job parameters",
-      "Only for debugging"
-    ],
-    "correct": 1,
-    "description": "Task values are key-value outputs from a task (via dbutils.jobs.taskValues.set()) consumable by dependent tasks using {{tasks.task_name.values.key_name}}."
-  },
-  {
-    "id": 7,
-    "question": "Which cluster type is recommended for production multi-task jobs?",
-    "choices": [
-      "All-purpose interactive",
-      "Job clusters (one per task or shared job cluster)",
-      "SQL warehouses",
-      "Serverless only"
-    ],
-    "correct": 1,
-    "description": "Job clusters start fast, terminate automatically, support spot instances, and cost far less than all-purpose clusters."
-  },
-  {
-    "id": 8,
-    "question": "How do you implement conditional execution in Databricks Workflows (as of 2025.2025)?",
-    "choices": [
-      "If/else tasks",
-      "Use a Python task that returns skip/downstream output via dbutils.jobs.taskValues + 'depends_on' with conditions",
-      "Run-if widgets",
-      "Native conditional tasks (preview → GA 2025)"
-    ],
-    ],
-    "correct": 3,
-    "description": "Native 'If/else condition' tasks are GA and allow boolean expressions using task values without extra code."
-  },
-  {
-    "id": 9,
-    "question": "What happens when you enable 'Retry on failure' with 3 retries and exponential backoff?",
-    "choices": [
-      "Whole job retries",
-      "Only the failed task retries automatically with increasing delays",
-      "Manual repair needed",
-      "Only timeout retries"
-    ],
-    "correct": 1,
-    "description": "Retries are per-task and support fixed or exponential backoff with jitter."
-  },
-  {
-    "id": 10,
-    "question": "Which permission is required to trigger a job run via the REST API?",
-    "choices": [
-      "Can View",
-      "Can Manage",
-      "Can Run",
-      "Can Manage Run"
-    ],
-    "correct": 1,
-    "description": "Can Manage grants full control (edit, delete, trigger).\nCan Run is being deprecated in favor of granular Can Manage Run."
-  },
-  {
-    "id": 11,
-    "question": "Databricks Asset Bundles (DAB) deploy jobs using which file as source of truth?",
-    "choices": [
-      "databricks.yml only",
-      "databricks.yml + resources/*.yml (jobs, pipelines, models)",
-      "Only JSON export",
-      "Notebook source"
-    ],
-    "correct": 1,
-    "description": "DAB enables full GitOps: jobs are defined declaratively in YAML and deployed/promoted via databricks bundle deploy."
-  },
-  {
-    "id": 12,
-    "question": "What is the default timeout behavior for a task with no timeout set?",
-    "choices": [
-      "7 days",
-      "No timeout (runs forever)",
-      "24 hours",
-      "Depends on cluster"
-    ],
-    "correct": 0,
-    "description": "Default task timeout is 7 days – long enough for heavy ETL but prevents infinite hangs."
-  },
-  {
-    "id": 13,
-    "question": "Which task type supports passing Spark SQL query results directly to downstream tasks?",
-    "choices": [
-      "Notebook task",
-      "Python task",
-      "DBSQL query task (preview → GA)",
-      "Only via temp view"
-    ],
-    "correct": 2,
-    "description": "DBSQL query task executes a SQL statement and can expose result as task value or write to Delta."
-  },
-  {
-    "id": 14,
-    "question": "How do you reference a parameter inside a notebook task?",
-    "choices": [
-      "dbutils.widgets.get()",
-      "{{job.parameters.param_name}} or {{job.params.param_name}}",
-      "spark.conf.get()",
-      "All of the above work"
-    ],
-    "correct": 3,
-    "description": "Both widget and job parameter syntaxes are supported; {{}} is preferred for clarity."
-  },
-  {
-    "id": 15,
-    "question": "What is the maximum size of a task value?",
-    "choices": [
-      "16 KB",
-      "48 KB",
-      "100 KB",
-      "1 MB"
-    ],
-    "correct": 1,
-    "description": "Task values are limited to 48 KB of UTF-8 encoded text – suitable for IDs, flags, JSON payloads."
-  },
-  {
-    "id": 16,
-    "question": "Which feature allows a single job to run on multiple clusters simultaneously (fan-out)?",
-    "choices": [
-      "For-each task",
-      "Map task (preview → GA 2025)",
-      "Dynamic value task",
-      "Python wheel task"
-    ],
-    "correct": 1,
-    "description": "Map tasks iterate over a list (or task value array) and spawn parallel tasks – perfect for hyper-parameter sweeps or sharding."
-  },
-  {
-    "id": 17,
-    "question": "You can monitor job run cost in real time using:",
-    "choices": [
-      "Job run details page → Cost tab",
-      "System tables system.billing.usage",
-      "Both",
-      "Only account console"
-    ],
-    "correct": 2,
-    "description": "Cost is broken down by task and cluster type; system tables provide queryable history."
-  },
-  {
-    "id": 18,
-    "question": "Which alert destinations are supported for job failure notifications?",
-    "choices": [
-      "Email only",
-      "Email, Slack, Microsoft Teams, PagerDuty, Webhook",
-      "Only Slack",
-      "Only email + Databricks Assistant"
-    ],
-    "correct": 1,
-    "description": "All major platforms plus custom webhooks are natively supported."
-  },
-  {
-    "id": 19,
-    "question": "A job with 10 tasks uses a shared job cluster. How many clusters are started?",
-    "choices": [
-      "10",
-      "1 (shared across all tasks)",
-      "2 (one for notebook, one for SQL)",
-      "Depends on task type"
-    ],
-    "correct": 1,
-    "description": "Shared job clusters stay alive for the entire job duration and are reused by all tasks → faster and cheaper."
-  },
-  {
-    "id": 20,
-    "question": "Which Git provider integrations are supported for job source code?",
-    "choices": [
-      "GitHub only",
-      "GitHub, GitLab, Bitbucket, Azure DevOps, AWS CodeCommit",
-      "Only Databricks Repos",
-      "Only local upload"
-    ],
-    "correct": 1,
-    "description": "Any Git provider with Databricks Repos or direct Git integration works seamlessly."
-  },
-  {
-    "id": 21,
-    "question": "What is the recommended way to promote a job from dev → staging → prod?",
-    "choices": [
-      "Manual export/import",
-      "Databricks Asset Bundles + separate targets in databricks.yml",
-      "Repos promotion",
-      "Only UI copy"
-    ],
-    "correct": 1,
-    "description": "DAB supports multiple targets (dev, staging, prod) with variable substitution and secrets injection."
-  },
-  {
-    "id": 22,
-    "question": "As of Nov 2025, which is the only task type that can run on serverless compute?",
-    "choices": [
-      "Notebook task",
-      "Python wheel task",
-      "Delta Live Tables pipeline task",
-      "SQL task (serverless)"
-    ],
-    "correct": 3,
-    "description": "SQL tasks can execute on serverless SQL warehouses; all other task types still require classic or job clusters."
-  }
+    {
+        "id": 1,
+        "question": "What is the maximum number of concurrent tasks allowed in a single Databricks Workflow (Job)?",
+        "choices": [
+            "100",
+            "200",
+            "1000",
+            "No hard limit – depends on account concurrency quota"
+        ],
+        "correct": 3,
+        "description": "Databricks imposes account-level concurrent run limits (typically 1000+), not a fixed job-level cap.\nMulti-task jobs can fan out massively with proper cluster policies."
+    },
+    {
+        "id": 2,
+        "question": "Which trigger type allows a job to start automatically when new files arrive in a cloud storage path?",
+        "choices": [
+            "Cron trigger",
+            "File arrival trigger",
+            "Event trigger",
+            "Manual only"
+        ],
+        "correct": 1,
+        "description": "File arrival triggers watch one or more storage paths (including wildcards) and start the job as soon as matching files appear."
+    },
+    {
+        "id": 3,
+        "question": "In a multi-task job, Task-A fails. Task-B has dependency 'Task-A succeeded'. What happens to Task-B?",
+        "choices": [
+            "Runs anyway",
+            "Skipped automatically",
+            "Retried 3 times",
+            "Job fails immediately"
+        ],
+        "correct": 1,
+        "description": "Default dependency behavior is 'success'. Failed upstream tasks cause downstream tasks to be skipped unless set to 'all_done' or custom logic."
+    },
+    {
+        "id": 4,
+        "question": "Which parameter passing method is considered best practice for production workflows?",
+        "choices": [
+            "Hard-coded widgets",
+            "Job parameters + {{job.parameters.param_name}} in tasks",
+            "dbutils.widgets.text() only",
+            "Global init scripts"
+        ],
+        "correct": 1,
+        "description": "Job-level parameters are version-controlled, visible in UI, and can be overridden per run or via API."
+    },
+    {
+        "id": 5,
+        "question": "Repair Run on a multi-task job allows you to:",
+        "choices": [
+            "Only rerun failed tasks while preserving outputs of successful tasks",
+            "Always rerun the entire job",
+            "Only rerun from a specific task onward",
+            "Both A and C"
+        ],
+        "correct": 3,
+        "description": "Repair Run reuses cached results of successful tasks and only re-executes failed or downstream tasks – huge time & cost saver."
+    },
+    {
+        "id": 6,
+        "question": "What is the purpose of a Task Value in Databricks Workflows?",
+        "choices": [
+            "Store large files",
+            "Pass small data (strings, JSON) from one task to downstream tasks",
+            "Replace job parameters",
+            "Only for debugging"
+        ],
+        "correct": 1,
+        "description": "Task values are key-value outputs from a task (via dbutils.jobs.taskValues.set()) consumable by dependent tasks using {{tasks.task_name.values.key_name}}."
+    },
+    {
+        "id": 7,
+        "question": "Which cluster type is recommended for production multi-task jobs?",
+        "choices": [
+            "All-purpose interactive",
+            "Job clusters (one per task or shared job cluster)",
+            "SQL warehouses",
+            "Serverless only"
+        ],
+        "correct": 1,
+        "description": "Job clusters start fast, terminate automatically, support spot instances, and cost far less than all-purpose clusters."
+    },
+    {
+        "id": 8,
+        "question": "How do you implement conditional execution in Databricks Workflows (as of 2025.2025)?",
+        "choices": [
+            "If/else tasks",
+            "Use a Python task that returns skip/downstream output via dbutils.jobs.taskValues + 'depends_on' with conditions",
+            "Run-if widgets",
+            "Native conditional tasks (preview → GA 2025)"
+        ],
+        "correct": 3,
+        "description": "Native 'If/else condition' tasks are GA and allow boolean expressions using task values without extra code."
+    },
+    {
+        "id": 9,
+        "question": "What happens when you enable 'Retry on failure' with 3 retries and exponential backoff?",
+        "choices": [
+            "Whole job retries",
+            "Only the failed task retries automatically with increasing delays",
+            "Manual repair needed",
+            "Only timeout retries"
+        ],
+        "correct": 1,
+        "description": "Retries are per-task and support fixed or exponential backoff with jitter."
+    },
+    {
+        "id": 10,
+        "question": "Which permission is required to trigger a job run via the REST API?",
+        "choices": [
+            "Can View",
+            "Can Manage",
+            "Can Run",
+            "Can Manage Run"
+        ],
+        "correct": 1,
+        "description": "Can Manage grants full control (edit, delete, trigger).\nCan Run is being deprecated in favor of granular Can Manage Run."
+    },
+    {
+        "id": 11,
+        "question": "Databricks Asset Bundles (DAB) deploy jobs using which file as source of truth?",
+        "choices": [
+            "databricks.yml only",
+            "databricks.yml + resources/*.yml (jobs, pipelines, models)",
+            "Only JSON export",
+            "Notebook source"
+        ],
+        "correct": 1,
+        "description": "DAB enables full GitOps: jobs are defined declaratively in YAML and deployed/promoted via databricks bundle deploy."
+    },
+    {
+        "id": 12,
+        "question": "What is the default timeout behavior for a task with no timeout set?",
+        "choices": [
+            "7 days",
+            "No timeout (runs forever)",
+            "24 hours",
+            "Depends on cluster"
+        ],
+        "correct": 0,
+        "description": "Default task timeout is 7 days – long enough for heavy ETL but prevents infinite hangs."
+    },
+    {
+        "id": 13,
+        "question": "Which task type supports passing Spark SQL query results directly to downstream tasks?",
+        "choices": [
+            "Notebook task",
+            "Python task",
+            "DBSQL query task (preview → GA)",
+            "Only via temp view"
+        ],
+        "correct": 2,
+        "description": "DBSQL query task executes a SQL statement and can expose result as task value or write to Delta."
+    },
+    {
+        "id": 14,
+        "question": "How do you reference a parameter inside a notebook task?",
+        "choices": [
+            "dbutils.widgets.get()",
+            "{{job.parameters.param_name}} or {{job.params.param_name}}",
+            "spark.conf.get()",
+            "All of the above work"
+        ],
+        "correct": 3,
+        "description": "Both widget and job parameter syntaxes are supported; {{}} is preferred for clarity."
+    },
+    {
+        "id": 15,
+        "question": "What is the maximum size of a task value?",
+        "choices": [
+            "16 KB",
+            "48 KB",
+            "100 KB",
+            "1 MB"
+        ],
+        "correct": 1,
+        "description": "Task values are limited to 48 KB of UTF-8 encoded text – suitable for IDs, flags, JSON payloads."
+    },
+    {
+        "id": 16,
+        "question": "Which feature allows a single job to run on multiple clusters simultaneously (fan-out)?",
+        "choices": [
+            "For-each task",
+            "Map task (preview → GA 2025)",
+            "Dynamic value task",
+            "Python wheel task"
+        ],
+        "correct": 1,
+        "description": "Map tasks iterate over a list (or task value array) and spawn parallel tasks – perfect for hyper-parameter sweeps or sharding."
+    },
+    {
+        "id": 17,
+        "question": "You can monitor job run cost in real time using:",
+        "choices": [
+            "Job run details page → Cost tab",
+            "System tables system.billing.usage",
+            "Both",
+            "Only account console"
+        ],
+        "correct": 2,
+        "description": "Cost is broken down by task and cluster type; system tables provide queryable history."
+    },
+    {
+        "id": 18,
+        "question": "Which alert destinations are supported for job failure notifications?",
+        "choices": [
+            "Email only",
+            "Email, Slack, Microsoft Teams, PagerDuty, Webhook",
+            "Only Slack",
+            "Only email + Databricks Assistant"
+        ],
+        "correct": 1,
+        "description": "All major platforms plus custom webhooks are natively supported."
+    },
+    {
+        "id": 19,
+        "question": "A job with 10 tasks uses a shared job cluster. How many clusters are started?",
+        "choices": [
+            "10",
+            "1 (shared across all tasks)",
+            "2 (one for notebook, one for SQL)",
+            "Depends on task type"
+        ],
+        "correct": 1,
+        "description": "Shared job clusters stay alive for the entire job duration and are reused by all tasks → faster and cheaper."
+    },
+    {
+        "id": 20,
+        "question": "Which Git provider integrations are supported for job source code?",
+        "choices": [
+            "GitHub only",
+            "GitHub, GitLab, Bitbucket, Azure DevOps, AWS CodeCommit",
+            "Only Databricks Repos",
+            "Only local upload"
+        ],
+        "correct": 1,
+        "description": "Any Git provider with Databricks Repos or direct Git integration works seamlessly."
+    },
+    {
+        "id": 21,
+        "question": "What is the recommended way to promote a job from dev → staging → prod?",
+        "choices": [
+            "Manual export/import",
+            "Databricks Asset Bundles + separate targets in databricks.yml",
+            "Repos promotion",
+            "Only UI copy"
+        ],
+        "correct": 1,
+        "description": "DAB supports multiple targets (dev, staging, prod) with variable substitution and secrets injection."
+    },
+    {
+        "id": 22,
+        "question": "As of Nov 2025, which is the only task type that can run on serverless compute?",
+        "choices": [
+            "Notebook task",
+            "Python wheel task",
+            "Delta Live Tables pipeline task",
+            "SQL task (serverless)"
+        ],
+        "correct": 3,
+        "description": "SQL tasks can execute on serverless SQL warehouses; all other task types still require classic or job clusters."
+    }
 ]

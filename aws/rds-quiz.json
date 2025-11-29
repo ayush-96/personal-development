@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "question": "Which storage engine does Amazon RDS MySQL use by default?",
+    "choices": [
+      "InnoDB",
+      "MyISAM",
+      "Memory",
+      "CSV"
+    ],
+    "correct": 0,
+    "description": "Amazon RDS MySQL uses InnoDB as the default storage engine, providing ACID compliance and transactional support."
+  },
+  {
+    "id": 2,
+    "question": "What is the maximum storage for Amazon RDS PostgreSQL with General Purpose SSD?",
+    "choices": [
+      "16 TB",
+      "64 TB",
+      "1 TB",
+      "8 TB"
+    ],
+    "correct": 0,
+    "description": "RDS PostgreSQL supports up to 16 TB of General Purpose SSD storage for scalable database workloads."
+  },
+  {
+    "id": 3,
+    "question": "Multi-AZ deployment in RDS ensures:",
+    "choices": [
+      "Read scaling",
+      "High availability and automatic failover",
+      "Data caching",
+      "Query optimization"
+    ],
+    "correct": 1,
+    "description": "Multi-AZ provides synchronous replication to a standby instance for automatic failover during outages."
+  },
+  {
+    "id": 4,
+    "question": "Which RDS feature helps prevent data loss in case of accidental deletion?",
+    "choices": [
+      "Automated backups",
+      "Enhanced monitoring",
+      "Read replicas",
+      "Parameter groups"
+    ],
+    "correct": 0,
+    "description": "Automated backups allow point-in-time recovery for up to 35 days, safeguarding against accidental deletions."
+  },
+  {
+    "id": 5,
+    "question": "RDS Read Replicas are primarily used for:",
+    "choices": [
+      "Automatic failover",
+      "Scaling read-heavy workloads",
+      "Storing backups",
+      "Encrypting data"
+    ],
+    "correct": 1,
+    "description": "Read replicas offload read traffic from the primary instance to improve performance for read-intensive applications."
+  },
+  {
+    "id": 6,
+    "question": "Which Amazon RDS engine supports cross-region read replicas?",
+    "choices": [
+      "MySQL and MariaDB",
+      "PostgreSQL only",
+      "SQL Server only",
+      "All supported engines"
+    ],
+    "correct": 0,
+    "description": "MySQL and MariaDB support cross-region read replicas to enhance disaster recovery and global performance."
+  },
+  {
+    "id": 7,
+    "question": "What is the purpose of RDS Enhanced Monitoring?",
+    "choices": [
+      "Provides real-time OS-level metrics",
+      "Automates query optimization",
+      "Encrypts database storage",
+      "Manages schema migrations"
+    ],
+    "correct": 0,
+    "description": "Enhanced Monitoring provides metrics like CPU, memory, and disk I/O for detailed instance monitoring."
+  },
+  {
+    "id": 8,
+    "question": "Amazon RDS supports encryption using:",
+    "choices": [
+      "AWS KMS",
+      "AWS IAM only",
+      "S3 Bucket Policy",
+      "CloudTrail"
+    ],
+    "correct": 0,
+    "description": "RDS integrates with AWS KMS to provide encryption at rest for data, snapshots, and automated backups."
+  },
+  {
+    "id": 9,
+    "question": "RDS automated minor version upgrades help to:",
+    "choices": [
+      "Apply patches automatically",
+      "Change instance type",
+      "Scale storage automatically",
+      "Enable Multi-AZ"
+    ],
+    "correct": 0,
+    "description": "Minor version upgrades ensure the database engine remains secure and stable by applying patches automatically."
+  },
+  {
+    "id": 10,
+    "question": "Which RDS engine supports native JSON data types?",
+    "choices": [
+      "PostgreSQL",
+      "Oracle",
+      "SQL Server",
+      "MariaDB"
+    ],
+    "correct": 0,
+    "description": "PostgreSQL supports native JSON and JSONB types for semi-structured data handling."
+  },
+  {
+    "id": 11,
+    "question": "RDS Parameter Groups are used to:",
+    "choices": [
+      "Manage database configuration settings",
+      "Control IAM access",
+      "Monitor CPU usage",
+      "Create read replicas"
+    ],
+    "correct": 0,
+    "description": "Parameter Groups allow you to customize DB engine settings such as memory, cache size, and connection limits."
+  },
+  {
+    "id": 12,
+    "question": "Which deployment option supports automatic failover in RDS?",
+    "choices": [
+      "Multi-AZ",
+      "Single-AZ",
+      "Read Replica",
+      "Provisioned IOPS"
+    ],
+    "correct": 0,
+    "description": "Multi-AZ deployments replicate synchronously to a standby instance for automatic failover during outages."
+  },
+  {
+    "id": 13,
+    "question": "What is the main limitation of RDS Read Replicas?",
+    "choices": [
+      "Cannot be used for writes",
+      "Limited to 10 GB storage",
+      "Do not support backups",
+      "Cannot be encrypted"
+    ],
+    "correct": 0,
+    "description": "Read Replicas are read-only and cannot handle write operations, used for read scaling."
+  },
+  {
+    "id": 14,
+    "question": "RDS supports which backup retention period maximum?",
+    "choices": [
+      "35 days",
+      "7 days",
+      "90 days",
+      "365 days"
+    ],
+    "correct": 0,
+    "description": "Automated backups can be retained for up to 35 days, allowing point-in-time recovery."
+  },
+  {
+    "id": 15,
+    "question": "RDS storage types include:",
+    "choices": [
+      "General Purpose SSD, Provisioned IOPS SSD, Magnetic",
+      "NVMe only",
+      "S3 only",
+      "HDD only"
+    ],
+    "correct": 0,
+    "description": "Amazon RDS offers multiple storage types for balancing cost, throughput, and IOPS requirements."
+  },
+  {
+    "id": 16,
+    "question": "RDS supports which database engines?",
+    "choices": [
+      "MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, Amazon Aurora",
+      "DynamoDB only",
+      "Redshift only",
+      "Elasticsearch only"
+    ],
+    "correct": 0,
+    "description": "RDS provides managed services for popular relational engines including Aurora for high-performance workloads."
+  },
+  {
+    "id": 17,
+    "question": "Provisioned IOPS in RDS are used for:",
+    "choices": [
+      "High-performance, predictable I/O",
+      "Data encryption",
+      "Creating read replicas",
+      "Backups"
+    ],
+    "correct": 0,
+    "description": "Provisioned IOPS storage is designed for applications requiring consistent, high-performance I/O."
+  },
+  {
+    "id": 18,
+    "question": "Amazon RDS supports VPC placement for:",
+    "choices": [
+      "Enhanced network isolation",
+      "Automatic schema migrations",
+      "Backup compression",
+      "Read-only queries"
+    ],
+    "correct": 0,
+    "description": "VPC allows you to control network access, subnet groups, and security for your RDS instances."
+  },
+  {
+    "id": 19,
+    "question": "Aurora Global Databases in RDS allow:",
+    "choices": [
+      "Cross-region replication with low latency",
+      "Backup only in the same region",
+      "Automatic schema conversion",
+      "Scaling writes globally"
+    ],
+    "correct": 0,
+    "description": "Aurora Global Databases enable cross-region read scaling and disaster recovery with low-latency replication."
+  },
+  {
+    "id": 20,
+    "question": "RDS Multi-AZ vs Read Replica difference:",
+    "choices": [
+      "Multi-AZ provides failover, Read Replica provides read scaling",
+      "Both are identical",
+      "Read Replica provides failover",
+      "Multi-AZ is read-only"
+    ],
+    "correct": 0,
+    "description": "Multi-AZ is for high availability; Read Replicas offload read traffic."
+  },
+  {
+    "id": 21,
+    "question": "Automatic minor version upgrades in RDS:",
+    "choices": [
+      "Ensure patching without downtime (if maintenance window allows)",
+      "Enable Multi-AZ automatically",
+      "Scale storage automatically",
+      "Upgrade instance type"
+    ],
+    "correct": 0,
+    "description": "Minor upgrades patch security and engine issues while respecting the maintenance window."
+  },
+  {
+    "id": 22,
+    "question": "RDS supports point-in-time recovery using:",
+    "choices": [
+      "Automated backups",
+      "Manual snapshots only",
+      "Read Replicas",
+      "Enhanced Monitoring"
+    ],
+    "correct": 0,
+    "description": "Automated backups combined with transaction logs allow restoration to any point within retention period."
+  },
+  {
+    "id": 23,
+    "question": "Encryption at rest in RDS can be applied to:",
+    "choices": [
+      "Primary instance, read replicas, snapshots",
+      "Only backups",
+      "Only EC2-hosted instances",
+      "Not supported"
+    ],
+    "correct": 0,
+    "description": "KMS encryption secures data at rest across primary, replica, and snapshots."
+  },
+  {
+    "id": 24,
+    "question": "Which RDS feature provides cross-region disaster recovery?",
+    "choices": [
+      "Read Replicas or Aurora Global Database",
+      "Parameter Groups",
+      "Enhanced Monitoring",
+      "VPC Peering"
+    ],
+    "correct": 0,
+    "description": "Cross-region read replicas or Aurora Global Database enable disaster recovery and global reads."
+  },
+  {
+    "id": 25,
+    "question": "RDS Performance Insights helps:",
+    "choices": [
+      "Analyze database load and bottlenecks",
+      "Encrypt data at rest",
+      "Create read replicas",
+      "Scale instance storage"
+    ],
+    "correct": 0,
+    "description": "Performance Insights provides visual analytics to monitor database performance and optimize queries."
+  },
+  {
+    "id": 26,
+    "question": "RDS automatic failover is triggered by:",
+    "choices": [
+      "Primary instance failure or connectivity loss",
+      "Parameter group changes",
+      "CloudWatch alarms",
+      "User requests only"
+    ],
+    "correct": 0,
+    "description": "Multi-AZ failover happens automatically when the primary instance becomes unavailable."
+  },
+  {
+    "id": 27,
+    "question": "RDS Maintenance Window is used for:",
+    "choices": [
+      "Applying engine upgrades and patches",
+      "Scaling read replicas",
+      "Creating snapshots",
+      "Configuring VPC endpoints"
+    ],
+    "correct": 0,
+    "description": "Scheduled maintenance windows allow patching and minor version upgrades without unexpected downtime."
+  },
+  {
+    "id": 28,
+    "question": "Which RDS engine supports native encryption in transit using SSL?",
+    "choices": [
+      "All supported engines",
+      "Only Aurora",
+      "Only MySQL",
+      "Only PostgreSQL"
+    ],
+    "correct": 0,
+    "description": "All RDS engines can use SSL/TLS to encrypt data in transit between applications and the database."
+  },
+  {
+    "id": 29,
+    "question": "Aurora Serverless is best for:",
+    "choices": [
+      "Variable or intermittent workloads with auto-scaling",
+      "Dedicated high-performance workloads only",
+      "Only MySQL compatible apps",
+      "Only read replicas"
+    ],
+    "correct": 0,
+    "description": "Aurora Serverless automatically adjusts compute capacity based on workload demand, suitable for intermittent usage."
+  },
+  {
+    "id": 30,
+    "question": "RDS supports tagging for:",
+    "choices": [
+      "Cost allocation, identification, automation",
+      "Scaling storage",
+      "Backup scheduling",
+      "Multi-AZ failover"
+    ],
+    "correct": 0,
+    "description": "Tags allow logical grouping, cost tracking, and automation across AWS resources."
+  }
+]

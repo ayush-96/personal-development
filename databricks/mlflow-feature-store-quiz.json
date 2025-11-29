@@ -1,0 +1,386 @@
+[
+  {
+    "id": 1,
+    "question": "What is the primary difference between registering a model in MLflow Model Registry vs Unity Catalog?",
+    "choices": [
+      "No difference",
+      "UC-registered models have full governance, column-level lineage, permissions, and appear in Catalog Explorer",
+      "Only UC models can be served",
+      "MLflow Registry is deprecated"
+    ],
+    "correct": 1,
+    "description": "Unity Catalog treats models as first-class objects with the same privilege model and lineage as tables.\nMLflow Registry remains for non-UC workspaces."
+  },
+  {
+    "id": 2,
+    "question": "Which method is recommended in 2025 to log models in Unity Catalog?",
+    "choices": [
+      "mlflow.log_model()",
+      "mlflow.log_model(..., registered_model_name=\"catalog.schema.model_name\")",
+      "mlflow.register_model() only",
+      "databricks.register_model()"
+    ],
+    "correct": 1,
+    "description": "Direct three-level namespace in registered_model_name automatically registers or creates a new version in UC."
+  },
+  {
+    "id": 3,
+    "question": "A Feature Store feature table must always have:",
+    "choices": [
+      "A primary key + timestamp key",
+      "Only a primary key",
+      "Z-ordering",
+      "Only partitioning"
+    ],
+    "correct": 0,
+    "description": "Both primary keys (entity) and timestamp key are mandatory for point-in-time correctness and online store sync."
+  },
+  {
+    "id": 4,
+    "question": "When you call FeatureStoreClient().create_table(..., online_stores=[...]), which online store types are supported?",
+    "choices": [
+      "DynamoDB only",
+      "DynamoDB, Cosmos DB, Azure Cache for Redis, Aurora RDS + MySQL-compatible",
+      "Only Redis",
+      "None – manual"
+    ],
+    "correct": 1,
+    "description": "Multiple online stores can be attached simultaneously; writes are replicated automatically."
+  },
+  {
+    "id": 5,
+    "question": "What happens when you write new data to a feature table with an existing online store?",
+    "choices": [
+      "Only offline table updated",
+      "Both offline Delta table and all configured online stores are updated atomically",
+      "Fails unless online store disabled",
+      "Requires manual sync"
+    ],
+    "correct": 1,
+    "description": "Feature Store guarantees consistency: a single write updates both offline and online stores in the same transaction."
+  },
+  {
+    "id": 6,
+    "question": "Point-in-time lookup using FeatureStoreClient().get_features() avoids:",
+    "choices": [
+      "Data leakage in training",
+      "Manual joins with as-of logic",
+      "Both A and B",
+      "Only latency"
+    ],
+    "correct": 2,
+    "description": "get_features(training_set_df) automatically performs correct as-of joins against feature tables using the timestamp key."
+  },
+  {
+    "id": 7,
+    "question": "Which of the following is true about Feature Store online serving latency?",
+    "choices": [
+      "Usually 100–500 ms",
+      "Single-digit milliseconds on DynamoDB/Redis with proper partitioning",
+      "Always >1 second",
+      "Only batch"
+    ],
+    "correct": 1,
+    "description": "Properly configured online stores achieve <10 ms p99 latency for real-time inference."
+  },
+  {
+    "id": 8,
+    "question": "You can publish features from a streaming Delta table to the online store:",
+    "choices": [
+      "No – only batch",
+      "Yes – using streaming writes or Delta Live Tables with feature table target",
+      "Only via scheduled job",
+      "Only manual"
+    ],
+    "correct": 1,
+    "description": "DLT pipelines and streaming Spark jobs can write continuously to feature tables → online stores stay near-real-time."
+  },
+  {
+    "id": 9,
+    "question": "FeatureSpec lineage in Unity Catalog tracks:",
+    "choices": [
+      "Only notebook that created the feature table",
+      "Source code, input tables, and downstream models that consume the feature",
+      "Only model versions",
+      "Nothing"
+    ],
+    "correct": 1,
+    "description": "Full upstream (data → feature) and downstream (feature → model) lineage visible in Catalog Explorer."
+  },
+  {
+    "id": 10,
+    "question": "Which privilege is required to write new features to an existing feature table?",
+    "choices": [
+      "SELECT",
+      "WRITE_FEATURES",
+      "MODIFY",
+      "CREATE_TABLE"
+    ],
+    "correct": 1,
+    "description": "Granular WRITE_FEATURES privilege (separate from regular MODIFY) controls feature ingestion."
+  },
+  {
+    "id": 11,
+    "question": "Training sets generated via create_training_set() are stored as:",
+    "choices": [
+      "Temporary views",
+      "Delta tables in Unity Catalog with full version history and lineage",
+      "Only Pandas DataFrames",
+      "Parquet files"
+    ],
+    "correct": 1,
+    "description": "Training sets are persisted Delta tables; you can time-travel and audit them like any other table."
+  },
+  {
+    "id": 12,
+    "question": "Feature Store supports which data types for primary/timestamp keys?",
+    "choices": [
+      "String and integer only",
+      "String, integer, long, UUID (timestamp key: timestamp or date)",
+      "Any type",
+      "Only string"
+    ],
+    "correct": 1,
+    "description": "Composite primary keys are also supported (multiple columns)."
+  },
+  {
+    "id": 13,
+    "question": "What happens if you try to log a model that used FeatureStore training sets without UC integration?",
+    "choices": [
+      "Model logs normally",
+      "Model logs but feature lineage is missing",
+      "Fails with error",
+      "Lineage is auto-captured only in UC-enabled workspaces"
+    ],
+    "correct": 3,
+    "description": "Feature-to-model lineage requires Unity Catalog; otherwise only basic MLflow params/metrics are recorded."
+  },
+  {
+    "id": 14,
+    "question": "You can serve a UC-registered model with real-time features using:",
+    "choices": [
+      "mlflow.pyfunc.serve",
+      "Databricks Model Serving with 'feature_lookup' payload",
+      "Only batch scoring",
+      "Custom Flask"
+    ],
+    "correct": 1,
+    "description": "Model Serving endpoints accept entity keys and automatically enrich payload with latest online feature values."
+  },
+  {
+    "id": 15,
+    "question": "Which MLflow flavor natively supports Feature Store lookup during scoring?",
+    "choices": [
+      "sklearn",
+      "pyfunc with FeatureLookup wrapper",
+      "xgboost",
+      "lightgbm"
+    ],
+    "correct": 1,
+    "description": "Use mlflow.pyfunc.PythonModel + FeatureSpec to declare required features → automatic lookup at inference time."
+  },
+  {
+    "id": 16,
+    "question": "Feature table freshness monitoring is available via:",
+    "choices": [
+      "Lakehouse Monitoring on the feature table",
+      "Manual query",
+      "MLflow metrics",
+      "No built-in"
+    ],
+    "correct": 0,
+    "description": "Apply Lakehouse Monitoring profiles to feature tables to track lag, null rates, distribution drift."
+  },
+  {
+    "id": 17,
+    "question": "The recommended way to backfill historical features after adding a new feature column is:",
+    "choices": [
+      "Rewrite entire table",
+      "Use feature_table.write_mode(\"merge\") with default nulls",
+      "Use fs.write_table(..., mode=\"merge\") + fill_na",
+      "Not possible"
+    ],
+    "correct": 2,
+    "description": "Merge mode + explicit default/fill logic safely backfills without breaking point-in-time correctness."
+  },
+  {
+    "id": 18,
+    "question": "question": "Which API retrieves both historical features and labels for model evaluation?",
+    "choices": [
+      "fs.score_batch()",
+      "fs.create_training_set() + .load_df()",
+      "fs.get_historical_features()",
+      "fs.read_table()"
+    ],
+    "correct": 1,
+    "description": "create_training_set() joins features + label table using the provided TrainingSet definition."
+  },
+  {
+    "id": 19,
+    "question": "Feature Search in Databricks UI allows filtering by:",
+    "choices": [
+      "Only name",
+      "Name, description, tags, data type, owner, lineage, freshness",
+      "Only tags",
+      "None"
+    ],
+    "correct": 1,
+    "description": "Enterprise feature discovery with rich metadata search."
+  },
+  {
+    "id": 20,
+    "question": "You can share a feature table via Delta Sharing:",
+    "choices": [
+      "No",
+      "Yes – feature tables are regular Delta tables and can be shared securely",
+      "Only offline table",
+      "Only online store"
+    ],
+    "correct": 1,
+    "description": "Recipients receive offline feature history; online stores are not shared."
+  },
+  {
+    "id": 21,
+    "question": "Which command lists all feature tables in a schema?",
+    "choices": [
+      "SHOW TABLES",
+      "SHOW FEATURE TABLES IN schema",
+      "fs.list_feature_tables()",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "description": "SQL command SHOW FEATURE TABLES and Python fs.list_feature_tables() both work."
+  },
+  {
+    "id": 22,
+    "question": "Feature Store supports schema evolution:",
+    "choices": [
+      "No",
+      "Yes – new columns can be added (not removed)",
+      "Full evolution with mergeSchema",
+      "Only via recreate"
+    ],
+    "correct": 1,
+    "description": "New nullable columns can be added; removing or changing types breaks point-in-time correctness."
+  },
+  {
+    "id": 23,
+    "question": "The correct way to delete a feature table with online stores is:",
+    "choices": [
+      "DROP TABLE",
+      "fs.delete_table()",
+      "Both work – online stores cleaned automatically",
+      "Manual cleanup needed"
+    ],
+    "correct": 2,
+    "description": "FeatureStoreClient().delete_table() or DROP TABLE both remove offline + online stores."
+  },
+  {
+    "id": 24,
+    "question": "Model Serving with feature lookup requires the model to be:",
+    "choices": [
+      "Logged with mlflow.pyfunc",
+      "Registered in Unity Catalog (not just MLflow Registry)",
+      "Any model",
+      "Only custom pyfunc"
+    ],
+    "correct": 1,
+    "description": "Only UC-registered models can have automatic feature lookup endpoints."
+  },
+  {
+    "id": 25,
+    "question": "You can use Feature Store from outside Databricks using:",
+    "choices": [
+      "Only Databricks notebooks",
+      "Open-source MLflow + Databricks Feature Store REST API / Unity Catalog ODBC/JDBC",
+      "No",
+      "Only Pandas"
+    ],
+    "correct": 1,
+    "description": "External tools can read offline tables via UC and online stores via direct SDK."
+  },
+  {
+    "id": 26,
+    "question": "Feature Store supports batch scoring with historical features using:",
+    "choices": [
+      "fs.score_batch(model_uri, input_df_with_keys_and_timestamp)",
+      "Only real-time",
+      "Manual join",
+      "Not supported"
+    ],
+    "correct": 0,
+    "description": "score_batch performs correct point-in-time joins at scale without data leakage."
+  },
+  {
+    "id": 27,
+    "question": "Which table property indicates a table is a Feature Store feature table?",
+    "choices": [
+      "delta.isFeatureTable = 'true'",
+      "pipelines.featureTable = 'true'",
+      "No property – metadata stored separately",
+      "delta.featureStore.enabled"
+    ],
+    "correct": 2,
+    "description": "No visible table property; Feature Store metadata is managed internally."
+  },
+  {
+    "id": 28,
+    "question": "Feature Store enforces freshness SLA using:",
+    "choices": [
+      "Manual checks",
+      "Expectations in DLT + Lakehouse Monitoring",
+      "Built-in SLA alerts",
+      "No enforcement"
+    ],
+    "correct": 1,
+    "description": "Use DLT expectations or Monitoring profiles to alert on stale features."
+  },
+  {
+    "id": 29,
+    "question": "You can version feature tables using:",
+    "choices": [
+      "MLflow Registry",
+      "Delta time travel + aliases/tags in UC",
+      "Only aliases",
+      "No versioning"
+    ],
+    "correct": 1,
+    "description": "Use CREATE OR REPLACE TABLE ... AS + tags/aliases for immutable feature versions."
+  },
+  {
+    "id": 30,
+    "question": "The recommended pattern for canary model deployment with Feature Store is:",
+    "choices": [
+      "Shadow mode with score_batch",
+      "Traffic splitting in Model Serving + same feature lookup",
+      "Manual A/B",
+      "Only batch"
+    ],
+    "correct": 1,
+    "description": "Model Serving supports percentage-based traffic splitting while both models use identical live features."
+  },
+  {
+    "id": 31,
+    "question": "Feature Store client automatically handles:",
+    "choices": [
+      "Only offline reads",
+      "Schema validation, primary key enforcement, timestamp alignment, online store sync",
+      "Only logging",
+      "Nothing"
+    ],
+    "correct": 1,
+    "description": "All correctness and consistency guarantees are built into the client."
+  },
+  {
+    "id": 32,
+    "question": "As of November 2025, Unity Catalog + Feature Store integration is:",
+    "choices": [
+      "Preview",
+      "Generally Available on AWS, Azure, and GCP",
+      "Only on AWS",
+      "Not released"
+    ],
+    "correct": 1,
+    "description": "Full GA across all clouds with governance, lineage, and serving integration."
+  }
+]

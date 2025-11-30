@@ -1,1 +1,422 @@
-
+[
+    {
+        "id": 1,
+        "question": "Which Structured Streaming trigger type processes data exactly once per interval even after failure/restart?",
+        "choices": [
+            "Trigger.Once()",
+            "Trigger.ProcessingTime('5 minutes')",
+            "Trigger.AvailableNow()",
+            "Trigger.Continuous()"
+        ],
+        "correct": 1,
+        "description": "ProcessingTime trigger with checkpointing guarantees exactly-once processing per micro-batch interval.\nFailures resume from the last successful offset."
+    },
+    {
+        "id": 2,
+        "question": "What is the key difference between Trigger.AvailableNow() and Trigger.Once()?",
+        "choices": [
+            "AvailableNow deletes checkpoint after completion; Once keeps it",
+            "AvailableNow processes all data then shuts down cleanly; Once may leave state",
+            "AvailableNow is for continuous processing",
+            "No difference"
+        ],
+        "correct": 1,
+        "description": "AvailableNow (introduced 2023) is designed for batch-like streaming jobs: runs all available data then terminates cleanly with no leftover state."
+    },
+    {
+        "id": 3,
+        "question": "Delta Lake as a streaming sink guarantees exactly-once semantics because:",
+        "choices": [
+            "It uses idempotent writes",
+            "Streaming writes are transactional and committed atomically with offset log in checkpoint",
+            "It uses two-phase commit",
+            "Only with foreachBatch"
+        ],
+        "correct": 1,
+        "description": "Delta sink commits data files and offset range in the same atomic transaction → no duplicates even on restart."
+    },
+    {
+        "id": 4,
+        "question": "Which source supports schema inference and evolution natively in Structured Streaming?",
+        "choices": [
+            "Kafka only",
+            "Delta Lake source (streaming from Delta table changes)",
+            "Event Hubs",
+            "Kinesis"
+        ],
+        "correct": 1,
+        "description": "Delta source + Change Data Feed (CDF) automatically tracks schema changes and supports mergeSchema option."
+    },
+    {
+        "id": 5,
+        "question": "To stream only INSERTs and UPDATEs (pre-image disabled) from a Delta table, you set:",
+        "choices": [
+            ".option(\"readChangeFeed\", \"true\").option(\"startingVersion\", 10)",
+            ".option(\"readChangeFeed\", \"true\").option(\"includePreimage\", \"false\")",
+            ".option(\"ignoreChanges\", \"true\")",
+            ".option(\"cdc\", \"true\")"
+        ],
+        "correct": 1,
+        "description": "CDF options: readChangeFeed=true, startingVersion/Timestamp, skipChangeCommits, includePreimage controls old image visibility."
+    },
+    {
+        "id": 6,
+        "question": "What happens when you use foreachBatch() on a streaming query?",
+        "choices": [
+            "Exactly-once guarantee is lost",
+            "You get access to micro-batch DataFrame and batchId; must ensure idempotency yourself",
+            "Automatically idempotent",
+            "Only for debugging"
+        ],
+        "correct": 1,
+        "description": "foreachBatch gives full control but responsibility for idempotency (e.g., MERGE with unique keys)."
+    },
+    {
+        "id": 7,
+        "question": "Which option enables multi-stream deduplication across different Kafka topics/partitions?",
+        "choices": [
+            ".dropDuplicates()",
+            ".dropDuplicatesWithinWatermark()",
+            "Both work with watermark + state store TTL",
+            "Not possible"
+        ],
+        "correct": 2,
+        "description": "With proper watermark and state TTL, dropDuplicates works globally across all input streams."
+    },
+    {
+        "id": 8,
+        "question": "Stateful streaming operators require checkpointing because:",
+        "choices": [
+            "State is stored in memory only",
+            "State is persisted in _checkpoint location using RocksDB + write-ahead log",
+            "State is stored in Delta",
+            "Only for flatMapGroupsWithState"
+        ],
+        "correct": 1,
+        "description": "Versioned state is fault-tolerant and allows speculative execution and auto-scaling."
+    },
+    {
+        "id": 9,
+        "question": "Which operation is NOT supported in Structured Streaming?",
+        "choices": [
+            "Streaming aggregations with event-time window",
+            "Streaming sort (without limit)",
+            "Streaming limit",
+            "Streaming deduplication"
+        ],
+        "correct": 1,
+        "description": "Full sort on unbounded streams is disallowed; use limit + orderBy for top-N."
+    },
+    {
+        "id": 10,
+        "question": "Trigger.Continuous() mode supports:",
+        "choices": [
+            "Sub-second latency with checkpointing",
+            "Experimental low-latency mode without exactly-once guarantees",
+            "Only Kafka",
+            "Deprecated"
+        ],
+        "correct": 1,
+        "description": "Continuous processing is experimental, no fault tolerance, sub-1ms latency possible."
+    },
+    {
+        "id": 11,
+        "question": "Delta Live Tables (DLT) streaming tables support which materialization mode?",
+        "choices": [
+            "Complete only",
+            "Incremental (streaming) and complete (batch) via APPLY CHANGES FROM",
+            "Only append",
+            "Only complete"
+        ],
+        "correct": 1,
+        "description": "APPLY CHANGES FROM + streaming tables enable incremental materialized views with automatic CDC handling."
+    },
+    {
+        "id": 12,
+        "question": "The maximum supported event-time skew for watermarks is controlled by:",
+        "choices": [
+            "withWatermark() delay threshold",
+            "spark.sql.streaming.stateStore.maintenanceInterval",
+            "spark.sql.streaming.multipleWatermarkPolicy",
+            "No limit"
+        ],
+        "correct": 0,
+        "description": "withWatermark(\"event_time\", \"10 minutes\") drops events older than watermark."
+    },
+    {
+        "id": 13,
+        "question": "Which Kafka option enables exactly-once semantics with Kafka sink?",
+        "choices": [
+            "enable.idempotence=true",
+            "kafka.transactional.id config + init transaction",
+            "Structured Streaming Kafka sink is always at-least-once",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "Databricks 13.0+ supports Kafka transactional producer for exactly-once Kafka sink."
+    },
+    {
+        "id": 14,
+        "question": "You can monitor active streaming query metrics via:",
+        "choices": [
+            "StreamingQueryListener only",
+            "system.event.streaming_metrics + REST API + UI",
+            "Only Spark UI",
+            "Only DLT events"
+        ],
+        "correct": 1,
+        "description": "system.event.streaming_metrics table exposes input rate, processing rate, latency, state size, etc."
+    },
+    {
+        "id": 15,
+        "question": "Arbitrary stateful processing with timeout support requires:",
+        "choices": [
+            "mapGroupsWithState",
+            "flatMapGroupsWithState with StateTimeout.ProcessingTimeTimeout()",
+            "Both",
+            "Only applyInPandasWithState"
+        ],
+        "correct": 2,
+        "description": "flatMapGroupsWithState + Timeout configuration enables event-time and processing-time timeouts."
+    },
+    {
+        "id": 16,
+        "question": "The recommended way to handle late data beyond watermark in 2025 is:",
+        "choices": [
+            "Increase watermark delay",
+            "Use allowedLateness on streaming windows + outputMode Update/Complete",
+            "Drop late data",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "allowedLateness (GA 2024) keeps windows open longer for late updates."
+    },
+    {
+        "id": 17,
+        "question": "Which sink supports schema registry integration out-of-the-box?",
+        "choices": [
+            "Delta",
+            "Kafka with Confluent Schema Registry via Avro format",
+            "Console",
+            "Memory"
+        ],
+        "correct": 1,
+        "description": "Kafka sink + Avro + schema.registry.url automatically registers/evolves schema."
+    },
+    {
+        "id": 18,
+        "question": "Auto Loader in streaming mode uses:",
+        "choices": [
+            "Polling",
+            "Cloud notification services (SQS + Event Grid + Event Hubs) for sub-second latency",
+            "Only directory listing",
+            "File arrival trigger"
+        ],
+        "correct": 1,
+        "description": "cloudFiles with queue uses native cloud events → near-zero latency and massive scale."
+    },
+    {
+        "id": 19,
+        "question": "You can join two streaming DataFrames directly:",
+        "choices": [
+            "Yes, inner join supported",
+            "Only stream-static joins",
+            "No stream-stream joins",
+            "Only with watermark + time constraints"
+        ],
+        "correct": 3,
+        "description": "Stream-stream inner/left/right joins require watermarks and time bounds to bound state."
+    },
+    {
+        "id": 20,
+        "question": "What is the default output mode for streaming aggregations with watermark?",
+        "choices": [
+            "Append",
+            "Update",
+            "Complete",
+            "Automatic based on query"
+        ],
+        "correct": 0,
+        "description": "Watermarked aggregations default to Append mode (early results allowed)."
+    },
+    {
+        "id": 21,
+        "question": "DLT expectation @expect_or_fail on a streaming table:",
+        "choices": [
+            "Logs violation",
+            "Fails the entire pipeline immediately",
+            "Retains violating records in quarantine",
+            "Only in batch"
+        ],
+        "correct": 1,
+        "description": "@expect_or_fail is strict; @expect_or_drop drops bad records; @expect logs only."
+    },
+    {
+        "id": 22,
+        "question": "Which command shows the latest offset ranges committed by a streaming query?",
+        "choices": [
+            "DESCRIBE DETAIL",
+            "query.lastProgress",
+            "Both",
+            "Only Spark UI"
+        ],
+        "correct": 2,
+        "description": "lastProgress JSON contains sources → committed offsets and metrics."
+    },
+    {
+        "id": 23,
+        "question": "State store compaction in long-running streams is controlled by:",
+        "choices": [
+            "spark.sql.streaming.stateStore.rocksdb.compactOnCommit",
+            "spark.sql.streaming.stateStore.maintenanceInterval",
+            "Automatic via TTL",
+            "Manual"
+        ],
+        "correct": 1,
+        "description": "Maintenance task runs periodically to compact and clean expired state."
+    },
+    {
+        "id": 24,
+        "question": "applyInPandasWithState is useful for:",
+        "choices": [
+            "Simple aggregations",
+            "Arbitrary Python stateful logic with timeout support and schema enforcement",
+            "Only sessionization",
+            "Deprecated"
+        ],
+        "correct": 1,
+        "description": "Python equivalent of flatMapGroupsWithState with full timeout and type safety."
+    },
+    {
+        "id": 25,
+        "question": "You can restart a failed streaming query from the exact same offsets using:",
+        "choices": [
+            "Same checkpoint location",
+            "Always automatic",
+            "Only with Trigger.Once",
+            "Not possible"
+        ],
+        "correct": 0,
+        "description": "Checkpoint contains offsets, state, and query definition → fully recoverable."
+    },
+    {
+        "id": 26,
+        "question": "Which feature enables streaming from Iceberg tables in Databricks?",
+        "choices": [
+            "Delta source only",
+            "Iceberg streaming source (GA 2025)",
+            "Only batch",
+            "Via Kafka"
+        ],
+        "correct": 1,
+        "description": "Databricks supports native streaming reads from Iceberg commit log."
+    },
+    {
+        "id": 27,
+        "question": "The maximum state size per key in stateful streaming is limited by:",
+        "choices": [
+            "100 MB default",
+            "spark.sql.streaming.statefulOperator.maxStateSizePerKey (default 100 MB)",
+            "No limit",
+            "1 GB"
+        ],
+        "correct": 1,
+        "description": "Configurable per-operator state size limit to prevent OOM."
+    },
+    {
+        "id": 28,
+        "question": "Delta Live Tables supports streaming materialized views with:",
+        "choices": [
+            "Only append",
+            "Full SCD Type 1 and Type 2 via APPLY CHANGES",
+            "Only complete refresh",
+            "Only batch"
+        ],
+        "correct": 1,
+        "description": "APPLY CHANGES INTO + slowly changing dimensions policies enable streaming dim tables."
+    },
+    {
+        "id": 29,
+        "question": "Which sink supports schema evolution automatically?",
+        "choices": [
+            "Kafka",
+            "Delta (with mergeSchema=true)",
+            "Console",
+            "Memory"
+        ],
+        "correct": 1,
+        "description": "Delta streaming sink honors .option(\"mergeSchema\", \"true\") or table property."
+    },
+    {
+        "id": 30,
+        "question": "You can rate-limit a streaming query using:",
+        "choices": [
+            "maxFilesPerTrigger",
+            "maxBytesPerTrigger",
+            "trigger(ProcessingTime) with rate limiting",
+            "All of the above"
+        ],
+        "correct": 3,
+        "description": "Multiple throttling options for backpressure control."
+    },
+    {
+        "id": 31,
+        "question": "Streaming Deduplication with multiple keys requires:",
+        "choices": [
+            "dropDuplicates([\"col1\", \"col2\"])",
+            "Works natively with composite columns or struct",
+            "Only single column",
+            "Not supported"
+        ],
+        "correct": 1,
+        "description": "Any column list or struct can be used as dedup key."
+    },
+    {
+        "id": 32,
+        "question": "The recommended way to handle schema drift in Auto Loader is:",
+        "choices": [
+            "rescue column",
+            "cloudFiles.schemaEvolutionMode = \"addNewColumns\" or \"rescue\"",
+            "Manual schema hint",
+            "Fail pipeline"
+        ],
+        "correct": 1,
+        "description": "addNewColumns auto-adds; rescue moves unknown fields to _rescued_data."
+    },
+    {
+        "id": 33,
+        "question": "DLT pipeline event log contains:",
+        "choices": [
+            "Only errors",
+            "Full lineage, metrics, expectations, flow definitions, and audit",
+            "Only runtime",
+            "Only metrics"
+        ],
+        "correct": 1,
+        "description": "Event log is a Delta table with complete observability."
+    },
+    {
+        "id": 34,
+        "question": "Which statement about multiple watermark policy is true?",
+        "choices": [
+            "Default is min",
+            "spark.sql.streaming.multipleWatermarkPolicy = \"min\" (most conservative) or \"max\"",
+            "Only min",
+            "No policy"
+        ],
+        "correct": 1,
+        "description": "min = safest (drops more late data); max = keeps more data."
+    },
+    {
+        "id": 35,
+        "question": "As of Nov 2025, the lowest achievable end-to-end latency for a production streaming pipeline on Databricks is:",
+        "choices": [
+            "10 seconds",
+            "< 500 ms with DLT + serverless compute + cloud notifications",
+            "1 minute",
+            "> 5 seconds"
+        ],
+        "correct": 1,
+        "description": "Serverless DLT + Auto Loader + cloud events achieve sub-second latency at scale."
+    }
+]

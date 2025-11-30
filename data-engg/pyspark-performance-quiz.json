@@ -1,1 +1,386 @@
-
+[
+    {
+        "id": 1,
+        "question": "Which of the following eliminates the majority of JVM object overhead in Spark on Databricks?",
+        "choices": [
+            "Project Tungsten",
+            "Project Tungsten + Photon + Adaptive Query Execution (AQE)",
+            "WholeStage CodeGen only",
+            "Off-heap memory"
+        ],
+        "correct": 1,
+        "description": "Photon (C++ vectorized engine) bypasses JVM entirely for most operators.\nAQE + Tungsten give massive gains even on classic Spark."
+    },
+    {
+        "id": 2,
+        "question": "The single biggest performance killer in PySpark is:",
+        "choices": [
+            "UDFs written in Python",
+            "Shuffles",
+            "Skewed joins",
+            "All of the above"
+        ],
+        "correct": 0,
+        "description": "Python UDFs incur serialization + process spawning overhead (10–100x slower).\nAlways prefer built-in functions or Pandas/Vectorized UDFs."
+    },
+    {
+        "id": 3,
+        "question": "Pandas UDF (Scalar) with Arrow enabled runs at what speed relative to Python UDF?",
+        "choices": [
+            "2–5x faster",
+            "10–100x faster",
+            "Same speed",
+            "Slower"
+        ],
+        "correct": 1,
+        "description": "Arrow zero-copy + vectorized execution removes Python object overhead."
+    },
+    {
+        "id": 4,
+        "question": "Which Spark config enables dynamic allocation of executors on Databricks clusters?",
+        "choices": [
+            "spark.dynamicAllocation.enabled=true",
+            "Automatically enabled on all Databricks clusters",
+            "spark.dynamicAllocation.enabled=false by default",
+            "Only on job clusters"
+        ],
+        "correct": 1,
+        "description": "Databricks enables dynamic allocation + autoscaling by default on all cluster types."
+    },
+    {
+        "id": 5,
+        "question": "The fastest way to filter a large Delta table on a high-cardinality column is:",
+        "choices": [
+            "ZORDER + data skipping",
+            "Liquid Clustering + Bloom filters",
+            "Partitioning",
+            "No filtering"
+        ],
+        "correct": 1,
+        "description": "Bloom filters + Liquid Clustering give sub-millisecond file pruning on equality filters."
+    },
+    {
+        "id": 6,
+        "question": "Adaptive Query Execution (AQE) automatically performs which optimizations?",
+        "choices": [
+            "Coalesce shuffle partitions, skew join handling, dynamic join reordering",
+            "Only partition coalescing",
+            "Only broadcast",
+            "Nothing by default"
+        ],
+        "correct": 0,
+        "description": "Enabled by default on DBR 10+.\nSkew handling, join reordering, and coalesce are all automatic."
+    },
+    {
+        "id": 7,
+        "question": "What is the optimal shuffle partition count formula in 2025?",
+        "choices": [
+            "200",
+            "Total cores × 2–4",
+            "Automatically tuned by AQE",
+            "128 MB per partition"
+        ],
+        "correct": 2,
+        "description": "AQE + spark.sql.shuffle.partitions auto-tuning (Databricks Runtime 13+) makes manual setting obsolete."
+    },
+    {
+        "id": 8,
+        "question": "Which join strategy should you force when one side is < 100 MB?",
+        "choices": [
+            "Sort-merge join",
+            "Broadcast hash join",
+            "Shuffle hash join",
+            "Cartesian"
+        ],
+        "correct": 1,
+        "description": "Use hint /*+ BROADCAST(df) */ or let AQE auto-broadcast (default threshold ~100 MB)."
+    },
+    {
+        "id": 9,
+        "question": "To mitigate data skew in a join, the best 2025 technique is:",
+        "choices": [
+            "Manual salting",
+            "AQE automatic skew handling + broadcast of skewed keys",
+            "Increase partitions",
+            "Repartition"
+        ],
+        "correct": 1,
+        "description": "AQE detects skew and splits hot partitions automatically — no code changes needed."
+    },
+    {
+        "id": 10,
+        "question": "Which cache storage level is fastest for iterative ML workloads?",
+        "choices": [
+            "MEMORY_ONLY",
+            "MEMORY_AND_DISK_SER",
+            "Photon-accelerated Delta Cache (automatic)",
+            "DISK_ONLY"
+        ],
+        "correct": 2,
+        "description": "Databricks Delta Cache (SSD + Photon) is tier-0 cache — faster than RAM for most workloads."
+    },
+    {
+        "id": 11,
+        "question": "spark.databricks.io.cache.enabled = true does what?",
+        "choices": [
+            "Caches Parquet in RAM",
+            "Enables Delta Cache on node local SSDs",
+            "Caches only metadata",
+            "Nothing"
+        ],
+        "correct": 1,
+        "description": "Delta Cache dramatically improves repeated reads (ML training, BI)."
+    },
+    {
+        "id": 12,
+        "question": "The fastest way to read a 10 TB Delta table filtered on date is:",
+        "choices": [
+            "df = spark.read.format(\"delta\").load(path)",
+            "spark.read.format(\"delta\").option(\"basePath\", path).load(partitioned_path)",
+            "Use Delta table API + push down filters early",
+            "No difference"
+        ],
+        "correct": 2,
+        "description": "spark.read.table(\"catalog.db.table\").filter(\"date >= '2025-01-01'\") uses metadata + statistics pruning."
+    },
+    {
+        "id": 13,
+        "question": "Which operation triggers a full table scan even with filters?",
+        "choices": [
+            "SELECT * WHERE upper(col) = 'ABC'",
+            "SELECT * WHERE col = 'abc'",
+            "SELECT count(*) BY col",
+            "All of the above"
+        ],
+        "correct": 0,
+        "description": "Non-deterministic or non-pushdown functions (upper, upper, substring) disable pruning."
+    },
+    {
+        "id": 14,
+        "question": "Databricks Runtime 15+ uses which garbage collector by default?",
+        "choices": [
+            "G1GC",
+            "ZGC (low-pause)",
+            "Shenandoah",
+            "Parallel GC"
+        ],
+        "correct": 1,
+        "description": "ZGC gives sub-10ms pause times even on 1 TB heaps — ideal for large analytics."
+    },
+    {
+        "id": 15,
+        "question": "The fastest way to apply a Python function row-by-row in 2025 is:",
+        "choices": [
+            "Python UDF",
+            "Pandas UDF (Scalar)",
+            "Pandas UDF (Iterator)",
+            "Vectorized UDF with Arrow + NumPy"
+        ],
+        "correct": 2,
+        "description": "Iterator Pandas UDF (Grouped Map) processes batches with almost zero overhead."
+    },
+    {
+        "id": 16,
+        "question": "spark.sql.execution.arrow.pyspark.enabled = true is:",
+        "choices": [
+            "Deprecated",
+            "Enabled by default on DBR 12+",
+            "Manual only",
+            "Only for ML"
+        ],
+        "correct": 1,
+        "description": "Arrow optimization is always on — critical for Pandas UDF performance."
+    },
+    {
+        "id": 17,
+        "question": "To minimize shuffle spill to disk, you should:",
+        "choices": [
+            "Increase executor memory",
+            "Enable AQE + use Delta format + Photon",
+            "Set spark.sql.shuffle.partitions=1",
+            "Use broadcast"
+        ],
+        "correct": 1,
+        "description": "Photon + AQE drastically reduce shuffle volume and memory pressure."
+    },
+    {
+        "id": 18,
+        "question": "The maximum recommended executor size on Databricks in 2025 is:",
+        "choices": [
+            "64 GB",
+            "256 GB memory / 32 cores",
+            "1 TB",
+            "No limit"
+        ],
+        "correct": 1,
+        "description": "Larger executors reduce GC pressure and improve cache locality."
+    },
+    {
+        "id": 19,
+        "question": "Which command shows actual physical plan + runtime stats?",
+        "choices": [
+            "df.explain()",
+            "df.explain(\"extended\")",
+            "spark.sql(\"EXPLAIN FORMATTED ...\")",
+            "All show different levels"
+        ],
+        "correct": 2,
+        "description": "EXPLAIN FORMATTED shows physical plan, AQE decisions, skew info, and runtime metrics."
+    },
+    {
+        "id": 20,
+        "question": "Photon acceleration is available on which compute types?",
+        "choices": [
+            "All-purpose clusters only",
+            "All compute: all-purpose, job clusters, serverless SQL, DLT, DBSQL",
+            "Only serverless",
+            "Only SQL warehouses"
+        ],
+        "correct": 1,
+        "description": "Photon is on by default everywhere in DBR 13+."
+    },
+    {
+        "id": 21,
+        "question": "To avoid OOM on large joins, use:",
+        "choices": [
+            "Increase memory",
+            "AQE + spill-enabled + broadcast small side",
+            "Sort-merge only",
+            "Repartition"
+        ],
+        "correct": 1,
+        "description": "AQE gracefully spills to disk when memory is exhausted."
+    },
+    {
+        "id": 22,
+        "question": "The fastest way to write 10 TB of data with 10k columns is:",
+        "choices": [
+            "df.write.mode(\"overwrite\")",
+            "Use OPTIMIZE WRITE + Delta",
+            "Use coalesce(1)",
+            "Use repartition"
+        ],
+        "correct": 1,
+        "description": "spark.databricks.delta.optimizeWrite.enabled = true dynamically repartitions to avoid small files."
+    },
+    {
+        "id": 23,
+        "question": "spark.sql.adaptive.coalescePartitions.enabled defaults to true and:",
+        "choices": [
+            "Reduces partitions after shuffle based on data size",
+            "Increases partitions",
+            "Only for streaming",
+            "Disabled"
+        ],
+        "correct": 0,
+        "description": "AQE coalesces small post-shuffle partitions → fewer tasks, less overhead."
+    },
+    {
+        "id": 24,
+        "question": "Which Delta table property dramatically improves MERGE/UPDATE/DELETE performance on large tables?",
+        "choices": [
+            "delta.enableDeletionVectors = true",
+            "delta.autoCompact.enabled = true",
+            "delta.optimizeWrite.enabled = true",
+            "All of them"
+        ],
+        "correct": 0,
+        "description": "Deletion vectors avoid full file rewrites on small changes."
+    },
+    {
+        "id": 25,
+        "question": "The best way to monitor query performance in production is:",
+        "choices": [
+            "Spark UI only",
+            "Ganglia metrics",
+            "Databricks SQL Query Profile + system.query.history",
+            "Manual logging"
+        ],
+        "correct": 2,
+        "description": "Query Profile shows skew, spill, Photon usage, stage times, etc."
+    },
+    {
+        "id": 26,
+        "question": "To force Photon execution on a DataFrame API, use:",
+        "choices": [
+            "No need — automatic",
+            "spark.databricks.photon.enabled = true",
+            "df.queryExecution.optimizedPlan",
+            "Only SQL"
+        ],
+        "correct": 0,
+        "description": "Photon is automatically used for all Delta operations in DBR 13+."
+    },
+    {
+        "id": 27,
+        "question": "Which operation benefits most from Delta Cache?",
+        "choices": [
+            "One-time ETL",
+            "ML feature engineering with repeated reads",
+            "Streaming",
+            "Writes"
+        ],
+        "correct": 1,
+        "description": "Repeated scans (ML training loops) become RAM-speed."
+    },
+    {
+        "id": 28,
+        "question": "spark.sql.adaptive.skewJoin.enabled = true automatically handles skew when:",
+        "choices": [
+            "One side has > 10x larger partitions",
+            "Skew > 3x median partition size",
+            "Any skew",
+            "Never"
+        ],
+        "correct": 1,
+        "description": "AQE splits hot partitions and replicates small side."
+    },
+    {
+        "id": 29,
+        "question": "The fastest way to convert Pandas → Spark DataFrame in 2025 is:",
+        "choices": [
+            "pd.DataFrame → spark.createDataFrame",
+            "Apache Arrow zero-copy via spark.createDataFrame(df, schema)",
+            "to_spark() pandas API",
+            "Both B and C"
+        ],
+        "correct": 3,
+        "description": "df.spark.to_spark() uses Arrow zero-copy and infers schema."
+    },
+    {
+        "id": 30,
+        "question": "To minimize driver OOM when collecting large results, use:",
+        "choices": [
+            "collect()",
+            "toPandas()",
+            "write to Delta + read back",
+            "show()"
+        ],
+        "correct": 2,
+        "description": "Never collect > few MB to driver — write to table instead."
+    },
+    {
+        "id": 31,
+        "question": "spark.databricks.delta.preview.enabled = true enables:",
+        "choices": [
+            "Liquid Clustering",
+            "Deletion vectors and latest Delta features",
+            "Photon",
+            "All of them"
+        ],
+        "correct": 1,
+        "description": "Required for newest Delta protocol features."
+    },
+    {
+        "id": 32,
+        "question": "As of Nov 2025, the fastest possible Spark job execution on Databricks is achieved by:",
+        "choices": [
+            "Serverless compute + Photon + Delta Cache + Liquid Clustering + AQE",
+            "Large all-purpose cluster",
+            "Job cluster with spot",
+            "SQL warehouse"
+        ],
+        "correct": 0,
+        "description": "Serverless + full Photon stack routinely runs jobs 10–100x faster than traditional Spark."
+    }
+]

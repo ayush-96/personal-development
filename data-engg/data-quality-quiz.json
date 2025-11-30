@@ -1,1 +1,350 @@
-
+[
+    {
+        "id": 1,
+        "question": "Which Unity Catalog privilege is required to apply column-level masking or row filters?",
+        "choices": [
+            "SELECT",
+            "UNMASK or BYPASS ROW FILTERS",
+            "OWNERSHIP",
+            "MODIFY"
+        ],
+        "correct": 1,
+        "description": "Regular SELECT sees masked data and filtered rows. Only users/groups explicitly granted UNMASK or BYPASS ROW FILTERS see raw data."
+    },
+    {
+        "id": 2,
+        "question": "Lakehouse Monitoring profiles automatically detect:",
+        "choices": [
+            "Only freshness",
+            "Freshness, completeness, volume anomalies, schema changes, numerical distribution drift, categorical drift",
+            "Only nulls",
+            "Only row count"
+        ],
+        "correct": 1,
+        "description": "ML-powered anomaly detection on time-series and snapshot metrics — no rules to write."
+    },
+    {
+        "id": 3,
+        "question": "The strictest Delta Live Tables expectation that fails the entire pipeline on violation is:",
+        "choices": [
+            "@expect",
+            "@expect_or_drop",
+            "@expect_or_fail",
+            "@expect_all"
+        ],
+        "correct": 2,
+        "description": "@expect_or_fail aborts the run immediately — ideal for critical business rules."
+    },
+    {
+        "id": 4,
+        "question": "Unity Catalog tags can be used for:",
+        "choices": [
+            "Only PII classification",
+            "PII, PHI, sensitivity, ownership, lifecycle, custom business tags — all queryable",
+            "Only column-level",
+            "Only table-level"
+        ],
+        "correct": 1,
+        "description": "Tags propagate to lineage, monitoring, sharing, and access policy engines."
+    },
+    {
+        "id": 5,
+        "question": "Right-to-be-forgotten (GDPR deletion) on Delta tables is best implemented using:",
+        "choices": [
+            "DELETE FROM",
+            "Deletion vectors + VACUUM with short retention",
+            "Full table rewrite",
+            "Only external tables"
+        ],
+        "correct": 1,
+        "description": "Deletion vectors mark rows as removed without rewrite; VACUUM permanently erases after retention window."
+    },
+    {
+        "id": 6,
+        "question": "Which system table contains every GRANT, REVOKE, and ownership change across the account?",
+        "choices": [
+            "system.information_schema.table_privileges",
+            "system.access.audit",
+            "system.billing.usage",
+            "system.query.history"
+        ],
+        "correct": 1,
+        "description": "Complete immutable audit log of all privilege changes — required for SOC2, GDPR compliance."
+    },
+    {
+        "id": 7,
+        "question": "Dynamic views with current_user() and is_account_group_member() are enforced:",
+        "choices": [
+            "Only in DBSQL",
+            "Across all compute: notebooks, jobs, DLT, SQL warehouses, Model Serving",
+            "Only in notebooks",
+            "Never"
+        ],
+        "correct": 1,
+        "description": "Unity Catalog applies RLS and column masking universally — same security model everywhere."
+    },
+    {
+        "id": 8,
+        "question": "Delta Sharing recipients can:",
+        "choices": [
+            "Only read shared tables",
+            "Read shared tables, views, volumes — with full row/column security enforced — without Databricks account",
+            "Write back",
+            "See your full catalog"
+        ],
+        "correct": 1,
+        "description": "Secure, live, governed sharing with external organizations using open protocol."
+    },
+    {
+        "id": 9,
+        "question": "The most effective way to prevent accidental PII exposure in notebooks is:",
+        "choices": [
+            "Manual redaction",
+            "SECURED views/tables + deny direct access to raw tables",
+            "Only restrict SELECT",
+            "Nothing"
+        ],
+        "correct": 1,
+        "description": "SECURED objects hide underlying table definitions and block direct access."
+    },
+    {
+        "id": 10,
+        "question": "Data lineage in Unity Catalog captures:",
+        "choices": [
+            "Only table → table",
+            "Column-level lineage across notebooks, jobs, DLT, SQL, Model Serving, Feature Store",
+            "Only DLT",
+            "Only manual"
+        ],
+        "correct": 1,
+        "description": "End-to-end, automatically collected, column-granular lineage graph."
+    },
+    {
+        "id": 11,
+        "question": "You can enforce a policy that only certain groups can create tables in prod using:",
+        "choices": [
+            "Table ACLs",
+            "Unity Catalog table access policies (preview → GA 2025)",
+            "Cluster policies",
+            "No way"
+        ],
+        "correct": 1,
+        "description": "Declarative policies at catalog/schema level for CREATE, DROP, etc."
+    },
+    {
+        "id": 12,
+        "question": "Lakehouse Monitoring can alert on:",
+        "choices": [
+            "Only freshness delay",
+            "Freshness, anomalies, drift, custom SQL-based metrics",
+            "Only volume",
+            "Only schema changes"
+        ],
+        "correct": 1,
+        "description": "Integrates with email, Slack, PagerDuty, etc."
+    },
+    {
+        "id": 13,
+        "question": "The quarantine table in DLT contains:",
+        "choices": [
+            "All records",
+            "Only records that violated @expect or @expect_or_drop rules",
+            "Duplicates",
+            "Deleted records"
+        ],
+        "correct": 1,
+        "description": "Full visibility into rejected data for debugging and reprocessing."
+    },
+    {
+        "id": 14,
+        "question": "Unity Catalog supports data classification via:",
+        "choices": [
+            "Manual tags only",
+            "Automatic PII/PHI detection (preview) + manual + third-party scanner integration",
+            "Only manual",
+            "None"
+        ],
+        "correct": 1,
+        "description": "Auto-classification is rolling out region-by-region in 2025."
+    },
+    {
+        "id": 15,
+        "question": "To completely hide a column from most users but allow a small team to see it, use:",
+        "choices": [
+            "Two tables",
+            "Column masking policy (e.g., sha2, mask(), nullify)",
+            "View with SELECT *",
+            "Row filter"
+        ],
+        "correct": 1,
+        "description": "Masking functions: mask(), sha2(), null, partial mask, custom SQL."
+    },
+    {
+        "id": 16,
+        "question": "Delta table history is retained by default for:",
+        "choices": [
+            "7 days",
+            "30 days (configurable via delta.logRetentionDuration)",
+            "Forever",
+            "1 year"
+        ],
+        "correct": 1,
+        "description": "Increase to 365 days+ for compliance requirements."
+    },
+    {
+        "id": 17,
+        "question": "The system table that shows who queried which columns is:",
+        "choices": [
+            "system.access.column_access",
+            "system.access.audit with column-level detail",
+            "system.query.history",
+            "Not available"
+        ],
+        "correct": 1,
+        "description": "Fine-grained column access logging for privacy audits."
+    },
+    {
+        "id": 18,
+        "question": "You can prevent data exfiltration by:",
+        "choices": [
+            "Nothing",
+            "Enabling Table Access Control + Storage Credential restrictions + egress controls",
+            "Only IP allowlist",
+            "Only VPN"
+        ],
+        "correct": 1,
+        "description": "Multi-layer defense: UC privileges + credential scoping + VPC egress rules."
+    },
+    {
+        "id": 19,
+        "question": "DLT pipeline quality metrics are stored in:",
+        "choices": [
+            "Temporary view",
+            "Persistent Delta event log table (system.event_log)",
+            "Only UI",
+            "Only emails"
+        ],
+        "correct": 1,
+        "description": "Queryable, versioned, long-term quality history."
+    },
+    {
+        "id": 20,
+        "question": "Unity Catalog supports denying access via:",
+        "choices": [
+            "DENY statement",
+            "No explicit DENY — only additive grants + ownership hierarchy",
+            "REVOKE only",
+            "Both"
+        ],
+        "correct": 1,
+        "description": "Purely additive model — simplifies reasoning and auditing."
+    },
+    {
+        "id": 21,
+        "question": "The most secure way to allow an external BI tool to query data is:",
+        "choices": [
+            "Service principal + ODBC/JDBC with token",
+            "Personal access token",
+            "SQL warehouse + Partner Connect (Tableau/PowerBI) with SSO",
+            "All of the above"
+        ],
+        "correct": 2,
+        "description": "Partner Connect provisions secure, governed connections with automatic token rotation."
+    },
+    {
+        "id": 22,
+        "question": "You can automatically prevent writes containing PII to certain tables using:",
+        "choices": [
+            "No way",
+            "Unity Catalog data classification + access policies + DLT expectations",
+            "Only manual review",
+            "Only encryption"
+        ],
+        "correct": 1,
+        "description": "Combine classification → tag → policy → expectation pipeline."
+    },
+    {
+        "id": 23,
+        "question": "Data stewardship in Unity Catalog is implemented via:",
+        "choices": [
+            "Only admins",
+            "Object ownership + delegated ownership to groups + tag-based stewardship",
+            "Only account admins",
+            "No ownership"
+        ],
+        "correct": 1,
+        "description": "Ownership can be transferred to groups → distributed stewardship."
+    },
+    {
+        "id": 24,
+        "question": "Lakehouse Monitoring baseline is computed using:",
+        "choices": [
+            "Last 7 days",
+            "Configurable historical window (default 28 days) with ML anomaly detection",
+            "Manual baseline",
+            "Fixed thresholds"
+        ],
+        "correct": 1,
+        "description": "Adaptive baselines — no static thresholds to maintain."
+    },
+    {
+        "id": 25,
+        "question": "You can query DLT expectation results using:",
+        "choices": [
+            "Only UI",
+            "SQL on the pipeline’s expectations table (auto-created)",
+            "Only Python API",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "SELECT * FROM <pipeline>_expectations for full history."
+    },
+    {
+        "id": 26,
+        "question": "The most complete data governance stack on Databricks combines:",
+        "choices": [
+            "Unity Catalog + Lakehouse Monitoring + DLT expectations + Delta Sharing + system.access.audit",
+            "Only UC",
+            "Only Monitoring",
+            "Only tags"
+        ],
+        "correct": 0,
+        "description": "Full lifecycle governance: access, quality, lineage, sharing, audit."
+    },
+    {
+        "id": 27,
+        "question": "You can encrypt data at rest using:",
+        "choices": [
+            "Only default cloud encryption",
+            "Customer-managed keys (CMK) via AWS KMS, Azure Key Vault, GCP CMEK",
+            "Only Databricks keys",
+            "None"
+        ],
+        "correct": 1,
+        "description": "Full control over encryption keys for compliance."
+    },
+    {
+        "id": 28,
+        "question": "Unity Catalog supports schema-level privileges:",
+        "choices": [
+            "Only USE SCHEMA",
+            "USE SCHEMA, CREATE TABLE, CREATE VIEW, CREATE FUNCTION, CREATE VOLUME, CREATE MODEL",
+            "Only CREATE TABLE",
+            "None"
+        ],
+        "correct": 1,
+        "description": "Granular control over what objects can be created in a schema."
+    },
+    {
+        "id": 29,
+        "question": "As of November 2025, the most advanced data quality & governance capability on any lakehouse platform is:",
+        "choices": [
+            "dbt tests",
+            "Great Expectations",
+            "Unity Catalog + Lakehouse Monitoring + DLT expectations + column lineage + Delta Sharing + audit log",
+            "Monte Carlo"
+        ],
+        "correct": 2,
+        "description": "Native, fully integrated, no-agent, ML-powered, column-granular, cross-workload governance."
+    }
+]

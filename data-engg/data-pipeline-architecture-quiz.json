@@ -1,1 +1,409 @@
-
+[
+    {
+        "id": 1,
+        "question": "The modern replacement for the classic Lambda Architecture in Databricks is:",
+        "choices": [
+            "Batch + Streaming separate layers",
+            "Kappa Architecture",
+            "Medallion Architecture with Delta Lake (Bronze → Silver → Gold)",
+            "Event-driven only"
+        ],
+        "correct": 2,
+        "description": "Delta Lake unifies batch and streaming on the same tables → no need for dual processing paths."
+    },
+    {
+        "id": 2,
+        "question": "Which ingestion pattern achieves sub-second latency at petabyte scale on Databricks?",
+        "choices": [
+            "Batch Auto Loader",
+            "Auto Loader with cloudFiles + native event queues (SQS / Event Grid / Event Hubs)",
+            "Kafka direct",
+            "Scheduled Spark jobs"
+        ],
+        "correct": 1,
+        "description": "Cloud-native notifications bypass directory listing → files detected instantly."
+    },
+    {
+        "id": 3,
+        "question": "The recommended Bronze layer pattern for JSON/CSV files with evolving schema is:",
+        "choices": [
+            "Strict schema enforcement",
+            "Schema-on-read + _rescued_data column + Change Data Feed enabled",
+            "Immediate parsing to Silver",
+            "Reject bad files"
+        ],
+        "correct": 1,
+        "description": "Preserve raw fidelity, capture malformed records, enable replayability."
+    },
+    {
+        "id": 4,
+        "question": "Silver layer tables should be:",
+        "choices": [
+            "Raw copies of Bronze",
+            "Cleaned, parsed, deduplicated, with enforced schema + primary keys + CDF enabled",
+            "Aggregated",
+            "Only for ML"
+        ],
+        "correct": 1,
+        "description": "Silver = trusted, queryable, versioned source for all downstream consumers."
+    },
+    {
+        "id": 5,
+        "question": "The most efficient pattern for implementing slowly changing dimensions (SCD Type 2) at scale is:",
+        "choices": [
+            "Daily batch MERGE",
+            "Delta Live Tables APPLY CHANGES FROM with SCD Type 2 policy",
+            "foreachBatch MERGE",
+            "Manual history table"
+        ],
+        "correct": 1,
+        "description": "DLT handles sequencing, effective dating, and history automatically — zero boilerplate."
+    },
+    {
+        "id": 6,
+        "question": "For a real-time dashboard requiring < 2-second freshness, the best architecture is:",
+        "choices": [
+            "Nightly batch refresh",
+            "DLT streaming pipeline → Gold Delta table → Serverless SQL dashboard",
+            "Direct Kafka → dashboard",
+            "Only materialized view"
+        ],
+        "correct": 1,
+        "description": "End-to-end streaming pipeline with serverless compute and Photon."
+    },
+    {
+        "id": 7,
+        "question": "Change Data Capture (CDC) from RDS/MySQL should use:",
+        "choices": [
+            "Full table dump daily",
+            "Debezium → Kafka → Databricks Auto Loader (Avro + APPLY CHANGES FROM",
+            "JDBC polling",
+            "Only batch"
+        ],
+        "correct": 1,
+        "description": "Debezium captures binlog → Kafka → Auto Loader + DLT APPLY CHANGES = fully incremental SCD."
+    },
+    {
+        "id": 8,
+        "question": "The correct order of operations in a production-grade pipeline is:",
+        "choices": [
+            "Ingest → Clean → Aggregate → Serve",
+            "Ingest → Validate → Parse → Enrich → Deduplicate → Store → Serve",
+            "Only ingest → serve",
+            "Parse → ingest"
+        ],
+        "correct": 1,
+        "description": "Progressive refinement with quality gates at each stage."
+    },
+    {
+        "id": 9,
+        "question": "Multi-hop architecture in Databricks is implemented via:",
+        "choices": [
+            "Separate jobs",
+            "Single Delta Live Tables pipeline with dependencies between tables",
+            "Only Workflows",
+            "Manual notebooks"
+        ],
+        "correct": 1,
+        "description": "DLT automatically builds dependency graph and executes in correct order."
+    },
+    {
+        "id": 10,
+        "question": "For exactly-once processing from Kafka with complex transformations, use:",
+        "choices": [
+            "foreachBatch + manual offset management",
+            "Structured Streaming → Delta sink (native exactly-once)",
+            "Kafka consumer + manual commit",
+            "Spark Kafka utils"
+        ],
+        "correct": 1,
+        "description": "Delta sink commits offsets and data atomically — no custom code needed."
+    },
+    {
+        "id": 11,
+        "question": "The best way to handle backfills in a streaming-first pipeline is:",
+        "choices": [
+            "Stop pipeline and rerun",
+            "Use DLT full refresh on specific tables or date ranges",
+            "Manual batch job",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "DLT supports targeted full refresh without stopping the pipeline."
+    },
+    {
+        "id": 12,
+        "question": "For event-driven microservices emitting to the lakehouse, the pattern is:",
+        "choices": [
+            "Direct JDBC writes",
+            "Write to Bronze via REST Ingestion API or Kafka → Auto Loader",
+            "Only batch upload",
+            "DBFS put"
+        ],
+        "correct": 1,
+        "description": "Databricks REST Ingestion endpoints + Auto Loader = serverless, schema-evolving ingestion."
+    },
+    {
+        "id": 13,
+        "question": "Gold layer aggregates should be materialized using:",
+        "choices": [
+            "Views only",
+            "Streaming or batch Delta tables (materialized) + Predictive Optimization",
+            "Only nightly batch",
+            "Only SQL views"
+        ],
+        "correct": 1,
+        "description": "Materialized Gold tables with auto-maintenance = best performance and freshness."
+    },
+    {
+        "id": 14,
+        "question": "The recommended way to share live data with external partners is:",
+        "choices": [
+            "S3 export",
+            "Delta Sharing (open protocol, no credentials, live reads)",
+            "Snowflake sharing",
+            "Only CSV"
+        ],
+        "correct": 1,
+        "description": "Recipients read live Delta tables securely without copying nothing."
+    },
+    {
+        "id": 15,
+        "question": "For a global company with GDPR, the architecture should include:",
+        "choices": [
+            "Single global lake",
+            "Regional Bronze + centralized Silver/Gold + data masking + deletion vectors for RTBF",
+            "Only EU-only cluster",
+            "Only batch"
+        ],
+        "correct": 1,
+        "description": "Multi-region ingestion with centralized governed analytics + right-to-be-forgotten via deletion vectors."
+    },
+    {
+        "id": 16,
+        "question": "Streaming aggregation with 5-minute tumbling windows and 15-minute late tolerance uses:",
+        "choices": [
+            "groupBy(window(col, \"5 minutes\"))",
+            "groupBy(window(col, \"5 minutes\", \"5 minutes\"), key).agg() + withWatermark() + allowedLateness",
+            "Only complete mode",
+            "Session windows"
+        ],
+        "correct": 1,
+        "description": "allowedLateness (GA 2024) keeps windows open longer for updates."
+    },
+    {
+        "id": 17,
+        "question": "The most resilient pattern for stateful streaming is:",
+        "choices": [
+            "In-memory state",
+            "RocksDB state store + checkpointing + speculative execution enabled",
+            "External Redis",
+            "No state"
+        ],
+        "correct": 1,
+        "description": "Built-in state store is fault-tolerant, scalable, and supports exactly-once."
+    },
+    {
+        "id": 18,
+        "question": "For machine learning feature pipelines, the correct flow is:",
+        "choices": [
+            "Batch only",
+            "Bronze → Silver → Feature Store (offline + online) → training → serving with lookup",
+            "Direct from Bronze",
+            "Only real-time"
+        ],
+        "correct": 1,
+        "description": "Feature Store guarantees consistency between training and serving."
+    },
+    {
+        "id": 19,
+        "question": "Zero-ETL architecture from operational databases is possible using:",
+        "choices": [
+            "Lakehouse Federation + foreign catalogs",
+            "Only replication tools",
+            "JDBC views",
+            "Not possible"
+        ],
+        "correct": 0,
+        "description": "Query MySQL/Postgres/SQL Server directly with UC governance — no pipeline needed."
+    },
+    {
+        "id": 20,
+        "question": "The best pattern for multi-table joins with different velocities is:",
+        "choices": [
+            "Join everything in batch",
+            "Streaming + stream-static joins + Delta as dimension sink",
+            "Only batch refresh",
+            "Views only"
+        ],
+        "correct": 1,
+        "description": "Dimensions updated via streaming or batch → fact stream joins live."
+    },
+    {
+        "id": 21,
+        "question": "For cost optimization at scale, pipelines should use:",
+        "choices": [
+            "All-purpose clusters",
+            "Job clusters + spot + serverless where possible + auto-termination",
+            "Only interactive",
+            "Fixed size"
+        ],
+        "correct": 1,
+        "description": "Spot + job clusters can reduce cost >70 % vs all-purpose."
+    },
+    {
+        "id": 22,
+        "question": "The most scalable pattern for processing 100 TB/day is:",
+        "choices": [
+            "Single large cluster",
+            "Auto Loader → DLT streaming pipeline → serverless compute",
+            "Manual partitioning",
+            "Only batch"
+        ],
+        "correct": 1,
+        "description": "Fully serverless, auto-scaling, horizontally scalable."
+    },
+    {
+        "id": 23,
+        "question": "For audit and replay, every pipeline should:",
+        "choices": [
+            "Log to console",
+            "Write raw Bronze with CDF + retain history ≥ 1 year",
+            "Delete raw data",
+            "Only Gold only"
+        ],
+        "correct": 1,
+        "description": "Immutable Bronze + CDF = full replayability and audit trail."
+    },
+    {
+        "id": 24,
+        "question": "The correct disaster recovery strategy includes:",
+        "choices": [
+            "Single region only",
+            "Cross-region Delta table replication + failover workflows",
+            "Only backups",
+            "Manual copy"
+        ],
+        "correct": 1,
+        "description": "Databricks Table Replication (GA 2025) syncs tables across regions."
+    },
+    {
+        "id": 25,
+        "question": "For a compliance requirement of immutable audit logs, store:",
+        "choices": [
+            "In relational DB",
+            "Bronze tables with append-only policy + WORM via object storage lifecycle",
+            "Delete after 30 days",
+            "Only in memory"
+        ],
+        "correct": 1,
+        "description": "Object storage + versioning + legal hold = immutable storage."
+    },
+    {
+        "id": 26,
+        "question": "The best pattern for A/B testing new pipeline logic is:",
+        "choices": [
+            "Run in production",
+            "Shadow pipeline writing to parallel Gold tables + comparison dashboard",
+            "Only in dev",
+            "Manual"
+        ],
+        "correct": 1,
+        "description": "Zero-risk validation of new transformations."
+    },
+    {
+        "id": 27,
+        "question": "For 10,000+ small files per hour, use:",
+        "choices": [
+            "Manual OPTIMIZE",
+            "Auto Loader + delta.autoCompact.enabled + Predictive Optimization",
+            "Coalesce(1)",
+            "Nothing"
+        ],
+        "correct": 1,
+        "description": "Automatic compaction keeps file counts healthy."
+    },
+    {
+        "id": 28,
+        "question": "The most future-proof data contract enforcement method is:",
+        "choices": [
+            "Manual review",
+            "Unity Catalog tags + schema registry + DLT expectations",
+            "Only views",
+            "No contracts"
+        ],
+        "correct": 1,
+        "description": "Programmatic, automated contract validation."
+    },
+    {
+        "id": 29,
+        "question": "For hybrid batch + streaming workloads, use:",
+        "choices": [
+            "Two pipelines",
+            "Single DLT pipeline with both streaming and complete tables",
+            "Only batch",
+            "Only streaming"
+        ],
+        "correct": 1,
+        "description": "DLT unifies both paradigms in one declarative pipeline."
+    },
+    {
+        "id": 30,
+        "question": "The recommended monitoring stack includes:",
+        "choices": [
+            "Only logs",
+            "DLT event log + Lakehouse Monitoring + system tables + custom dashboards",
+            "Only Spark UI",
+            "Nothing"
+        ],
+        "correct": 1,
+        "description": "Complete observability from ingestion to quality to cost."
+    },
+    {
+        "id": 31,
+        "question": "For extreme low-latency use cases (< 100 ms), the architecture is:",
+        "choices": [
+            "Delta Lake",
+            "Delta + online Feature Store + Model Serving endpoints",
+            "Only Kafka",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "Online stores (DynamoDB/Redis) + feature lookup endpoints."
+    },
+    {
+        "id": 32,
+        "question": "Data mesh on Databricks is implemented via:",
+        "choices": [
+            "Single metastore",
+            "Multiple Unity Catalog metastores + cross-metastore Delta Sharing",
+            "Domain-owned catalogs with centralized governance."
+        ],
+        "correct": 1,
+        "description": "Full data mesh support with isolated domains and secure sharing."
+    },
+    {
+        "id": 33,
+        "question": "The most secure pattern for third-party data ingestion is:",
+        "choices": [
+            "Give them DB credentials",
+            "Delta Sharing recipient or signed URL → Auto Loader",
+            "SFTP",
+            "Email attachments"
+        ],
+        "correct": 1,
+        "description": "Zero credentials, auditable, automatic."
+    },
+    {
+        "id": 34,
+        "question": "As of Nov 2025, the most mature, scalable, and cost-effective lakehouse pipeline architecture is:",
+        "choices": [
+            "Spark batch jobs",
+            "Auto Loader → Delta Live Tables → Unity Catalog → Serverless SQL + Model Serving",
+            "Airflow + EMR",
+            "Databricks + dbt"
+        ],
+        "correct": 1,
+        "description": "Fully managed, unified batch+streaming, auto-optimizing, governed, and serverless."
+    }
+]

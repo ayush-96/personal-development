@@ -1,1 +1,362 @@
-
+[
+  {
+    "id": 1,
+    "question": "In 2025, which clustering technology has fully replaced partitioning and Z-Ordering for new tables?",
+    "choices": [
+      "Z-Ordering only",
+      "Liquid Clustering",
+      "Hive partitioning",
+      "Delta clustering keys"
+    ],
+    "correct": 1,
+    "description": "Liquid Clustering is the recommended and default clustering method for all new tables.\nIt dynamically adapts clustering keys incrementally without full rewrites."
+  },
+  {
+    "id": 2,
+    "question": "Which statement is true about Liquid Clustering behavior on existing tables?",
+    "choices": [
+      "Automatically converts partitioned/Z-ordered tables",
+      "You must explicitly ALTER TABLE ... CLUSTER BY to enable Liquid Clustering",
+      "Cannot be applied to existing tables",
+      "Only via CTAS"
+    ],
+    "correct": 1,
+    "description": "ALTER TABLE t CLUSTER BY (col1, col2) replaces any prior partitioning/Z-Ordering.\nClustering happens incrementally on subsequent writes and OPTIMIZE."
+  },
+  {
+    "id": 3,
+    "question": "Predictive Optimization automatically maintains which of the following on managed tables?",
+    "choices": [
+      "Only VACUUM",
+      "OPTIMIZE, VACUUM, ANALYZE, and Liquid Clustering maintenance",
+      "Only file compaction",
+      "Only statistics"
+    ],
+    "correct": 1,
+    "description": "Fully autonomous maintenance on serverless/all-purpose clusters with Predictive Optimization enabled (default on serverless)."
+  },
+  {
+    "id": 4,
+    "question": "When should you still use traditional partitioning in 2025?",
+    "choices": [
+      "Never — Liquid Clustering is always better",
+      "Only for strict enforcement of directory-level pruning required by external tools",
+      "For very high cardinality keys",
+      "For time-based windows"
+    ],
+    "correct": 1,
+    "description": "Rare cases: tools that only understand Hive-style directory layout (e.g., some legacy BI tools)."
+  },
+  {
+    "id": 5,
+    "question": "Deletion Vectors are automatically used when:",
+    "choices": [
+      "delta.enableDeletionVectors = true + DBR 14.3+",
+      "Table is Liquid Clustered",
+      "Table has row tracking enabled",
+      "Always on managed tables"
+    ],
+    "correct": 0,
+    "description": "Must be explicitly enabled at table creation or via ALTER TABLE.\nRequired for high-frequency small deletes/updates."
+  },
+  {
+    "id": 6,
+    "question": "Which table constraint is enforced at write time in Delta Lake?",
+    "choices": [
+      "Foreign key",
+      "CHECK and NOT NULL only",
+      "UNIQUE",
+      "PRIMARY KEY"
+    ],
+    "correct": 1,
+    "description": "Only CHECK and NOT NULL are currently enforced.\nPK/FK are planned but not yet available."
+  },
+  {
+    "id": 7,
+    "question": "A Gold layer aggregated table should typically be:",
+    "choices": [
+      "Denormalized, consumer-aligned, heavily pre-joined",
+      "Fully normalized 3NF",
+      "Raw copy of Silver",
+      "Star schema only"
+    ],
+    "correct": 0,
+    "description": "Gold = business-ready: denormalized, optimized for BI/reporting, often pre-aggregated."
+  },
+  {
+    "id": 8,
+    "question": "SCD Type 2 implementation using Delta Lake should use:",
+    "choices": [
+      "MERGE with surrogate key and is_current flag + start/end dates",
+      "Two tables (current + history)",
+      "Only append + view",
+      "Z-ordering on primary key"
+    ],
+    "correct": 0,
+    "description": "MERGE + row tracking + generated columns for dates is the most efficient pattern."
+  },
+  {
+    "id": 9,
+    "question": "Which of the following improves data skipping the most on high-cardinality columns?",
+    "choices": [
+      "Z-Ordering",
+      "Liquid Clustering on that column",
+      "Bloom filters",
+      "Partitioning"
+    ],
+    "correct": 2,
+    "description": "Bloom filters (enabled via TBLPROPERTIES) provide probabilistic skipping on high-cardinality equality filters."
+  },
+  {
+    "id": 10,
+    "question": "You can create a materialized view in Databricks SQL that automatically refreshes using:",
+    "choices": [
+      "CREATE OR REFRESH MATERIALIZED VIEW",
+      "CREATE INCREMENTAL MATERIALIZED VIEW (streaming)",
+      "Only scheduled queries",
+      "Only DLT"
+    ],
+    "correct": 1,
+    "description": "Streaming materialized views (GA 2025) use APPLY CHANGES + incremental refresh."
+  },
+  {
+    "id": 11,
+    "question": "The optimal file size target after OPTIMIZE in 2025 is:",
+    "choices": [
+      "128 MB",
+      "1 GiB (default)",
+      "256 MiB",
+      "4 GiB"
+    ],
+    "correct": 1,
+    "description": "Default delta.targetFileSize = 1 GiB.\nPhoton and Liquid Clustering work best around this size."
+  },
+  {
+    "id": 12,
+    "question": "Identity columns in Delta Lake are:",
+    "choices": [
+      "Generated always as identity (monotonic, no gaps)",
+      "Generated by default as identity (gaps allowed, cluster-wide unique)",
+      "Only via sequence",
+      "Not supported"
+    ],
+    "correct": 1,
+    "description": "Generated by default — allows explicit inserts, may have gaps due to caching/speculation."
+  },
+  {
+    "id": 13,
+    "question": "Which table property enables automatic schema evolution on write?",
+    "choices": [
+      "delta.autoMerge.enabled = true",
+      "delta.mergeSchema = true",
+      "delta.schema.autoMerge = true",
+      "delta.evolveSchema = true"
+    ],
+    "correct": 0,
+    "description": "Applies to append, overwrite, and MERGE operations automatically."
+  },
+  {
+    "id": 14,
+    "question": "For a fact table with 10 billion rows queried by date and customer_id, the best clustering is:",
+    "choices": [
+      "CLUSTER BY (date, customer_id)",
+      "CLUSTER BY (customer_id, date)",
+      "Partition by date only",
+      "No clustering"
+    ],
+    "correct": 0,
+    "description": "Liquid Clustering co-locates both dimensions; order matters for pruning efficiency.\nHigher cardinality first is often better."
+  },
+  {
+    "id": 15,
+    "question": "Change Data Feed (CDF) should be enabled:",
+    "choices": [
+      "On all tables",
+      "Only on Silver/Gold tables that feed downstream pipelines or analytics",
+      "Only on Bronze",
+      "Never"
+    ],
+    "correct": 1,
+    "description": "Enables incremental processing, auditing, and streaming from tables."
+  },
+  {
+    "id": 16,
+    "question": "A table with delta.columnMapping.mode = 'name' allows:",
+    "choices": [
+      "Column reordering without rewrite",
+      "Renaming and dropping columns without data rewrite",
+      "Both",
+      "None"
+    ],
+    "correct": 2,
+    "description": "Physical column IDs decouple logical name from position → safe evolution."
+  },
+  {
+    "id": 17,
+    "question": "The most efficient way to implement slowly changing dimensions in streaming is:",
+    "choices": [
+      "Batch MERGE nightly",
+      "DLT APPLY CHANGES FROM with SCD Type 2 policy",
+      "foreachBatch MERGE",
+      "Two tables"
+    ],
+    "correct": 1,
+    "description": "DLT handles key resolution, sequencing, and history automatically."
+  },
+  {
+    "id": 18,
+    "question": "You should run ANALYZE TABLE after:",
+    "choices": [
+      "Every write",
+      "Significant data changes (e.g., after OPTIMIZE, large MERGE, clustering change)",
+      "Never — automatic",
+      "Only on small tables"
+    ],
+    "correct": 1,
+    "description": "Updates statistics used by Photon optimizer.\nPredictive Optimization does this automatically on managed tables."
+  },
+  {
+    "id": 19,
+    "question": "Which feature allows zero-copy cloning of massive fact tables for experimentation?",
+    "choices": [
+      "COPY INTO",
+      "DEEP CLONE",
+      "SHALLOW CLONE",
+      "CREATE TABLE ... LIKE"
+    ],
+    "correct": 2,
+    "description": "SHALLOW CLONE creates a new table pointer with zero data copy.\nPerfect for dev/test environments."
+  },
+  {
+    "id": 20,
+    "question": "For a dashboard querying the last 7 days on a 5-year fact table, you should:",
+    "choices": [
+      "Partition by date",
+      "Cluster by date + use dynamic file pruning",
+      "Both",
+      "No optimization needed"
+    ],
+    "correct": 2,
+    "description": "Liquid Clustering on date + deletion vectors + data skipping = fastest pruning."
+  },
+  {
+    "id": 21,
+    "question": "Table history retention is controlled by:",
+    "choices": [
+      "delta.logRetentionDuration (default 30 days)",
+      "delta.deletedFileRetentionDuration (default 7 days)",
+      "Both — different purposes",
+      "Fixed at 30 days"
+    ],
+    "correct": 2,
+    "description": "logRetentionDuration = time travel, deletedFileRetentionDuration = VACUUM safety."
+  },
+  {
+    "id": 22,
+    "question": "The best practice for surrogate key generation in 2025 is:",
+    "choices": [
+      "ROW_NUMBER() in SQL",
+      "monotonically_increasing_id()",
+      "Generated column with identity or sequence (coming soon)",
+      "Hash of natural key"
+    ],
+    "correct": 3,
+    "description": "Sequences (GA 2025) provide cluster-unique, gapless integers — ideal for dimensions."
+  },
+  {
+    "id": 23,
+    "question": "You can enforce referential integrity using:",
+    "choices": [
+      "Foreign key constraints",
+      "Data quality expectations + constraints in DLT",
+      "Unity Catalog policies",
+      "Not possible yet"
+    ],
+    "correct": 1,
+    "description": "No native FK enforcement — use DLT expectations or application logic."
+  },
+  {
+    "id": 24,
+    "question": "A table with frequent small deletes should have:",
+    "choices": [
+      "Deletion vectors + OPTIMIZE scheduled",
+      "Regular full rewrite",
+      "Partitioning",
+      "No optimization"
+    ],
+    "correct": 0,
+    "description": "Deletion vectors avoid full file rewrites until consolidated by OPTIMIZE."
+  },
+  {
+    "id": 25,
+    "question": "The optimal number of clustering columns is typically:",
+    "choices": [
+      "1",
+      "2–4 high-cardinality, frequently filtered columns",
+      "As many as possible",
+      "Only low-cardinality"
+    ],
+    "correct": 1,
+    "description": "Too many columns reduce clustering effectiveness and increase overhead."
+  },
+  {
+    "id": 26,
+    "question": "You can replace a production table atomically using:",
+    "choices": [
+      "CREATE OR REPLACE TABLE",
+      "SWAP WITH in Unity Catalog (GA 2025)",
+      "RENAME TABLE",
+      "Only CTAS + drop"
+    ],
+    "correct": 1,
+    "description": "ALTER TABLE prod SWAP WITH staging — zero downtime deployment."
+  },
+  {
+    "id": 27,
+    "question": "For auditability, you should enable:",
+    "choices": [
+      "Change Data Feed on all Silver+ tables",
+      "Table history only",
+      "Both + system.access.audit",
+      "Nothing"
+    ],
+    "correct": 2,
+    "description": "CDF + history + audit log = complete lineage and change tracking."
+  },
+  {
+    "id": 28,
+    "question": "The most efficient way to handle late-arriving facts is:",
+    "choices": [
+      "MERGE with upsert",
+      "Delete + insert",
+      "Append + view",
+      "Rewrite partition"
+    ],
+    "correct": 0,
+    "description": "MERGE with deletion vectors = minimal data movement."
+  },
+  {
+    "id": 29,
+    "question": "A table used by both BI and ML should be:",
+    "choices": [
+      "Duplicated",
+      "Single source of truth (Gold) with Liquid Clustering on BI + ML columns",
+      "Only in Feature Store",
+      "Only in warehouse"
+    ],
+    "correct": 1,
+    "description": "Lakehouse principle: one table serves all workloads safely."
+  },
+  {
+    "id": 30,
+    "question": "As of Nov 2025, the most advanced data modeling feature in Databricks is:",
+    "choices": [
+      "Liquid Clustering + Deletion Vectors + Predictive Optimization + Streaming Materialized Views",
+      "Iceberg support",
+      "Foreign keys",
+      "Graph tables"
+    ],
+    "correct": 0,
+    "description": "This combination delivers performance, freshness, and maintenance-free operation unmatched by any traditional warehouse."
+  }
+]

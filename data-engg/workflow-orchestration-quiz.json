@@ -1,1 +1,338 @@
-
+[
+    {
+        "id": 1,
+        "question": "Which feature guarantees zero-downtime deployment of a new pipeline version in production?",
+        "choices": [
+            "Repair Run",
+            "Databricks Asset Bundles with blue-green promotion",
+            "Git branch deployment only",
+            "Manual job edit"
+        ],
+        "correct": 1,
+        "description": "DAB supports multiple targets (dev/staging/prod) and atomic promotion via databricks bundle deploy --target prod."
+    },
+    {
+        "id": 2,
+        "question": "In Databricks Workflows, the native If/Else condition task evaluates:",
+        "choices": [
+            "Only task success/failure",
+            "Boolean expressions using task values, job parameters, and runtime variables",
+            "Only notebook widgets",
+            "Only Python code"
+        ],
+        "correct": 1,
+        "description": "If/else tasks support rich expressions like {{tasks.task1.values.count > 1000 && job.parameters.env == 'prod'}}."
+    },
+    {
+        "id": 3,
+        "question": "What is the maximum number of concurrent runs a single multi-task job can have?",
+        "choices": [
+            "only one run at a time",
+            "10",
+            "Unlimited (subject to account concurrency limits)",
+            "100"
+        ],
+        "correct": 2,
+        "description": "Databricks allows unlimited concurrent runs of the same job (useful for event-driven or high-throughput pipelines)."
+    },
+    {
+        "id": 4,
+        "question": "Which task type executes on serverless compute today (Nov 2025)?",
+        "choices": [
+            "Notebook task",
+            "Python wheel task",
+            "SQL task (serverless)",
+            "JAR task"
+        ],
+        "correct": 2,
+        "description": "Only SQL tasks run on serverless SQL warehouses; all other task types require classic/job clusters."
+    },
+    {
+        "id": 5,
+        "question": "Task Values are limited to:",
+        "choices": [
+            "10 KB",
+            "48 KB UTF-8",
+            "100 KB",
+            "1 MB"
+        ],
+        "correct": 1,
+        "description": "Use Delta tables or DBFS for larger payloads."
+    },
+    {
+        "id": 6,
+        "question": "The recommended way to trigger a job from an external system is:",
+        "choices": [
+            "dbutils.notebook.run()",
+            "Jobs API 2.1 /runs/submit or /runs/create",
+            "Webhooks only",
+            "Only file arrival"
+        ],
+        "correct": 1,
+        "description": "REST API supports JSON payload, queueing, parameter passing, and run tracking."
+    },
+    {
+        "id": 7,
+        "question": "Which permission is required to view run history and logs of a job you did not create?",
+        "choices": [
+            "Can View",
+            "Can Manage",
+            "Can Run",
+            "Owner only"
+        ],
+        "correct": 0,
+        "description": "Can View = read-only access to runs, metrics, and logs."
+    },
+    {
+        "id": 8,
+        "question": "Repair Run automatically reuses:",
+        "choices": [
+            "The entire job",
+            "Only failed tasks and their downstream dependencies, reusing cached results",
+            "Only the last task",
+            "Nothing — manual"
+        ],
+        "correct": 1,
+        "description": "Massive time & cost savings — successful tasks are skipped."
+    },
+    {
+        "id": 9,
+        "question": "Map tasks (parallel fan-out) are ideal for:",
+        "choices": [
+            "Parameter sweeps",
+            "Processing independent partitions/shards",
+            "Hyperparameter tuning",
+            "All of the above"
+        ],
+        "correct": 3,
+        "description": "Map tasks dynamically spawn N parallel tasks from a list or array task value."
+    },
+    {
+        "id": 10,
+        "question": "You can pause an entire schedule with:",
+        "choices": [
+            "No way",
+            "Pause button in UI or API",
+            "Only by deleting",
+            "Only via cron disable"
+        ],
+        "correct": 1,
+        "description": "Pause/resume schedules without losing configuration."
+    },
+    {
+        "id": 11,
+        "question": "Which trigger supports sub-minute scheduling?",
+        "choices": [
+            "Cron only",
+            "File arrival + event-based + API",
+            "Only cron",
+            "None"
+        ],
+        "correct": 1,
+        "description": "File arrival and API triggers are event-driven → instant reaction."
+    },
+    {
+        "id": 12,
+        "question": "Databricks Workflows supports run expectancy (SLO tracking):",
+        "choices": [
+            "No",
+            "Yes — set expected duration and get alerts on breach",
+            "Only in DLT",
+            "Only via custom code"
+        ],
+        "correct": 1,
+        "description": "Configure expected runtime per task or job → automatic alerts."
+    },
+    {
+        "id": 13,
+        "question": "The best practice for secret injection in jobs is:",
+        "choices": [
+            "Hard-code",
+            "Databricks Secrets + {{secrets/scope/key}} syntax",
+            "Environment variables",
+            "dbutils.secrets.get()"
+        ],
+        "correct": 1,
+        "description": "{{secrets/scope/key}} works in job parameters, notebook widgets, and cluster init scripts."
+    },
+    {
+        "id": 14,
+        "question": "You can define job-level cluster policies using:",
+        "choices": [
+            "UI only",
+            "Databricks Asset Bundles YAML",
+            "Only admin",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "DAB allows declarative policy assignment per job/target."
+    },
+    {
+        "id": 15,
+        "question": "Which alert destinations are natively supported for job notifications?",
+        "choices": [
+            "Email + Slack",
+            "Email, Slack, Teams, PagerDuty, Opsgenie, Webhook",
+            "Only email",
+            "Only Slack"
+        ],
+        "correct": 1,
+        "description": "Full integration with modern incident tools."
+    },
+    {
+        "id": 16,
+        "question": "A job with 50 parallel notebook tasks should use:",
+        "choices": [
+            "50 separate jobs",
+            "Shared job cluster or pool",
+            "50 individual job clusters",
+            "Serverless"
+        ],
+        "correct": 1,
+        "description": "Shared job cluster or instance pool = fastest start + lowest cost."
+    },
+    {
+        "id": 17,
+        "question": "You can pass a DataFrame between tasks:",
+        "choices": [
+            "Directly",
+            "By writing to Delta + reading in downstream task",
+            "Via task values",
+            "Not possible"
+        ],
+        "correct": 1,
+        "description": "Write to a temporary Delta table (or use task values for small data)."
+    },
+    {
+        "id": 18,
+        "question": "Job run timeout is:",
+        "choices": [
+            "7 days by default",
+            "Unlimited",
+            "24 hours",
+            "Configurable per task/job"
+        ],
+        "correct": 0,
+        "description": "Default 7 days prevents zombie runs; override if needed."
+    },
+    {
+        "id": 19,
+        "question": "Which statement is true about job cluster termination?",
+        "choices": [
+            "Terminates after last task",
+            "Per-task job clusters terminate immediately after their task",
+            "Shared job cluster stays alive until manual termination",
+            "All terminate after 2 hours"
+        ],
+        "correct": 1,
+        "description": "Per-task clusters = cheapest; shared = fastest for sequential tasks."
+    },
+    {
+        "id": 20,
+        "question": "Databricks Workflows supports matrix jobs (multi-dimensional parameter sweep):",
+        "choices": [
+            "No",
+            "Yes — via Map task + array of JSON objects",
+            "Only via custom code",
+            "Only in MLflow"
+        ],
+        "correct": 1,
+        "description": "Pass an array of parameter maps → automatic parallel execution."
+    },
+    {
+        "id": 21,
+        "question": "The Jobs API supports:",
+        "choices": [
+            "Only trigger run",
+            "Trigger, cancel, repair, delete, list, get run output, export run",
+            "Only list",
+            "Only via UI"
+        ],
+        "correct": 1,
+        "description": "Full CRUD + output retrieval via API."
+    },
+    {
+        "id": 22,
+        "question": "You can export an entire job definition as JSON:",
+        "choices": [
+            "Yes — via UI or API",
+            "Only via DAB",
+            "No",
+            "Only via Repos"
+        ],
+        "correct": 0,
+        "description": "Export → use as source of truth or for migration."
+    },
+    {
+        "id": 23,
+        "question": "Which task dependency mode runs a task regardless of upstream success?",
+        "choices": [
+            "All done",
+            "None succeeded",
+            "At least one succeeded",
+            "All failed"
+        ],
+        "correct": 0,
+        "description": "All done = run cleanup tasks even on failure."
+    },
+    {
+        "id": 24,
+        "question": "The recommended CI/CD pattern for Databricks pipelines in 2025 is:",
+        "choices": [
+            "Manual UI promotion",
+            "Databricks Asset Bundles + GitHub Actions / Azure DevOps / GitLab CI",
+            "Only Repos",
+            "dbx"
+        ],
+        "correct": 1,
+        "description": "DAB is the official, fully supported IaC solution."
+    },
+    {
+        "id": 25,
+        "question": "You can monitor job costs in real time using:",
+        "choices": [
+            "Job run page → Cost",
+            "System tables system.billing.usage + job_run_id filter",
+            "Both",
+            "Only account console"
+        ],
+        "correct": 2,
+        "description": "Granular cost attribution per job run and task."
+    },
+    {
+        "id": 26,
+        "question": "A pipeline fails because a downstream task cannot find a table created upstream. The fix is:",
+        "choices": [
+            "Use same cluster",
+            "Use shared job cluster or instance pool",
+            "Use serverless",
+            "Use dbutils.fs.refreshMounts()"
+        ],
+        "correct": 1,
+        "description": "Separate job clusters have isolated metastore sessions → table not visible."
+    },
+    {
+        "id": 27,
+        "question": "Which feature allows you to rerun a job from a specific task onward?",
+        "choices": [
+            "Repair Run with task selection",
+            "Only full rerun",
+            "Manual clone",
+            "Not possible"
+        ],
+        "correct": 0,
+        "description": "Select starting task during Repair Run → skips everything before it."
+    },
+    {
+        "id": 28,
+        "question": "As of Nov 2025, the most mature orchestration approach on Databricks is:",
+        "choices": [
+            "Airflow on Databricks",
+            "Pure dbutils.notebook.run()",
+            "Databricks Workflows + Asset Bundles + Jobs API",
+            "Prefect"
+        ],
+        "correct": 2,
+        "description": "Native, fully managed, serverless-compatible, GitOps-ready orchestration."
+    }
+]

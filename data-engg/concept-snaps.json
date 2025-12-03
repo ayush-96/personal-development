@@ -1,0 +1,596 @@
+[
+    {
+        "term": "ETL",
+        "question": "What does ETL stand for and what is its traditional workflow?",
+        "answer": "Extract, Transform, Load. Data is cleaned and transformed on a staging server before being loaded into the destination data warehouse.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "ELT",
+        "question": "What does ELT stand for and what is its modern workflow?",
+        "answer": "Extract, Load, Transform. Data is loaded directly into a cloud data warehouse/lakehouse, and transformation is performed there.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Warehouse",
+        "question": "What is the primary characteristic of a Data Warehouse architecture?",
+        "answer": "It is structured, optimized for complex analytical queries (reads), and historical data storage. Typically uses a dimensional model.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Lake",
+        "question": "What is the primary characteristic of a Data Lake?",
+        "answer": "A centralized repository that stores vast amounts of raw data in its native format (structured, semi-structured, and unstructured). Optimized for cost and scale.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Star Schema",
+        "question": "Describe the composition of a Star Schema in dimensional modeling.",
+        "answer": "A centralized Fact Table surrounded by several related Dimension Tables. Characterized by de-normalization for fast querying.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Fact Table",
+        "question": "What kind of data does a Fact Table store?",
+        "answer": "Quantitative data (metrics or measures) related to a business process, along with foreign keys to Dimension Tables.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Dimension Table",
+        "question": "What kind of data does a Dimension Table store?",
+        "answer": "Descriptive attributes related to the Fact Table (e.g., product name, date, customer address).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Snowflake Schema",
+        "question": "How does a Snowflake Schema differ from a Star Schema?",
+        "answer": "Dimension Tables in a Snowflake Schema are normalized and linked to further sub-dimension tables, requiring more joins but reducing data redundancy.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "3rd Normal Form (3NF)",
+        "question": "What is the key principle of 3NF in relational database design?",
+        "answer": "It requires that every non-key attribute in a table must depend only on the primary key, eliminating transitive dependencies.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Slowly Changing Dimension (SCD) Type 1",
+        "question": "How is history tracked in an SCD Type 1 approach?",
+        "answer": "The existing dimension value is simply overwritten with the new value. History is lost.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Slowly Changing Dimension (SCD) Type 2",
+        "question": "How is history tracked in an SCD Type 2 approach?",
+        "answer": "A new row is created for the updated dimension record, preserving the history of the old record using version numbers, effective dates, or active flags.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Lineage",
+        "question": "What is Data Lineage?",
+        "answer": "The lifecycle of data, tracking its origin, transformations, and destinations (i.e., 'who changed what, when, and why').",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Governance",
+        "question": "What is the overall goal of Data Governance?",
+        "answer": "To establish and enforce policies, standards, and processes to ensure data quality, security, compliance, and usability across an organization.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Metadata",
+        "question": "What is metadata in a data engineering context?",
+        "answer": "Data about data. It includes schema definitions, data types, column names, table sizes, partition information, and access privileges.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Quality",
+        "question": "Name three key dimensions used to measure Data Quality.",
+        "answer": "Accuracy, Completeness, Consistency, Timeliness, Validity, and Uniqueness.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Referential Integrity",
+        "question": "What database concept ensures that foreign key values in one table match primary key values in another?",
+        "answer": "Referential Integrity.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Idempotency",
+        "question": "What does it mean for a data pipeline step to be idempotent?",
+        "answer": "Executing the operation multiple times with the same input produces the same result (crucial for reliable reprocessing).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "CDC (Change Data Capture)",
+        "question": "What is CDC and what is its primary use case?",
+        "answer": "A set of software design patterns used to determine and track changes in source data systems (e.g., transactional databases) to synchronize a data warehouse.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "DML",
+        "question": "What does DML stand for in SQL?",
+        "answer": "Data Manipulation Language (used for inserting, updating, and deleting data).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "DDL",
+        "question": "What does DDL stand for in SQL?",
+        "answer": "Data Definition Language (used for creating, altering, and dropping database objects like tables).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Indexing",
+        "question": "How do database indexes improve query performance?",
+        "answer": "They provide a fast lookup structure, allowing the database engine to quickly locate data without scanning the entire table (at the expense of slower write times).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Partitioning (DB)",
+        "question": "What is table partitioning and why is it used?",
+        "answer": "Dividing a large table into smaller, more manageable pieces based on a key (e.g., date). It improves query performance by minimizing the amount of data scanned.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Sharding",
+        "question": "What is database sharding?",
+        "answer": "A horizontal partitioning technique that separates large databases into smaller, independent databases (shards) across multiple servers to handle extreme scaling.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Denormalization",
+        "question": "When is denormalization typically used in data modeling?",
+        "answer": "In analytical databases (Data Warehouses) to reduce the number of joins required for complex reporting queries, sacrificing storage efficiency for read speed.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Primary Key",
+        "question": "What constraint ensures that a column uniquely identifies each record in a table and cannot be NULL?",
+        "answer": "Primary Key.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "NoSQL",
+        "question": "Name four types of NoSQL databases.",
+        "answer": "Key-Value, Document, Column-Family, and Graph.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Eventual Consistency",
+        "question": "In distributed systems (like NoSQL), what is Eventual Consistency?",
+        "answer": "A consistency model where, if no new updates are made, all reads will eventually return the last written value (data convergence takes time).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "CAP Theorem",
+        "question": "What three properties does the CAP Theorem state a distributed data store can only guarantee two of simultaneously?",
+        "answer": "Consistency, Availability, and Partition Tolerance.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Parquet",
+        "question": "What type of file format is Parquet and what is its advantage?",
+        "answer": "A columnar storage format (like ORC) that is highly optimized for analytical workloads, compression, and predicate pushdown.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Avro",
+        "question": "What is the primary feature of the Avro data serialization system?",
+        "answer": "It features a robust schema evolution capability, handling changes to data structure without breaking older versions of the data consumer.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Drift",
+        "question": "What is Data Drift?",
+        "answer": "When the statistical properties of the incoming data change over time in a way that the processing system was not designed to handle (e.g., change in currency, format).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Warehouse Architecture",
+        "question": "What is the difference between a Federated and a Centralized Data Warehouse?",
+        "answer": "Federated links multiple existing sources (virtual view) while Centralized consolidates data into a single, dedicated repository.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Mesh",
+        "question": "What is the core principle of a Data Mesh architecture?",
+        "answer": "Treating data as a product, owned and served by decentralized domain teams, shifting from centralized data platforms to distributed data ownership.",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Data Mart",
+        "question": "How does a Data Mart relate to a Data Warehouse?",
+        "answer": "A Data Mart is a subset of a Data Warehouse, focused on a specific business line or department (e.g., Sales or Marketing).",
+        "frontColor": "#0F766E"
+    },
+    {
+        "term": "Hadoop",
+        "question": "What are the two core components of Apache Hadoop?",
+        "answer": "HDFS (Hadoop Distributed File System) for storage, and YARN (Yet Another Resource Negotiator) for resource management.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "MapReduce",
+        "question": "In the context of Hadoop, what are the two main phases of the MapReduce paradigm?",
+        "answer": "The Map phase (filtering, sorting, and key-value generation) and the Reduce phase (aggregation and summarization).",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Apache Spark",
+        "question": "What is the key factor that makes Spark much faster than traditional MapReduce for many workloads?",
+        "answer": "In-memory processing (using RDDs/DataFrames) instead of writing intermediate results back to disk (HDFS).",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "RDD (Resilient Distributed Dataset)",
+        "question": "What is an RDD in Spark and what are its three key properties?",
+        "answer": "A fundamental data structure in Spark: Immutable, Distributed, and Fault-tolerant (Resilient).",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Spark Transformation",
+        "question": "In Spark, what is the difference between a Transformation and an Action?",
+        "answer": "Transformations (e.g., filter, map) create a new RDD/DataFrame but are executed lazily. Actions (e.g., count, collect, write) trigger the actual computation.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Spark DAG",
+        "question": "What does Spark's DAGScheduler create before execution?",
+        "answer": "A Directed Acyclic Graph (DAG) that optimizes the job execution plan by combining multiple transformations into stages.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Shuffle Operation",
+        "question": "What is a 'shuffle' in Spark and why is it expensive?",
+        "answer": "A mandatory data redistribution operation across partitions/nodes (e.g., during a groupBy or join). It requires network I/O and disk I/O.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Broadcast Variable",
+        "question": "How can you use a Broadcast Variable to optimize a small table join in Spark?",
+        "answer": "It allows a copy of the small read-only data (e.g., a lookup table) to be sent to all worker nodes once, avoiding the costly shuffle operation.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Apache Hive",
+        "question": "What is the primary role of Apache Hive in the Hadoop ecosystem?",
+        "answer": "It provides a SQL-like interface (HiveQL) for querying and analyzing data stored in HDFS.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Apache Flink",
+        "question": "How is Apache Flink primarily positioned in the processing landscape compared to Spark?",
+        "answer": "It is a dedicated stream processing engine, treating both batch and streaming as bounded and unbounded streams, respectively, often offering lower latency than Spark Streaming.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Apache Kafka",
+        "question": "What is the primary function of Kafka in a data architecture?",
+        "answer": "A distributed streaming platform used for publishing, subscribing to, storing, and processing streams of records (data in motion) in real-time.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Kafka Topic",
+        "question": "What is a Kafka Topic?",
+        "answer": "A category or feed name to which records are published. Topics are divided into ordered, immutable, and append-only partitions.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Kafka Broker",
+        "question": "What is a Kafka Broker?",
+        "answer": "A server that forms part of the Kafka cluster. Brokers receive messages from producers, store them on disk, and serve messages to consumers.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Kafka Consumer Group",
+        "question": "In Kafka, how does a Consumer Group scale message processing?",
+        "answer": "It allows multiple consumer instances to jointly consume messages from one or more topics, with each partition being consumed by only one member of the group.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Airflow DAG",
+        "question": "What does DAG stand for in Apache Airflow and what does it represent?",
+        "answer": "Directed Acyclic Graph. It represents the workflow, where the tasks (nodes) have dependencies and execute in a directed, non-looping order.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Airflow Operator",
+        "question": "What is an Airflow Operator?",
+        "answer": "A blueprint for a task. Operators define the work to be done (e.g., PythonOperator, BashOperator, S3ToRedshiftOperator).",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Airflow Sensor",
+        "question": "What is the purpose of an Airflow Sensor?",
+        "answer": "A specific type of Operator that waits for a certain condition to be met (e.g., a file landing in S3 or a time reaching a specific threshold) before proceeding.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Airflow XComs",
+        "question": "What are XComs (Cross-Communication) used for in Airflow?",
+        "answer": "A mechanism that allows tasks to exchange small amounts of data or metadata with each other within a DAG.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Dagster Definitions",
+        "question": "What are the core units of work in Dagster, replacing Airflow's Operators?",
+        "answer": "Software-defined Assets (SDAs), which focus on the data objects being created or materialized, rather than just the task execution.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Docker",
+        "question": "Why is Docker commonly used in data engineering orchestration (e.g., Airflow)?",
+        "answer": "It provides consistent, isolated, and reproducible environments for each task, ensuring dependencies and runtimes are identical everywhere.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "CI/CD",
+        "question": "What does CI/CD stand for in the context of data pipelines?",
+        "answer": "Continuous Integration/Continuous Delivery. It automates the process of building, testing, and deploying data pipeline code changes.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "ETL Testing",
+        "question": "Name three critical areas to test in an ETL pipeline.",
+        "answer": "Data Completeness (row counts), Data Transformation Logic, Data Quality/Validation (data types, NULL checks), and Performance/Latency.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Monitoring (Pipeline)",
+        "question": "Name three key metrics to monitor in a production data pipeline.",
+        "answer": "Execution Time/Latency, Success Rate, Data Volume Processed, and Data Quality Metrics (failure count of expectations).",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Backfilling",
+        "question": "What is 'backfilling' in data engineering?",
+        "answer": "Rerunning a pipeline for a historical period to reprocess data, typically to correct errors or apply new logic to old data.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Orchestration",
+        "question": "What is the role of an Orchestration tool (like Airflow or Dagster)?",
+        "answer": "To schedule, manage dependencies, monitor, and manage the execution of tasks in complex data pipelines.",
+        "frontColor": "#C2410C"
+    },
+    {
+        "term": "Data Catalog",
+        "question": "What is a Data Catalog and its main function?",
+        "answer": "A centralized repository of metadata that allows users to easily discover, understand, and trust data assets across the organization.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "GDPR/CCPA",
+        "question": "What is the primary data engineering concern when dealing with privacy regulations like GDPR or CCPA?",
+        "answer": "The ability to accurately identify, locate, mask/pseudonymize, and delete personal identifiable information (PII) upon request (Right to be Forgotten).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "PII",
+        "question": "What does PII stand for?",
+        "answer": "Personally Identifiable Information (any data that could potentially identify a specific individual).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Masking",
+        "question": "What is Data Masking?",
+        "answer": "A technique to obscure sensitive data (e.g., replacing credit card numbers with dummy values) while maintaining the data's format and structural integrity for testing/development.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Tokenization",
+        "question": "How does tokenization protect sensitive data?",
+        "answer": "It replaces sensitive data (like a credit card number) with a non-sensitive equivalent (a token) that has no extrinsic meaning or value.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Auditing",
+        "question": "What is the purpose of Data Auditing?",
+        "answer": "To systematically record all data access, changes, and deletions for security analysis, compliance validation, and debugging.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Zero Trust Security",
+        "question": "What is the core principle of a Zero Trust model in data access?",
+        "answer": "Never trust, always verify. Access is granted only on a need-to-know, least-privilege basis, regardless of location or network.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Streaming Windowing",
+        "question": "What is a 'Tumbling Window' in stream processing?",
+        "answer": "Fixed-size, non-overlapping, contiguous time intervals (e.g., counting events every 5 minutes).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Streaming Windowing",
+        "question": "What is a 'Sliding Window' in stream processing?",
+        "answer": "Fixed-size windows that overlap and are usually defined by a slide interval (e.g., calculate the average of the last 10 minutes, every 1 minute).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Watermarking (Streaming)",
+        "question": "What is the purpose of watermarking in stream processing (e.g., Spark/Flink)?",
+        "answer": "It manages late-arriving data by defining a threshold for how long the system should wait for late events before finalizing a window and producing the result.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Lambda Architecture",
+        "question": "What are the three layers of the Lambda Architecture?",
+        "answer": "Batch Layer (for accuracy), Speed Layer (for low-latency views), and Serving Layer (for merging and query access).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Kappa Architecture",
+        "question": "How does the Kappa Architecture simplify the Lambda Architecture?",
+        "answer": "It replaces the separate Batch and Speed Layers with a single Stream Processing engine, where all data processing is done via streaming (re-processing historical data as a stream).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Message Queue",
+        "question": "What is the primary benefit of using a Message Queue (like RabbitMQ or SQS)?",
+        "answer": "It decouples sending and receiving components, improving scalability, reliability, and fault tolerance in microservices and asynchronous processing.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Backpressure (Streaming)",
+        "question": "What is backpressure in a streaming system?",
+        "answer": "A mechanism to handle the situation where data producers are creating data faster than the consumers can process it, often by slowing down the producers.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Serialization",
+        "question": "What is data serialization?",
+        "answer": "The process of translating data structures or object state into a format that can be stored (e.g., file) or transmitted (e.g., network) and reconstructed later (deserialization).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Vault",
+        "question": "What are the three core table types in a Data Vault model?",
+        "answer": "Hubs (business keys), Links (relationships), and Satellites (descriptive attributes and history).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Hub (Data Vault)",
+        "question": "What does a Hub table store in Data Vault modeling?",
+        "answer": "A list of unique business keys (the 'what'), without any descriptive attributes. They are stable and rarely change.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Link (Data Vault)",
+        "question": "What does a Link table store in Data Vault modeling?",
+        "answer": "The relationships or transactions between Hubs (the 'how').",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Satellite (Data Vault)",
+        "question": "What does a Satellite table store in Data Vault modeling?",
+        "answer": "The descriptive attributes, along with load date and source information, that track the history of the Hubs or Links over time (the 'when' and 'where').",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Contract",
+        "question": "What is a Data Contract in a Data Mesh context?",
+        "answer": "A formalized agreement between the data producer and consumer domains specifying the schema, quality guarantees, delivery mechanism, and ownership of a data product.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Infrastructure as Code (IaC)",
+        "question": "What is IaC and what is its relevance to data engineering?",
+        "answer": "Managing and provisioning infrastructure (e.g., cloud resources, networking) using code (e.g., Terraform or CloudFormation) rather than manual processes, ensuring reproducibility for environments.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Cloud-Native DW",
+        "question": "Name two major cloud-native data warehouse platforms.",
+        "answer": "Snowflake, Amazon Redshift, Google BigQuery, or Azure Synapse Analytics.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Serverless (Compute)",
+        "question": "What does 'serverless' mean for data engineers?",
+        "answer": "The cloud provider automatically manages the underlying infrastructure (provisioning, scaling, maintenance), allowing engineers to focus only on the code/pipeline logic.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Polyglot Persistence",
+        "question": "What is Polyglot Persistence?",
+        "answer": "The practice of using different data storage technologies (e.g., relational, document, graph) for different needs within a single application or system.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Silo",
+        "question": "What is a Data Silo and why is it a problem?",
+        "answer": "A collection of data isolated from other systems and not readily accessible by other parts of the organization, leading to inconsistency and limited insights.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Federated Query",
+        "question": "What is a Federated Query?",
+        "answer": "A query that retrieves data from multiple, disparate data sources (like a database, an S3 bucket, and a spreadsheet) without consolidating the data beforehand.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Change Log",
+        "question": "What is a Change Log in the context of data streaming?",
+        "answer": "A topic (often in Kafka) that records every update or change event in a source system, used for state restoration and consistency.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Observability",
+        "question": "What is Data Observability?",
+        "answer": "The ability to actively monitor, track, and alert on the health, quality, and reliability of data across the entire data lifecycle.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Ingestion",
+        "question": "What is Data Ingestion?",
+        "answer": "The process of importing data from one or more sources into a destination system for processing or storage (e.g., loading files into a data lake).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Catalog Tagging",
+        "question": "Why is tagging important in a Data Catalog?",
+        "answer": "It allows for easy classification (e.g., PII, Sensitive, Finance), discovery, and governance policy enforcement on data assets.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Materialized View",
+        "question": "What is a Materialized View?",
+        "answer": "A database object that stores the result set of a query, physically persisting it for faster access (unlike a standard view, which runs the query every time).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Deduplication (Batch)",
+        "question": "Name two common methods for deduplicating data in a batch job.",
+        "answer": "Using a ROW_NUMBER() SQL window function, or utilizing Spark's dropDuplicates() on a defined subset of key columns.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Data Lake Storage",
+        "question": "Name the three major cloud providers' primary Data Lake storage services.",
+        "answer": "AWS S3, Azure Data Lake Storage (ADLS) Gen2, and Google Cloud Storage (GCS).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "ACID Compliance",
+        "question": "In the context of transactions, define the 'I' in ACID.",
+        "answer": "Isolation: Ensures that concurrent transactions do not interfere with or see the intermediate results of each other (e.g., using locks).",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Schema-on-Read",
+        "question": "What does Schema-on-Read mean, typically associated with Data Lakes?",
+        "answer": "The schema is not enforced during data loading; instead, the structure is applied dynamically by the query engine (e.g., Spark, Hive) at the time of reading.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Schema-on-Write",
+        "question": "What does Schema-on-Write mean, typically associated with traditional Data Warehouses?",
+        "answer": "The schema is strictly defined and enforced during the data loading (write) process.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Foreign Key",
+        "question": "What is a Foreign Key?",
+        "answer": "A column or set of columns in a relational database table that provides a link between data in two tables by referencing the Primary Key of another table.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Dead Letter Queue (DLQ)",
+        "question": "What is the purpose of a Dead Letter Queue (DLQ) in messaging systems?",
+        "answer": "It stores messages that could not be successfully processed or delivered after a maximum number of retries, allowing for later analysis and debugging.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Circuit Breaker",
+        "question": "In distributed systems, what is a Circuit Breaker pattern?",
+        "answer": "A design pattern used to detect failures and prevent the system from repeatedly invoking a failing operation, giving the failing service time to recover.",
+        "frontColor": "#7E22CE"
+    },
+    {
+        "term": "Job Scheduler",
+        "question": "What is the key role of a Job Scheduler in a data pipeline outside of orchestration?",
+        "answer": "To define when (time, interval, or event-based) and how often a batch or streaming job should run.",
+        "frontColor": "#7E22CE"
+    }
+]

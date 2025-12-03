@@ -1,30 +1,584 @@
 [
   {
-    "term": "Hadoop",
+    "term": "Spark Core",
+    "question": "What is Spark Core?",
+    "answer": "The base engine for large-scale parallel and distributed data processing, handling I/O, scheduling, and RDDs.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Driver Program",
+    "question": "What is its role?",
+    "answer": "Runs the main() function, manages the SparkSession, and coordinates the execution of tasks on executors.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Executor",
+    "question": "What is an Executor?",
+    "answer": "A process running on a worker node responsible for executing tasks and storing data/caching results.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Cluster Manager",
+    "question": "Name two common types.",
+    "answer": "YARN, Apache Mesos, Kubernetes, and Spark's built-in Standalone mode.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "RDD",
+    "question": "What does RDD stand for?",
+    "answer": "Resilient Distributed Dataset: a fundamental, immutable, fault-tolerant collection of elements partitioned across a cluster.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Immutability",
+    "question": "Why are RDDs immutable?",
+    "answer": "It simplifies fault tolerance and caching, ensuring that transformations are deterministic and repeatable.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Fault Tolerance",
+    "question": "How is it achieved in RDDs?",
+    "answer": "Through lineage (Directed Acyclic Graph or DAG), allowing lost partitions to be recomputed from their source.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Transformations",
+    "question": "Define a Transformation.",
+    "answer": "An operation on an RDD/DataFrame that produces a new RDD/DataFrame (e.g., map, filter). They are lazy.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Actions",
+    "question": "Define an Action.",
+    "answer": "An operation that triggers the immediate execution of the DAG and returns a result to the driver (e.g., count, collect, save).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Lazy Evaluation",
     "question": "What is it?",
-    "answer": "Distributed storage (HDFS) + processing (MapReduce) for massive datasets.",
-    "frontColor": "#10B981",
-    "backColor": "#334155"
+    "answer": "Spark does not execute transformations immediately; it waits until an action is called, optimizing the execution plan.",
+    "frontColor": "#F59E0B"
   },
   {
-    "term": "Spark",
-    "question": "Core idea?",
-    "answer": "In-memory cluster computing with RDDs and DataFrames.",
-    "frontColor": "#00FF00",
-    "backColor": "#FFFF00"
+    "term": "DAG",
+    "question": "What is the DAG?",
+    "answer": "Directed Acyclic Graph: a sequence of computation stages representing the lineage of transformations for a job.",
+    "frontColor": "#F59E0B"
   },
   {
-    "term": "Kafka",
-    "question": "Why use it?",
-    "answer": "Real-time streaming with topics, partitions, and durability.",
-    "frontColor": "#9C27B0",
-    "backColor": "#3F51B5"
+    "term": "DAGScheduler",
+    "question": "What does it do?",
+    "answer": "Computes the DAG of stages based on the RDD/DataFrame lineage, submitting stages to the TaskScheduler.",
+    "frontColor": "#F59E0B"
   },
   {
-    "term": "Snowflake",
-    "question": "Key feature?",
-    "answer": "Cloud data warehouse with separate storage & compute.",
-    "frontColor": "#00BCD4",
-    "backColor": "#009688"
+    "term": "Job",
+    "question": "What defines a Spark Job?",
+    "answer": "A computation triggered by a single Action.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Stage",
+    "question": "What is a Stage?",
+    "answer": "A set of narrow transformations that can be run in parallel, ending with a shuffle (wide transformation).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Task",
+    "question": "What is a Task?",
+    "answer": "The smallest unit of work sent to an executor, operating on a single partition of data.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Wide Transformation",
+    "question": "Give an example.",
+    "answer": "Operations that require shuffling data across the network, like `groupByKey`, `reduceByKey`, and `join`.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Narrow Transformation",
+    "question": "Give an example.",
+    "answer": "Operations that do not require shuffling, like `map`, `filter`, and `union`.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "DataFrame",
+    "question": "What is a DataFrame?",
+    "answer": "A distributed collection of data organized into named columns (like a table in a relational database).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Dataset",
+    "question": "What is a Dataset?",
+    "answer": "A type-safe, object-oriented programming interface for DataFrames (Scala/Java only).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Catalyst Optimizer",
+    "question": "What is its purpose?",
+    "answer": "The optimization engine in Spark SQL that builds the execution plan for DataFrames/Datasets.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Tungsten Engine",
+    "question": "What is Tungsten?",
+    "answer": "Spark's core execution engine focused on high-performance, memory, and CPU-efficient operations.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Code Generation",
+    "question": "What does Spark do with code?",
+    "answer": "It generates optimized bytecode at runtime for faster execution of Spark SQL queries (using Janino).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "SparkSession",
+    "question": "What is SparkSession?",
+    "answer": "The unified entry point for all Spark functionality, replacing SparkContext for modern APIs.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "SparkContext",
+    "question": "Why is SparkContext needed?",
+    "answer": "It's the entry point for RDD functionality, connecting to the cluster manager to access resources.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "DataFrame Schema",
+    "question": "What is a Schema?",
+    "answer": "The metadata defining the column names and data types of a DataFrame.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Row Object",
+    "question": "What is a Row object?",
+    "answer": "The internal data structure representing a single record within a DataFrame or Dataset.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Caching",
+    "question": "Why cache data?",
+    "answer": "To store intermediate RDD/DataFrame results in memory (or disk) to avoid recomputing them in later stages or jobs.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Persist()",
+    "question": "What is the difference from cache()?",
+    "answer": "Persist() allows specifying the storage level (e.g., MEMORY_AND_DISK, DISK_ONLY), while cache() uses MEMORY_AND_DISK by default.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Unpersist()",
+    "question": "When do you use unpersist()?",
+    "answer": "To explicitly remove a cached RDD or DataFrame from the memory and disk storage.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Shuffle",
+    "question": "What is the Shuffle operation?",
+    "answer": "The mechanism for redistributing data across partitions (and nodes) for wide transformations like group or join.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Shuffle Read/Write",
+    "question": "What are the two phases?",
+    "answer": "Shuffle Write occurs on the map side (creating blocks). Shuffle Read occurs on the reduce side (fetching blocks).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Broadcast Variable",
+    "question": "When is it useful?",
+    "answer": "To efficiently send a large, read-only variable to all worker nodes once, reducing network I/O during joins.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Accumulator",
+    "question": "What is an Accumulator?",
+    "answer": "A variable used for aggregating values from workers back to the driver, primarily for counters or sums.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark UI",
+    "question": "What is the Spark UI?",
+    "answer": "A web interface used for monitoring Spark applications, jobs, stages, and execution performance.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "History Server",
+    "question": "Purpose of History Server?",
+    "answer": "To view the Spark UI for applications that have already finished, reading logs from persistent storage.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark SQL",
+    "question": "What is Spark SQL?",
+    "answer": "The Spark module for working with structured data using SQL queries or the DataFrame/Dataset API.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "User Defined Function (UDF)",
+    "question": "What is a UDF?",
+    "answer": "A function registered with Spark that allows users to write custom logic in Python/Scala/Java to process data within a DataFrame.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Performance Concern with UDFs",
+    "question": "Why are Python UDFs slower?",
+    "answer": "They require data to be serialized, sent to the Python interpreter, processed, and sent back to the JVM, causing overhead.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Vectorized UDFs",
+    "question": "What is a vectorized UDF?",
+    "answer": "A Pandas UDF that processes data in batches using Arrow/Pandas, drastically reducing serialization overhead.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark Streaming",
+    "question": "How does classic Spark Streaming work?",
+    "answer": "It uses Discretized Streams (DStreams) based on micro-batching RDDs, with state managed by checkpoints.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Structured Streaming",
+    "question": "What is its core idea?",
+    "answer": "Treats a live data stream as a perpetually growing table, allowing use of the DataFrame/Dataset API.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Watermarking",
+    "question": "Why use Watermarking?",
+    "answer": "To specify how long Spark should wait for late-arriving data in stream processing before aggregation state is dropped.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Checkpointing (Streaming)",
+    "question": "What is its purpose?",
+    "answer": "To save the state of the streaming application (progress, configuration, and offsets) to external storage for recovery from failure.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Stateful Operations",
+    "question": "Example of a stateful streaming operation?",
+    "answer": "Windowed aggregations (e.g., counting events over the last 5 minutes) or stream-stream joins.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark Connect",
+    "question": "What is Spark Connect?",
+    "answer": "A decoupled client-server architecture allowing remote connectivity and execution of Spark code from any application/language.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Adaptive Query Execution (AQE)",
+    "question": "What does AQE do?",
+    "answer": "Optimizes the execution plan dynamically at runtime, based on statistics gathered during the initial execution phase.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Coalesce",
+    "question": "What is `coalesce`?",
+    "answer": "Reduces the number of partitions without shuffling all data; often used to reduce partitions for writing data.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Repartition",
+    "question": "What is `repartition`?",
+    "answer": "Changes the number of partitions by performing a full shuffle of the data.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Partitioning",
+    "question": "Why is partitioning important?",
+    "answer": "It determines how data is distributed across the cluster, crucial for optimizing joins and aggregations.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Data Skew",
+    "question": "What is Data Skew?",
+    "answer": "When data is unevenly distributed across partitions, causing some executors to process significantly more data than others (leading to bottlenecks).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Salted Key Join",
+    "question": "How does it fix skew?",
+    "answer": "It adds a random prefix (salt) to skewed join keys to distribute the records across more partitions before the join.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Map-Side Join",
+    "question": "What is it also called?",
+    "answer": "Broadcast Hash Join (BHJ). It broadcasts the smaller table to all executors to avoid shuffling the larger table.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Hash Join",
+    "question": "What is a Hash Join?",
+    "answer": "The most common join type where the join key is hashed to determine which partition a row belongs to.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Sort Merge Join",
+    "question": "When is SMJ used?",
+    "answer": "When tables are too large for BHJ. It sorts and then merges the partitions on the join key.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spill",
+    "question": "What does 'Spill' mean?",
+    "answer": "When an executor runs out of memory for an operation (like a shuffle or aggregation), it writes data to disk (spills) to complete the task.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Memory Management",
+    "question": "Name the two main memory pools.",
+    "answer": "Execution Memory (for shuffles, joins, sorts) and Storage Memory (for caching RDDs/DataFrames).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Out of Memory (OOM)",
+    "question": "How to fix OOM issues?",
+    "answer": "Increase executor memory, reduce partition size, or change persistence level to DISK_ONLY.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Data Source API",
+    "question": "What is the Data Source API?",
+    "answer": "The interface used by Spark to read and write data in various formats (e.g., Parquet, ORC, CSV, JSON).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Parquet",
+    "question": "Why is Parquet preferred?",
+    "answer": "It is a columnar storage format, highly compressed, and schema-aware, offering faster query performance.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Predicates",
+    "question": "What is 'Predicate Pushdown'?",
+    "answer": "Optimization where Spark pushes filtering conditions down to the data source (like Parquet files) to minimize data read.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Columnar Pruning",
+    "question": "What is Columnar Pruning?",
+    "answer": "Optimization where Spark only reads the columns required for the query from the storage layer.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Partition Pruning",
+    "question": "What is Partition Pruning?",
+    "answer": "Skipping directories (partitions) that do not contain relevant data, based on filtering conditions in the WHERE clause.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Window Functions",
+    "question": "What is a Window Function?",
+    "answer": "A function that performs a calculation across a set of table rows that are somehow related to the current row (e.g., running total).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Over() Clause",
+    "question": "What does the OVER() clause define?",
+    "answer": "It defines the window (group of rows) on which the window function operates.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Lag/Lead",
+    "question": "What do LAG/LEAD do?",
+    "answer": "LAG accesses data from a previous row; LEAD accesses data from a subsequent row within the window.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Collect()",
+    "question": "Why is collect() dangerous?",
+    "answer": "It moves all distributed data from the executors to the driver program, potentially causing an OOM error on the driver.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Take(N)",
+    "question": "Why use take(N) instead of collect()?",
+    "answer": "It retrieves only the first N rows, limiting data transfer and preventing driver OOM errors for inspection.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark Standalone Mode",
+    "question": "What is it?",
+    "answer": "Spark's own simple cluster manager, easy to set up but less robust than YARN or Kubernetes.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Client vs. Cluster Mode",
+    "question": "Difference in driver location?",
+    "answer": "Client mode: Driver runs on the machine where the spark-submit is invoked. Cluster mode: Driver runs on a worker node.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Livy",
+    "question": "What is Apache Livy?",
+    "answer": "A service that enables easy interaction with Spark clusters over a REST API.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "PySpark",
+    "question": "How does PySpark connect to Spark?",
+    "answer": "Using Py4J, which bridges the Python process with the JVM where Spark runs.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Py4J",
+    "question": "What is Py4J?",
+    "answer": "A Python library that enables Python programs to dynamically access Java objects in a JVM.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "OOM on Driver",
+    "question": "How to debug a driver OOM?",
+    "answer": "Increase the `spark.driver.memory` configuration and check for excessive use of `collect()` or large broadcast variables.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "OOM on Executor",
+    "question": "How to debug an executor OOM?",
+    "answer": "Increase `spark.executor.memory`, check for data skew, and verify caching storage levels.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Shuffle File Corruption",
+    "question": "Common reason for shuffle errors?",
+    "answer": "Executor loss (e.g., due to OOM or node failure) that causes shuffle blocks to be unavailable for reading.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Garbage Collection (GC)",
+    "question": "Why is GC an issue?",
+    "answer": "Excessive GC pauses (long 'stop-the-world' events) can cause tasks to time out, reducing throughput.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Task Serialization",
+    "question": "What is serialization?",
+    "answer": "The process of converting objects into a byte stream for transmission across the network or storage.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Kryo",
+    "question": "What is Kryo in Spark?",
+    "answer": "An alternative, faster, and more compact serializer than the default Java serializer, highly recommended for performance.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Hadoop Compatibility",
+    "question": "Is Spark Hadoop compatible?",
+    "answer": "Yes, Spark can read and write data to any Hadoop-compatible file system, including HDFS and S3.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Structured Streaming Triggers",
+    "question": "Name two types of triggers.",
+    "answer": "ProcessingTime (run query every X interval) and OneTime (run query once and terminate).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Offset Management",
+    "question": "What are offsets in Kafka/Spark?",
+    "answer": "Pointers that Structured Streaming uses to track which events it has processed from the source (e.g., Kafka topic).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Delta Lake",
+    "question": "What is the Transaction Log?",
+    "answer": "An ordered, atomic record of every modification made to the Delta Lake table, enabling ACID features and time travel.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Time Travel (Delta)",
+    "question": "What is Time Travel?",
+    "answer": "The ability to query or revert to previous versions of a Delta Lake table using the transaction log.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Z-Ordering (Delta)",
+    "question": "What is Z-Ordering?",
+    "answer": "A technique to co-locate related information in the same set of files, optimizing data skipping for multi-dimensional queries.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Data Bricks Runtime",
+    "question": "What is the DBR?",
+    "answer": "An optimized, performance-tuned version of Apache Spark maintained and distributed by Databricks.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Koalas",
+    "question": "What is Koalas?",
+    "answer": "A Pandas-like API built on top of Apache Spark DataFrames to enable scaling of Pandas workloads.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Spark Monitoring Tools",
+    "question": "Name one non-UI monitoring tool.",
+    "answer": "Ganglia, Prometheus, or Grafana, used to track cluster metrics like CPU and memory usage.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Dynamic Allocation",
+    "question": "What is Dynamic Allocation?",
+    "answer": "The mechanism where Spark automatically adds and removes executors based on workload, managing cluster resources efficiently.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Resource Allocation (YARN)",
+    "question": "What resources are requested from YARN?",
+    "answer": "The number of executor cores and the amount of executor memory.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "MapPartitions",
+    "question": "When to use mapPartitions?",
+    "answer": "When you need to perform an expensive setup (like creating a database connection) once per partition rather than once per row.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "ForeachBatch",
+    "question": "When is foreachBatch used?",
+    "answer": "In Structured Streaming, it allows applying custom, arbitrary logic (like writing to a database) to the output of every micro-batch.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Streaming Output Modes",
+    "question": "Name two Streaming Output Modes.",
+    "answer": "Append, Complete, and Update.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Window Duration",
+    "question": "What is Window Duration?",
+    "answer": "The length of time over which an aggregation is computed in windowed streaming operations.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Sliding Interval",
+    "question": "What is Sliding Interval?",
+    "answer": "The frequency at which the window aggregation is calculated (e.g., 5-minute window, sliding every 1 minute).",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Speculation",
+    "question": "What is Speculation?",
+    "answer": "A feature where Spark re-runs slow tasks on different nodes to prevent slow nodes from bottlenecking the entire job.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "Data Locality",
+    "question": "Define Data Locality.",
+    "answer": "The proximity of the data being processed to the code running on the executor; high locality is best.",
+    "frontColor": "#F59E0B"
+  },
+  {
+    "term": "YARN Container",
+    "question": "What is a YARN container?",
+    "answer": "The fundamental unit of resource allocation in YARN, where Spark executors run.",
+    "frontColor": "#F59E0B"
   }
 ]

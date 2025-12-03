@@ -1,0 +1,1280 @@
+[
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is the core function of S3?",
+        "answer": "Provides object storage for the internet. It is highly durable, highly available, and scalable.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What are S3 objects composed of?",
+        "answer": "Key (name), Value (data), Version ID, Metadata, and Access Control List (ACL).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is the maximum size of a single S3 object?",
+        "answer": "5 TB (though upload must be done using Multipart Upload for files larger than 100 MB).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Standard durability?",
+        "answer": "11 nines (99.999999999%) of durability. This is achieved by storing data redundantly across multiple facilities.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is Read-After-Write Consistency?",
+        "answer": "Applicable to new PUTs of objects (non-overwrites). You can immediately read the new object after writing it.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is Eventual Consistency?",
+        "answer": "Applicable to PUTs of existing objects (overwrites) and DELETEs. It may take time for changes to propagate globally.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Standard",
+        "answer": "General-purpose storage for frequently accessed data, 99.99% availability.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Standard-IA",
+        "answer": "Infrequent Access. For data accessed less frequently but requiring millisecond retrieval. Has a retrieval fee.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 One Zone-IA",
+        "answer": "Infrequent Access, but data is stored only in a single Availability Zone (AZ). Lower cost, lower durability (99.5% availability).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Glacier Instant Retrieval",
+        "answer": "For archived data that needs immediate access (millisecond retrieval), charged per GB retrieved.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Glacier Flexible Retrieval",
+        "answer": "For archiving, where retrieval time is flexible (minutes to hours).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Glacier Deep Archive",
+        "answer": "Lowest cost storage class, for long-term data archival (7-12 hours retrieval time).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Intelligent-Tiering",
+        "answer": "Automatically moves data between two access tiers based on access patterns to optimize cost.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Versioning?",
+        "answer": "Keeps multiple versions of an object (including all writes and deletes), protecting against unintended deletions or overwrites.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Cross-Region Replication (CRR)?",
+        "answer": "Automatically copies objects across buckets in different AWS regions for disaster recovery or latency reduction.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is an S3 Lifecycle Policy?",
+        "answer": "Defines rules to automatically transition objects to cheaper storage classes or expire them after a set time.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What are S3 Pre-signed URLs?",
+        "answer": "Temporary URLs that grant time-limited permission to users to upload (PUT) or download (GET) a specific object.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "How do you control access at the bucket level?",
+        "answer": "Using Bucket Policies, which are JSON documents defining permissions.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "How do you control access at the object level (legacy)?",
+        "answer": "Using Access Control Lists (ACLs), though Bucket Policies/IAM are preferred.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Transfer Acceleration?",
+        "answer": "Utilizes CloudFront edge locations to speed up file transfers over long distances between the client and S3.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Select?",
+        "answer": "Allows applications to retrieve only a subset of data from an object using simple SQL expressions, improving performance.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Block Public Access?",
+        "answer": "A security feature that prevents public access configurations on S3 buckets and objects at the account or bucket level.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "S3 Encryption at Rest methods?",
+        "answer": "SSE-S3 (S3-managed keys), SSE-KMS (KMS-managed keys), SSE-C (Customer-provided keys).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is an S3 Bucket?",
+        "answer": "The fundamental container for data storage in S3. Bucket names must be globally unique.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is the minimum storage duration charge for S3 Standard-IA?",
+        "answer": "30 days. Deleting or transitioning the object before 30 days incurs a charge for the remaining time.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is the use case for S3 Batch Operations?",
+        "answer": "Performing large-scale operations on millions of S3 objects (e.g., changing metadata, changing ACLs, or copying).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What are S3 Storage Lens metrics?",
+        "answer": "Account-level analytics to gain visibility into object storage usage, activity, and trends.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon S3 (Storage)",
+        "question": "What is S3 Object Lock?",
+        "answer": "A feature that prevents objects from being deleted or overwritten for a fixed amount of time or indefinitely (Write Once Read Many - WORM).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the primary benefit of RDS?",
+        "answer": "It is a managed relational database service, handling patching, backups, failure detection, and recovery.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "List the six supported RDS database engines.",
+        "answer": "Amazon Aurora, PostgreSQL, MySQL, MariaDB, Oracle, and SQL Server.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is RDS Multi-AZ Deployment?",
+        "answer": "Provides high availability and failover by synchronously replicating data to a standby instance in a different AZ.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the main use case for RDS Read Replicas?",
+        "answer": "Scaling read-heavy database workloads by redirecting read traffic from the primary database instance.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "Difference between Multi-AZ and Read Replicas?",
+        "answer": "Multi-AZ is for Disaster Recovery/High Availability (synchronous). Read Replicas are for Read Scaling (asynchronous).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "How are RDS backups performed?",
+        "answer": "Automatically by creating a storage volume snapshot and backing up transaction logs.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the purpose of a Manual DB Snapshot?",
+        "answer": "User-initiated backups that are retained until manually deleted, unlike automated backups.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the minimum size for RDS storage?",
+        "answer": "10 GiB (for most engines/storage types).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What are the two main RDS storage types?",
+        "answer": "General Purpose SSD (gp2/gp3) for most workloads and Provisioned IOPS SSD (io1/io2) for I/O-intensive workloads.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "How do you scale compute resources in RDS?",
+        "answer": "By modifying the DB instance class (e.g., from t3.medium to r6g.large). Requires a brief outage.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "How do you scale storage in RDS?",
+        "answer": "For most storage types, it can be scaled up dynamically without downtime (storage auto-scaling).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is Amazon Aurora?",
+        "answer": "A proprietary, MySQL and PostgreSQL-compatible relational database built for the cloud, offering up to 5x better performance than standard MySQL.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the key difference in storage for Aurora?",
+        "answer": "Aurora uses a distributed, fault-tolerant, self-healing storage system that automatically scales up to 128TB.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is Aurora Serverless?",
+        "answer": "An on-demand, auto-scaling configuration for Aurora that automatically starts up, shuts down, and scales capacity based on application needs.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the primary key benefit of using Amazon Aurora?",
+        "answer": "High performance and fault tolerance (data is replicated across 3 AZs with 6 copies).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What does a Failover do in a Multi-AZ deployment?",
+        "answer": "In case of failure, RDS automatically switches the Canonical Name Record (CNAME) of the DB instance to the standby.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "Can you SSH into an RDS instance?",
+        "answer": "No. RDS is a managed service, and AWS does not provide OS-level access to the database servers.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is Performance Insights?",
+        "answer": "A tool that monitors and helps analyze database load, making it easy to spot performance issues.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "How are Read Replicas updated?",
+        "answer": "Asynchronously. This means the replica may lag slightly behind the primary instance.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the maximum retention period for Automated Backups?",
+        "answer": "35 days (for most engines).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the default port for PostgreSQL in RDS?",
+        "answer": "5432.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What are DB Subnet Groups?",
+        "answer": "A collection of subnets (typically private) that you create in a VPC, which RDS uses to associate your DB instance with a VPC.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "How is encryption managed for RDS?",
+        "answer": "Encryption at rest is achieved using AWS KMS. All automated backups, read replicas, and snapshots are also encrypted.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is Amazon Babelfish for Aurora PostgreSQL?",
+        "answer": "A translation layer that allows Aurora PostgreSQL to understand commands from applications written for Microsoft SQL Server.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the goal of Amazon RDS Proxy?",
+        "answer": "To manage and pool database connections, improving application resilience and scalability, especially during failovers.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is an RDS Blue/Green Deployment?",
+        "answer": "A feature for safer database updates, allowing you to stage changes on a separate 'Green' environment before seamlessly promoting it to production.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "Can an RDS instance run in a Public Subnet?",
+        "answer": "Yes, but it is generally discouraged for security reasons. Instances should usually be in private subnets with access via Bastion Host or RDS Proxy.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Amazon RDS (Database)",
+        "question": "What is the primary scaling limitation of Read Replicas?",
+        "answer": "They cannot solve write bottlenecks; they only help distribute read load.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is AWS Glue?",
+        "answer": "A serverless data integration service that makes it easy to discover, prepare, and combine data for analytics.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the Glue Data Catalog?",
+        "answer": "A centralized, persistent metadata store that contains table definitions, location, schema, and partition information for data.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is an AWS Glue Crawler?",
+        "answer": "A program that connects to a data store (like S3), infers the schema, and populates the Glue Data Catalog.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is a Glue Job?",
+        "answer": "The business logic that performs the ETL work. It runs on a serverless Apache Spark or Python shell environment.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the purpose of Glue Development Endpoints?",
+        "answer": "To allow interactive development and testing of ETL scripts using a notebook (e.g., Zeppelin or Jupyter).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What are Glue Bookmarks?",
+        "answer": "Used to track the state of previously run jobs, allowing Glue to process new data only, preventing reprocessing.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue DataBrew?",
+        "answer": "A visual data preparation tool that allows data analysts and scientists to clean and normalize data without writing code.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is a Glue Data Quality rule?",
+        "answer": "Defines expectations for data (e.g., 'SSN must be unique') and monitors the quality of data as it moves through pipelines.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue Schema Registry?",
+        "answer": "A serverless feature that allows you to centrally discover, control, and evolve schemas for data streams (e.g., Kafka, Kinesis).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What does a Glue Job use for parallel processing?",
+        "answer": "Apache Spark, which is automatically provisioned and managed by AWS.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What are DynamicFrames in Glue?",
+        "answer": "AWS Glue's extension of Apache Spark DataFrames, offering flexibility and schema evolution handling during ETL.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "How does Glue handle schema evolution?",
+        "answer": "DynamicFrames allow Glue to handle schema evolution by adapting the schema on the fly during data processing.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the purpose of Glue Workflows?",
+        "answer": "To define complex ETL processes involving multiple dependent crawlers, jobs, and triggers in a directed acyclic graph (DAG).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "How is security managed for Glue access to S3?",
+        "answer": "Through an IAM Role attached to the Glue Crawler or Job, granting read/write permissions to the specified S3 paths.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What are Glue Triggers?",
+        "answer": "Events or schedules that start a Glue Crawler or Job execution (e.g., time-based or job-success event).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the serverless advantage of Glue?",
+        "answer": "No infrastructure to set up, patch, or manage. AWS handles all resources for Spark jobs.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue Studio?",
+        "answer": "A graphical interface (GUI) for creating, running, and monitoring Glue ETL jobs without manual code writing.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the primary role of the Data Catalog?",
+        "answer": "To act as the central source of truth for all data metadata, usable by services like Athena and Redshift Spectrum.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is a Glue Transform?",
+        "answer": "A machine learning transform that helps clean and prepare data, such as finding matching records (Deduplication).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "Which open-source projects is Glue based on?",
+        "answer": "Apache Spark (for processing) and Apache Hive Metastore (for the Data Catalog).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What does G.1X or G.2X refer to in Glue?",
+        "answer": "The worker type and processing capacity allocated to a Glue Job (G.1X is standard, G.2X has more memory and cores).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is 'Pushdown' in the context of Glue and JDBC?",
+        "answer": "Optimizing data transfer by performing filtering and aggregation on the source database before transferring data to Glue.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "How is sensitive data protected within Glue ETL jobs?",
+        "answer": "Through client-side or server-side encryption and by enforcing IAM policies on data sources and targets.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is the minimum billing unit for AWS Glue jobs?",
+        "answer": "1 minute (after a 10-second startup), billed based on the number of Data Processing Units (DPUs) used.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is AWS Lake Formation?",
+        "answer": "A service that makes it easy to set up a secure data lake in days. It uses Glue Data Catalog for governance.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue Data Catalog Partitioning?",
+        "answer": "A way to divide the data into segments (like by year or country) to improve query performance and cost.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue Flex Execution?",
+        "answer": "A lower-cost option for non-time-sensitive Glue ETL jobs, where jobs may take slightly longer to start.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "AWS Glue (ETL)",
+        "question": "What is Glue Data Quality?",
+        "answer": "A native capability of Glue that automatically analyzes data quality and recommends rules for monitoring data integrity.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is Amazon Redshift?",
+        "answer": "A fast, fully managed, petabyte-scale cloud data warehouse service optimized for large-scale analytical queries.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the key storage technology in Redshift?",
+        "answer": "Columnar storage (instead of row-based), which is highly efficient for analytical queries.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What are the two main node types in a Redshift cluster?",
+        "answer": "Leader Node and Compute Nodes.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the primary role of the Leader Node?",
+        "answer": "Handles external communication (client connection), query parsing, optimization, and coordinating the Compute Nodes.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the primary role of the Compute Nodes?",
+        "answer": "Execute the compiled code and perform the parallel query processing (storage and computation).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is a Slice in Redshift?",
+        "answer": "A virtual processor on a Compute Node. Compute nodes are divided into slices, and data is distributed across these slices.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the purpose of the COPY command?",
+        "answer": "The most efficient way to load large amounts of data into a Redshift table, typically from S3.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the default data distribution style?",
+        "answer": "AUTO, which allows Redshift to choose the optimal distribution method (KEY, ALL, or EVEN).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is EVEN distribution style?",
+        "answer": "Data is distributed round-robin across the slices. Simple but can lead to data skew if not managed.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is KEY distribution style?",
+        "answer": "Rows are distributed based on the values in one column (the distribution key). Essential for co-locating join keys.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is ALL distribution style?",
+        "answer": "A copy of the entire table is distributed to every Compute Node. Useful for small dimension tables to avoid data movement.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is a Sort Key?",
+        "answer": "Defines the order in which data is physically stored on disk within each slice, speeding up range-restricted queries.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is an Interleaved Sort Key?",
+        "answer": "Gives equal weight to all columns or subsets of columns in the sort key, useful for queries with varying WHERE clauses.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the purpose of VACUUM?",
+        "answer": "Reclaims storage space from deleted/updated rows and resorts the data to maintain optimal query performance.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is ANALYZE in Redshift?",
+        "answer": "Updates the table's statistics, which the query optimizer uses to generate efficient execution plans.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is Workload Management (WLM)?",
+        "answer": "Allows you to manage query concurrency, queue long-running queries, and assign specific resources to different user groups.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is Redshift Spectrum?",
+        "answer": "Enables Redshift to directly query data stored in S3 (in the Data Lake) without loading it into the cluster.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What AWS service does Redshift Spectrum use for metadata?",
+        "answer": "AWS Glue Data Catalog or the internal Redshift catalog.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the key advantage of Redshift Serverless?",
+        "answer": "Automatically provisions and scales compute capacity to deliver high performance for demanding and fluctuating workloads.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is AQUA (Advanced Query Accelerator)?",
+        "answer": "A distributed, hardware-accelerated cache that allows Redshift to run up to 10x faster than other cloud data warehouses.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is data compression in Redshift?",
+        "answer": "Automatic compression of data within the columnar storage to save space and reduce I/O during queries.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "How do you achieve high availability for a Redshift cluster?",
+        "answer": "By enabling Multi-AZ deployment, which automatically provisions a standby cluster in another AZ.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What are Distribution Keys used for?",
+        "answer": "To determine how the table rows are spread across the Compute Node slices to minimize data movement during joins.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the best practice for data loading into Redshift?",
+        "answer": "Use the COPY command, load from S3, and load in parallel using multiple files of equal size.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the primary use case for Redshift Materialized Views?",
+        "answer": "To pre-compute and store the results of complex joins and aggregations, significantly speeding up query time.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is Query Monitoring Rule (QMR)?",
+        "answer": "Part of WLM, it allows you to define thresholds and actions for queries (e.g., abort a query that runs for too long).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the major constraint of the Leader Node?",
+        "answer": "It does not participate in the parallel execution of the SQL queries; it only coordinates.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is a Zone Map?",
+        "answer": "Metadata stored per column block, containing the minimum and maximum values, used to skip scanning irrelevant data blocks.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the purpose of the DEEP COPY command?",
+        "answer": "A specific type of COPY that performs a full data reload, useful for completely reorganizing data.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is Amazon Redshift Query Editor V2?",
+        "answer": "A web-based SQL client that allows you to explore data, develop queries, and visualize results directly in the AWS console.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What are the common Distribution and Sort Key columns?",
+        "answer": "Foreign Keys for Distribution, Date/Time columns or frequently filtered columns for Sort Keys.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "What is the primary way to enforce uniqueness in Redshift?",
+        "answer": "It accepts PRIMARY KEY/UNIQUE constraints but does not enforce them; uniqueness must be guaranteed by the loading process.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Redshift (DW)",
+        "question": "Redshift's primary mechanism for cost control in Serverless?",
+        "answer": "RPU-hours (Redshift Processing Unit) consumed, as capacity auto-scales based on demand.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is Amazon Athena?",
+        "answer": "A serverless, interactive query service that makes it easy to analyze data directly in S3 using standard SQL.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the underlying query engine for Athena?",
+        "answer": "Presto (and more recently, Trino), a distributed SQL query engine.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "How is Athena billed?",
+        "answer": "Per query, based on the amount of data scanned in S3.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Where does Athena store its metadata and schema?",
+        "answer": "It uses the AWS Glue Data Catalog.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the best way to optimize Athena cost and performance?",
+        "answer": "Partition the data, compress the data, and use columnar formats like Parquet or ORC.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Why is using columnar formats (Parquet/ORC) beneficial for Athena?",
+        "answer": "Athena can scan only the necessary columns instead of reading the entire row, drastically reducing data scanned.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is data partitioning in the context of Athena?",
+        "answer": "Structuring your S3 data paths based on column values (e.g., s3://bucket/table/year=2024/month=01).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "How can you load new partitions into Athena's table metadata?",
+        "answer": "By running the 'MSCK REPAIR TABLE' command or by using a Glue Crawler.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the maximum query runtime for Athena?",
+        "answer": "30 minutes (queries are terminated after this period).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Where are Athena query results stored?",
+        "answer": "In an S3 bucket specified by the user (or the default bucket).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is Athena's primary use case?",
+        "answer": "Ad-hoc, interactive SQL querying of massive datasets in S3 for data exploration and reporting.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Can Athena join data from multiple S3 sources?",
+        "answer": "Yes, as long as the data is defined as separate tables in the Glue Data Catalog, Athena can join them using standard SQL.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is Athena's concept of Workgroups?",
+        "answer": "Allows you to manage users' access to data sources, control query costs by setting data usage limits, and enforce query encryption.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the role of the Glue Data Catalog in Athena's process?",
+        "answer": "It provides the table definition (schema) so Athena knows how to interpret the raw files in S3.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What are Athena User Defined Functions (UDFs)?",
+        "answer": "Allows users to write custom Java functions to process data during an Athena query.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the cost reduction achieved by using compression?",
+        "answer": "Significantly reduces the amount of data scanned in S3, directly reducing the query cost.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Can Athena query data in other AWS services?",
+        "answer": "Yes, using Federated Queries, it can query data from sources like RDS, DynamoDB, or even on-premises databases.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "How does Athena ensure data security?",
+        "answer": "It uses S3 encryption (SSE-S3, SSE-KMS) and IAM policies to control access to the underlying S3 data and the Glue Data Catalog.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Can Athena handle nested data structures?",
+        "answer": "Yes, it can query nested formats like JSON and Parquet/ORC structs and arrays using Presto's features.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the performance implication of using TEXT/CSV vs Parquet in Athena?",
+        "answer": "TEXT/CSV is slower and more expensive as Athena must scan the entire file. Parquet is faster and cheaper due to columnar scanning.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the concept of Query Result Encryption in Athena?",
+        "answer": "Encrypting the query results stored in the S3 result location using SSE-S3 or KMS.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is a major limitation of Athena?",
+        "answer": "It is not suitable for transactional workloads or real-time queries; it is optimized for large-scale analytical scanning.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "How does Athena support Data Lake governance?",
+        "answer": "Through integration with Lake Formation, allowing fine-grained, column-level access control on S3 data.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is Athena Engine Version 3?",
+        "answer": "The latest version based on Trino, offering improved performance, new SQL features, and better cost efficiency.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "Can you use Athena to modify data in S3?",
+        "answer": "Yes, it supports DML operations like INSERT INTO, UNLOAD, and even DELETE/UPDATE (for managed tables).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is the purpose of the UNLOAD command in Athena?",
+        "answer": "To run a SELECT query and then write the results back to an S3 location in a specified file format.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What is Athena's approach to schema-on-read?",
+        "answer": "It applies the schema (from Glue Catalog) at the time of querying the data in S3, allowing flexibility in data structure.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Amazon Athena (Query)",
+        "question": "What are the common storage formats supported by Athena?",
+        "answer": "CSV, JSON, ORC, Parquet, Avro, and custom SerDe (Serializer/Deserializer).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Data Organization",
+        "question": "What is the structure of an S3 file path?",
+        "answer": "s3://bucket-name/key (where 'key' is the full path including 'folders').",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Data Organization",
+        "question": "What is a 'folder' in S3?",
+        "answer": "There are no true folders; they are simply prefixes in the object key name (e.g., 'logs/2024/data.csv').",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS/Aurora Components",
+        "question": "What is the purpose of a Custom Endpoint in Aurora?",
+        "answer": "Allows connecting to a specific subset of Read Replicas, defined by tags or instance types.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS/Aurora Components",
+        "question": "What is the Writer Endpoint in Aurora?",
+        "answer": "The endpoint that always points to the single Read/Write master instance in the cluster.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue/Redshift Integration",
+        "question": "How do Redshift and Glue Data Catalog integrate?",
+        "answer": "Redshift Spectrum connects to the Glue Data Catalog to retrieve table schemas and locations for S3 data.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Glue/Redshift Integration",
+        "question": "How can Glue be used with Redshift?",
+        "answer": "Glue ETL jobs can read data from S3, transform it, and then use the JDBC driver to load it into Redshift.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Optimization",
+        "question": "What is the purpose of the Redshift Compression Encoding feature?",
+        "answer": "Automatically applies the best compression algorithm (e.g., LZO, ZSTD, RAW) to columns during data loading.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Optimization",
+        "question": "What is the benefit of a Compound Sort Key?",
+        "answer": "Sorts data by multiple columns in the order they are listed; best for queries that filter on the key columns in the same order.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "S3 Security",
+        "question": "Difference between Bucket Policy and IAM Policy for S3?",
+        "answer": "Bucket Policies are attached to the bucket itself. IAM Policies are attached to users/roles and control access to all services.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Security",
+        "question": "What is the default encryption state for new S3 buckets?",
+        "answer": "By default, S3 now enables Server-Side Encryption with S3-managed keys (SSE-S3) for all new objects.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS High Availability",
+        "question": "What is the RPO in an RDS Multi-AZ environment?",
+        "answer": "Recovery Point Objective is near zero, as replication is synchronous.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS High Availability",
+        "question": "What is the RTO in an RDS Multi-AZ environment?",
+        "answer": "Recovery Time Objective is typically less than 60-120 seconds for an automatic failover.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue Networking",
+        "question": "How does Glue access resources within a VPC?",
+        "answer": "By assigning the Glue Job/Crawler an Elastic Network Interface (ENI) within the specified VPC subnets.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue Networking",
+        "question": "Why does a Glue Job need an S3 VPC Endpoint?",
+        "answer": "To securely access the S3 data lake without traversing the public internet.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Data Loading",
+        "question": "How does Redshift handle data consistency during COPY?",
+        "answer": "The COPY operation is transactional. If it fails mid-way, all changes are rolled back.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Data Loading",
+        "question": "What is the key benefit of the ZSTD compression algorithm in Redshift?",
+        "answer": "It provides a great balance between high compression ratio and fast decompression speed.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena Best Practices",
+        "question": "How can you prevent a user from running a full table scan in Athena?",
+        "answer": "Using Workgroups to set a per-query or per-workgroup data usage limit.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena Best Practices",
+        "question": "What is the importance of file size optimization for Athena?",
+        "answer": "Aim for larger files (e.g., 128MB to 1GB) to reduce S3 overhead and improve parallelization.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Data Protection",
+        "question": "What is MFA Delete on S3?",
+        "answer": "Requires an authentication code from a physical or virtual MFA device to permanently delete an object version or suspend versioning.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Data Protection",
+        "question": "What is the 'Retention Mode' in S3 Object Lock?",
+        "answer": "Governed (users with permissions can change/remove lock) or Compliance (no user, including root, can change or remove the lock).",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS/Aurora Architecture",
+        "question": "What is a Cluster Volume in Aurora?",
+        "answer": "The single, fault-tolerant virtual database storage volume that spans multiple AZs (up to 128TB).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS/Aurora Architecture",
+        "question": "How many Read Replicas does Aurora support per cluster?",
+        "answer": "Up to 15 Read Replicas.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue Data Discovery",
+        "question": "What is the most common output schema format inferred by a Glue Crawler?",
+        "answer": "Apache Parquet or ORC (columnar formats).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue Data Discovery",
+        "question": "What is Glue Classifier?",
+        "answer": "Determines the schema of your data (e.g., CSV, JSON, Log files) to help the Crawler infer the correct schema.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Concurrency",
+        "question": "What is Concurrency Scaling?",
+        "answer": "Redshift automatically adds capacity to handle bursts of concurrent read queries, transparently and instantaneously.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Concurrency",
+        "question": "What is Elastic Resize?",
+        "answer": "Allows you to quickly adjust the number of nodes in your Redshift cluster with only a few minutes of downtime.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena Federated Query",
+        "question": "How does Athena run a Federated Query?",
+        "answer": "It uses Lambda functions as Data Source Connectors to translate queries into the target database's dialect and retrieve results.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena Federated Query",
+        "question": "What is the primary benefit of Athena Federated Query?",
+        "answer": "Ability to analyze data in place across multiple sources without needing to first ETL the data into S3.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Encryption",
+        "question": "What is the difference between SSE-S3 and SSE-KMS?",
+        "answer": "SSE-S3 uses keys managed by AWS. SSE-KMS uses keys managed and audited by you in AWS KMS.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Encryption",
+        "question": "What is SSE-C?",
+        "answer": "Server-Side Encryption with Customer-Provided Keys. AWS performs the encryption/decryption, but you manage the key.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS Parameter Groups",
+        "question": "What is an RDS DB Parameter Group?",
+        "answer": "A container for engine-specific configuration values that are applied to one or more DB instances.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS Parameter Groups",
+        "question": "When are dynamic parameters applied?",
+        "answer": "Immediately after modification.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue Data Security",
+        "question": "How can you perform record-level filtering using Glue?",
+        "answer": "By using AWS Lake Formation permissions and Glue's support for row and column-level security policies.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue Data Security",
+        "question": "What are Glue Connection objects used for?",
+        "answer": "Storing connection properties (like JDBC URL, username, password) for source or target data stores (e.g., RDS, Redshift).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Maintenance",
+        "question": "What happens during a Maintenance Window in Redshift?",
+        "answer": "System upgrades, cluster modifications, and patch application occur during this window (can cause brief downtime).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Maintenance",
+        "question": "What is an Amazon Redshift Reserved Instance?",
+        "answer": "Allows you to commit to using Redshift compute capacity for a 1- or 3-year term for significant cost savings.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena Performance",
+        "question": "What is the cost implication of not filtering by Partition Keys in Athena?",
+        "answer": "Athena will perform a full scan of all partitions, increasing the amount of data scanned and the cost.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena Performance",
+        "question": "What is an S3 Access Point in the context of Athena?",
+        "answer": "A named network endpoint attached to a bucket, used to simplify S3 data access by multiple Athena queries.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Storage Management",
+        "question": "What are S3 Storage Class Analysis metrics used for?",
+        "answer": "Observing data access patterns over time to help determine the best S3 Lifecycle policy for cost optimization.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Storage Management",
+        "question": "What is the minimum object size for S3 Intelligent-Tiering to be efficient?",
+        "answer": "128 KB. Smaller objects incur a monitoring overhead cost.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS Monitoring",
+        "question": "Which AWS services are used for monitoring RDS performance and metrics?",
+        "answer": "Amazon CloudWatch (for basic metrics) and Performance Insights (for deeper query-level analysis).",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS Monitoring",
+        "question": "What is the primary indicator of a Write Bottleneck in RDS?",
+        "answer": "High Write Latency and high CPU utilization on the primary instance.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue ETL Language",
+        "question": "What are the two programming languages supported for Glue ETL jobs?",
+        "answer": "Python (with PySpark) and Scala (with Spark).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue ETL Language",
+        "question": "What is the main advantage of using Glue Custom Blueprints?",
+        "answer": "They allow for the creation of reusable, standardized ETL process templates for repeatable tasks.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Networking",
+        "question": "Where must a Redshift cluster be deployed?",
+        "answer": "Inside an Amazon VPC (Virtual Private Cloud).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Networking",
+        "question": "How do you connect to a Redshift cluster from outside the VPC?",
+        "answer": "The cluster must be in a public subnet with 'Publicly Accessible' enabled, or accessed via a VPN/Direct Connect.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena Metadata",
+        "question": "What is a common reason for 'Invalid Table Schema' error in Athena?",
+        "answer": "Schema drift (the schema inferred by the Glue Crawler no longer matches the current data format in S3).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena Metadata",
+        "question": "What is the effect of the 'EXTERNAL' keyword when creating a table in Athena/Glue?",
+        "answer": "It means the table definition is stored in the catalog, but the actual data files are external (in S3) and not managed by the catalog.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Replication",
+        "question": "What is Same-Region Replication (SRR)?",
+        "answer": "Copies objects between buckets in the same AWS region, often used for log aggregation or compliance.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Replication",
+        "question": "Does S3 Replication copy existing objects by default?",
+        "answer": "No. By default, it only copies new objects created after the replication rule is enabled. Batch Replication is needed for existing objects.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS High Availability",
+        "question": "How can you force a manual failover on a Multi-AZ deployment?",
+        "answer": "By rebooting the primary DB instance with the 'Reboot with failover' option selected.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS High Availability",
+        "question": "What is the maximum number of Read Replicas for MySQL, PostgreSQL, and MariaDB?",
+        "answer": "Up to 5 Read Replicas.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue Data Flow",
+        "question": "What is the typical sequence of components in a Glue ETL process?",
+        "answer": "Data Source (S3) -> Crawler (infers schema) -> Data Catalog (stores metadata) -> Job (transforms data) -> Data Sink (S3/Redshift).",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue Data Flow",
+        "question": "What is the primary use case for the Glue Console's visual interface?",
+        "answer": "To easily design and troubleshoot ETL data pipelines without writing code.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Data Warehousing",
+        "question": "What is the use case for a Fact Table?",
+        "answer": "Stores observed or measured quantitative data (metrics) in a data warehouse (e.g., sales quantity, price).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Data Warehousing",
+        "question": "What is the use case for a Dimension Table?",
+        "answer": "Stores descriptive attributes about the business or object (e.g., customer name, product color, date details).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena SQL",
+        "question": "What is the key difference between Athena's SQL and standard relational SQL?",
+        "answer": "Athena's SQL (Presto/Trino) includes specialized functions for querying semi-structured data (JSON, arrays, maps).",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena SQL",
+        "question": "How can you improve query security by avoiding plaintext results in S3?",
+        "answer": "Configure Athena to encrypt the query results output file in S3 using KMS.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "S3 Access Points",
+        "question": "What is the primary benefit of using S3 Access Points?",
+        "answer": "Creating distinct access policies for a shared S3 bucket, simplifying access management at scale.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "S3 Access Points",
+        "question": "What is the URL format for an S3 Access Point?",
+        "answer": "https://www.google.com/search?q=access-point-name-account-id.s3-accesspoint.region.amazonaws.com.",
+        "frontColor": "#F59E0B"
+    },
+    {
+        "term": "RDS Security",
+        "question": "What is a common reason for failing to connect to an RDS instance?",
+        "answer": "Security Group configuration: ensuring the client's IP or security group is allowed access on the DB port.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "RDS Security",
+        "question": "How do you achieve encryption in transit for RDS connections?",
+        "answer": "By configuring the client to use SSL/TLS when connecting to the database endpoint.",
+        "frontColor": "#3B82F6"
+    },
+    {
+        "term": "Glue Data Catalog",
+        "question": "What are the core attributes stored in a Data Catalog table definition?",
+        "answer": "Table name, S3 location, input/output format, schema (column names and data types), and partition keys.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Glue Data Catalog",
+        "question": "What is a Glue Data Catalog database?",
+        "answer": "A logical container for tables, not a database in the traditional sense.",
+        "frontColor": "#10B981"
+    },
+    {
+        "term": "Redshift Security",
+        "question": "How is encryption at rest managed in Redshift?",
+        "answer": "Using AWS KMS or HSM. All data, backups, and replicas are encrypted.",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Redshift Security",
+        "question": "What is the primary function of Redshift Security Groups?",
+        "answer": "Controlling inbound access to the cluster (VPC Security Group).",
+        "frontColor": "#DC2626"
+    },
+    {
+        "term": "Athena vs Redshift",
+        "question": "When would you prefer Athena over Redshift?",
+        "answer": "For ad-hoc querying, unpredictable/infrequent usage, and when data already resides in S3 and doesn't require complex ETL.",
+        "frontColor": "#06B6D4"
+    },
+    {
+        "term": "Athena vs Redshift",
+        "question": "When would you prefer Redshift over Athena?",
+        "answer": "For consistent, complex analytical workloads, high concurrency of complex queries, and when data is frequently updated (Data Warehouse).",
+        "frontColor": "#DC2626"
+    }
+]

@@ -1,0 +1,392 @@
+[
+{
+"term": "Lakehouse Architecture",
+"question": "What is the primary goal of the Lakehouse Architecture, pioneered by Databricks?",
+"answer": "To combine the flexibility and cost-efficiency of Data Lakes (S3, ADLS) with the ACID properties and structure of Data Warehouses.",
+"frontColor": "#D97706"
+},
+{
+"term": "Databricks Platform",
+"question": "Name the two primary planes that make up the Databricks cloud architecture. ",
+"answer": "Control Plane (Managed by Databricks) and Data Plane (Managed by the customer's cloud account).",
+"frontColor": "#D97706"
+},
+{
+"term": "Control Plane",
+"question": "What core components reside in the Databricks Control Plane?",
+"answer": "The Workspace, Notebooks, Cluster management logic, MLflow Tracking Server, and API endpoints.",
+"frontColor": "#D97706"
+},
+{
+"term": "Data Plane",
+"question": "What core components reside in the Customer's Data Plane?",
+"answer": "The Apache Spark clusters (Compute nodes), the actual data storage (S3/ADLS), and the networking (VPC/VNet).",
+"frontColor": "#D97706"
+},
+{
+"term": "Databricks Workspace",
+"question": "What is the Databricks Workspace?",
+"answer": "The user-facing environment for managing resources, running notebooks, managing clusters, and interacting with the Lakehouse.",
+"frontColor": "#D97706"
+},
+{
+"term": "All-Purpose Cluster",
+"question": "What is the primary use case for an All-Purpose Cluster?",
+"answer": "Interactive data exploration, analysis, and development using notebooks or the Databricks UI.",
+"frontColor": "#D97706"
+},
+{
+"term": "Job Cluster",
+"question": "How is a Job Cluster different from an All-Purpose Cluster?",
+"answer": "Job clusters are provisioned automatically when a job starts, terminate when the job finishes, and are billed at a lower rate.",
+"frontColor": "#D97706"
+},
+{
+"term": "Databricks Runtime (DBR)",
+"question": "What is the Databricks Runtime?",
+"answer": "The set of core components (e.g., Apache Spark, open-source libraries, Delta Lake) that runs on Databricks clusters, optimized for performance.",
+"frontColor": "#D97706"
+},
+{
+"term": "Photon Engine",
+"question": "What is Photon in the context of Databricks Compute?",
+"answer": "A vectorized query engine built to accelerate Spark workloads and execute SQL and DataFrame operations significantly faster.",
+"frontColor": "#D97706"
+},
+{
+"term": "DBU (Databricks Unit)",
+"question": "What is a DBU?",
+"answer": "A normalized unit of processing power used to measure and bill Databricks consumption. DBU consumption rates vary by workload and cluster type.",
+"frontColor": "#D97706"
+},
+{
+"term": "Autoscaling",
+"question": "How does Databricks Autoscaling work to optimize cluster costs?",
+"answer": "It automatically adjusts the number of worker nodes in a cluster based on the workload to ensure optimal utilization.",
+"frontColor": "#D97706"
+},
+{
+"term": "Cluster Pools",
+"question": "What is the purpose of using Cluster Pools?",
+"answer": "To reduce cluster start time by keeping a set of idle, pre-configured instances ready for immediate cluster launch.",
+"frontColor": "#D97706"
+},
+{
+"term": "Spark Driver Node",
+"question": "In a Databricks cluster, what is the primary role of the Driver Node?",
+"answer": "It manages the cluster state, maintains the SparkContext, and coordinates task execution across the Worker Nodes.",
+"frontColor": "#D97706"
+},
+{
+"term": "Spark Worker Nodes",
+"question": "What is the primary role of the Worker Nodes?",
+"answer": "They execute the tasks assigned by the Driver Node, process the data, and store results (shuffles) temporarily.",
+"frontColor": "#D97706"
+},
+{
+"term": "Init Scripts",
+"question": "What is an Init Script in Databricks?",
+"answer": "A script that runs during the cluster startup phase to install libraries, modify system environment variables, or configure Spark properties.",
+"frontColor": "#D97706"
+},
+{
+"term": "Serverless Compute",
+"question": "Which Databricks services utilize Serverless Compute?",
+"answer": "Databricks SQL Endpoints and Delta Live Tables (DLT) can run on serverless compute, where infrastructure is fully managed by Databricks.",
+"frontColor": "#D97706"
+},
+{
+"term": "Instance Profiles",
+"question": "In AWS deployments, what IAM entity is used to grant Databricks clusters access to S3 data?",
+"answer": "IAM Roles, which are assumed by EC2 Instance Profiles associated with the cluster's compute nodes.",
+"frontColor": "#D97706"
+},
+{
+"term": "Cluster Logging",
+"question": "Where are cluster logs and notebook execution details typically stored for troubleshooting and auditing?",
+"answer": "In a dedicated log destination within the customer's cloud storage (S3 or ADLS).",
+"frontColor": "#D97706"
+},
+{
+"term": "High Concurrency Cluster",
+"question": "What is the primary security feature provided by a High Concurrency Cluster?",
+"answer": "It uses credential passthrough to isolate users from each other, ensuring notebooks running in the same cluster cannot access another user's data.",
+"frontColor": "#D97706"
+},
+{
+"term": "Security Policy",
+"question": "What are Databricks Cluster Policies?",
+"answer": "Templates that define guardrails for cluster configuration, allowing administrators to restrict user options (e.g., maximum node count or instance type).",
+"frontColor": "#D97706"
+},
+{
+"term": "Delta Lake",
+"question": "What open-source storage layer sits atop data lake storage (e.g., S3) and is core to the Lakehouse?",
+"answer": "Delta Lake.",
+"frontColor": "#059669"
+},
+{
+"term": "ACID Properties",
+"question": "What are the four properties that Delta Lake brings to data lakes (ACID)?",
+"answer": "Atomicity, Consistency, Isolation, and Durability.",
+"frontColor": "#059669"
+},
+{
+"term": "Transaction Log",
+"question": "What component of Delta Lake enforces ACID properties and provides the source for Time Travel?",
+"answer": "The Delta Lake Transaction Log (a structured history stored alongside the data files).",
+"frontColor": "#059669"
+},
+{
+"term": "Time Travel (Version)",
+"question": "What feature allows a user to query an older version of a Delta Lake table?",
+"answer": "Time Travel (using VERSION AS OF or TIMESTAMP AS OF).",
+"frontColor": "#059669"
+},
+{
+"term": "Schema Enforcement",
+"question": "What is Delta Lake Schema Enforcement?",
+"answer": "A mechanism that prevents writes to a table if the data's schema is incompatible with the existing table schema, protecting data quality.",
+"frontColor": "#059669"
+},
+{
+"term": "Schema Evolution",
+"question": "How can a user intentionally allow a schema change to an existing Delta table?",
+"answer": "By using the option mergeSchema = true during the write operation (e.g., adding new columns).",
+"frontColor": "#059669"
+},
+{
+"term": "MERGE INTO",
+"question": "What is the primary SQL command used to efficiently implement UPSERTS (Update/Insert) on Delta tables?",
+"answer": "MERGE INTO (critical for slowly changing dimensions and data deduplication).",
+"frontColor": "#059669"
+},
+{
+"term": "Z-Ordering",
+"question": "What Delta Lake optimization technique co-locates related information in the same set of files based on multiple columns?",
+"answer": "Z-Ordering (used via the OPTIMIZE command).",
+"frontColor": "#059669"
+},
+{
+"term": "VACUUM",
+"question": "What Delta Lake command is used to physically delete data files that are no longer referenced by the transaction log?",
+"answer": "VACUUM (default retention period is 7 days).",
+"frontColor": "#059669"
+},
+{
+"term": "Bronze, Silver, Gold",
+"question": "What is the common three-layer architecture for Delta Lake data pipelines?",
+"answer": "Bronze (raw data), Silver (cleaned/conformed data), and Gold (aggregated/business-ready data).",
+"frontColor": "#059669"
+},
+{
+"term": "Delta Live Tables (DLT)",
+"question": "What Databricks service automates the building, management, and monitoring of production-grade ETL pipelines using SQL or Python declarations?",
+"answer": "Delta Live Tables (DLT).",
+"frontColor": "#059669"
+},
+{
+"term": "DLT Expectations",
+"question": "What DLT feature allows developers to define data quality rules and specify actions (e.g., dropping, failing, or alerting) when rules are violated?",
+"answer": "Expectations.",
+"frontColor": "#059669"
+},
+{
+"term": "Unity Catalog",
+"question": "What is Unity Catalog?",
+"answer": "A unified governance solution for the Lakehouse, providing centralized access control, auditing, and lineage across data and AI assets.",
+"frontColor": "#059669"
+},
+{
+"term": "Three-Level Namespace",
+"question": "What is the standard three-level hierarchy for data objects managed by Unity Catalog?",
+"answer": "Catalog -> Schema (or Database) -> Table/View.",
+"frontColor": "#059669"
+},
+{
+"term": "Metastore",
+"question": "What is the primary component of Unity Catalog that stores all the metadata for catalogs and schemas?",
+"answer": "The Unity Catalog Metastore (must be configured once per region).",
+"frontColor": "#059669"
+},
+{
+"term": "External Locations",
+"question": "What Unity Catalog object is used to define a secure mapping to a cloud storage path (S3 or ADLS)?",
+"answer": "External Locations (managed by a Storage Credential).",
+"frontColor": "#059669"
+},
+{
+"term": "Storage Credential",
+"question": "What Unity Catalog object holds the long-term cloud credential (e.g., IAM role) required to access an External Location?",
+"answer": "Storage Credential.",
+"frontColor": "#059669"
+},
+{
+"term": "Fine-Grained Access",
+"question": "What level of access control does Unity Catalog enforce below the table level?",
+"answer": "Row-level and Column-level access control (using views or dynamic filters).",
+"frontColor": "#059669"
+},
+{
+"term": "Lineage",
+"question": "What Unity Catalog feature automatically tracks how data flows through various notebooks, jobs, and queries?",
+"answer": "Data Lineage (records upstream/downstream dependencies).",
+"frontColor": "#059669"
+},
+{
+"term": "Grant Syntax",
+"question": "What is the standard SQL syntax used in Unity Catalog to assign permissions?",
+"answer": "GRANT <privilege> ON <securable_type> <securable_name> TO <principal>",
+"frontColor": "#059669"
+},
+{
+"term": "Sharing Data",
+"question": "What open standard does Databricks use to securely share data across clouds and platforms with non-Databricks users?",
+"answer": "Delta Sharing.",
+"frontColor": "#059669"
+},
+{
+"term": "Managed Tables",
+"question": "What is a Unity Catalog Managed Table?",
+"answer": "Both the data files and metadata are managed by Unity Catalog, and the files are stored in the root storage location of the metastore.",
+"frontColor": "#059669"
+},
+{
+"term": "External Tables",
+"question": "What is a Unity Catalog External Table?",
+"answer": "Only the metadata is managed by Unity Catalog; the data files remain in a user-specified path (External Location) and are managed by the user.",
+"frontColor": "#059669"
+},
+{
+"term": "Delta Sharing",
+"question": "What security mechanism is central to Delta Sharing for secure client authentication?",
+"answer": "Bearer tokens (shared securely with recipients).",
+"frontColor": "#059669"
+},
+{
+"term": "DLT Pipeline Update",
+"question": "What is the term for a single run of a DLT pipeline?",
+"answer": "A Pipeline Update.",
+"frontColor": "#059669"
+},
+{
+"term": "SQL Endpoint",
+"question": "What Databricks component is specifically optimized for running BI and SQL query workloads with low latency?",
+"answer": "Databricks SQL Endpoints (formerly SQL Warehouse).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "BI Tool Integration",
+"question": "What protocol allows BI tools like Tableau and Power BI to connect to Databricks SQL Endpoints?",
+"answer": "ODBC/JDBC (leveraging the standard Spark Thrift Server protocol).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Databricks SQL",
+"question": "What is the core advantage of Databricks SQL over a standard Spark cluster for SQL queries?",
+"answer": "It runs on the Photon engine and uses a purpose-built architecture for query acceleration and optimal price/performance for SQL workloads.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Notebook Languages",
+"question": "What are the four primary programming languages supported in Databricks Notebooks?",
+"answer": "Python, Scala, R, and SQL.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Magic Commands",
+"question": "What is the notebook feature that allows switching between languages in different cells?",
+"answer": "Magic commands (e.g., %python, %sql, %scala, %r).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Widgets",
+"question": "What notebook feature is used to add dynamic input parameters to interactively change query results?",
+"answer": "Widgets.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "MLflow",
+"question": "What open-source platform, integrated into Databricks, is used for managing the end-to-end machine learning lifecycle?",
+"answer": "MLflow.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "MLflow Components",
+"question": "Name the four primary components of MLflow.",
+"answer": "Tracking, Projects, Models, and Model Registry.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "MLflow Tracking",
+"question": "What MLflow component is used to record and query experiments, including code, data, configuration, and results?",
+"answer": "MLflow Tracking.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "MLflow Model Registry",
+"question": "What MLflow component is used to centrally manage the lifecycle of an ML model (staging, production, archived)?",
+"answer": "MLflow Model Registry.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Databricks Repos",
+"question": "What feature allows you to integrate Databricks notebooks and files with external Git providers (e.g., GitHub, GitLab)?",
+"answer": "Databricks Repos.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Model Serving",
+"question": "What is the Databricks service used to host trained ML models as low-latency REST API endpoints?",
+"answer": "Model Serving (can utilize Serverless or Dedicated Compute).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Feature Store",
+"question": "What Databricks component is used to manage and serve features consistently for both model training and inference?",
+"answer": "Databricks Feature Store.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Autoloader",
+"question": "What Databricks feature efficiently ingests new data files incrementally from cloud storage into Delta Lake tables?",
+"answer": "Autoloader.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Autoloader Modes",
+"question": "What are the two modes Autoloader uses to track new files?",
+"answer": "Directory Listing (for smaller directories) and File Notification (for massive scale).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Structured Streaming",
+"question": "What is the core Spark API used for processing real-time data streams in Databricks?",
+"answer": "Structured Streaming (builds streaming queries on top of static data processing concepts).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Delta Cache",
+"question": "What type of caching, available on Databricks clusters, stores copies of remote data files (Parquet/Delta) in local SSDs?",
+"answer": "Delta Cache (formerly Disk Cache).",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "Table Access Control",
+"question": "What is the difference between Unity Catalog permissions and legacy Workspace ACLs?",
+"answer": "Unity Catalog manages permissions using standard SQL across all clusters; ACLs only apply to one workspace and specific cluster types.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "MLflow Projects",
+"question": "What MLflow component helps package code in a reproducible and repeatable format for execution?",
+"answer": "MLflow Projects.",
+"frontColor": "#1D4ED8"
+},
+{
+"term": "DLT Pipeline Types",
+"question": "What are the two modes for running a DLT pipeline?",
+"answer": "Continuous (for near real-time processing) or Triggered (for batch processing).",
+"frontColor": "#1D4ED8"
+}
+]

@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "question": "In the Medallion Architecture, which layer is responsible for storing 'cleansed' and 'normalized' data that is queryable by analysts?",
+        "choices": [
+            "Bronze",
+            "Silver",
+            "Gold",
+            "Platinum"
+        ],
+        "correct": 1,
+        "description": "Silver represents the 'cleansed' layer where data is refined and prepared for ad-hoc analysis, while Gold is for high-level business aggregates."
+    },
+    {
+        "id": 2,
+        "question": "What is the primary difference between ETL and ELT?",
+        "choices": [
+            "ETL is only for streaming data",
+            "ELT performs transformations within the target system (e.g., Snowflake or Spark) after loading",
+            "ETL does not require a staging area",
+            "ELT is slower than ETL for large datasets"
+        ],
+        "correct": 1,
+        "description": "ELT (Extract, Load, Transform) leverages the compute power of modern cloud data warehouses or lakehouses to transform data after it is loaded."
+    },
+    {
+        "id": 3,
+        "question": "Which Apache Spark component is responsible for converting user code into a logical DAG of tasks?",
+        "choices": [
+            "Executor",
+            "Cluster Manager",
+            "Driver",
+            "Worker Node"
+        ],
+        "correct": 2,
+        "description": "The Driver is the 'brain' that orchestrates the job and generates the Directed Acyclic Graph (DAG) for execution."
+    },
+    {
+        "id": 4,
+        "question": "Which file format is 'columnar' and highly optimized for analytical read-heavy workloads?",
+        "choices": [
+            "CSV",
+            "JSON",
+            "Parquet",
+            "Avro"
+        ],
+        "correct": 2,
+        "description": "Parquet stores data by column, allowing for efficient compression and 'predicate pushdown' during queries."
+    },
+    {
+        "id": 5,
+        "question": "What does 'Lazy Evaluation' mean in Apache Spark?",
+        "choices": [
+            "Spark executes code as soon as it is written",
+            "Spark only executes transformations when an action (like .collect() or .save()) is called",
+            "Spark skips transformations to save memory",
+            "Spark delays the startup of executors"
+        ],
+        "correct": 1,
+        "description": "Lazy evaluation allows Spark to optimize the entire execution plan before any physical work starts."
+    },
+    {
+        "id": 6,
+        "question": "In SQL, which window function would you use to assign a unique rank with NO gaps, even if there are ties?",
+        "choices": [
+            "RANK()",
+            "DENSE_RANK()",
+            "ROW_NUMBER()",
+            "PERCENT_RANK()"
+        ],
+        "correct": 1,
+        "description": "DENSE_RANK() does not skip values in the sequence when ties occur, unlike RANK()."
+    },
+    {
+        "id": 7,
+        "question": "Which S3 storage class is best for data that is rarely accessed but requires immediate retrieval when needed?",
+        "choices": [
+            "S3 Standard",
+            "S3 Glacier Deep Archive",
+            "S3 Standard-IA (Infrequent Access)",
+            "S3 Intelligent-Tiering"
+        ],
+        "correct": 2,
+        "description": "Standard-IA offers lower storage costs than Standard but retains millisecond retrieval times."
+    },
+    {
+        "id": 8,
+        "question": "What is 'Data Skew' in a distributed system?",
+        "choices": [
+            "When data is missing from the source",
+            "When one partition contains significantly more data than others, causing some executors to work much longer",
+            "When the schema of the data changes over time",
+            "When data is duplicated across nodes"
+        ],
+        "correct": 1,
+        "description": "Data skew leads to 'straggler tasks' that prevent the overall job from finishing efficiently."
+    },
+    {
+        "id": 9,
+        "question": "Which Delta Lake feature allows you to query previous versions of your data?",
+        "choices": [
+            "Delta Caching",
+            "Time Travel",
+            "Z-Ordering",
+            "Schema Enforcement"
+        ],
+        "correct": 1,
+        "description": "Time Travel utilizes the transaction log to access snapshots of the data at a specific point in time or version."
+    },
+    {
+        "id": 10,
+        "question": "What is the main benefit of a 'Broadcast Join' in Spark?",
+        "choices": [
+            "It splits a large table into small chunks",
+            "It avoids an expensive network 'shuffle' by sending a small table to all executors",
+            "It allows joins between streaming and batch data",
+            "It forces Spark to use more memory"
+        ],
+        "correct": 1,
+        "description": "By duplicating the small table on every executor, Spark can perform the join locally without moving the larger table's data."
+    },
+    {
+        "id": 11,
+        "question": "Which SCD (Slowly Changing Dimension) type involves creating a new record for every change to track full history?",
+        "choices": [
+            "SCD Type 0",
+            "SCD Type 1",
+            "SCD Type 2",
+            "SCD Type 3"
+        ],
+        "correct": 2,
+        "description": "SCD Type 2 uses 'effective dates' or 'active flags' to maintain a complete historical record of changes."
+    },
+    {
+        "id": 12,
+        "question": "What is the purpose of a 'Data Catalog' like AWS Glue or Unity Catalog?",
+        "choices": [
+            "To store actual data files",
+            "To act as a centralized metadata repository for discovery and governance",
+            "To perform high-speed SQL queries",
+            "To manage cluster auto-scaling"
+        ],
+        "correct": 1,
+        "description": "A Data Catalog stores technical metadata (schema, location, permissions) so users can find and trust the data."
+    },
+    {
+        "id": 13,
+        "question": "In Spark, which operation is considered a 'Wide Transformation'?",
+        "choices": [
+            "filter()",
+            "map()",
+            "groupByKey()",
+            "select()"
+        ],
+        "correct": 2,
+        "description": "Wide transformations require data to be shuffled across partitions, which is more resource-intensive."
+    },
+    {
+        "id": 14,
+        "question": "What does the 'ACID' acronym stand for in database systems?",
+        "choices": [
+            "Access, Control, Integrity, Durability",
+            "Atomicity, Consistency, Isolation, Durability",
+            "Automated, Concurrent, Indexed, Distributed",
+            "Availability, Completeness, Integration, Delivery"
+        ],
+        "correct": 1,
+        "description": "ACID properties ensure that database transactions are processed reliably."
+    },
+    {
+        "id": 15,
+        "question": "Which of these is a popular data orchestration tool used to define workflows as Directed Acyclic Graphs (DAGs)?",
+        "choices": [
+            "Kafka",
+            "Apache Airflow",
+            "Redis",
+            "Tableau"
+        ],
+        "correct": 1,
+        "description": "Airflow allows engineers to schedule and monitor complex data pipelines."
+    },
+    {
+        "id": 16,
+        "question": "What is 'Predicate Pushdown'?",
+        "choices": [
+            "Moving filters (WHERE clauses) as close to the data source as possible to reduce data transfer",
+            "Pushing data from the lakehouse to the dashboard",
+            "Converting Spark code into Python",
+            "Deleting old records from a table"
+        ],
+        "correct": 0,
+        "description": "Filtering data at the source level means less data is read into memory, improving performance."
+    },
+    {
+        "id": 17,
+        "question": "In a Star Schema, which table typically contains the quantitative metrics or 'facts' of a business process?",
+        "choices": [
+            "Dimension Table",
+            "Fact Table",
+            "Lookup Table",
+            "Metadata Table"
+        ],
+        "correct": 1,
+        "description": "Fact tables hold the measurements (e.g., price, quantity) and foreign keys to dimension tables."
+    },
+    {
+        "id": 18,
+        "question": "What is the primary goal of partitioning a large table?",
+        "choices": [
+            "To encrypt the data",
+            "To skip irrelevant data files during a query based on a specific column (e.g., year or region)",
+            "To make the files larger",
+            "To change the column names"
+        ],
+        "correct": 1,
+        "description": "Partitioning allows the engine to 'prune' partitions, reading only the relevant directories for a query."
+    },
+    {
+        "id": 19,
+        "question": "Which technology enables 'Zero ETL' integration in Databricks by querying external databases without moving data?",
+        "choices": [
+            "Lakehouse Federation",
+            "Delta Sharing",
+            "Auto Loader",
+            "Photon"
+        ],
+        "correct": 0,
+        "description": "Lakehouse Federation allows users to query Snowflake, MySQL, or Postgres directly through Unity Catalog."
+    },
+    {
+        "id": 20,
+        "question": "What is the CAP Theorem?",
+        "choices": [
+            "Consistency, Availability, and Partition Tolerance—choose two",
+            "Compute, Analysis, and Processing—the three pillars of Big Data",
+            "Continuous, Automated, and Productive development",
+            "Calculated, Aggregated, and Partitioned data"
+        ],
+        "correct": 0,
+        "description": "It states that a distributed data store can only provide two of the three guarantees at once."
+    },
+    {
+        "id": 21,
+        "question": "Which Spark UI tab would you use to find the visual execution plan and check for 'shuffles'?",
+        "choices": [
+            "Environment",
+            "Storage",
+            "SQL",
+            "Executors"
+        ],
+        "correct": 2,
+        "description": "The SQL tab provides the graphical plan of the executed query, showing exchanges (shuffles) and joins."
+    },
+    {
+        "id": 22,
+        "question": "What is 'Schema Evolution' in the context of Delta Lake?",
+        "choices": [
+            "Deleting the table and starting over",
+            "Automatically updating the table schema to include new columns added during a write",
+            "Changing the database from SQL to NoSQL",
+            "Renaming every column to uppercase"
+        ],
+        "correct": 1,
+        "description": "Delta Lake allows you to seamlessly add new columns without failing the pipeline if the feature is enabled."
+    },
+    {
+        "id": 23,
+        "question": "Which service is a serverless, ad-hoc query service that lets you analyze data in S3 using standard SQL?",
+        "choices": [
+            "Amazon RDS",
+            "Amazon Athena",
+            "Amazon Redshift",
+            "AWS Glue"
+        ],
+        "correct": 1,
+        "description": "Athena is ideal for interactive analysis on large datasets stored in S3 without managing servers."
+    },
+    {
+        "id": 24,
+        "question": "What is a 'Checkpoint' in Spark Structured Streaming?",
+        "choices": [
+            "A way to stop the job manually",
+            "A location that stores metadata to allow a streaming job to resume exactly where it left off after a failure",
+            "A code review process",
+            "A validation of the data quality"
+        ],
+        "correct": 1,
+        "description": "Checkpoints provide fault tolerance by tracking the offsets of processed data."
+    },
+    {
+        "id": 25,
+        "question": "In a Lakehouse, what is the 'Medallion' purpose of the Gold layer?",
+        "choices": [
+            "Raw data landing zone",
+            "Data cleansing and filtering",
+            "Final business-level aggregates and consumption-ready data",
+            "Temporary storage for scratch work"
+        ],
+        "correct": 2,
+        "description": "Gold tables are the 'Source of Truth' for business reporting and dashboards."
+    }
+]

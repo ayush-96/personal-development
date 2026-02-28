@@ -1,0 +1,653 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "rootuser",
+            "email": "root@example.com",
+            "password": "hashed_password_1",
+            "role": 0,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-01T08:00:00Z",
+            "updated_at": "2023-01-01T08:00:00Z"
+        },
+        {
+            "id": 2,
+            "username": "managerAlice",
+            "email": "alice.manager@example.com",
+            "password": "hashed_password_2",
+            "role": 1,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-02T09:00:00Z",
+            "updated_at": "2023-01-02T09:00:00Z"
+        },
+        {
+            "id": 3,
+            "username": "managerBob",
+            "email": "bob.manager@example.com",
+            "password": "hashed_password_3",
+            "role": 1,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-03T10:00:00Z",
+            "updated_at": "2023-01-03T10:00:00Z"
+        },
+        {
+            "id": 4,
+            "username": "teacherCharlie",
+            "email": "charlie.teacher@example.com",
+            "password": "hashed_password_4",
+            "role": 2,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-04T11:00:00Z",
+            "updated_at": "2023-01-04T11:00:00Z"
+        },
+        {
+            "id": 5,
+            "username": "teacherDiana",
+            "email": "diana.teacher@example.com",
+            "password": "hashed_password_5",
+            "role": 2,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-05T12:00:00Z",
+            "updated_at": "2023-01-05T12:00:00Z"
+        },
+        {
+            "id": 6,
+            "username": "studentEve",
+            "email": "eve.student@example.com",
+            "password": "hashed_password_6",
+            "role": 3,
+            "isactivated": true,
+            "isdeleted": false,
+            "created_at": "2023-01-06T13:00:00Z",
+            "updated_at": "2023-01-06T13:00:00Z"
+        },
+        {
+            "id": 7,
+            "username": "studentFrank",
+            "email": "frank.student@example.com",
+            "password": "hashed_password_7",
+            "role": 3,
+            "isactivated": false,
+            "isdeleted": false,
+            "created_at": "2023-01-07T14:00:00Z",
+            "updated_at": "2023-01-07T14:00:00Z"
+        },
+        {
+            "id": 8,
+            "username": "studentGrace",
+            "email": "grace.student@example.com",
+            "password": "hashed_password_8",
+            "role": 3,
+            "isactivated": true,
+            "isdeleted": true,
+            "created_at": "2023-01-08T15:00:00Z",
+            "updated_at": "2023-01-08T15:00:00Z"
+        }
+    ],
+    "classes": [
+        {
+            "id": 1,
+            "name": "Mathematics 101",
+            "description": "Introduction to basic mathematical concepts.",
+            "created_by": 4,
+            "created_at": "2023-02-01T10:00:00Z",
+            "updated_at": "2023-02-01T10:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 2,
+            "name": "English Literature",
+            "description": "Study of classic and modern literature.",
+            "created_by": 5,
+            "created_at": "2023-02-05T11:00:00Z",
+            "updated_at": "2023-02-05T11:00:00Z",
+            "isdeleted": false
+        }
+    ],
+    "user_classes": [
+        {
+            "id": 1,
+            "user_id": 4,
+            "class_id": 1,
+            "role_in_class": 1,
+            "joined_at": "2023-02-01T10:05:00Z"
+        },
+        {
+            "id": 2,
+            "user_id": 6,
+            "class_id": 1,
+            "role_in_class": 2,
+            "joined_at": "2023-02-01T10:15:00Z"
+        },
+        {
+            "id": 3,
+            "user_id": 7,
+            "class_id": 1,
+            "role_in_class": 2,
+            "joined_at": "2023-02-01T10:20:00Z"
+        },
+        {
+            "id": 4,
+            "user_id": 5,
+            "class_id": 2,
+            "role_in_class": 1,
+            "joined_at": "2023-02-05T11:05:00Z"
+        },
+        {
+            "id": 5,
+            "user_id": 6,
+            "class_id": 2,
+            "role_in_class": 2,
+            "joined_at": "2023-02-05T11:15:00Z"
+        },
+        {
+            "id": 6,
+            "user_id": 8,
+            "class_id": 2,
+            "role_in_class": 2,
+            "joined_at": "2023-02-05T11:20:00Z"
+        }
+    ],
+    "user_sessions": [
+        {
+            "id": 1,
+            "token": "session_token_1",
+            "user_id": 1,
+            "login_time": "2023-05-03T08:15:00Z",
+            "expires_at": "2023-05-03T12:15:00Z",
+            "last_active_time": "2023-05-03T10:15:00Z",
+            "logout_time": "2023-05-03T11:00:00Z"
+        },
+        {
+            "id": 2,
+            "token": "session_token_2",
+            "user_id": 2,
+            "login_time": "2023-05-10T09:20:00Z",
+            "expires_at": "2023-05-10T13:20:00Z",
+            "last_active_time": "2023-05-10T11:30:00Z",
+            "logout_time": null
+        },
+        {
+            "id": 3,
+            "token": "session_token_3",
+            "user_id": 3,
+            "login_time": "2023-05-15T10:00:00Z",
+            "expires_at": "2023-05-15T14:00:00Z",
+            "last_active_time": "2023-05-15T12:00:00Z",
+            "logout_time": "2023-05-15T13:30:00Z"
+        },
+        {
+            "id": 4,
+            "token": "session_token_4",
+            "user_id": 4,
+            "login_time": "2023-05-20T11:30:00Z",
+            "expires_at": "2023-05-20T15:30:00Z",
+            "last_active_time": "2023-05-20T14:00:00Z",
+            "logout_time": null
+        },
+        {
+            "id": 5,
+            "token": "session_token_5",
+            "user_id": 5,
+            "login_time": "2023-06-01T08:00:00Z",
+            "expires_at": "2023-06-01T12:00:00Z",
+            "last_active_time": "2023-06-01T10:00:00Z",
+            "logout_time": null
+        },
+        {
+            "id": 6,
+            "token": "session_token_6",
+            "user_id": 6,
+            "login_time": "2023-06-10T09:45:00Z",
+            "expires_at": "2023-06-10T13:45:00Z",
+            "last_active_time": "2023-06-10T11:00:00Z",
+            "logout_time": "2023-06-10T12:30:00Z"
+        },
+        {
+            "id": 7,
+            "token": "session_token_7",
+            "user_id": 7,
+            "login_time": "2023-06-15T10:30:00Z",
+            "expires_at": "2023-06-15T14:30:00Z",
+            "last_active_time": "2023-06-15T12:00:00Z",
+            "logout_time": null
+        },
+        {
+            "id": 8,
+            "token": "session_token_8",
+            "user_id": 8,
+            "login_time": "2023-06-20T11:00:00Z",
+            "expires_at": "2023-06-20T15:00:00Z",
+            "last_active_time": "2023-06-20T13:00:00Z",
+            "logout_time": "2023-06-20T14:30:00Z"
+        }
+    ],
+    "user_refresh_sessions": [
+        {
+            "id": 1,
+            "refresh_token": "refresh_token_1",
+            "user_id": 1,
+            "issued_at": "2023-05-01T08:00:00Z",
+            "expires_at": "2023-06-01T08:00:00Z",
+            "is_revoked": false
+        },
+        {
+            "id": 2,
+            "refresh_token": "refresh_token_2",
+            "user_id": 2,
+            "issued_at": "2023-05-02T09:00:00Z",
+            "expires_at": "2023-06-02T09:00:00Z",
+            "is_revoked": false
+        },
+        {
+            "id": 3,
+            "refresh_token": "refresh_token_3",
+            "user_id": 6,
+            "issued_at": "2023-05-03T10:00:00Z",
+            "expires_at": "2023-06-03T10:00:00Z",
+            "is_revoked": false
+        }
+    ],
+    "pdfs": [
+        {
+            "id": 1,
+            "user_id": 4,
+            "title": "Algebra Basics",
+            "file_path": "https://example.com/pdfs/algebra_basics.pdf",
+            "upload_at": "2023-04-15T10:00:00Z",
+            "description": "A beginner's guide to algebra.",
+            "isdeleted": false,
+            "is_private": false,
+            "class_id": 1
+        },
+        {
+            "id": 2,
+            "user_id": 5,
+            "title": "Shakespearean Sonnets",
+            "file_path": "https://example.com/pdfs/shakespeare_sonnets.pdf",
+            "upload_at": "2023-04-20T12:30:00Z",
+            "description": "Collection of sonnets from Shakespeare.",
+            "isdeleted": false,
+            "is_private": false,
+            "class_id": 2
+        },
+        {
+            "id": 3,
+            "user_id": 6,
+            "title": "Private Study Notes",
+            "file_path": "https://example.com/pdfs/study_notes.pdf",
+            "upload_at": "2023-04-25T08:45:00Z",
+            "description": "Personal notes for exam preparation.",
+            "isdeleted": false,
+            "is_private": true,
+            "class_id": null
+        },
+        {
+            "id": 4,
+            "user_id": 2,
+            "title": "Manager Report Q1",
+            "file_path": "https://example.com/pdfs/q1_report.pdf",
+            "upload_at": "2023-04-30T09:00:00Z",
+            "description": "Quarterly performance report.",
+            "isdeleted": false,
+            "is_private": true,
+            "class_id": null
+        },
+        {
+            "id": 5,
+            "user_id": 4,
+            "title": "Advanced Calculus",
+            "file_path": "https://example.com/pdfs/advanced_calculus.pdf",
+            "upload_at": "2023-05-05T11:15:00Z",
+            "description": "In-depth exploration of calculus.",
+            "isdeleted": false,
+            "is_private": false,
+            "class_id": 1
+        },
+        {
+            "id": 6,
+            "user_id": 5,
+            "title": "Literature Review",
+            "file_path": "https://example.com/pdfs/literature_review.pdf",
+            "upload_at": "2023-05-10T14:30:00Z",
+            "description": "Review of modern literature trends.",
+            "isdeleted": false,
+            "is_private": false,
+            "class_id": 2
+        },
+        {
+            "id": 7,
+            "user_id": 3,
+            "title": "Deleted PDF Example",
+            "file_path": "https://example.com/pdfs/deleted_example.pdf",
+            "upload_at": "2023-05-15T15:00:00Z",
+            "description": "This file is no longer active.",
+            "isdeleted": true,
+            "is_private": false,
+            "class_id": 1
+        }
+    ],
+    "flashcards": [
+        {
+            "id": 1,
+            "pdf_id": 1,
+            "keywords_title": "Algebra Introduction",
+            "content": "Overview of basic algebra concepts including variables, expressions, and equations.",
+            "created_at": "2023-04-16T09:00:00Z",
+            "updated_at": "2023-04-16T09:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 2,
+            "pdf_id": 2,
+            "keywords_title": "Sonnets Structure",
+            "content": "Detailed analysis of Shakespearean sonnets focusing on structure, themes, and literary devices.",
+            "created_at": "2023-04-21T10:30:00Z",
+            "updated_at": "2023-04-21T10:30:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 3,
+            "pdf_id": 3,
+            "keywords_title": "Exam Prep Tips",
+            "content": "Summarizes key study techniques and time management strategies for exam success.",
+            "created_at": "2023-04-26T11:00:00Z",
+            "updated_at": "2023-04-26T11:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 4,
+            "pdf_id": 5,
+            "keywords_title": "Calculus Theorems",
+            "content": "Highlights important calculus theorems and their practical applications.",
+            "created_at": "2023-05-06T12:00:00Z",
+            "updated_at": "2023-05-06T12:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 5,
+            "pdf_id": 6,
+            "keywords_title": "Modern Literature Trends",
+            "content": "Overview of trends in modern literature and analysis of critical perspectives.",
+            "created_at": "2023-05-11T13:30:00Z",
+            "updated_at": "2023-05-11T13:30:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 6,
+            "pdf_id": 7,
+            "keywords_title": "Archived Flashcard",
+            "content": "This flashcard is linked to a deleted PDF and is archived.",
+            "created_at": "2023-05-16T14:00:00Z",
+            "updated_at": "2023-05-16T14:00:00Z",
+            "isdeleted": true
+        }
+    ],
+    "multiple_choice_questions": [
+        {
+            "id": 1,
+            "flashcard_id": 1,
+            "question_text": "Which of the following best describes a variable in algebra?",
+            "correct_options": [
+                "A symbol that represents an unknown number"
+            ],
+            "incorrect_options": [
+                "A fixed number",
+                "A type of equation",
+                "A mathematical operator"
+            ],
+            "difficulty": 2,
+            "created_at": "2023-04-17T09:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 2,
+            "flashcard_id": 2,
+            "question_text": "What is the typical structure of a Shakespearean sonnet?",
+            "correct_options": [
+                "14 lines with a specific rhyme scheme"
+            ],
+            "incorrect_options": [
+                "12 lines with free verse",
+                "10 lines with irregular rhythm",
+                "16 lines with alternating rhymes"
+            ],
+            "difficulty": 3,
+            "created_at": "2023-04-22T10:00:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 3,
+            "flashcard_id": 4,
+            "question_text": "Which theorem is commonly used to determine the derivative of a function?",
+            "correct_options": [
+                "The Mean Value Theorem"
+            ],
+            "incorrect_options": [
+                "The Pythagorean Theorem",
+                "The Fundamental Theorem of Arithmetic",
+                "The Binomial Theorem"
+            ],
+            "difficulty": 4,
+            "created_at": "2023-05-07T12:30:00Z",
+            "isdeleted": false
+        },
+        {
+            "id": 4,
+            "flashcard_id": 3,
+            "question_text": "Which study technique is often recommended for long-term retention?",
+            "correct_options": [
+                "Spaced repetition"
+            ],
+            "incorrect_options": [
+                "Cramming",
+                "Overlearning",
+                "Rote memorization"
+            ],
+            "difficulty": 2,
+            "created_at": "2023-04-27T11:15:00Z",
+            "isdeleted": false
+        }
+    ],
+    "test_attempts": [
+        {
+            "id": 1,
+            "test_id": 1,
+            "user_id": 1,
+            "start_time": "2023-06-01T09:00:00Z",
+            "end_time": "2023-06-01T09:45:00Z",
+            "score": 88.75
+        },
+        {
+            "id": 2,
+            "test_id": 1,
+            "user_id": 2,
+            "start_time": "2023-06-02T10:00:00Z",
+            "end_time": "2023-06-02T10:30:00Z",
+            "score": 92.00
+        },
+        {
+            "id": 3,
+            "test_id": 1,
+            "user_id": 3,
+            "start_time": "2023-06-03T11:00:00Z",
+            "end_time": "2023-06-03T11:40:00Z",
+            "score": 76.50
+        },
+        {
+            "id": 4,
+            "test_id": 2,
+            "user_id": 4,
+            "start_time": "2023-06-04T08:30:00Z",
+            "end_time": "2023-06-04T09:15:00Z",
+            "score": 82.00
+        },
+        {
+            "id": 5,
+            "test_id": 2,
+            "user_id": 5,
+            "start_time": "2023-06-05T09:15:00Z",
+            "end_time": "2023-06-05T10:00:00Z",
+            "score": 89.00
+        },
+        {
+            "id": 6,
+            "test_id": 2,
+            "user_id": 6,
+            "start_time": "2023-06-06T10:45:00Z",
+            "end_time": null,
+            "score": 70.00
+        },
+        {
+            "id": 7,
+            "test_id": 3,
+            "user_id": 7,
+            "start_time": "2023-06-07T11:30:00Z",
+            "end_time": "2023-06-07T12:15:00Z",
+            "score": 95.00
+        },
+        {
+            "id": 8,
+            "test_id": 3,
+            "user_id": 8,
+            "start_time": "2023-06-08T12:00:00Z",
+            "end_time": "2023-06-08T12:45:00Z",
+            "score": 67.50
+        },
+        {
+            "id": 9,
+            "test_id": 1,
+            "user_id": 4,
+            "start_time": "2023-06-09T08:15:00Z",
+            "end_time": "2023-06-09T09:00:00Z",
+            "score": 78.25
+        },
+        {
+            "id": 10,
+            "test_id": 3,
+            "user_id": 2,
+            "start_time": "2023-06-10T09:00:00Z",
+            "end_time": "2023-06-10T09:50:00Z",
+            "score": 88.00
+        }
+    ],
+    "test_attempt_answers": [
+        {
+            "id": 1,
+            "attempt_id": 1,
+            "question_id": 1,
+            "user_answer": "A symbol that represents an unknown number",
+            "is_correct": 1
+        },
+        {
+            "id": 2,
+            "attempt_id": 1,
+            "question_id": 2,
+            "user_answer": "12 lines with free verse",
+            "is_correct": 0
+        },
+        {
+            "id": 3,
+            "attempt_id": 2,
+            "question_id": 1,
+            "user_answer": "A symbol representing variables",
+            "is_correct": 1
+        },
+        {
+            "id": 4,
+            "attempt_id": 2,
+            "question_id": 3,
+            "user_answer": "The Pythagorean Theorem",
+            "is_correct": 0
+        },
+        {
+            "id": 5,
+            "attempt_id": 3,
+            "question_id": 4,
+            "user_answer": "Spaced repetition",
+            "is_correct": 1
+        },
+        {
+            "id": 6,
+            "attempt_id": 3,
+            "question_id": 2,
+            "user_answer": "14 lines with a specific rhyme scheme",
+            "is_correct": 1
+        },
+        {
+            "id": 7,
+            "attempt_id": 4,
+            "question_id": 3,
+            "user_answer": "The Mean Value Theorem",
+            "is_correct": 1
+        },
+        {
+            "id": 8,
+            "attempt_id": 4,
+            "question_id": 4,
+            "user_answer": "Cramming",
+            "is_correct": 0
+        },
+        {
+            "id": 9,
+            "attempt_id": 5,
+            "question_id": 2,
+            "user_answer": "14 lines with a specific rhyme scheme",
+            "is_correct": 1
+        },
+        {
+            "id": 10,
+            "attempt_id": 5,
+            "question_id": 4,
+            "user_answer": "Overlearning",
+            "is_correct": 0
+        },
+        {
+            "id": 11,
+            "attempt_id": 6,
+            "question_id": 1,
+            "user_answer": "A symbol representing an unknown number",
+            "is_correct": 1
+        },
+        {
+            "id": 12,
+            "attempt_id": 6,
+            "question_id": 3,
+            "user_answer": "The Mean Value Theorem",
+            "is_correct": 1
+        },
+        {
+            "id": 13,
+            "attempt_id": 7,
+            "question_id": 4,
+            "user_answer": "Spaced repetition",
+            "is_correct": 1
+        },
+        {
+            "id": 14,
+            "attempt_id": 8,
+            "question_id": 1,
+            "user_answer": "A fixed number",
+            "is_correct": 0
+        },
+        {
+            "id": 15,
+            "attempt_id": 9,
+            "question_id": 2,
+            "user_answer": "14 lines with a specific rhyme scheme",
+            "is_correct": 1
+        },
+        {
+            "id": 16,
+            "attempt_id": 10,
+            "question_id": 3,
+            "user_answer": "The Mean Value Theorem",
+            "is_correct": 1
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0.39
+    container_name: mysql-leap
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: glasgow_uestc_leap
+      MYSQL_DATABASE: leap_db
+      MYSQL_USER: leap_user
+      MYSQL_PASSWORD: Zs19981030.
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    command: "--default-authentication-plugin=mysql_native_password"
+    networks:
+      - leap-network
+
+networks:
+  leap-network:
+    driver: bridge

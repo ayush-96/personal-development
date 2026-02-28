@@ -1,30 +1,30 @@
-I want to create Apache Spark — Full Quiz Catalog
+I want to create SQL related — Full Quiz Catalog
 ----------------------------------------------------------------------------------
-Generate JSON for '' —  questions of Basic & Intermediate difficulty with 2-3 lines explanations. Follow the json format as following:
+Generate JSON for 'SQL Basics and SELECT queries' — 30 questions of Basic & Intermediate difficulty with 2-3 lines explanations. Follow the json format as following:
 [
   {
     "id": 1,
-    "question": "In Spark, repartition function can :",
+    "question": "Spark’s primary fault-tolerance mechanism for RDDs is:",
     "choices": [
-      "only increase the number of partitions",
-      "only decrease the number of partitions",
-      "increase or decrease the number of partitions",
-      "automatically repartition the data"
+      "Checkpointing",
+      "Lineage (re-computation from source)",
+      "Write-Ahead Log (WAL)",
+      "Replication"
     ],
-    "correct": 2,
-    "description": "Spark provides two ways to control the number of partitions. One of them is repartition().\nRepartition can increase and decrease the number of partitions. It performs a full shuffle of data across partitions and equally distributes them resulting in roughly equal sized partitions.\nIt is a very expensive operation as it shuffles data from all nodes in a cluster."
+    "correct": 1,
+    "description": "Spark records the graph of transformations (lineage) and recomputes lost partitions on failure.\nThis is lightweight and works even for in-memory data."
   },
   {
     "id": 2,
-    "question": "Which of the following statements about the DAG is correct?",
+    "question": "Checkpointing in Spark breaks the lineage and:",
     "choices": [
-      "DAG stands for Distributed Acyclic Graph",
-      "Spark developers cannot see the DAG of Spark jobs because Spark wants hide internals for simplicity",
-      "A DAG represents the executor level mapping of tasks",
-      "A DAG represents the execution plan of a Spark job"
+      "Speeds up recomputation",
+      "Materializes the RDD/DataFrame to reliable storage (HDFS/S3) and truncates lineage",
+      "Only saves metadata",
+      "Is automatic"
     ],
-    "correct": 3,
-    "description": "DAG stands for Directed Acyclic Graph. It is the logical execution plan of a Spark job."
+    "correct": 1,
+    "description": "After checkpoint(), Spark no longer needs to recompute from the beginning → faster recovery."
   }
 ]
 ------------------------
@@ -43,26 +43,63 @@ Follow the same format and give me the card element code as well
 ---------------------------------------------------------------------------
 Introduction to Apache Spark - Basic - History, ecosystem, features - 34 questions
 	quiz-arena/apache-spark/introduction-to-spark
-Spark Core & RDD Fundamentals - Basic & Intermediate - RDD basics, transformations, actions - 55 
+
+Spark Core & RDD Fundamentals - Basic & Intermediate - RDD basics, transformations, actions - 55 questions
 	quiz-arena/apache-spark/spark-core-and-rdd
-Spark Architecture Basics - Basic - Driver, Executors, Cluster Manager, DAG, etc. - 40 questions
+	
+Spark Architecture Basics - Basic - Driver, Executors, Cluster Manager, DAG, etc. - 45 questions
+	quiz-arena/apache-spark/spark-architecture-basics
+
 Spark Application & Deployment - Basic & Intermediate - Job stages, submitting apps, cluster modes - 30 questions
+	quiz-arena/apache-spark/spark-application-deployment
+
 Spark Shell & API Basics (Scala/Python)	- Basic & Intermediate - REPL, Data API differences - 25 questions
+	quiz-arena/apache-spark/spark-shell
+
 Spark RDD Advanced Concepts - Advanced - Partitioning, persistence, failure recovery - 45 questions
+	quiz-arena/apache-spark/spark-rdd-advanced
+
 DataFrames & Dataset API – Intermediate - Schema, encoders, lazy evaluation - 30 questions
+	quiz-arena/apache-spark/spark-dataframe-and-dataset
+
 Spark SQL & Catalyst Optimizer - Advanced - SQL functions, query plan, projection filters - 35 questions
+	quiz-arena/apache-spark/spark-sql-catalyst-optimizer
+
 Advanced Spark Architecture - Advanced — Detailed Internals	Executors, memory model, shuffle mechanics - 40 questions
+	quiz-arena/apache-spark/advanced-spark-architecture
+
 Spark Configs & Performance - Intermediate - Tuning partitions, broadcast, caching - 35 questions
+	quiz-arena/apache-spark/spark-configs-performance
+
 Spark Shuffle & Tungsten Engine - Intermediate - Whole-stage codegen, off-heap memory - 25 questions
+	quiz-arena/apache-spark/spark-shuffle-tungsten-engine
+
 Spark Scheduler & Job Execution Internals - Basic & Intermediate - DAG scheduling & speculative execution - 30 questions
+	quiz-arena/apache-spark/spark-scheduler-job-execution-internals
+
 Spark Streaming (DStreams) - Basic & Intermediate - Batch intervals, window ops, checkpointing - 40 questions
+	quiz-arena/apache-spark/spark-streaming
+
 Structured Streaming - advanced - Event-time, watermarks, triggers - 30 questions
+	quiz-arena/apache-spark/structured-streaming
+
 MLlib ML Pipelines - Basic & Intermediate - Transformers, evaluators, models - 25 questions
+	quiz-arena/apache-spark/mllib-ml-pipelines
+
 GraphX Fundamentals - Basic & Intermediate - Pregel API, triplets - 30 questions
+	quiz-arena/apache-spark/graphx-fundamentals
+
 Spark on Kubernetes - Basic & Intermediate - Deployment + auto-scaling concepts - 25 questions
+	quiz-arena/apache-spark/spark-on-kubernetes
+
 Cluster Resource Optimization - Intermediate - Executors, dynamic allocation, memory tuning - 30 questions
+	quiz-arena/apache-spark/cluster-resource-optimization
+
 Fault-Tolerance & Checkpointing Advanced - Intermediate - WAL, lineage, recovery - 20 questions
+	quiz-arena/apache-spark/fault-tolerance-checkpointing-advanced
+
 Delta Lake & Lakehouse - Intermediate to Advanced - ACID transactions, MERGE, schema evolution - 40 questions
+	quiz-arena/apache-spark/delta-lake-lakehouse
 
 ---------------------------------------------------------------------------
 

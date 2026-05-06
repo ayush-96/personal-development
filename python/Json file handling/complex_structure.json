@@ -1,0 +1,78 @@
+{
+  "organization": {
+    "id": "org-001",
+    "name": "TechNova Solutions",
+    "departments": [
+      {
+        "id": "dept-101",
+        "name": "Research & Development",
+        "managerId": "emp-001",
+        "projects": ["proj-500", "proj-501"]
+      },
+      {
+        "id": "dept-102",
+        "name": "Marketing",
+        "managerId": "emp-004",
+        "projects": ["proj-502"]
+      }
+    ]
+  },
+  "employees": [
+    {
+      "id": "emp-001",
+      "name": "Alice Johnson",
+      "role": "Head of R&D",
+      "reportsTo": null,
+      "departmentId": "dept-101"
+    },
+    {
+      "id": "emp-002",
+      "name": "Bob Smith",
+      "role": "Senior Engineer",
+      "reportsTo": "emp-001",
+      "departmentId": "dept-101"
+    },
+    {
+      "id": "emp-003",
+      "name": "Carol Lee",
+      "role": "Data Scientist",
+      "reportsTo": "emp-001",
+      "departmentId": "dept-101"
+    },
+    {
+      "id": "emp-004",
+      "name": "David Kim",
+      "role": "Marketing Director",
+      "reportsTo": null,
+      "departmentId": "dept-102"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-500",
+      "name": "AI Optimization Engine",
+      "leadId": "emp-002",
+      "departmentId": "dept-101",
+      "relatedProjects": ["proj-501"]
+    },
+    {
+      "id": "proj-501",
+      "name": "Neural Network Visualizer",
+      "leadId": "emp-003",
+      "departmentId": "dept-101",
+      "relatedProjects": ["proj-500"]
+    },
+    {
+      "id": "proj-502",
+      "name": "Global Brand Campaign",
+      "leadId": "emp-004",
+      "departmentId": "dept-102",
+      "relatedProjects": []
+    }
+  ],
+  "metadata": {
+    "version": "1.2.0",
+    "lastUpdated": "2026-05-05T10:30:00Z",
+    "source": "Internal HR & Project Management System"
+  }
+}

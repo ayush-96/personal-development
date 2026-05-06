@@ -1,0 +1,47 @@
+[
+  {
+    "rank": 1,
+    "title": "Factfulness: Ten Reasons We're Wrong About the World - and Why Things Are Better Than You Think",
+    "author": "Hans Rosling",
+    "genre": "Non-fiction",
+    "category": "Science",
+    "publisher": "Penguin Random House",
+    "release_date": "2018-09-18"
+  },
+  {
+    "rank": 2,
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "genre": "Non-fiction",
+    "category": "History",
+    "publisher": "HarperCollins",
+    "release_date": "2014-02-18"
+  },
+  {
+    "rank": 3,
+    "title": "Homo Deus: A Brief History of Tomorrow",
+    "author": "Yuval Noah Harari",
+    "genre": "Non-fiction",
+    "category": "Technology",
+    "publisher": "HarperCollins",
+    "release_date": "2016-09-06"
+  },
+  {
+    "rank": 4,
+    "title": "Talking to Strangers: What We Say and What We Mean",
+    "author": "Malcolm Gladwell",
+    "genre": "Non-fiction",
+    "category": "Psychology",
+    "publisher": "Little, Brown and Company",
+    "release_date": "2019-09-10"
+  },
+  {
+    "rank": 5,
+    "title": "Think Again: The Power of Knowing What You Don't Know",
+    "author": "Adam Grant",
+    "genre": "Non-fiction",
+    "category": "Business",
+    "publisher": "Viking",
+    "release_date": "2021-02-02"
+  }
+]

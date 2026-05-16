@@ -1,2 +1,2 @@
 # personal-development
-coding questions for skills development
+Skills development and CPD

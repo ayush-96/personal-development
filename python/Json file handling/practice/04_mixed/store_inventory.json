@@ -1,0 +1,61 @@
+{
+  "store_id": "store-gla-01",
+  "name": "Highland Tech Supplies",
+  "locations": [
+    {
+      "id": "loc-1",
+      "city": "Glasgow",
+      "aisles": [
+        {
+          "name": "Electronics",
+          "products": [
+            {
+              "sku": "EL-001",
+              "name": "USB-C Hub",
+              "price": 24.99,
+              "in_stock": 18,
+              "tags": ["accessory", "usb"]
+            },
+            {
+              "sku": "EL-002",
+              "name": "Wireless Mouse",
+              "price": 19.5,
+              "in_stock": 0,
+              "tags": ["accessory", "wireless"]
+            }
+          ]
+        },
+        {
+          "name": "Books",
+          "products": [
+            {
+              "sku": "BK-301",
+              "name": "Python Crash Course",
+              "price": 32.0,
+              "in_stock": 7,
+              "tags": ["programming", "python"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loc-2",
+      "city": "Edinburgh",
+      "aisles": [
+        {
+          "name": "Electronics",
+          "products": [
+            {
+              "sku": "EL-001",
+              "name": "USB-C Hub",
+              "price": 26.99,
+              "in_stock": 5,
+              "tags": ["accessory", "usb"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

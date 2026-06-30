@@ -1,0 +1,7 @@
+{
+  "product_id": "prod-55",
+  "name": "Mechanical Keyboard",
+  "price": 89.99,
+  "stock": 12,
+  "tags": ["hardware", "keyboard"]
+}

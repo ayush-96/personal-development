@@ -1,0 +1,17 @@
+[
+  "plain string entry",
+  42,
+  true,
+  null,
+  {
+    "type": "object",
+    "note": "Objects and primitives can live in the same array"
+  },
+  [1, 2, 3],
+  {
+    "type": "another_object",
+    "nested": {
+      "enabled": false
+    }
+  }
+]

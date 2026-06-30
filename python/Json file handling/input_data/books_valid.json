@@ -1,0 +1,19 @@
+[
+  {
+    "title": "The Pragmatic Programmer",
+    "genre": "Technology",
+    "author_details": {
+      "name": "David Thomas",
+      "birth_year": 1959,
+      "nationality": "British"
+    }
+  },
+  {
+    "title": "Atomic Habits",
+    "genre": "Self-help",
+    "author_details": {
+      "name": "James Clear",
+      "nationality": "American"
+    }
+  }
+]

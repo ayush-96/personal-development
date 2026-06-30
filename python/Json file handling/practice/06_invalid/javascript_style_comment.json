@@ -1,0 +1,5 @@
+{
+  "comment": "JSON does not support comments",
+  // this line makes the file invalid
+  "value": 1
+}

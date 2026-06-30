@@ -1,0 +1,9 @@
+{
+  "payload_type": "embedded_json_string",
+  "raw_message": "{\"event\":\"user.created\",\"user_id\":42,\"active\":true}",
+  "metadata": {
+    "received_at": "2026-06-24T10:00:00Z",
+    "source": "webhook-relay"
+  },
+  "practice_hint": "Use json.loads() on raw_message after loading the outer file with json.load()"
+}

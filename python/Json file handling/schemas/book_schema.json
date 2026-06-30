@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/book.json",
+    "type": "object",
+    "properties": {
+        "title": { "type": "string" },
+        "genre": { "type": "string" },
+        "author_details": { "$ref": "https://example.com/schemas/author.json" }
+    },
+    "required": ["title", "author_details"]
+}

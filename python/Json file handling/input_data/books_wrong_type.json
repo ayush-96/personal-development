@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Wrong Type Book",
+    "genre": "Science",
+    "author_details": {
+      "name": "Ada Lovelace",
+      "birth_year": "1815"
+    }
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "usr-001",
+      "name": "Alice Chen",
+      "role": "admin"
+    },
+    {
+      "id": "usr-002",
+      "name": "Ben Patel",
+      "role": "editor"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "page_size": 2,
+    "total_items": 57,
+    "total_pages": 29
+  },
+  "links": {
+    "self": "/api/v1/users?page=1",
+    "next": "/api/v1/users?page=2",
+    "prev": null
+  }
+}

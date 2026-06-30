@@ -1,0 +1,19 @@
+{
+  "user_id": "u-501",
+  "display_name": "Jordan Lee",
+  "bio": null,
+  "website": null,
+  "settings": {
+    "theme": "system",
+    "notifications": {
+      "email": true,
+      "push": false,
+      "sms": null
+    }
+  },
+  "deleted_at": null,
+  "metadata": {
+    "last_login": "2026-06-20T09:15:00Z",
+    "referrer": null
+  }
+}

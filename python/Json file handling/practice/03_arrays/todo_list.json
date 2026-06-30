@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "task": "Read JSON basics notebook",
+    "completed": true,
+    "priority": "high",
+    "tags": ["learning", "json"]
+  },
+  {
+    "id": 2,
+    "task": "Practice loading files with pathlib",
+    "completed": false,
+    "priority": "medium",
+    "tags": ["python", "files"]
+  },
+  {
+    "id": 3,
+    "task": "Validate sample books against schema",
+    "completed": false,
+    "priority": "high",
+    "tags": ["jsonschema", "validation"]
+  }
+]

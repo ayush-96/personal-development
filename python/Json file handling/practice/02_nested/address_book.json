@@ -1,0 +1,30 @@
+{
+  "owner": "Ayush Agarwal",
+  "contacts": [
+    {
+      "name": "Roshini Agarwal",
+      "phones": {
+        "mobile": "+44 7700 900123",
+        "work": "+44 141 555 0100"
+      },
+      "address": {
+        "line1": "12 University Avenue",
+        "city": "Glasgow",
+        "postcode": "G12 8QQ",
+        "country": "United Kingdom" 
+      }
+    },
+    {
+      "name": "James O'Connor",
+      "phones": {
+        "mobile": "+353 87 123 4567"
+      },
+      "address": {
+        "line1": "45 River Road",
+        "city": "Dublin",
+        "postcode": "D02 X285",
+        "country": "Ireland"
+      }
+    }
+  ]
+}

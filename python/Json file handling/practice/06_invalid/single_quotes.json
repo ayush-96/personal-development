@@ -1,0 +1,4 @@
+{
+  'name': 'single quotes are invalid in JSON',
+  "valid_key": true
+}

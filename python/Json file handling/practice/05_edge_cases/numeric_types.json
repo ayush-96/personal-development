@@ -1,0 +1,11 @@
+{
+  "integer": 9007199254740991,
+  "negative": -42,
+  "float": 3.141592653589793,
+  "scientific": 1.23e-4,
+  "zero": 0,
+  "string_that_looks_like_number": "007",
+  "boolean_true": true,
+  "boolean_false": false,
+  "note": "Compare type after json.load(): int vs float vs str"
+}

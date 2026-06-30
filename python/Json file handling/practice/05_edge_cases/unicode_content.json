@@ -1,0 +1,9 @@
+{
+  "greeting_en": "Hello, world!",
+  "greeting_es": "¡Hola, mundo!",
+  "greeting_fr": "Bonjour le monde !",
+  "greeting_ja": "こんにちは、世界！",
+  "greeting_ar": "مرحبا بالعالم",
+  "emoji_note": "Practice parsing unicode: 📚 🐍 ✅",
+  "special_chars": "Quotes \"inside\" strings, backslash \\, newline represented as \\n in source"
+}

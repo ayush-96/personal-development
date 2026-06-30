@@ -1,0 +1,10 @@
+{
+  "title": "Single Book Object",
+  "genre": "Reference",
+  "author_details": {
+    "name": "Guido van Rossum",
+    "birth_year": 1956,
+    "nationality": "Dutch"
+  },
+  "extra_field_not_in_schema": "Schemas may allow extra keys unless additionalProperties is false"
+}

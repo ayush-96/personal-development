@@ -1,0 +1,4 @@
+{"event":"page_view","user_id":"u-1","page":"/home","ts":"2026-06-24T08:00:00Z"}
+{"event":"click","user_id":"u-1","page":"/home","element":"signup_button","ts":"2026-06-24T08:00:05Z"}
+{"event":"page_view","user_id":"u-2","page":"/pricing","ts":"2026-06-24T08:01:12Z"}
+{"event":"purchase","user_id":"u-2","amount":49.99,"currency":"GBP","ts":"2026-06-24T08:03:40Z"}

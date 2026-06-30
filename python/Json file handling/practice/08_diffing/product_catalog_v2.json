@@ -1,0 +1,8 @@
+{
+  "product_id": "prod-55",
+  "name": "Mechanical Keyboard Pro",
+  "price": 94.99,
+  "stock": 8,
+  "tags": ["hardware", "keyboard", "premium"],
+  "warranty_months": 24
+}

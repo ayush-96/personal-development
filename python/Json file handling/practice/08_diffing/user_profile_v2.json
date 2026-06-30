@@ -1,0 +1,13 @@
+{
+  "user_id": "u-900",
+  "username": "json_learner",
+  "email": "learner.new@example.com",
+  "role": "student",
+  "preferences": {
+    "theme": "dark",
+    "language": "en",
+    "newsletter": false,
+    "timezone": "Europe/London"
+  },
+  "updated_at": "2026-06-24T09:30:00Z"
+}

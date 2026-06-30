@@ -1,0 +1,12 @@
+{
+  "user_id": "u-900",
+  "username": "json_learner",
+  "email": "learner@example.com",
+  "role": "student",
+  "preferences": {
+    "theme": "light",
+    "language": "en",
+    "newsletter": true
+  },
+  "updated_at": "2026-06-01T12:00:00Z"
+}

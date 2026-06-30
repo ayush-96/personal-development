@@ -1,0 +1,8 @@
+{
+  "username": "dev_learner",
+  "email": "learner@example.com",
+  "age": 28,
+  "is_active": true,
+  "login_count": 42,
+  "preferred_language": "en-GB"
+}

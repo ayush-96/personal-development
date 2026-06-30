@@ -1,0 +1,46 @@
+{
+  "order_id": "ORD-2026-0042",
+  "status": "shipped",
+  "customer": {
+    "id": "cust-7781",
+    "name": "Samira Khan",
+    "email": "samira.khan@example.com",
+    "loyalty_tier": "gold"
+  },
+  "items": [
+    {
+      "sku": "BK-101",
+      "title": "Clean Code",
+      "quantity": 1,
+      "unit_price": 29.99,
+      "discount_percent": 10
+    },
+    {
+      "sku": "BK-204",
+      "title": "Designing Data-Intensive Applications",
+      "quantity": 2,
+      "unit_price": 39.5,
+      "discount_percent": 0
+    }
+  ],
+  "shipping": {
+    "method": "express",
+    "address": {
+      "line1": "88 Kelvin Street",
+      "city": "Glasgow",
+      "postcode": "G4 0BA",
+      "country": "UK"
+    },
+    "tracking_number": "TRK-UK-99887766"
+  },
+  "payment": {
+    "method": "card",
+    "currency": "GBP",
+    "subtotal": 108.99,
+    "tax": 21.8,
+    "shipping_cost": 4.99,
+    "total": 135.78,
+    "paid_at": "2026-06-01T14:22:10Z"
+  },
+  "notes": null
+}

@@ -1,0 +1,38 @@
+{
+  "family_name": "Nguyen",
+  "generations": {
+    "grandparents": [
+      {
+        "id": "gp-1",
+        "name": "Lan Nguyen",
+        "children": ["p-1", "p-2"]
+      }
+    ],
+    "parents": [
+      {
+        "id": "p-1",
+        "name": "Minh Nguyen",
+        "spouse_id": "p-2",
+        "children": ["c-1", "c-2"]
+      },
+      {
+        "id": "p-2",
+        "name": "Hoa Tran",
+        "spouse_id": "p-1",
+        "children": ["c-1", "c-2"]
+      }
+    ],
+    "children": [
+      {
+        "id": "c-1",
+        "name": "An Nguyen",
+        "birth_year": 2010
+      },
+      {
+        "id": "c-2",
+        "name": "Bao Nguyen",
+        "birth_year": 2013
+      }
+    ]
+  }
+}
